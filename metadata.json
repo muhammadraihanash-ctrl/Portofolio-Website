@@ -1,0 +1,8 @@
+{
+  "name": "NughthohArfawi",
+  "description": "Sistem informasi pengelolaan, publikasi, dan infografik penelitian skripsi mahasiswa universitas dengan integrasi export data.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

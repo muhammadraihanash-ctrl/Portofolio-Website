@@ -1,0 +1,23 @@
+node_modules/
+build/
+dist/
+coverage/
+.DS_Store
+*.log
+.env*
+!.env.example
+.vercel/
+
+# Temporary and local runtime caches
+*.tmp
+*.tmp.*
+*.backup.*
+*.safe_backup.*
+data/admin_sessions.json
+data/mysql_config.json
+data/storage/files/*
+!data/storage/files/.gitkeep
+data/releases/*
+!data/releases/.gitkeep
+bun.lock
+

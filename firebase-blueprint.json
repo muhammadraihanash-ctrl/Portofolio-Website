@@ -1,0 +1,232 @@
+{
+  "entities": {
+    "Profile": {
+      "title": "Profile",
+      "description": "Full academic profile of Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "maxLength": 200 },
+        "titleWithDegrees": { "type": "string", "maxLength": 200 },
+        "role": { "type": "string", "maxLength": 200 },
+        "department": { "type": "string", "maxLength": 200 },
+        "faculty": { "type": "string", "maxLength": 200 },
+        "institution": { "type": "string", "maxLength": 200 },
+        "email": { "type": "string", "maxLength": 100 },
+        "photoUrl": { "type": "string", "maxLength": 1000 },
+        "cvPdfUrl": { "type": "string", "maxLength": 1000 },
+        "cvPdfFileName": { "type": "string", "maxLength": 200 },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["name", "email", "photoUrl"]
+    },
+    "Publication": {
+      "title": "Publication",
+      "description": "Scholarly journal article, conference paper, or book chapter",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "title": { "type": "string", "maxLength": 1000 },
+        "authors": { "type": "array" },
+        "year": { "type": "number" },
+        "venue": { "type": "string", "maxLength": 500 },
+        "type": { "type": "string", "maxLength": 100 },
+        "status": { "type": "string", "maxLength": 50 },
+        "doi": { "type": "string", "maxLength": 200 },
+        "citations": { "type": "number" },
+        "isArchived": { "type": "boolean" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "title", "year", "type", "status"]
+    },
+    "Student": {
+      "title": "Student",
+      "description": "Supervised undergraduate or graduate student thesis research",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "name": { "type": "string", "maxLength": 200 },
+        "nim": { "type": "string", "maxLength": 50 },
+        "program": { "type": "string", "maxLength": 100 },
+        "thesisTitle": { "type": "string", "maxLength": 1000 },
+        "role": { "type": "string", "maxLength": 50 },
+        "status": { "type": "string", "maxLength": 50 },
+        "yearStart": { "type": "number" }
+      },
+      "required": ["id", "name", "thesisTitle", "status"]
+    },
+    "TeachingCourse": {
+      "title": "TeachingCourse",
+      "description": "Academic course taught at Universitas Sebelas Maret",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "courseCode": { "type": "string", "maxLength": 50 },
+        "name": { "type": "string", "maxLength": 200 },
+        "program": { "type": "string", "maxLength": 100 },
+        "credits": { "type": "number" },
+        "semester": { "type": "string", "maxLength": 50 },
+        "academicYear": { "type": "string", "maxLength": 50 },
+        "classCount": { "type": "number" }
+      },
+      "required": ["id", "courseCode", "name", "credits"]
+    },
+    "ResearchTopic": {
+      "title": "ResearchTopic",
+      "description": "Academic research cluster or interest domain",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "title": { "type": "string", "maxLength": 200 },
+        "description": { "type": "string", "maxLength": 2000 },
+        "keywords": { "type": "array" }
+      },
+      "required": ["id", "title"]
+    },
+    "ResearchProject": {
+      "title": "ResearchProject",
+      "description": "Funded research project or grant program",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "title": { "type": "string", "maxLength": 500 },
+        "fundingScheme": { "type": "string", "maxLength": 200 },
+        "fundingAgency": { "type": "string", "maxLength": 200 },
+        "year": { "type": "number" },
+        "role": { "type": "string", "maxLength": 100 },
+        "status": { "type": "string", "maxLength": 50 }
+      },
+      "required": ["id", "title", "year", "status"]
+    },
+    "EditorialRole": {
+      "title": "EditorialRole",
+      "description": "Journal editorial board or peer review appointment",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "journalName": { "type": "string", "maxLength": 300 },
+        "role": { "type": "string", "maxLength": 100 },
+        "publisher": { "type": "string", "maxLength": 200 },
+        "indexedIn": { "type": "string", "maxLength": 100 }
+      },
+      "required": ["id", "journalName", "role"]
+    },
+    "PressMedia": {
+      "title": "PressMedia",
+      "description": "Institutional news or public media coverage item",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "title": { "type": "string", "maxLength": 300 },
+        "mediaOutlet": { "type": "string", "maxLength": 200 },
+        "date": { "type": "string", "maxLength": 50 },
+        "url": { "type": "string", "maxLength": 1000 }
+      },
+      "required": ["id", "title", "mediaOutlet"]
+    },
+    "BlogPost": {
+      "title": "BlogPost",
+      "description": "Scientific article or scholarly essay",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "title": { "type": "string", "maxLength": 300 },
+        "content": { "type": "string", "maxLength": 50000 },
+        "author": { "type": "string", "maxLength": 200 },
+        "status": { "type": "string", "maxLength": 50 },
+        "date": { "type": "string", "maxLength": 50 },
+        "readTime": { "type": "string", "maxLength": 50 }
+      },
+      "required": ["id", "title", "content", "status"]
+    },
+    "Admin": {
+      "title": "Admin",
+      "description": "Authorized administrator user profile in RBAC",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "maxLength": 128 },
+        "email": { "type": "string", "maxLength": 150 },
+        "role": { "type": "string", "maxLength": 100 },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["email", "role"]
+    },
+    "AuditLog": {
+      "title": "AuditLog",
+      "description": "Administrative event history and security audit record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "adminEmail": { "type": "string", "maxLength": 150 },
+        "action": { "type": "string", "maxLength": 100 },
+        "details": { "type": "string", "maxLength": 2000 },
+        "timestamp": { "type": "string" }
+      },
+      "required": ["id", "adminEmail", "action", "timestamp"]
+    },
+    "StoredFile": {
+      "title": "StoredFile",
+      "description": "Metadata for persistent photos and documents",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "name": { "type": "string", "maxLength": 300 },
+        "url": { "type": "string", "maxLength": 2000 },
+        "mimeType": { "type": "string", "maxLength": 100 },
+        "size": { "type": "number" },
+        "uploadedAt": { "type": "string" }
+      },
+      "required": ["id", "name", "url", "mimeType"]
+    }
+  },
+  "firestore": {
+    "/academic_profile/{profileId}": {
+      "schema": "Profile",
+      "description": "Academic profile details and verified metrics"
+    },
+    "/publications/{publicationId}": {
+      "schema": "Publication",
+      "description": "All academic publications and articles"
+    },
+    "/students/{studentId}": {
+      "schema": "Student",
+      "description": "Supervised students and research dissertations"
+    },
+    "/teaching/{teachingId}": {
+      "schema": "TeachingCourse",
+      "description": "Courses and curricular lectures"
+    },
+    "/research_topics/{topicId}": {
+      "schema": "ResearchTopic",
+      "description": "Active research topics"
+    },
+    "/research_projects/{projectId}": {
+      "schema": "ResearchProject",
+      "description": "Funded research projects"
+    },
+    "/editorial_roles/{roleId}": {
+      "schema": "EditorialRole",
+      "description": "Journal editorial appointments"
+    },
+    "/press_media/{mediaId}": {
+      "schema": "PressMedia",
+      "description": "News coverage and press releases"
+    },
+    "/blog_posts/{postId}": {
+      "schema": "BlogPost",
+      "description": "Academic insights and scientific blog posts"
+    },
+    "/admins/{adminId}": {
+      "schema": "Admin",
+      "description": "Verified administrative accounts for RBAC access control"
+    },
+    "/audit_logs/{logId}": {
+      "schema": "AuditLog",
+      "description": "Audit trails of admin activities"
+    },
+    "/files/{fileId}": {
+      "schema": "StoredFile",
+      "description": "Metadata records for permanent media and documents"
+    }
+  }
+}

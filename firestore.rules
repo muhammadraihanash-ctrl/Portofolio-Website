@@ -1,0 +1,116 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && (
+        request.auth.token.email in [
+          'muhammadraihanash@gmail.com',
+          'muhammadraihanash@student.uns.ac.id',
+          'arfa@staff.uns.ac.id',
+          'akunpemanis820@gmail.com'
+        ] ||
+        request.auth.token.email.matches('.*@staff\\.uns\\.ac\\.id$') ||
+        request.auth.token.email.matches('.*@student\\.uns\\.ac\\.id$') ||
+        exists(/databases/$(database)/documents/admins/$(request.auth.uid))
+      );
+    }
+
+    // Default deny all access
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Connection testing
+    match /test/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Public Profile
+    match /academic_profile/{profileId} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+
+    // Academic Publications
+    match /publications/{publicationId} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+
+    // Supervised Students
+    match /students/{studentId} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+
+    // Courses & Teaching
+    match /teaching/{teachingId} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+
+    // Research Topics
+    match /research_topics/{topicId} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+
+    // Research Projects & Grants
+    match /research_projects/{projectId} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+
+    // Editorial Appointments
+    match /editorial_roles/{roleId} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+
+    // Press & Media
+    match /press_media/{mediaId} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+
+    // Blog & Scholarly Articles
+    match /blog_posts/{postId} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+
+    // Permanent Files & Photos Metadata
+    match /files/{fileId} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+
+    // Admin Accounts (Strict RBAC)
+    match /admins/{adminId} {
+      allow read, write: if isAdmin();
+    }
+
+    // Audit Logs
+    match /audit_logs/{logId} {
+      allow read, write: if isAdmin();
+    }
+  }
+}
