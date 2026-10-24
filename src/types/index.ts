@@ -563,6 +563,7 @@ export interface AivenMySqlDiagnosticResult {
     threadId?: number;
     rawError?: string;
     rawCode?: string | number;
+    [key: string]: any;
   };
   timestamp: string;
 }

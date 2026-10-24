@@ -2989,14 +2989,10 @@ class P2MDatabaseService {
    * Catches errors gracefully so the application remains 100% operational in all environments.
    */
   public async safePoolQuery(sql: string, params: any[] = []): Promise<any> {
-    if (this.pool && this.isMySqlConnected) {
-      try {
-        return await this.pool.query(sql, params);
-      } catch (err: any) {
-        console.warn(`[MySQL Pool Query Notice]: ${err?.message || err}`);
-      }
+    if (!this.pool || !this.isMySqlConnected) {
+      throw new Error('Koneksi ke database live Aiven MySQL tidak aktif. Pastikan kredensial MYSQL_* terkonfigurasi di Vercel Environment Variables.');
     }
-    return [null];
+    return await this.pool.query(sql, params);
   }
 
   /**

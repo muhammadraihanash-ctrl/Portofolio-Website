@@ -2858,56 +2858,34 @@ class AcademicService {
         ...(isCustom ? { body: JSON.stringify(customConfig) } : {})
       });
 
-      const body: any = await res.json().catch(() => null);
-
-      if (body && typeof body.statusCode === 'number') {
-        return body as AivenMySqlDiagnosticResult;
-      }
-
-      const statusCode = res.status || 500;
-      let errorCode = 'CONNECTION_FAILED';
-      let statusText = res.statusText || 'ERROR';
-
-      if (res.ok) {
+      const contentType = res.headers.get('content-type') || '';
+      if (!contentType.includes('application/json')) {
         return {
-          success: true,
-          statusCode: 200,
-          statusText: 'OK',
-          message: body?.message || 'Handshake SSL dan koneksi ke Aiven MySQL berhasil diverifikasi.',
-          details: body?.details,
+          success: false,
+          statusCode: 502,
+          errorCode: 'NON_JSON_RESPONSE',
+          statusText: 'BAD_GATEWAY',
+          message: 'Server Vercel mengembalikan dokumen non-JSON (HTML). Endpoint API backend belum merespons.',
+          details: { contentType, status: res.status },
           timestamp
         };
       }
 
-      if (statusCode === 525) {
-        errorCode = 'SSL_HANDSHAKE_FAILED';
-        statusText = 'SSL_HANDSHAKE_FAILED';
-      } else if (statusCode === 401) {
-        errorCode = 'AUTH_FAILED';
-        statusText = 'UNAUTHORIZED';
-      } else if (statusCode === 400) {
-        errorCode = 'MISSING_ENV_CREDENTIALS';
-        statusText = 'BAD_REQUEST';
-      } else if (statusCode === 404) {
-        errorCode = 'DATABASE_NOT_FOUND';
-        statusText = 'NOT_FOUND';
-      } else if (statusCode === 504) {
-        errorCode = 'HANDSHAKE_TIMEOUT';
-        statusText = 'GATEWAY_TIMEOUT';
-      } else if (statusCode === 503) {
-        errorCode = 'HOST_UNREACHABLE';
-        statusText = 'SERVICE_UNAVAILABLE';
+      const body: any = await res.json().catch(() => null);
+
+      if (!body || typeof body !== 'object' || typeof body.statusCode !== 'number') {
+        return {
+          success: false,
+          statusCode: 502,
+          errorCode: 'INVALID_DIAGNOSTIC_BODY',
+          statusText: 'BAD_GATEWAY',
+          message: body?.message || 'Format data pengujian diagnostik tidak valid.',
+          details: body,
+          timestamp
+        };
       }
 
-      return {
-        success: false,
-        statusCode,
-        errorCode,
-        statusText,
-        message: body?.message || `Pengujian koneksi Aiven MySQL gagal dengan kode status HTTP ${statusCode}.`,
-        details: body?.details || { rawError: res.statusText },
-        timestamp
-      };
+      return body as AivenMySqlDiagnosticResult;
     } catch (err: any) {
       return {
         success: false,

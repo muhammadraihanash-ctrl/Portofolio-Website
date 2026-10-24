@@ -144,25 +144,9 @@ app.use((req, res, next) => {
         const rem = parsed.searchParams.toString();
         req.url = rem ? `${r}?${rem}` : r;
       }
-    } else if (
-      req.headers['x-forwarded-uri'] &&
-      String(req.headers['x-forwarded-uri']).startsWith('/api') &&
-      !String(req.headers['x-forwarded-uri']).startsWith('/api/index')
-    ) {
-      req.url = String(req.headers['x-forwarded-uri']);
-    } else if (
-      req.headers['x-matched-path'] &&
-      String(req.headers['x-matched-path']).startsWith('/api') &&
-      !String(req.headers['x-matched-path']).startsWith('/api/index')
-    ) {
-      req.url = String(req.headers['x-matched-path']);
     } else if (req.url.startsWith('/api/index/')) {
       req.url = req.url.replace('/api/index/', '/api/');
     } else if (req.url === '/api/index' || req.url.startsWith('/api/index?')) {
-      req.url = '/api/health';
-    } else if (req.url.startsWith('/api/[...all]/')) {
-      req.url = req.url.replace('/api/[...all]/', '/api/');
-    } else if (req.url === '/api/[...all]' || req.url.startsWith('/api/[...all]?')) {
       req.url = '/api/health';
     }
   } catch {}
@@ -170,7 +154,7 @@ app.use((req, res, next) => {
 });
 
 // Health check
-app.get('/api/health', (req, res) => {
+app.all('/api/health', (req, res) => {
   res.json({
     status: 'ok',
     system: 'Academic Portfolio & Research Archive Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.',
@@ -656,7 +640,7 @@ interface AdminSessionData {
 }
 
 const SESSIONS_FILE = path.resolve(__dirname, 'data/admin_sessions.json');
-const SESSION_SECRET = 'kurdhi_academic_secret_uns_2026';
+const SESSION_SECRET = process.env.SESSION_SECRET || process.env.JWT_SECRET || (process.env.MYSQL_PASSWORD ? `kurdhi_sec_${process.env.MYSQL_PASSWORD}` : 'kurdhi_academic_secret_uns_2026');
 const adminSessions = new Map<string, AdminSessionData>();
 
 // Load persisted sessions on startup
@@ -757,27 +741,8 @@ function verifyFirebaseIdToken(token: string): AdminSessionData | null {
   }
 }
 
-function verifyFallbackToken(token: string): AdminSessionData | null {
-  try {
-    if (!token.startsWith('adm_') || !token.endsWith('.fallback')) return null;
-    const b64 = token.slice(4).replace('.fallback', '');
-    const decoded = JSON.parse(Buffer.from(b64, 'base64').toString('utf-8'));
-    if (!decoded || !decoded.admin || !decoded.admin.email) return null;
-    const email = String(decoded.admin.email).toLowerCase();
-    if (
-      email === 'arfa@staff.uns.ac.id' ||
-      email === 'muhammadraihanash@student.uns.ac.id' ||
-      email === 'muhammadraihanash@gmail.com' ||
-      email === 'akunpemanis820@gmail.com' ||
-      academicDb.adminExists(email)
-    ) {
-      return {
-        token,
-        admin: decoded.admin,
-        expiresAt: decoded.expiresAt || (Date.now() + 7 * 24 * 3600 * 1000)
-      };
-    }
-  } catch {}
+function verifyFallbackToken(_token: string): AdminSessionData | null {
+  // Reject unsigned tokens for strict production security
   return null;
 }
 
@@ -791,15 +756,11 @@ function requireAdminAuth(req: express.Request, res: express.Response, next: exp
   let session = adminSessions.get(token);
 
   if (!session) {
-    // Check cryptographic token signature as resilient fallback
+    // Check cryptographic token signature with HMAC-SHA256
     session = verifyCryptoToken(token) || undefined;
     if (!session) {
       // Check Firebase ID JWT token
       session = verifyFirebaseIdToken(token) || undefined;
-    }
-    if (!session) {
-      // Check verified fallback master token
-      session = verifyFallbackToken(token) || undefined;
     }
     if (session) {
       adminSessions.set(token, session);
@@ -918,8 +879,7 @@ app.post('/api/admin/forgot-password', (req, res) => {
       success: true,
       message: `Kode autentifikasi 6-digit berhasil dikirimkan ke alamat email ${cleanEmail}. Masukkan kode tersebut untuk mereset kata sandi.`,
       email: cleanEmail,
-      expiresAt,
-      debugOtpCode: otpCode
+      expiresAt
     });
   } catch (err: any) {
     return res.status(500).json({ error: 'Gagal mengirim kode autentifikasi pemulihan sandi.' });
@@ -3058,7 +3018,7 @@ app.get('/api/sql/config', requireAdminAuth, (req, res) => {
 });
 
 // Diagnostic endpoint that explicitly checks connectivity of Aiven MySQL using .env credentials
-app.get('/api/sql/diagnostic', async (req, res) => {
+app.get('/api/sql/diagnostic', requireAdminAuth, async (req, res) => {
   try {
     const result = await p2mDatabaseService.diagnoseAivenConnection();
     return res.status(result.statusCode).json(result);
@@ -3074,7 +3034,7 @@ app.get('/api/sql/diagnostic', async (req, res) => {
   }
 });
 
-app.post('/api/sql/diagnostic', async (req, res) => {
+app.post('/api/sql/diagnostic', requireAdminAuth, async (req, res) => {
   try {
     const result = await p2mDatabaseService.diagnoseAivenConnection(req.body);
     return res.status(result.statusCode).json(result);
@@ -3090,7 +3050,7 @@ app.post('/api/sql/diagnostic', async (req, res) => {
   }
 });
 
-app.post('/api/sql/test-connection', async (req, res) => {
+app.post('/api/sql/test-connection', requireAdminAuth, async (req, res) => {
   try {
     const result = await p2mDatabaseService.testMySqlConnection(req.body);
     const status = result.statusCode || (result.success ? 200 : 500);
@@ -3153,7 +3113,7 @@ app.post('/api/sql/config', requireAdminAuth, async (req, res) => {
   }
 });
 
-app.post('/api/sql/reconnect', async (req, res) => {
+app.post('/api/sql/reconnect', requireAdminAuth, async (req, res) => {
   try {
     const ok = await p2mDatabaseService.initMySqlConnection({
       ...req.body,
