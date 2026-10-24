@@ -1,0 +1,40 @@
+[
+  {
+    "releaseId": "REL-20261012-PROD-V1",
+    "version": "v2.5.0",
+    "approvedAt": "2026-10-12T15:03:58.648Z",
+    "approvedBy": "Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.",
+    "adminEmail": "arfa@staff.uns.ac.id",
+    "notes": "Rilis Produksi Terverifikasi Awal - Sistem Portofolio & Repositori Riset Matematika FMIPA UNS permanen.",
+    "buildStatus": "SUCCESS",
+    "snapshotSummary": {
+      "publicationsCount": 8,
+      "studentsCount": 0,
+      "teachingCount": 3,
+      "topicsCount": 4,
+      "dbVersion": 3,
+      "lastDataUpdate": "2026-10-12T14:52:12.162Z"
+    },
+    "liveUrl": "https://ais-pre-pfyleimsq765mq27bwd75a-400965784325.asia-east1.run.app",
+    "isPermanentLocked": true
+  },
+  {
+    "releaseId": "REL-1791817447534-PROD-V2",
+    "version": "v2.6.0",
+    "approvedAt": "2026-10-12T15:04:07.534Z",
+    "approvedBy": "Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.",
+    "adminEmail": "arfa@staff.uns.ac.id",
+    "notes": "Persetujuan deployment produksi permanen portofolio kurdhi 2026.",
+    "buildStatus": "SUCCESS",
+    "snapshotSummary": {
+      "publicationsCount": 8,
+      "studentsCount": 0,
+      "teachingCount": 3,
+      "topicsCount": 4,
+      "dbVersion": 3,
+      "lastDataUpdate": "2026-10-12T15:04:05.716Z"
+    },
+    "liveUrl": "https://ais-pre-pfyleimsq765mq27bwd75a-400965784325.asia-east1.run.app",
+    "isPermanentLocked": true
+  }
+]

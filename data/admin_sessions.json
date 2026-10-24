@@ -1,0 +1,152 @@
+[
+  {
+    "token": "adm_eyJhZG1pbiI6eyJpZCI6ImFkbWluLWt1cmRoaSIsImVtYWlsIjoiYXJmYUBzdGFmZi51bnMuYWMuaWQiLCJuYW1hTGVuZ2thcCI6Ik51Z2h0aG9oIEFyZmF3aSBLdXJkaGksIFMuU2kuLCBNLlNjLiwgUGguRC4iLCJyb2xlIjoiRG9zZW4gUGVtaWxpayBQb3J0b2ZvbGlvIChBZG1pbmlzdHJhdG9yIFV0YW1hKSJ9LCJleHBpcmVzQXQiOjE3OTQzMjUzMTU2NjAsInJhbmQiOjAuMTkwNjQ0NTc0OTE4MTQzMzV9.b157b9de2e6190d752c17c64a0fd4543c81cb03cbac64dcd8bfc81db11cce2b2",
+    "admin": {
+      "id": "admin-kurdhi",
+      "email": "arfa@staff.uns.ac.id",
+      "namaLengkap": "Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.",
+      "role": "Dosen Pemilik Portofolio (Administrator Utama)"
+    },
+    "expiresAt": 1794325315660
+  },
+  {
+    "token": "adm_eyJhZG1pbiI6eyJpZCI6ImFkbWluLTE3OTE3MzY4MzM0NTItZHVwaSIsImVtYWlsIjoidGVzdGFkbWluXzE3OTE3MzY4MzM0MzFAdW5zLmFjLmlkIiwibmFtYUxlbmdrYXAiOiJBZG1pbmlzdHJhdG9yIFBlbmRhbXBpbmciLCJyb2xlIjoiRG9zZW4gUGVtaWxpayBQb3J0b2ZvbGlvIChBZG1pbmlzdHJhdG9yKSJ9LCJleHBpcmVzQXQiOjE3OTQzMjg4MzM0NTgsInJhbmQiOjAuMjE3MjQ4NTMyNzQ3NzU4MDJ9.907a29b69d56fe89d2104c5c245e8eb771e8b90a9a0ecc30ec3c262c292c50d9",
+    "admin": {
+      "id": "admin-1791736833452-dupi",
+      "email": "testadmin_1791736833431@uns.ac.id",
+      "namaLengkap": "Administrator Pendamping",
+      "role": "Dosen Pemilik Portofolio (Administrator)"
+    },
+    "expiresAt": 1794328833458
+  },
+  {
+    "token": "adm_eyJhZG1pbiI6eyJpZCI6ImFkbWluLTE3OTE3MzY4MzM0NTItZHVwaSIsImVtYWlsIjoidGVzdGFkbWluXzE3OTE3MzY4MzM0MzFAdW5zLmFjLmlkIiwibmFtYUxlbmdrYXAiOiJBZG1pbmlzdHJhdG9yIFBlbmRhbXBpbmciLCJyb2xlIjoiRG9zZW4gUGVtaWxpayBQb3J0b2ZvbGlvIChBZG1pbmlzdHJhdG9yKSJ9LCJleHBpcmVzQXQiOjE3OTQzMjg4MzM0NjUsInJhbmQiOjAuNDA4NzY5ODc0NzA2NTY0OX0.bfd11e7f0e434e55014b41e3bbab2acc0f6b4fa63ea51ddc262d0f1bfb373fa0",
+    "admin": {
+      "id": "admin-1791736833452-dupi",
+      "email": "testadmin_1791736833431@uns.ac.id",
+      "namaLengkap": "Administrator Pendamping",
+      "role": "Dosen Pemilik Portofolio (Administrator)"
+    },
+    "expiresAt": 1794328833465
+  },
+  {
+    "token": "adm_eyJhZG1pbiI6eyJpZCI6ImFkbWluLTE3OTE3MzY4MzM0NTItZHVwaSIsImVtYWlsIjoidGVzdGFkbWluXzE3OTE3MzY4MzM0MzFAdW5zLmFjLmlkIiwibmFtYUxlbmdrYXAiOiJBZG1pbmlzdHJhdG9yIFBlbmRhbXBpbmciLCJyb2xlIjoiRG9zZW4gUGVtaWxpayBQb3J0b2ZvbGlvIChBZG1pbmlzdHJhdG9yKSJ9LCJleHBpcmVzQXQiOjE3OTQzMjg4MzM0OTYsInJhbmQiOjAuMDg4OTc0OTI2NjA1MTA3ODZ9.37d359c375de5c46db2e5cf3f0c17c0d581b4b8d114bf05cc837afa0e9580de2",
+    "admin": {
+      "id": "admin-1791736833452-dupi",
+      "email": "testadmin_1791736833431@uns.ac.id",
+      "namaLengkap": "Administrator Pendamping",
+      "role": "Dosen Pemilik Portofolio (Administrator)"
+    },
+    "expiresAt": 1794328833496
+  },
+  {
+    "token": "adm_eyJhZG1pbiI6eyJpZCI6ImFkbWluLWt1cmRoaSIsImVtYWlsIjoiYXJmYUBzdGFmZi51bnMuYWMuaWQiLCJuYW1hTGVuZ2thcCI6Ik51Z2h0aG9oIEFyZmF3aSBLdXJkaGksIFMuU2kuLCBNLlNjLiwgUGguRC4iLCJyb2xlIjoiRG9zZW4gUGVtaWxpayBQb3J0b2ZvbGlvIChBZG1pbmlzdHJhdG9yIFV0YW1hKSJ9LCJleHBpcmVzQXQiOjE3OTQzMjg4NTA4OTEsInJhbmQiOjAuOTk3NzQ1MTkzNjU0MzYyMn0.6563d8673a6bc4cfd233c9da6a90adb04850378dd25d78a44d1a690bf3cd8442",
+    "admin": {
+      "id": "admin-kurdhi",
+      "email": "arfa@staff.uns.ac.id",
+      "namaLengkap": "Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.",
+      "role": "Dosen Pemilik Portofolio (Administrator Utama)"
+    },
+    "expiresAt": 1794328850891
+  },
+  {
+    "token": "adm_eyJhZG1pbiI6eyJpZCI6ImFkbWluLWt1cmRoaSIsImVtYWlsIjoiYXJmYUBzdGFmZi51bnMuYWMuaWQiLCJuYW1hTGVuZ2thcCI6Ik51Z2h0aG9oIEFyZmF3aSBLdXJkaGksIFMuU2kuLCBNLlNjLiwgUGguRC4iLCJyb2xlIjoiRG9zZW4gUGVtaWxpayBQb3J0b2ZvbGlvIChBZG1pbmlzdHJhdG9yIFV0YW1hKSJ9LCJleHBpcmVzQXQiOjE3OTQ0MDY0ODc0NTEsInJhbmQiOjAuODgyNDgxNjY4MDg4NTAyMX0.368c3ff3fd02c17ccf40bc686169e31c0879d6970b0d94c4bb63babe449f2a69",
+    "admin": {
+      "id": "admin-kurdhi",
+      "email": "arfa@staff.uns.ac.id",
+      "namaLengkap": "Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.",
+      "role": "Dosen Pemilik Portofolio (Administrator Utama)"
+    },
+    "expiresAt": 1794406487451
+  },
+  {
+    "token": "adm_eyJhZG1pbiI6eyJpZCI6ImFkbWluLWt1cmRoaSIsImVtYWlsIjoiYXJmYUBzdGFmZi51bnMuYWMuaWQiLCJuYW1hTGVuZ2thcCI6Ik51Z2h0aG9oIEFyZmF3aSBLdXJkaGksIFMuU2kuLCBNLlNjLiwgUGguRC4iLCJyb2xlIjoiRG9zZW4gUGVtaWxpayBQb3J0b2ZvbGlvIChBZG1pbmlzdHJhdG9yIFV0YW1hKSJ9LCJleHBpcmVzQXQiOjE3OTQ0MDY4MjE2MjUsInJhbmQiOjAuMjY4MjU3Nzg0MDE5MDQyNTR9.8b620e8d8489178115be9b171c9a21c8e0bc2a72e4a8417b83bacca14003ddf8",
+    "admin": {
+      "id": "admin-kurdhi",
+      "email": "arfa@staff.uns.ac.id",
+      "namaLengkap": "Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.",
+      "role": "Dosen Pemilik Portofolio (Administrator Utama)"
+    },
+    "expiresAt": 1794406821625
+  },
+  {
+    "token": "adm_eyJhZG1pbiI6eyJpZCI6ImFkbWluLWt1cmRoaSIsImVtYWlsIjoiYXJmYUBzdGFmZi51bnMuYWMuaWQiLCJuYW1hTGVuZ2thcCI6Ik51Z2h0aG9oIEFyZmF3aSBLdXJkaGksIFMuU2kuLCBNLlNjLiwgUGguRC4iLCJyb2xlIjoiRG9zZW4gUGVtaWxpayBQb3J0b2ZvbGlvIChBZG1pbmlzdHJhdG9yIFV0YW1hKSJ9LCJleHBpcmVzQXQiOjE3OTQ0MDY4MzU5MzQsInJhbmQiOjAuNDIxOTA5NTk3MDQ4Mzk5MDN9.bebf032f6868f78d1c0eca88b9974097a28bca326bea574ed7e6d78077e5d952",
+    "admin": {
+      "id": "admin-kurdhi",
+      "email": "arfa@staff.uns.ac.id",
+      "namaLengkap": "Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.",
+      "role": "Dosen Pemilik Portofolio (Administrator Utama)"
+    },
+    "expiresAt": 1794406835934
+  },
+  {
+    "token": "adm_eyJhZG1pbiI6eyJpZCI6ImFkbWluLWt1cmRoaSIsImVtYWlsIjoiYXJmYUBzdGFmZi51bnMuYWMuaWQiLCJuYW1hTGVuZ2thcCI6Ik51Z2h0aG9oIEFyZmF3aSBLdXJkaGksIFMuU2kuLCBNLlNjLiwgUGguRC4iLCJyb2xlIjoiRG9zZW4gUGVtaWxpayBQb3J0b2ZvbGlvIChBZG1pbmlzdHJhdG9yIFV0YW1hKSJ9LCJleHBpcmVzQXQiOjE3OTQ0MDY4NTEwMzMsInJhbmQiOjAuMjMzMDcyNzI1NjM1MzM0ODh9.70d6eedad3b1f2f127edd7bcf7456e37295bee88753c11686b6979f9a34d249f",
+    "admin": {
+      "id": "admin-kurdhi",
+      "email": "arfa@staff.uns.ac.id",
+      "namaLengkap": "Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.",
+      "role": "Dosen Pemilik Portofolio (Administrator Utama)"
+    },
+    "expiresAt": 1794406851033
+  },
+  {
+    "token": "adm_eyJhZG1pbiI6eyJpZCI6ImFkbWluLWt1cmRoaSIsImVtYWlsIjoiYXJmYUBzdGFmZi51bnMuYWMuaWQiLCJuYW1hTGVuZ2thcCI6Ik51Z2h0aG9oIEFyZmF3aSBLdXJkaGksIFMuU2kuLCBNLlNjLiwgUGguRC4iLCJyb2xlIjoiRG9zZW4gUGVtaWxpayBQb3J0b2ZvbGlvIChBZG1pbmlzdHJhdG9yIFV0YW1hKSJ9LCJleHBpcmVzQXQiOjE3OTQ0MDg3MzIxNDMsInJhbmQiOjAuNTc0MTY5MTYzMTkxMzUzOX0.b970f018ea8602d48840dc127ddb76f9179d76e8d790db991f67b7bf7f0f50b1",
+    "admin": {
+      "id": "admin-kurdhi",
+      "email": "arfa@staff.uns.ac.id",
+      "namaLengkap": "Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.",
+      "role": "Dosen Pemilik Portofolio (Administrator Utama)"
+    },
+    "expiresAt": 1794408732143
+  },
+  {
+    "token": "adm_eyJhZG1pbiI6eyJpZCI6InVpZC10ZXN0LTEyMyIsImVtYWlsIjoiYXJmYUBzdGFmZi51bnMuYWMuaWQiLCJuYW1hTGVuZ2thcCI6Ik51Z2h0aG9oIEFyZmF3aSBLdXJkaGksIFMuU2kuLCBNLlNjLiwgUGguRC4iLCJyb2xlIjoiQWRtaW5pc3RyYXRvciBSZXNtaSAoRmlyZWJhc2UgVmVyaWZpZWQpIn0sImV4cGlyZXNBdCI6MTc5MjQyMTUzMjE1MSwicmFuZCI6MC4wMzczMTkwNzQ4MzQ2MzgxNDR9.768cee877c6edf4d09e08d0ddb052cb0719a78249a90301bc37d496f431b0d96",
+    "admin": {
+      "id": "uid-test-123",
+      "email": "arfa@staff.uns.ac.id",
+      "namaLengkap": "Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.",
+      "role": "Administrator Resmi (Firebase Verified)"
+    },
+    "expiresAt": 1792421532151
+  },
+  {
+    "token": "adm_eyJhZG1pbiI6eyJpZCI6ImFkbWluLWt1cmRoaSIsImVtYWlsIjoiYXJmYUBzdGFmZi51bnMuYWMuaWQiLCJuYW1hTGVuZ2thcCI6Ik51Z2h0aG9oIEFyZmF3aSBLdXJkaGksIFMuU2kuLCBNLlNjLiwgUGguRC4iLCJyb2xlIjoiRG9zZW4gUGVtaWxpayBQb3J0b2ZvbGlvIChBZG1pbmlzdHJhdG9yIFV0YW1hKSJ9LCJleHBpcmVzQXQiOjE3OTQ0MDk0NDU3MTUsInJhbmQiOjAuMTY5NDM2NDQxNjQzNTAwOH0.80b12b683a106d45a24cbf6127d192a8814e0813aacd9d47881a6d6d7921fa6a",
+    "admin": {
+      "id": "admin-kurdhi",
+      "email": "arfa@staff.uns.ac.id",
+      "namaLengkap": "Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.",
+      "role": "Dosen Pemilik Portofolio (Administrator Utama)"
+    },
+    "expiresAt": 1794409445715
+  },
+  {
+    "token": "adm_eyJhZG1pbiI6eyJpZCI6ImFkbWluLWt1cmRoaSIsImVtYWlsIjoiYXJmYUBzdGFmZi51bnMuYWMuaWQiLCJuYW1hTGVuZ2thcCI6Ik51Z2h0aG9oIEFyZmF3aSBLdXJkaGksIFMuU2kuLCBNLlNjLiwgUGguRC4iLCJyb2xlIjoiRG9zZW4gUGVtaWxpayBQb3J0b2ZvbGlvIChBZG1pbmlzdHJhdG9yIFV0YW1hKSJ9LCJleHBpcmVzQXQiOjE3OTQ1MDA3NDg0MjAsInJhbmQiOjAuMDM4MjAyMDUxMjg0NDA1MDE0fQ.7cbc85e53e01c8d46fbd3b3a28e1f5eb94b815cd5eed985ed8c515a15c2cced4",
+    "admin": {
+      "id": "admin-kurdhi",
+      "email": "arfa@staff.uns.ac.id",
+      "namaLengkap": "Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.",
+      "role": "Dosen Pemilik Portofolio (Administrator Utama)"
+    },
+    "expiresAt": 1794500748420
+  },
+  {
+    "token": "adm_eyJhZG1pbiI6eyJpZCI6ImFkbWluLWt1cmRoaSIsImVtYWlsIjoiYXJmYUBzdGFmZi51bnMuYWMuaWQiLCJuYW1hTGVuZ2thcCI6Ik51Z2h0aG9oIEFyZmF3aSBLdXJkaGksIFMuU2kuLCBNLlNjLiwgUGguRC4iLCJyb2xlIjoiRG9zZW4gUGVtaWxpayBQb3J0b2ZvbGlvIChBZG1pbmlzdHJhdG9yIFV0YW1hKSJ9LCJleHBpcmVzQXQiOjE3OTQ1MDA3NTczODQsInJhbmQiOjAuODg0MzQ1MDkyNzIxMzQyMX0.c76446e136d29f0522d68149ff5937acfdda2445303f287d97ec5a39b2504b93",
+    "admin": {
+      "id": "admin-kurdhi",
+      "email": "arfa@staff.uns.ac.id",
+      "namaLengkap": "Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.",
+      "role": "Dosen Pemilik Portofolio (Administrator Utama)"
+    },
+    "expiresAt": 1794500757384
+  },
+  {
+    "token": "adm_eyJhZG1pbiI6eyJpZCI6ImFkbWluLWt1cmRoaSIsImVtYWlsIjoiYXJmYUBzdGFmZi51bnMuYWMuaWQiLCJuYW1hTGVuZ2thcCI6Ik51Z2h0aG9oIEFyZmF3aSBLdXJkaGksIFMuU2kuLCBNLlNjLiwgUGguRC4iLCJyb2xlIjoiRG9zZW4gUGVtaWxpayBQb3J0b2ZvbGlvIChBZG1pbmlzdHJhdG9yIFV0YW1hKSJ9LCJleHBpcmVzQXQiOjE3OTUwMTI4MDgzOTEsInJhbmQiOjAuMDQzNjI4MzgzMjIxMzUzOTg0fQ.20a4064848f32648111b91e2cb4ae5baad3b05ff7ad8c12e0bc1c541839cab4a",
+    "admin": {
+      "id": "admin-kurdhi",
+      "email": "arfa@staff.uns.ac.id",
+      "namaLengkap": "Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.",
+      "role": "Dosen Pemilik Portofolio (Administrator Utama)"
+    },
+    "expiresAt": 1795012808391
+  }
+]

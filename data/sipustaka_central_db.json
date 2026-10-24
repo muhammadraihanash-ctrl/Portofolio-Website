@@ -1,0 +1,617 @@
+{
+  "version": 1,
+  "updatedAt": "2026-10-05T18:46:41.132Z",
+  "fakultas": [
+    {
+      "id": "fak-fatisda",
+      "kodeFakultas": "FATISDA",
+      "namaFakultas": "Fakultas Teknologi Informasi dan Sains Data",
+      "singkatan": "FATISDA"
+    },
+    {
+      "id": "fak-fmipa",
+      "kodeFakultas": "FMIPA",
+      "namaFakultas": "Fakultas Matematika dan Ilmu Pengetahuan Alam",
+      "singkatan": "FMIPA"
+    },
+    {
+      "id": "fak-ft",
+      "kodeFakultas": "FT",
+      "namaFakultas": "Fakultas Teknik",
+      "singkatan": "FT"
+    },
+    {
+      "id": "fak-fk",
+      "kodeFakultas": "FK",
+      "namaFakultas": "Fakultas Kedokteran",
+      "singkatan": "FK"
+    },
+    {
+      "id": "fak-fpsi",
+      "kodeFakultas": "FPsi",
+      "namaFakultas": "Fakultas Psikologi",
+      "singkatan": "FPsi"
+    },
+    {
+      "id": "fak-feb",
+      "kodeFakultas": "FEB",
+      "namaFakultas": "Fakultas Ekonomi dan Bisnis",
+      "singkatan": "FEB"
+    },
+    {
+      "id": "fak-fh",
+      "kodeFakultas": "FH",
+      "namaFakultas": "Fakultas Hukum",
+      "singkatan": "FH"
+    },
+    {
+      "id": "fak-fisip",
+      "kodeFakultas": "FISIP",
+      "namaFakultas": "Fakultas Ilmu Sosial dan Ilmu Politik",
+      "singkatan": "FISIP"
+    },
+    {
+      "id": "fak-fkip",
+      "kodeFakultas": "FKIP",
+      "namaFakultas": "Fakultas Keguruan dan Ilmu Pendidikan",
+      "singkatan": "FKIP"
+    },
+    {
+      "id": "fak-fp",
+      "kodeFakultas": "FP",
+      "namaFakultas": "Fakultas Pertanian",
+      "singkatan": "FP"
+    },
+    {
+      "id": "fak-fpet",
+      "kodeFakultas": "FPET",
+      "namaFakultas": "Fakultas Peternakan",
+      "singkatan": "FPet"
+    },
+    {
+      "id": "fak-fsrd",
+      "kodeFakultas": "FSRD",
+      "namaFakultas": "Fakultas Seni Rupa dan Desain",
+      "singkatan": "FSRD"
+    },
+    {
+      "id": "fak-fib",
+      "kodeFakultas": "FIB",
+      "namaFakultas": "Fakultas Ilmu Budaya",
+      "singkatan": "FIB"
+    },
+    {
+      "id": "fak-fkor",
+      "kodeFakultas": "FKOR",
+      "namaFakultas": "Fakultas Keolahragaan",
+      "singkatan": "FKOR"
+    },
+    {
+      "id": "fak-sv",
+      "kodeFakultas": "SV",
+      "namaFakultas": "Sekolah Vokasi",
+      "singkatan": "SV"
+    }
+  ],
+  "prodi": [
+    {
+      "id": "p-inf",
+      "fakultasId": "fak-fatisda",
+      "fakultas": "Fakultas Teknologi Informasi dan Sains Data",
+      "kodeProdi": "INF",
+      "namaProdi": "S1 Informatika",
+      "jenjang": "S1"
+    },
+    {
+      "id": "p-sd",
+      "fakultasId": "fak-fatisda",
+      "fakultas": "Fakultas Teknologi Informasi dan Sains Data",
+      "kodeProdi": "SD",
+      "namaProdi": "S1 Sains Data",
+      "jenjang": "S1"
+    },
+    {
+      "id": "p-mat",
+      "fakultasId": "fak-fmipa",
+      "fakultas": "Fakultas Matematika dan Ilmu Pengetahuan Alam",
+      "kodeProdi": "MAT",
+      "namaProdi": "S1 Matematika",
+      "jenjang": "S1"
+    },
+    {
+      "id": "p-fis",
+      "fakultasId": "fak-fmipa",
+      "fakultas": "Fakultas Matematika dan Ilmu Pengetahuan Alam",
+      "kodeProdi": "FIS",
+      "namaProdi": "S1 Fisika",
+      "jenjang": "S1"
+    },
+    {
+      "id": "p-kim",
+      "fakultasId": "fak-fmipa",
+      "fakultas": "Fakultas Matematika dan Ilmu Pengetahuan Alam",
+      "kodeProdi": "KIM",
+      "namaProdi": "S1 Kimia",
+      "jenjang": "S1"
+    },
+    {
+      "id": "p-bio",
+      "fakultasId": "fak-fmipa",
+      "fakultas": "Fakultas Matematika dan Ilmu Pengetahuan Alam",
+      "kodeProdi": "BIO",
+      "namaProdi": "S1 Biologi",
+      "jenjang": "S1"
+    },
+    {
+      "id": "p-far",
+      "fakultasId": "fak-fmipa",
+      "fakultas": "Fakultas Matematika dan Ilmu Pengetahuan Alam",
+      "kodeProdi": "FAR",
+      "namaProdi": "S1 Farmasi",
+      "jenjang": "S1"
+    },
+    {
+      "id": "p-stat",
+      "fakultasId": "fak-fmipa",
+      "fakultas": "Fakultas Matematika dan Ilmu Pengetahuan Alam",
+      "kodeProdi": "STAT",
+      "namaProdi": "S1 Statistika",
+      "jenjang": "S1"
+    },
+    {
+      "id": "p-ling",
+      "fakultasId": "fak-fmipa",
+      "fakultas": "Fakultas Matematika dan Ilmu Pengetahuan Alam",
+      "kodeProdi": "LING",
+      "namaProdi": "S1 Ilmu Lingkungan",
+      "jenjang": "S1"
+    },
+    {
+      "id": "p-ts",
+      "fakultasId": "fak-ft",
+      "fakultas": "Fakultas Teknik",
+      "kodeProdi": "TS",
+      "namaProdi": "S1 Teknik Sipil",
+      "jenjang": "S1"
+    },
+    {
+      "id": "p-tm",
+      "fakultasId": "fak-ft",
+      "fakultas": "Fakultas Teknik",
+      "kodeProdi": "TM",
+      "namaProdi": "S1 Teknik Mesin",
+      "jenjang": "S1"
+    },
+    {
+      "id": "p-tk",
+      "fakultasId": "fak-ft",
+      "fakultas": "Fakultas Teknik",
+      "kodeProdi": "TK",
+      "namaProdi": "S1 Teknik Kimia",
+      "jenjang": "S1"
+    },
+    {
+      "id": "p-ti",
+      "fakultasId": "fak-ft",
+      "fakultas": "Fakultas Teknik",
+      "kodeProdi": "TI",
+      "namaProdi": "S1 Teknik Industri",
+      "jenjang": "S1"
+    },
+    {
+      "id": "p-te",
+      "fakultasId": "fak-ft",
+      "fakultas": "Fakultas Teknik",
+      "kodeProdi": "TE",
+      "namaProdi": "S1 Teknik Elektro",
+      "jenjang": "S1"
+    },
+    {
+      "id": "p-ars",
+      "fakultasId": "fak-ft",
+      "fakultas": "Fakultas Teknik",
+      "kodeProdi": "ARS",
+      "namaProdi": "S1 Arsitektur",
+      "jenjang": "S1"
+    },
+    {
+      "id": "p-pwk",
+      "fakultasId": "fak-ft",
+      "fakultas": "Fakultas Teknik",
+      "kodeProdi": "PWK",
+      "namaProdi": "S1 Perencanaan Wilayah dan Kota (PWK)",
+      "jenjang": "S1"
+    },
+    {
+      "id": "p-ked",
+      "fakultasId": "fak-fk",
+      "fakultas": "Fakultas Kedokteran",
+      "kodeProdi": "KED",
+      "namaProdi": "S1 Kedokteran",
+      "jenjang": "S1"
+    },
+    {
+      "id": "p-keb",
+      "fakultasId": "fak-fk",
+      "fakultas": "Fakultas Kedokteran",
+      "kodeProdi": "KEB",
+      "namaProdi": "S1 Kebidanan",
+      "jenjang": "S1"
+    },
+    {
+      "id": "p-psi",
+      "fakultasId": "fak-fpsi",
+      "fakultas": "Fakultas Psikologi",
+      "kodeProdi": "PSI",
+      "namaProdi": "S1 Psikologi",
+      "jenjang": "S1"
+    },
+    {
+      "id": "p-mnj",
+      "fakultasId": "fak-feb",
+      "fakultas": "Fakultas Ekonomi dan Bisnis",
+      "kodeProdi": "MNJ",
+      "namaProdi": "S1 Manajemen",
+      "jenjang": "S1"
+    },
+    {
+      "id": "p-akt",
+      "fakultasId": "fak-feb",
+      "fakultas": "Fakultas Ekonomi dan Bisnis",
+      "kodeProdi": "AKT",
+      "namaProdi": "S1 Akuntansi",
+      "jenjang": "S1"
+    },
+    {
+      "id": "p-ep",
+      "fakultasId": "fak-feb",
+      "fakultas": "Fakultas Ekonomi dan Bisnis",
+      "kodeProdi": "EP",
+      "namaProdi": "S1 Ekonomi Pembangunan",
+      "jenjang": "S1"
+    },
+    {
+      "id": "p-bd",
+      "fakultasId": "fak-feb",
+      "fakultas": "Fakultas Ekonomi dan Bisnis",
+      "kodeProdi": "BD",
+      "namaProdi": "S1 Bisnis Digital",
+      "jenjang": "S1"
+    },
+    {
+      "id": "p-hk",
+      "fakultasId": "fak-fh",
+      "fakultas": "Fakultas Hukum",
+      "kodeProdi": "HK",
+      "namaProdi": "S1 Ilmu Hukum",
+      "jenjang": "S1"
+    },
+    {
+      "id": "p-ia",
+      "fakultasId": "fak-fisip",
+      "fakultas": "Fakultas Ilmu Sosial dan Ilmu Politik",
+      "kodeProdi": "IA",
+      "namaProdi": "S1 Ilmu Administrasi Negara",
+      "jenjang": "S1"
+    },
+    {
+      "id": "p-ilkom",
+      "fakultasId": "fak-fisip",
+      "fakultas": "Fakultas Ilmu Sosial dan Ilmu Politik",
+      "kodeProdi": "KOM",
+      "namaProdi": "S1 Ilmu Komunikasi",
+      "jenjang": "S1"
+    },
+    {
+      "id": "p-sos",
+      "fakultasId": "fak-fisip",
+      "fakultas": "Fakultas Ilmu Sosial dan Ilmu Politik",
+      "kodeProdi": "SOS",
+      "namaProdi": "S1 Sosiologi",
+      "jenjang": "S1"
+    },
+    {
+      "id": "p-hi",
+      "fakultasId": "fak-fisip",
+      "fakultas": "Fakultas Ilmu Sosial dan Ilmu Politik",
+      "kodeProdi": "HI",
+      "namaProdi": "S1 Hubungan Internasional",
+      "jenjang": "S1"
+    },
+    {
+      "id": "p-pend-mat",
+      "fakultasId": "fak-fkip",
+      "fakultas": "Fakultas Keguruan dan Ilmu Pendidikan",
+      "kodeProdi": "PMAT",
+      "namaProdi": "S1 Pendidikan Matematika",
+      "jenjang": "S1"
+    },
+    {
+      "id": "p-pend-biol",
+      "fakultasId": "fak-fkip",
+      "fakultas": "Fakultas Keguruan dan Ilmu Pendidikan",
+      "kodeProdi": "PBIO",
+      "namaProdi": "S1 Pendidikan Biologi",
+      "jenjang": "S1"
+    },
+    {
+      "id": "p-pend-fis",
+      "fakultasId": "fak-fkip",
+      "fakultas": "Fakultas Keguruan dan Ilmu Pendidikan",
+      "kodeProdi": "PFIS",
+      "namaProdi": "S1 Pendidikan Fisika",
+      "jenjang": "S1"
+    },
+    {
+      "id": "p-pend-kim",
+      "fakultasId": "fak-fkip",
+      "fakultas": "Fakultas Keguruan dan Ilmu Pendidikan",
+      "kodeProdi": "PKIM",
+      "namaProdi": "S1 Pendidikan Kimia",
+      "jenjang": "S1"
+    },
+    {
+      "id": "p-pend-indo",
+      "fakultasId": "fak-fkip",
+      "fakultas": "Fakultas Keguruan dan Ilmu Pendidikan",
+      "kodeProdi": "PBIN",
+      "namaProdi": "S1 Pendidikan Bahasa Indonesia",
+      "jenjang": "S1"
+    },
+    {
+      "id": "p-pend-ing",
+      "fakultasId": "fak-fkip",
+      "fakultas": "Fakultas Keguruan dan Ilmu Pendidikan",
+      "kodeProdi": "PBING",
+      "namaProdi": "S1 Pendidikan Bahasa Inggris",
+      "jenjang": "S1"
+    },
+    {
+      "id": "p-pgsd",
+      "fakultasId": "fak-fkip",
+      "fakultas": "Fakultas Keguruan dan Ilmu Pendidikan",
+      "kodeProdi": "PGSD",
+      "namaProdi": "S1 Pendidikan Guru Sekolah Dasar (PGSD)",
+      "jenjang": "S1"
+    },
+    {
+      "id": "p-agrot",
+      "fakultasId": "fak-fp",
+      "fakultas": "Fakultas Pertanian",
+      "kodeProdi": "AGRT",
+      "namaProdi": "S1 Agroteknologi",
+      "jenjang": "S1"
+    },
+    {
+      "id": "p-agrib",
+      "fakultasId": "fak-fp",
+      "fakultas": "Fakultas Pertanian",
+      "kodeProdi": "AGRB",
+      "namaProdi": "S1 Agribisnis",
+      "jenjang": "S1"
+    },
+    {
+      "id": "p-itp",
+      "fakultasId": "fak-fp",
+      "fakultas": "Fakultas Pertanian",
+      "kodeProdi": "ITP",
+      "namaProdi": "S1 Ilmu dan Teknologi Pangan (ITP)",
+      "jenjang": "S1"
+    },
+    {
+      "id": "p-soil",
+      "fakultasId": "fak-fp",
+      "fakultas": "Fakultas Pertanian",
+      "kodeProdi": "ITAN",
+      "namaProdi": "S1 Ilmu Tanah",
+      "jenjang": "S1"
+    },
+    {
+      "id": "p-pet",
+      "fakultasId": "fak-fpet",
+      "fakultas": "Fakultas Peternakan",
+      "kodeProdi": "PET",
+      "namaProdi": "S1 Peternakan",
+      "jenjang": "S1"
+    },
+    {
+      "id": "p-dkv",
+      "fakultasId": "fak-fsrd",
+      "fakultas": "Fakultas Seni Rupa dan Desain",
+      "kodeProdi": "DKV",
+      "namaProdi": "S1 Desain Komunikasi Visual (DKV)",
+      "jenjang": "S1"
+    },
+    {
+      "id": "p-di",
+      "fakultasId": "fak-fsrd",
+      "fakultas": "Fakultas Seni Rupa dan Desain",
+      "kodeProdi": "DI",
+      "namaProdi": "S1 Desain Interior",
+      "jenjang": "S1"
+    },
+    {
+      "id": "p-sr",
+      "fakultasId": "fak-fsrd",
+      "fakultas": "Fakultas Seni Rupa dan Desain",
+      "kodeProdi": "SR",
+      "namaProdi": "S1 Seni Rupa Murni",
+      "jenjang": "S1"
+    },
+    {
+      "id": "p-sasi",
+      "fakultasId": "fak-fib",
+      "fakultas": "Fakultas Ilmu Budaya",
+      "kodeProdi": "SASI",
+      "namaProdi": "S1 Sastra Indonesia",
+      "jenjang": "S1"
+    },
+    {
+      "id": "p-sasing",
+      "fakultasId": "fak-fib",
+      "fakultas": "Fakultas Ilmu Budaya",
+      "kodeProdi": "SASING",
+      "namaProdi": "S1 Sastra Inggris",
+      "jenjang": "S1"
+    },
+    {
+      "id": "p-sasda",
+      "fakultasId": "fak-fib",
+      "fakultas": "Fakultas Ilmu Budaya",
+      "kodeProdi": "SASDA",
+      "namaProdi": "S1 Sastra Daerah",
+      "jenjang": "S1"
+    },
+    {
+      "id": "p-sejarah",
+      "fakultasId": "fak-fib",
+      "fakultas": "Fakultas Ilmu Budaya",
+      "kodeProdi": "ILSEJ",
+      "namaProdi": "S1 Ilmu Sejarah",
+      "jenjang": "S1"
+    },
+    {
+      "id": "p-penjas",
+      "fakultasId": "fak-fkor",
+      "fakultas": "Fakultas Keolahragaan",
+      "kodeProdi": "PENJAS",
+      "namaProdi": "S1 Pendidikan Jasmani, Kesehatan & Rekreasi (PJKR)",
+      "jenjang": "S1"
+    },
+    {
+      "id": "p-or",
+      "fakultasId": "fak-fkor",
+      "fakultas": "Fakultas Keolahragaan",
+      "kodeProdi": "IKOR",
+      "namaProdi": "S1 Ilmu Keolahragaan",
+      "jenjang": "S1"
+    },
+    {
+      "id": "p-d3ti",
+      "fakultasId": "fak-sv",
+      "fakultas": "Sekolah Vokasi",
+      "kodeProdi": "D3TI",
+      "namaProdi": "D3 Teknik Informatika",
+      "jenjang": "D3"
+    },
+    {
+      "id": "p-d3akt",
+      "fakultasId": "fak-sv",
+      "fakultas": "Sekolah Vokasi",
+      "kodeProdi": "D3AKT",
+      "namaProdi": "D3 Akuntansi",
+      "jenjang": "D3"
+    },
+    {
+      "id": "p-d4k3",
+      "fakultasId": "fak-sv",
+      "fakultas": "Sekolah Vokasi",
+      "kodeProdi": "D4K3",
+      "namaProdi": "D4 Keselamatan dan Kesehatan Kerja (K3)",
+      "jenjang": "D4"
+    }
+  ],
+  "dosen": [
+    {
+      "id": "dos-1",
+      "nip": "197805122003121001",
+      "namaDosen": "Dr. Eng. Ir. Hendra Prasetyo, S.Kom., M.T.",
+      "email": "hendra.p@staff.uns.ac.id",
+      "bidangKeahlian": "Artificial Intelligence & Computer Vision",
+      "fakultasId": "fak-fatisda"
+    },
+    {
+      "id": "dos-2",
+      "nip": "198203192006042002",
+      "namaDosen": "Prof. Dr. Siti Rahmawati, S.Si., M.Cs.",
+      "email": "siti.rahma@staff.uns.ac.id",
+      "bidangKeahlian": "Data Science & Natural Language Processing",
+      "fakultasId": "fak-fmipa"
+    },
+    {
+      "id": "dos-3",
+      "nip": "198511042008121003",
+      "namaDosen": "Budi Santoso, S.T., M.Eng., Ph.D.",
+      "email": "budi.santoso@staff.uns.ac.id",
+      "bidangKeahlian": "Cybersecurity & Telecommunications",
+      "fakultasId": "fak-ft"
+    },
+    {
+      "id": "dos-4",
+      "nip": "197909152005012001",
+      "namaDosen": "Dr. Nurul Hidayati, S.Si., M.T.",
+      "email": "nurul.h@staff.uns.ac.id",
+      "bidangKeahlian": "Internet of Things & Embedded Systems",
+      "fakultasId": "fak-ft"
+    },
+    {
+      "id": "dos-5",
+      "nip": "198801222012041002",
+      "namaDosen": "Fajar Nugroho, S.Kom., M.Cs.",
+      "email": "fajar.nugroho@staff.uns.ac.id",
+      "bidangKeahlian": "Software Architecture & Information Systems",
+      "fakultasId": "fak-fatisda"
+    },
+    {
+      "id": "dos-6",
+      "nip": "198307182008011004",
+      "namaDosen": "Dr. Arif Wibowo, S.E., M.M.",
+      "email": "arif.wibowo@staff.uns.ac.id",
+      "bidangKeahlian": "Digital Business & Enterprise Strategy",
+      "fakultasId": "fak-feb"
+    },
+    {
+      "id": "dos-7",
+      "nip": "198104112005011002",
+      "namaDosen": "dr. Raden Wahyudi, Sp.S(K)., Ph.D.",
+      "email": "raden.wahyudi@staff.uns.ac.id",
+      "bidangKeahlian": "Neurologi & Bioinformatika Medis",
+      "fakultasId": "fak-fk"
+    },
+    {
+      "id": "dos-8",
+      "nip": "198606142010122003",
+      "namaDosen": "Dr. Retno Wulandari, S.Pd., M.Hum.",
+      "email": "retno.w@staff.uns.ac.id",
+      "bidangKeahlian": "Linguistik Komputasional & Sastra",
+      "fakultasId": "fak-fib"
+    }
+  ],
+  "mahasiswa": [],
+  "skripsi": [],
+  "publikasi": [],
+  "students": [],
+  "adminAccounts": [
+    {
+      "id": "admin-master-uns",
+      "email": "admin@staff.uns.ac.id",
+      "nomorHp": "081234567890",
+      "namaLengkap": "Dr. Hendra Prasetyo",
+      "nip": "197805122003121001",
+      "fakultasId": "fak-fatisda",
+      "fakultasNama": "Fakultas Teknologi Informasi dan Sains Data",
+      "role": "Administrator Repositori",
+      "passwordHash": "8b9d09f3d548325a2df6a6234e76d9bf3c3937bcbb3fc106ca86bda19da52fbf",
+      "salt": "unsdefaultsalt",
+      "createdAt": "2024-01-01T00:00:00.000Z"
+    }
+  ],
+  "auditLogs": [
+    {
+      "id": "log-1791226001131-r67w",
+      "adminEmail": "admin@staff.uns.ac.id",
+      "adminNama": "Administrator Repositori",
+      "action": "CLEAR_ALL_STUDENTS",
+      "details": "Menghapus seluruh data akun autentikasi dan profil mahasiswa (1 mahasiswa).",
+      "timestamp": "2026-10-05T18:46:41.131Z"
+    },
+    {
+      "id": "log-boot-zero",
+      "adminEmail": "admin@staff.uns.ac.id",
+      "adminNama": "Administrator Repositori",
+      "action": "DATABASE_CLEARED_ZERO",
+      "details": "Database repositori berhasil dibersihkan dan diinisialisasi ke 0 skripsi & 0 mahasiswa sesuai permintaan pengelola.",
+      "timestamp": "2026-10-05T18:30:00.000Z"
+    }
+  ]
+}
