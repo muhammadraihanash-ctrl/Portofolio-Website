@@ -34,12 +34,44 @@ export default async function handler(req: IncomingMessage, res: ServerResponse)
     return;
   }
 
-  // Normalize path if Vercel stripped /api prefix in rewrite
-  if (req.url && !req.url.startsWith('/api') && !req.url.startsWith('/index.html')) {
-    req.url = '/api' + (req.url.startsWith('/') ? req.url : '/' + req.url);
-  }
+  try {
+    // Extract true original path from Vercel headers if rewritten
+    const matchedPath = (req.headers['x-matched-path'] as string) || 
+                        (req.headers['x-forwarded-uri'] as string) ||
+                        (req.headers['x-original-url'] as string);
 
-  await ensureVercelBootstrapped();
-  return (app as any)(req, res);
+    if (matchedPath && matchedPath.startsWith('/api')) {
+      req.url = matchedPath;
+    } else if (req.url) {
+      // If Vercel rewrote /api/(.*) -> /api and placed the capture in query params
+      const [pathPart, queryPart] = req.url.split('?');
+      if (pathPart === '/api' || pathPart === '/api/') {
+        const qParams = new URLSearchParams(queryPart || '');
+        const sub = qParams.get('0') || qParams.get('1') || qParams.get('path');
+        if (sub) {
+          qParams.delete('0');
+          qParams.delete('1');
+          qParams.delete('path');
+          const remainingQuery = qParams.toString();
+          req.url = `/api/${sub}${remainingQuery ? '?' + remainingQuery : ''}`;
+        }
+      } else if (!req.url.startsWith('/api') && !req.url.startsWith('/index.html')) {
+        req.url = '/api' + (req.url.startsWith('/') ? req.url : '/' + req.url);
+      }
+    }
+
+    await ensureVercelBootstrapped();
+    return (app as any)(req, res);
+  } catch (err: any) {
+    console.error('[Vercel Serverless Handler Error]:', err);
+    if (!res.headersSent) {
+      res.statusCode = 500;
+      res.setHeader('Content-Type', 'application/json');
+      res.end(JSON.stringify({
+        success: false,
+        error: err?.message || 'Internal Server Error in Vercel Gateway'
+      }));
+    }
+  }
 }
 

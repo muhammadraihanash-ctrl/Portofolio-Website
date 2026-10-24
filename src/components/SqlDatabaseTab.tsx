@@ -179,18 +179,6 @@ export const SQL_TABLES: TableMeta[] = [
     defaultCount: 4
   }
 ];
-    sublabel: 'Paten & Hak Cipta Kemenkumham RI',
-    icon: Sparkles,
-    defaultCount: 22
-  },
-  {
-    id: 'digilib_documents',
-    label: 'Dokumen Digilib Mahasiswa',
-    sublabel: 'Arsip Skripsi & Tesis Mahasiswa Bimbingan',
-    icon: GraduationCap,
-    defaultCount: 74
-  }
-];
 
 interface SqlDatabaseTabProps {
   showToast: (message: string, type?: 'success' | 'error') => void;
@@ -202,6 +190,7 @@ export const SqlDatabaseTab: React.FC<SqlDatabaseTabProps> = ({ showToast }) => 
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [yearFilter, setYearFilter] = useState<string>('all');
+  const [sectionFilter, setSectionFilter] = useState<string>('all');
   const [statusInfo, setStatusInfo] = useState<any>(null);
   const [tableCounts, setTableCounts] = useState<Record<string, number>>({});
 
@@ -478,6 +467,88 @@ export const SqlDatabaseTab: React.FC<SqlDatabaseTabProps> = ({ showToast }) => 
         detail_url: '',
         catatan_umum: ''
       };
+    } else if (activeTable === 'teaching_courses') {
+      initial = {
+        code: 'MAT-301',
+        name: '',
+        level: 'Undergraduate (S1)',
+        program: 'Matematika',
+        academic_year: `${currentYear}/${currentYear + 1}`,
+        semester: 'Ganjil',
+        description: '',
+        learning_outcomes: '',
+        materials_url: '',
+        is_active: 1
+      };
+    } else if (activeTable === 'research_topics') {
+      initial = {
+        title: '',
+        description: '',
+        key_concepts: 'Optimization, Mathematical Modeling, Operations Research'
+      };
+    } else if (activeTable === 'research_projects') {
+      initial = {
+        title: '',
+        period: `${currentYear} - ${currentYear + 1}`,
+        funding_source: 'Kemdiktisaintek RI',
+        grant_name: 'Penelitian Terapan Unggulan (PTU)',
+        role: 'Ketua Peneliti',
+        collaborators: 'FMIPA Universitas Sebelas Maret',
+        description: '',
+        status: 'Ongoing'
+      };
+    } else if (activeTable === 'editorial_roles') {
+      initial = {
+        role: 'Editorial Board Member',
+        venue: '',
+        publisher: '',
+        indexing: 'Scopus Q2 / SINTA 1',
+        period: `${currentYear} - Sekarang`,
+        url: '',
+        description: ''
+      };
+    } else if (activeTable === 'press_media') {
+      initial = {
+        title: '',
+        media_outlet: 'Humas UNS',
+        publish_date: new Date().toISOString().split('T')[0],
+        category: 'Liputan Penelitian',
+        url: '',
+        summary: ''
+      };
+    } else if (activeTable === 'blog_posts') {
+      initial = {
+        title: '',
+        slug: `catatan-riset-${Date.now()}`,
+        published_at: new Date().toISOString().split('T')[0],
+        read_time: '5 min read',
+        tags: 'Riset, Matematika Terapan, Optimasi',
+        excerpt: '',
+        content: '',
+        status: 'Published',
+        author: 'Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.',
+        category: 'Wawasan Riset'
+      };
+    } else if (activeTable === 'academic_profile') {
+      initial = {
+        name: 'Nughthoh Arfawi Kurdhi',
+        title_with_degrees: 'Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.',
+        role: 'Lektor / Dosen & Peneliti',
+        department: 'Program Studi Matematika',
+        faculty: 'Fakultas MIPA',
+        institution: 'Universitas Sebelas Maret (UNS)',
+        location: 'Surakarta, Jawa Tengah, Indonesia',
+        email: 'arfa@staff.uns.ac.id',
+        bio_short: '',
+        bio: '',
+        research_interests: 'Operations Research, Graph Theory, Optimization'
+      };
+    } else if (activeTable === 'admin_accounts') {
+      initial = {
+        nama_lengkap: '',
+        email: '',
+        role: 'Administrator Resmi (Staff FMIPA UNS)'
+      };
     }
     setEditingRow(null);
     setFormData(initial);
@@ -490,7 +561,7 @@ export const SqlDatabaseTab: React.FC<SqlDatabaseTabProps> = ({ showToast }) => 
     setFormData({
       ...row,
       tahun: row.tahun ?? row.year ?? new Date().getFullYear(),
-      judul: row.judul ?? row.title ?? '',
+      judul: row.judul ?? row.title ?? row.name ?? row.venue ?? '',
       penulis: row.penulis ?? row.authors ?? row.inventors ?? '',
       authors: row.authors ?? row.penulis ?? '',
       inventors: row.inventors ?? row.authors ?? row.penulis ?? '',
@@ -522,7 +593,45 @@ export const SqlDatabaseTab: React.FC<SqlDatabaseTabProps> = ({ showToast }) => 
       link_scopus: row.link_scopus ?? row.link ?? '',
       doi: row.doi || '',
       kuartil: row.kuartil || 'Scopus',
-      sitasi: row.sitasi ?? 0
+      sitasi: row.sitasi ?? 0,
+      // Remaining tables fields
+      code: row.code || '',
+      name: row.name || row.nama_lengkap || '',
+      level: row.level || 'Undergraduate (S1)',
+      program: row.program || '',
+      academic_year: row.academic_year || '',
+      semester: row.semester || '',
+      description: row.description || row.bio || '',
+      learning_outcomes: row.learning_outcomes || '',
+      materials_url: row.materials_url || '',
+      is_active: row.is_active ?? 1,
+      key_concepts: row.key_concepts || '',
+      period: row.period || '',
+      funding_source: row.funding_source || '',
+      grant_name: row.grant_name || '',
+      collaborators: row.collaborators || '',
+      venue: row.venue || '',
+      indexing: row.indexing || '',
+      media_outlet: row.media_outlet || '',
+      publish_date: row.publish_date || '',
+      summary: row.summary || '',
+      slug: row.slug || '',
+      published_at: row.published_at || '',
+      read_time: row.read_time || '',
+      tags: row.tags || '',
+      excerpt: row.excerpt || '',
+      content: row.content || '',
+      author: row.author || '',
+      title_with_degrees: row.title_with_degrees || '',
+      department: row.department || '',
+      faculty: row.faculty || '',
+      institution: row.institution || '',
+      location: row.location || '',
+      email: row.email || '',
+      bio: row.bio || '',
+      bio_short: row.bio_short || '',
+      research_interests: row.research_interests || '',
+      nama_lengkap: row.nama_lengkap || row.name || ''
     });
     setIsModalOpen(true);
   };
@@ -745,9 +854,9 @@ export const SqlDatabaseTab: React.FC<SqlDatabaseTabProps> = ({ showToast }) => 
           <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-200/80">
             <span className="text-[11px] text-slate-500 block">Total Data Terdaftar:</span>
             <span className="font-mono font-bold text-[#004b87] text-lg mt-0.5 block">
-              {totalRowCount > 0 ? totalRowCount : 289} Baris
+              {totalRowCount > 0 ? totalRowCount : 309} Baris
             </span>
-            <span className="text-[10px] text-slate-500 font-medium">Tersebar di 7 Tabel Resmi (termasuk Digilib Mahasiswa)</span>
+            <span className="text-[10px] text-slate-500 font-medium">Tersebar di 15 Tabel Basis Data MySQL Pusat</span>
           </div>
 
           <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-200/80">
@@ -771,9 +880,45 @@ export const SqlDatabaseTab: React.FC<SqlDatabaseTabProps> = ({ showToast }) => 
         </div>
       </div>
 
-      {/* 2. Table Selection Tabs */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-7 gap-2">
-        {SQL_TABLES.map(tab => {
+      {/* 2. Portfolio Navigation Section Filter Bar */}
+      <div className="flex items-center gap-1.5 overflow-x-auto pb-1 text-xs scrollbar-none">
+        <span className="text-slate-400 font-semibold px-2 py-1 text-[11px] shrink-0 uppercase tracking-wider font-mono">
+          Navigasi:
+        </span>
+        {[
+          { id: 'all', label: `Semua Tabel (${SQL_TABLES.length})` },
+          { id: 'Home & Resume', label: 'Home & Resume' },
+          { id: 'Teaching', label: 'Teaching' },
+          { id: 'Graduate Students', label: 'Graduate Students' },
+          { id: 'Current Research', label: 'Current Research' },
+          { id: 'Publications', label: 'Publications' },
+          { id: 'P2M Kegiatan', label: 'P2M Kegiatan' },
+          { id: 'Editorial Roles', label: 'Editorial Roles' },
+          { id: 'Press & Media', label: 'Press & Media' },
+          { id: 'Blog', label: 'Blog' },
+          { id: 'Sistem Admin', label: 'Sistem Admin' }
+        ].map(sec => {
+          const isCurrentSec = sectionFilter === sec.id;
+          return (
+            <button
+              key={sec.id}
+              type="button"
+              onClick={() => setSectionFilter(sec.id)}
+              className={`px-3 py-1.5 rounded-lg font-semibold text-xs transition-colors shrink-0 cursor-pointer ${
+                isCurrentSec
+                  ? 'bg-[#004b87] text-white shadow-2xs'
+                  : 'bg-white hover:bg-slate-100 text-slate-700 border border-slate-200'
+              }`}
+            >
+              {sec.label}
+            </button>
+          );
+        })}
+      </div>
+
+      {/* 3. Table Selection Tabs Grid */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-2.5">
+        {SQL_TABLES.filter(tab => sectionFilter === 'all' || tab.navSection === sectionFilter).map(tab => {
           const Icon = tab.icon;
           const isSelected = activeTable === tab.id;
           const count = tableCounts[tab.id] ?? tab.defaultCount;
@@ -785,14 +930,21 @@ export const SqlDatabaseTab: React.FC<SqlDatabaseTabProps> = ({ showToast }) => 
                 setSearchQuery('');
                 setYearFilter('all');
               }}
-              className={`p-3 rounded-xl border text-left transition-all cursor-pointer flex flex-col justify-between ${
+              className={`p-3.5 rounded-xl border text-left transition-all cursor-pointer flex flex-col justify-between ${
                 isSelected
-                  ? 'bg-[#004b87] border-[#004b87] text-white shadow-xs'
+                  ? 'bg-[#004b87] border-[#004b87] text-white shadow-sm ring-2 ring-sky-300/40'
                   : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-50 hover:border-sky-300'
               }`}
             >
-              <div className="flex items-center justify-between mb-2">
-                <Icon className={`w-4 h-4 ${isSelected ? 'text-sky-200' : 'text-[#004b87]'}`} />
+              <div className="flex items-center justify-between mb-2.5">
+                <div className="flex items-center gap-1.5">
+                  <Icon className={`w-4 h-4 ${isSelected ? 'text-sky-200' : 'text-[#004b87]'}`} />
+                  <span className={`text-[10px] font-semibold uppercase tracking-wider px-1.5 py-0.5 rounded ${
+                    isSelected ? 'bg-sky-950/40 text-sky-200' : 'bg-slate-100 text-slate-500'
+                  }`}>
+                    {tab.navSection}
+                  </span>
+                </div>
                 <span
                   className={`text-[11px] font-mono font-bold px-2 py-0.5 rounded-full ${
                     isSelected ? 'bg-sky-900 text-sky-100' : 'bg-slate-100 text-slate-800'
@@ -921,6 +1073,62 @@ export const SqlDatabaseTab: React.FC<SqlDatabaseTabProps> = ({ showToast }) => 
                       <th className="py-3 px-4 font-bold">Mahasiswa / Penulis</th>
                       <th className="py-3 px-4 font-bold">Program Studi &amp; Jenis</th>
                       <th className="py-3 px-4 font-bold">Pembimbing &amp; Repositori</th>
+                    </>
+                  )}
+                  {activeTable === 'teaching_courses' && (
+                    <>
+                      <th className="py-3 px-4 font-bold">Kode Matkul</th>
+                      <th className="py-3 px-4 font-bold">Tingkat &amp; Semester</th>
+                      <th className="py-3 px-4 font-bold">Status Perkuliahan</th>
+                    </>
+                  )}
+                  {activeTable === 'research_topics' && (
+                    <>
+                      <th className="py-3 px-4 font-bold">Konsep Kunci</th>
+                      <th className="py-3 px-4 font-bold">Fokus Riset</th>
+                      <th className="py-3 px-4 font-bold">Domain</th>
+                    </>
+                  )}
+                  {activeTable === 'research_projects' && (
+                    <>
+                      <th className="py-3 px-4 font-bold">Periode &amp; Hibah</th>
+                      <th className="py-3 px-4 font-bold">Peran Peneliti</th>
+                      <th className="py-3 px-4 font-bold">Status Proyek</th>
+                    </>
+                  )}
+                  {activeTable === 'editorial_roles' && (
+                    <>
+                      <th className="py-3 px-4 font-bold">Peran Editorial</th>
+                      <th className="py-3 px-4 font-bold">Penerbit &amp; Indexing</th>
+                      <th className="py-3 px-4 font-bold">Periode Masa Tugas</th>
+                    </>
+                  )}
+                  {activeTable === 'press_media' && (
+                    <>
+                      <th className="py-3 px-4 font-bold">Media Outlet</th>
+                      <th className="py-3 px-4 font-bold">Tanggal Liputan</th>
+                      <th className="py-3 px-4 font-bold">Kategori Berita</th>
+                    </>
+                  )}
+                  {activeTable === 'blog_posts' && (
+                    <>
+                      <th className="py-3 px-4 font-bold">Slug URL</th>
+                      <th className="py-3 px-4 font-bold">Kategori &amp; Baca</th>
+                      <th className="py-3 px-4 font-bold">Status Publikasi</th>
+                    </>
+                  )}
+                  {activeTable === 'academic_profile' && (
+                    <>
+                      <th className="py-3 px-4 font-bold">Gelar &amp; Jabatan</th>
+                      <th className="py-3 px-4 font-bold">Email &amp; Unit</th>
+                      <th className="py-3 px-4 font-bold">Minat Penelitian</th>
+                    </>
+                  )}
+                  {activeTable === 'admin_accounts' && (
+                    <>
+                      <th className="py-3 px-4 font-bold">Nama Lengkap</th>
+                      <th className="py-3 px-4 font-bold">Email Akun</th>
+                      <th className="py-3 px-4 font-bold">Role Akses</th>
                     </>
                   )}
                   <th className="py-3 px-4 text-right font-bold">Aksi</th>
@@ -1111,6 +1319,134 @@ export const SqlDatabaseTab: React.FC<SqlDatabaseTabProps> = ({ showToast }) => 
                           ) : (
                             <span className="text-[10px] text-slate-400 font-mono">ID #{row.doc_id || row.id}</span>
                           )}
+                        </td>
+                      </>
+                    )}
+
+                    {activeTable === 'teaching_courses' && (
+                      <>
+                        <td className="py-3 px-4 font-mono font-bold text-[#004b87] whitespace-nowrap">
+                          {row.code || 'MAT-301'}
+                        </td>
+                        <td className="py-3 px-4 whitespace-nowrap">
+                          <span className="font-medium text-slate-800 text-[11px] block">{row.level || 'S1'}</span>
+                          <span className="text-[10px] text-slate-500">{row.semester || 'Ganjil'} ({row.academic_year || '2024/2025'})</span>
+                        </td>
+                        <td className="py-3 px-4 whitespace-nowrap">
+                          <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${row.is_active ? 'bg-emerald-50 text-emerald-700' : 'bg-slate-100 text-slate-600'}`}>
+                            {row.is_active ? 'Aktif Diajarkan' : 'Arsip Kurikulum'}
+                          </span>
+                        </td>
+                      </>
+                    )}
+
+                    {activeTable === 'research_topics' && (
+                      <>
+                        <td className="py-3 px-4 max-w-xs font-mono text-[11px] text-slate-600">
+                          {row.key_concepts || '-'}
+                        </td>
+                        <td className="py-3 px-4 max-w-sm text-xs text-slate-700 line-clamp-2">
+                          {row.description || '-'}
+                        </td>
+                        <td className="py-3 px-4 whitespace-nowrap text-[10px] font-semibold text-[#004b87]">
+                          Riset Unggulan UNS
+                        </td>
+                      </>
+                    )}
+
+                    {activeTable === 'research_projects' && (
+                      <>
+                        <td className="py-3 px-4 whitespace-nowrap">
+                          <div className="font-semibold text-slate-800 text-xs">{row.period || '-'}</div>
+                          <div className="text-[10px] text-slate-500">{row.funding_source || row.grant_name || 'UNS'}</div>
+                        </td>
+                        <td className="py-3 px-4 whitespace-nowrap">
+                          <span className="bg-sky-50 text-[#004b87] font-semibold text-[10px] px-2 py-0.5 rounded">
+                            {row.role || 'Ketua Peneliti'}
+                          </span>
+                        </td>
+                        <td className="py-3 px-4 whitespace-nowrap">
+                          <span className="bg-emerald-50 text-emerald-800 font-bold text-[10px] px-2 py-0.5 rounded">
+                            {row.status || 'Active'}
+                          </span>
+                        </td>
+                      </>
+                    )}
+
+                    {activeTable === 'editorial_roles' && (
+                      <>
+                        <td className="py-3 px-4 whitespace-nowrap">
+                          <span className="bg-purple-50 text-purple-800 font-bold text-[10px] px-2 py-0.5 rounded">
+                            {row.role || 'Editorial Board'}
+                          </span>
+                        </td>
+                        <td className="py-3 px-4 max-w-xs truncate text-[11px] text-slate-700">
+                          {row.publisher || '-'} | {row.indexing || 'Scopus'}
+                        </td>
+                        <td className="py-3 px-4 font-mono text-[11px] text-slate-600 whitespace-nowrap">
+                          {row.period || 'Sekarang'}
+                        </td>
+                      </>
+                    )}
+
+                    {activeTable === 'press_media' && (
+                      <>
+                        <td className="py-3 px-4 font-bold text-slate-900 text-xs whitespace-nowrap">
+                          {row.media_outlet || 'Media UNS'}
+                        </td>
+                        <td className="py-3 px-4 font-mono text-[11px] text-slate-600 whitespace-nowrap">
+                          {row.publish_date || '-'}
+                        </td>
+                        <td className="py-3 px-4 whitespace-nowrap">
+                          <span className="bg-amber-50 text-amber-800 text-[10px] font-semibold px-2 py-0.5 rounded">
+                            {row.category || 'Liputan'}
+                          </span>
+                        </td>
+                      </>
+                    )}
+
+                    {activeTable === 'blog_posts' && (
+                      <>
+                        <td className="py-3 px-4 font-mono text-[11px] text-slate-600 max-w-xs truncate">
+                          /{row.slug || 'artikel'}
+                        </td>
+                        <td className="py-3 px-4 text-[11px] text-slate-600 whitespace-nowrap">
+                          {row.category || 'Wawasan Riset'} ({row.read_time || '5m'})
+                        </td>
+                        <td className="py-3 px-4 whitespace-nowrap">
+                          <span className="bg-emerald-50 text-emerald-700 font-bold text-[10px] px-2 py-0.5 rounded">
+                            {row.status || 'Published'}
+                          </span>
+                        </td>
+                      </>
+                    )}
+
+                    {activeTable === 'academic_profile' && (
+                      <>
+                        <td className="py-3 px-4 text-xs font-medium text-slate-800">
+                          {row.title_with_degrees || row.name}
+                        </td>
+                        <td className="py-3 px-4 text-[11px] text-slate-600 whitespace-nowrap">
+                          {row.email || 'arfa@staff.uns.ac.id'}
+                        </td>
+                        <td className="py-3 px-4 max-w-xs truncate text-[11px] text-slate-600">
+                          {row.research_interests || 'Operations Research'}
+                        </td>
+                      </>
+                    )}
+
+                    {activeTable === 'admin_accounts' && (
+                      <>
+                        <td className="py-3 px-4 font-bold text-slate-900 text-xs whitespace-nowrap">
+                          {row.nama_lengkap || row.name}
+                        </td>
+                        <td className="py-3 px-4 font-mono text-[11px] text-slate-600 whitespace-nowrap">
+                          {row.email}
+                        </td>
+                        <td className="py-3 px-4 whitespace-nowrap">
+                          <span className="bg-sky-50 text-[#004b87] font-bold text-[10px] px-2 py-0.5 rounded">
+                            {row.role || 'Administrator'}
+                          </span>
                         </td>
                       </>
                     )}
@@ -1737,6 +2073,371 @@ export const SqlDatabaseTab: React.FC<SqlDatabaseTabProps> = ({ showToast }) => 
                       value={formData.catatan_umum || ''}
                       onChange={e => setFormData({ ...formData, catatan_umum: e.target.value })}
                       placeholder="Ringkasan abstrak atau catatan verifikasi naskah tugas akhir mahasiswa..."
+                      className="w-full px-3 py-2 border border-slate-300 rounded-lg"
+                    />
+                  </div>
+                </>
+              )}
+
+              {activeTable === 'teaching_courses' && (
+                <>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-slate-700 font-semibold mb-1">Kode Mata Kuliah *</label>
+                      <input
+                        type="text"
+                        required
+                        value={formData.code || ''}
+                        onChange={e => setFormData({ ...formData, code: e.target.value })}
+                        placeholder="e.g. MAT-301 / MAT-402"
+                        className="w-full px-3 py-2 border border-slate-300 rounded-lg font-mono font-bold"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-slate-700 font-semibold mb-1">Nama Mata Kuliah *</label>
+                      <input
+                        type="text"
+                        required
+                        value={formData.name || ''}
+                        onChange={e => setFormData({ ...formData, name: e.target.value })}
+                        placeholder="Riset Operasi II / Pemodelan Matematika"
+                        className="w-full px-3 py-2 border border-slate-300 rounded-lg font-semibold"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div>
+                      <label className="block text-slate-700 font-semibold mb-1">Jenjang Pendidikan</label>
+                      <select
+                        value={formData.level || 'Undergraduate (S1)'}
+                        onChange={e => setFormData({ ...formData, level: e.target.value })}
+                        className="w-full px-3 py-2 border border-slate-300 rounded-lg bg-white"
+                      >
+                        <option value="Undergraduate (S1)">Sarjana (S1)</option>
+                        <option value="Master (S2)">Magister (S2)</option>
+                        <option value="Doctoral (S3)">Doktor (S3)</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-slate-700 font-semibold mb-1">Semester</label>
+                      <input
+                        type="text"
+                        value={formData.semester || 'Ganjil'}
+                        onChange={e => setFormData({ ...formData, semester: e.target.value })}
+                        placeholder="Ganjil / Genap"
+                        className="w-full px-3 py-2 border border-slate-300 rounded-lg"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-slate-700 font-semibold mb-1">Tahun Akademik</label>
+                      <input
+                        type="text"
+                        value={formData.academic_year || '2024/2025'}
+                        onChange={e => setFormData({ ...formData, academic_year: e.target.value })}
+                        placeholder="2024/2025"
+                        className="w-full px-3 py-2 border border-slate-300 rounded-lg font-mono"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-slate-700 font-semibold mb-1">Deskripsi Silabus</label>
+                    <textarea
+                      rows={2}
+                      value={formData.description || ''}
+                      onChange={e => setFormData({ ...formData, description: e.target.value })}
+                      placeholder="Capaian pembelajaran dan pokok bahasan perkuliahan..."
+                      className="w-full px-3 py-2 border border-slate-300 rounded-lg"
+                    />
+                  </div>
+                </>
+              )}
+
+              {activeTable === 'research_topics' && (
+                <>
+                  <div>
+                    <label className="block text-slate-700 font-semibold mb-1">Bidang / Topik Riset Utama *</label>
+                    <input
+                      type="text"
+                      required
+                      value={formData.title || ''}
+                      onChange={e => setFormData({ ...formData, title: e.target.value })}
+                      placeholder="e.g. Operations Research & Supply Chain Optimization"
+                      className="w-full px-3 py-2 border border-slate-300 rounded-lg font-bold"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-slate-700 font-semibold mb-1">Konsep Kunci (Key Concepts)</label>
+                    <input
+                      type="text"
+                      value={formData.key_concepts || ''}
+                      onChange={e => setFormData({ ...formData, key_concepts: e.target.value })}
+                      placeholder="Vehicle Routing Problem, Metaheuristics, Antimagic Graph"
+                      className="w-full px-3 py-2 border border-slate-300 rounded-lg"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-slate-700 font-semibold mb-1">Deskripsi Ruang Lingkup</label>
+                    <textarea
+                      rows={2}
+                      value={formData.description || ''}
+                      onChange={e => setFormData({ ...formData, description: e.target.value })}
+                      placeholder="Deskripsi metodologis dan arah kajian ilmiah riset ini..."
+                      className="w-full px-3 py-2 border border-slate-300 rounded-lg"
+                    />
+                  </div>
+                </>
+              )}
+
+              {activeTable === 'research_projects' && (
+                <>
+                  <div>
+                    <label className="block text-slate-700 font-semibold mb-1">Judul Proyek / Hibah Riset *</label>
+                    <input
+                      type="text"
+                      required
+                      value={formData.title || ''}
+                      onChange={e => setFormData({ ...formData, title: e.target.value })}
+                      placeholder="e.g. Model Optimasi Rute Distribusi Menggunakan Hybrid Genetic Algorithm"
+                      className="w-full px-3 py-2 border border-slate-300 rounded-lg font-bold"
+                    />
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div>
+                      <label className="block text-slate-700 font-semibold mb-1">Periode Riset</label>
+                      <input
+                        type="text"
+                        value={formData.period || ''}
+                        onChange={e => setFormData({ ...formData, period: e.target.value })}
+                        placeholder="2024 - 2026"
+                        className="w-full px-3 py-2 border border-slate-300 rounded-lg font-mono"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-slate-700 font-semibold mb-1">Sumber Dana</label>
+                      <input
+                        type="text"
+                        value={formData.funding_source || ''}
+                        onChange={e => setFormData({ ...formData, funding_source: e.target.value })}
+                        placeholder="Kemdiktisaintek RI / LPPM UNS"
+                        className="w-full px-3 py-2 border border-slate-300 rounded-lg"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-slate-700 font-semibold mb-1">Status Proyek</label>
+                      <select
+                        value={formData.status || 'Ongoing'}
+                        onChange={e => setFormData({ ...formData, status: e.target.value })}
+                        className="w-full px-3 py-2 border border-slate-300 rounded-lg bg-white"
+                      >
+                        <option value="Ongoing">Sedang Berjalan (Ongoing)</option>
+                        <option value="Completed">Selesai (Completed)</option>
+                        <option value="Submitted">Diusulkan (Submitted)</option>
+                      </select>
+                    </div>
+                  </div>
+                </>
+              )}
+
+              {activeTable === 'editorial_roles' && (
+                <>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-slate-700 font-semibold mb-1">Peran Editorial *</label>
+                      <input
+                        type="text"
+                        required
+                        value={formData.role || ''}
+                        onChange={e => setFormData({ ...formData, role: e.target.value })}
+                        placeholder="Editorial Board Member / Reviewer"
+                        className="w-full px-3 py-2 border border-slate-300 rounded-lg font-semibold"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-slate-700 font-semibold mb-1">Nama Jurnal / Lembaga *</label>
+                      <input
+                        type="text"
+                        required
+                        value={formData.venue || ''}
+                        onChange={e => setFormData({ ...formData, venue: e.target.value })}
+                        placeholder="Journal of Applied Mathematics and Computing"
+                        className="w-full px-3 py-2 border border-slate-300 rounded-lg font-semibold"
+                      />
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-slate-700 font-semibold mb-1">Penerbit &amp; Indexing</label>
+                      <input
+                        type="text"
+                        value={formData.indexing || ''}
+                        onChange={e => setFormData({ ...formData, indexing: e.target.value })}
+                        placeholder="Scopus Q2 / SINTA 1"
+                        className="w-full px-3 py-2 border border-slate-300 rounded-lg"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-slate-700 font-semibold mb-1">Masa Tugas</label>
+                      <input
+                        type="text"
+                        value={formData.period || ''}
+                        onChange={e => setFormData({ ...formData, period: e.target.value })}
+                        placeholder="2022 - Sekarang"
+                        className="w-full px-3 py-2 border border-slate-300 rounded-lg font-mono"
+                      />
+                    </div>
+                  </div>
+                </>
+              )}
+
+              {activeTable === 'press_media' && (
+                <>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-slate-700 font-semibold mb-1">Nama Media Outlet *</label>
+                      <input
+                        type="text"
+                        required
+                        value={formData.media_outlet || ''}
+                        onChange={e => setFormData({ ...formData, media_outlet: e.target.value })}
+                        placeholder="Humas UNS / Kompas / Solopos"
+                        className="w-full px-3 py-2 border border-slate-300 rounded-lg font-semibold"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-slate-700 font-semibold mb-1">Kategori Liputan</label>
+                      <input
+                        type="text"
+                        value={formData.category || 'Liputan Penelitian'}
+                        onChange={e => setFormData({ ...formData, category: e.target.value })}
+                        placeholder="Inovasi Matematika / Prestasi Riset"
+                        className="w-full px-3 py-2 border border-slate-300 rounded-lg"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <label className="block text-slate-700 font-semibold mb-1">Tautan URL Berita</label>
+                    <input
+                      type="url"
+                      value={formData.url || ''}
+                      onChange={e => setFormData({ ...formData, url: e.target.value })}
+                      placeholder="https://uns.ac.id/id/uns-research/..."
+                      className="w-full px-3 py-2 border border-slate-300 rounded-lg font-mono text-[11px]"
+                    />
+                  </div>
+                </>
+              )}
+
+              {activeTable === 'blog_posts' && (
+                <>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-slate-700 font-semibold mb-1">Slug URL *</label>
+                      <input
+                        type="text"
+                        required
+                        value={formData.slug || ''}
+                        onChange={e => setFormData({ ...formData, slug: e.target.value })}
+                        placeholder="optimasi-jaringan-distribusi-logistik"
+                        className="w-full px-3 py-2 border border-slate-300 rounded-lg font-mono"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-slate-700 font-semibold mb-1">Kategori Tulisan</label>
+                      <input
+                        type="text"
+                        value={formData.category || 'Wawasan Riset'}
+                        onChange={e => setFormData({ ...formData, category: e.target.value })}
+                        placeholder="Wawasan Riset / Catatan Kuliah"
+                        className="w-full px-3 py-2 border border-slate-300 rounded-lg"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <label className="block text-slate-700 font-semibold mb-1">Isi Konten Catatan Akademik</label>
+                    <textarea
+                      rows={3}
+                      value={formData.content || ''}
+                      onChange={e => setFormData({ ...formData, content: e.target.value })}
+                      placeholder="Tulisan catatan, gagasan akademis, atau pengantar riset..."
+                      className="w-full px-3 py-2 border border-slate-300 rounded-lg"
+                    />
+                  </div>
+                </>
+              )}
+
+              {activeTable === 'academic_profile' && (
+                <>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-slate-700 font-semibold mb-1">Gelar Lengkap Dosen *</label>
+                      <input
+                        type="text"
+                        required
+                        value={formData.title_with_degrees || ''}
+                        onChange={e => setFormData({ ...formData, title_with_degrees: e.target.value })}
+                        placeholder="Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D."
+                        className="w-full px-3 py-2 border border-slate-300 rounded-lg font-bold"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-slate-700 font-semibold mb-1">Email Resmi Akademik *</label>
+                      <input
+                        type="email"
+                        required
+                        value={formData.email || ''}
+                        onChange={e => setFormData({ ...formData, email: e.target.value })}
+                        placeholder="arfa@staff.uns.ac.id"
+                        className="w-full px-3 py-2 border border-slate-300 rounded-lg font-mono"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <label className="block text-slate-700 font-semibold mb-1">Fokus Bidang Keahlian / Riset</label>
+                    <input
+                      type="text"
+                      value={formData.research_interests || ''}
+                      onChange={e => setFormData({ ...formData, research_interests: e.target.value })}
+                      placeholder="Operations Research, Graph Theory, Combinatorial Optimization"
+                      className="w-full px-3 py-2 border border-slate-300 rounded-lg"
+                    />
+                  </div>
+                </>
+              )}
+
+              {activeTable === 'admin_accounts' && (
+                <>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-slate-700 font-semibold mb-1">Nama Lengkap Administrator *</label>
+                      <input
+                        type="text"
+                        required
+                        value={formData.nama_lengkap || ''}
+                        onChange={e => setFormData({ ...formData, nama_lengkap: e.target.value })}
+                        placeholder="Nama Pengelola"
+                        className="w-full px-3 py-2 border border-slate-300 rounded-lg font-bold"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-slate-700 font-semibold mb-1">Alamat Email Terverifikasi *</label>
+                      <input
+                        type="email"
+                        required
+                        value={formData.email || ''}
+                        onChange={e => setFormData({ ...formData, email: e.target.value })}
+                        placeholder="email@gmail.com / staff@uns.ac.id"
+                        className="w-full px-3 py-2 border border-slate-300 rounded-lg font-mono"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <label className="block text-slate-700 font-semibold mb-1">Peran Akses (Role)</label>
+                    <input
+                      type="text"
+                      value={formData.role || 'Administrator Resmi (Staff FMIPA UNS)'}
+                      onChange={e => setFormData({ ...formData, role: e.target.value })}
                       className="w-full px-3 py-2 border border-slate-300 rounded-lg"
                     />
                   </div>

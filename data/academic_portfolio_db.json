@@ -1,6 +1,6 @@
 {
   "version": 3,
-  "updatedAt": "2026-10-22T10:49:47.575Z",
+  "updatedAt": "2026-10-24T15:27:31.762Z",
   "profile": {
     "name": "Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.",
     "titleWithDegrees": "Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.",
@@ -115,12 +115,12 @@
       "penelitian": 47,
       "p2m": 13,
       "scopus": 63,
-      "nonScopus": 33,
+      "nonScopus": 32,
       "prosiding": 16,
       "buku": 22,
       "paten": 1,
       "hki": 21,
-      "notes": "Kinerja akademik resmi terintegrasi penuh dari basis data SQL (60 P2M: 47 Penelitian, 13 Pengabdian; 63 Scopus; 33 Jurnal; 16 Prosiding; 22 Buku; 1 Paten; 21 HKI)."
+      "notes": "Kinerja akademik resmi terintegrasi penuh dari basis data SQL (60 P2M: 47 Penelitian, 13 Pengabdian; 63 Scopus; 32 Jurnal; 16 Prosiding; 22 Buku; 1 Paten; 21 HKI)."
     },
     "researchGroups": [
       {
@@ -218,7 +218,7 @@
         "year": 2026,
         "p2m": 13,
         "scopus": 3,
-        "jurnal": 2,
+        "jurnal": 1,
         "prosiding": null,
         "buku": 2,
         "paten": null,
@@ -1012,35 +1012,6 @@
   },
   "publications": [
     {
-      "id": "journal-35",
-      "title": "Analisis Optimasi Rantai Pasok Berkelanjutan",
-      "authors": [
-        {
-          "name": "Nughthoh Arfawi Kurdhi",
-          "role": "First Author",
-          "affiliation": "Universitas Sebelas Maret (UNS)",
-          "isMainAuthor": true,
-          "order": 1
-        }
-      ],
-      "year": 2026,
-      "venue": "Journal of Industrial Mathematics",
-      "abstract": "Artikel jurnal ilmiah terpublikasi pada Journal of Industrial Mathematics (2026) terkait penerapan optimasi matematika, statistika, dan pemodelan sistem.",
-      "keywords": [
-        "Peer-Reviewed Journal",
-        "Applied Mathematics",
-        "Riset Operasi"
-      ],
-      "category": "Jurnal Ilmiah Nasional/Internasional",
-      "type": "Journals (Jurnal)",
-      "status": "Published",
-      "connectToAnnual": true,
-      "annualCategory": "jurnal",
-      "isFeatured": true,
-      "createdAt": "2026-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:47.567Z"
-    },
-    {
       "id": "scopus-62",
       "title": "An integrated optimization framework for lot sizing and scheduling in sustainable hybrid production",
       "authors": [
@@ -1095,7 +1066,7 @@
       "annualCategory": "scopus",
       "isFeatured": true,
       "createdAt": "2026-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.476Z"
+      "updatedAt": "2026-10-24T15:27:31.678Z"
     },
     {
       "id": "scopus-63",
@@ -1136,7 +1107,7 @@
       "annualCategory": "scopus",
       "isFeatured": true,
       "createdAt": "2026-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.476Z"
+      "updatedAt": "2026-10-24T15:27:31.678Z"
     },
     {
       "id": "book-22",
@@ -1167,7 +1138,7 @@
       "annualCategory": "buku",
       "isFeatured": true,
       "createdAt": "2026-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.479Z"
+      "updatedAt": "2026-10-24T15:27:31.680Z"
     },
     {
       "id": "journal-32",
@@ -1222,7 +1193,7 @@
       "annualCategory": "jurnal",
       "isFeatured": true,
       "createdAt": "2026-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.479Z"
+      "updatedAt": "2026-10-24T15:27:31.679Z"
     },
     {
       "id": "book-21",
@@ -1277,7 +1248,7 @@
       "annualCategory": "buku",
       "isFeatured": true,
       "createdAt": "2026-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.479Z"
+      "updatedAt": "2026-10-24T15:27:31.680Z"
     },
     {
       "id": "scopus-61",
@@ -1326,7 +1297,7 @@
       "annualCategory": "scopus",
       "isFeatured": true,
       "createdAt": "2026-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.476Z"
+      "updatedAt": "2026-10-24T15:27:31.678Z"
     },
     {
       "id": "journal-28",
@@ -1373,7 +1344,7 @@
       "annualCategory": "jurnal",
       "isFeatured": true,
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.479Z"
+      "updatedAt": "2026-10-24T15:27:31.679Z"
     },
     {
       "id": "scopus-53",
@@ -1430,7 +1401,7 @@
       "annualCategory": "scopus",
       "isFeatured": true,
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.476Z"
+      "updatedAt": "2026-10-24T15:27:31.679Z"
     },
     {
       "id": "scopus-60",
@@ -1495,7 +1466,7 @@
       "annualCategory": "scopus",
       "isFeatured": true,
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.478Z"
+      "updatedAt": "2026-10-24T15:27:31.679Z"
     },
     {
       "id": "scopus-45",
@@ -1544,7 +1515,7 @@
       "annualCategory": "scopus",
       "isFeatured": true,
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.476Z"
+      "updatedAt": "2026-10-24T15:27:31.678Z"
     },
     {
       "id": "scopus-58",
@@ -1601,7 +1572,7 @@
       "annualCategory": "scopus",
       "isFeatured": true,
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.478Z"
+      "updatedAt": "2026-10-24T15:27:31.679Z"
     },
     {
       "id": "scopus-43",
@@ -1658,7 +1629,7 @@
       "annualCategory": "scopus",
       "isFeatured": true,
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.476Z"
+      "updatedAt": "2026-10-24T15:27:31.678Z"
     },
     {
       "id": "scopus-46",
@@ -1699,7 +1670,7 @@
       "annualCategory": "scopus",
       "isFeatured": true,
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.476Z"
+      "updatedAt": "2026-10-24T15:27:31.678Z"
     },
     {
       "id": "book-17",
@@ -1738,7 +1709,7 @@
       "annualCategory": "buku",
       "isFeatured": true,
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.479Z"
+      "updatedAt": "2026-10-24T15:27:31.680Z"
     },
     {
       "id": "scopus-54",
@@ -1795,7 +1766,7 @@
       "annualCategory": "scopus",
       "isFeatured": true,
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.476Z"
+      "updatedAt": "2026-10-24T15:27:31.679Z"
     },
     {
       "id": "scopus-47",
@@ -1844,7 +1815,7 @@
       "annualCategory": "scopus",
       "isFeatured": true,
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.476Z"
+      "updatedAt": "2026-10-24T15:27:31.678Z"
     },
     {
       "id": "scopus-51",
@@ -1885,7 +1856,7 @@
       "annualCategory": "scopus",
       "isFeatured": true,
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.476Z"
+      "updatedAt": "2026-10-24T15:27:31.679Z"
     },
     {
       "id": "scopus-52",
@@ -1926,7 +1897,7 @@
       "annualCategory": "scopus",
       "isFeatured": true,
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.476Z"
+      "updatedAt": "2026-10-24T15:27:31.679Z"
     },
     {
       "id": "book-18",
@@ -2013,7 +1984,7 @@
       "annualCategory": "buku",
       "isFeatured": true,
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.479Z"
+      "updatedAt": "2026-10-24T15:27:31.680Z"
     },
     {
       "id": "patent-22",
@@ -2092,7 +2063,7 @@
       "annualCategory": "hki",
       "isFeatured": true,
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.480Z"
+      "updatedAt": "2026-10-24T15:27:31.681Z"
     },
     {
       "id": "book-20",
@@ -2187,7 +2158,7 @@
       "annualCategory": "buku",
       "isFeatured": true,
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.479Z"
+      "updatedAt": "2026-10-24T15:27:31.680Z"
     },
     {
       "id": "book-19",
@@ -2234,7 +2205,7 @@
       "annualCategory": "buku",
       "isFeatured": true,
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.479Z"
+      "updatedAt": "2026-10-24T15:27:31.680Z"
     },
     {
       "id": "scopus-57",
@@ -2275,7 +2246,7 @@
       "annualCategory": "scopus",
       "isFeatured": true,
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.478Z"
+      "updatedAt": "2026-10-24T15:27:31.679Z"
     },
     {
       "id": "journal-27",
@@ -2314,7 +2285,7 @@
       "annualCategory": "jurnal",
       "isFeatured": true,
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.479Z"
+      "updatedAt": "2026-10-24T15:27:31.679Z"
     },
     {
       "id": "scopus-55",
@@ -2355,7 +2326,7 @@
       "annualCategory": "scopus",
       "isFeatured": true,
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.476Z"
+      "updatedAt": "2026-10-24T15:27:31.679Z"
     },
     {
       "id": "patent-21",
@@ -2402,7 +2373,7 @@
       "annualCategory": "hki",
       "isFeatured": true,
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.480Z"
+      "updatedAt": "2026-10-24T15:27:31.681Z"
     },
     {
       "id": "journal-29",
@@ -2489,7 +2460,7 @@
       "annualCategory": "jurnal",
       "isFeatured": true,
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.479Z"
+      "updatedAt": "2026-10-24T15:27:31.679Z"
     },
     {
       "id": "journal-31",
@@ -2536,7 +2507,7 @@
       "annualCategory": "jurnal",
       "isFeatured": true,
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.479Z"
+      "updatedAt": "2026-10-24T15:27:31.680Z"
     },
     {
       "id": "scopus-59",
@@ -2593,7 +2564,7 @@
       "annualCategory": "scopus",
       "isFeatured": true,
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.478Z"
+      "updatedAt": "2026-10-24T15:27:31.679Z"
     },
     {
       "id": "scopus-49",
@@ -2642,7 +2613,7 @@
       "annualCategory": "scopus",
       "isFeatured": true,
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.476Z"
+      "updatedAt": "2026-10-24T15:27:31.679Z"
     },
     {
       "id": "scopus-50",
@@ -2683,7 +2654,7 @@
       "annualCategory": "scopus",
       "isFeatured": true,
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.476Z"
+      "updatedAt": "2026-10-24T15:27:31.679Z"
     },
     {
       "id": "scopus-44",
@@ -2732,7 +2703,7 @@
       "annualCategory": "scopus",
       "isFeatured": true,
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.476Z"
+      "updatedAt": "2026-10-24T15:27:31.678Z"
     },
     {
       "id": "scopus-48",
@@ -2781,7 +2752,7 @@
       "annualCategory": "scopus",
       "isFeatured": true,
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.476Z"
+      "updatedAt": "2026-10-24T15:27:31.678Z"
     },
     {
       "id": "scopus-56",
@@ -2822,7 +2793,7 @@
       "annualCategory": "scopus",
       "isFeatured": true,
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.478Z"
+      "updatedAt": "2026-10-24T15:27:31.679Z"
     },
     {
       "id": "journal-30",
@@ -2885,7 +2856,7 @@
       "annualCategory": "jurnal",
       "isFeatured": true,
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.479Z"
+      "updatedAt": "2026-10-24T15:27:31.679Z"
     },
     {
       "id": "scopus-42",
@@ -2942,7 +2913,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2024-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.478Z"
+      "updatedAt": "2026-10-24T15:27:31.679Z"
     },
     {
       "id": "journal-20",
@@ -2989,7 +2960,7 @@
       "annualCategory": "jurnal",
       "isFeatured": false,
       "createdAt": "2024-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.479Z"
+      "updatedAt": "2026-10-24T15:27:31.680Z"
     },
     {
       "id": "journal-23",
@@ -3036,7 +3007,7 @@
       "annualCategory": "jurnal",
       "isFeatured": false,
       "createdAt": "2024-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.479Z"
+      "updatedAt": "2026-10-24T15:27:31.680Z"
     },
     {
       "id": "scopus-32",
@@ -3093,7 +3064,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2024-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.478Z"
+      "updatedAt": "2026-10-24T15:27:31.679Z"
     },
     {
       "id": "journal-24",
@@ -3140,7 +3111,7 @@
       "annualCategory": "jurnal",
       "isFeatured": false,
       "createdAt": "2024-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.479Z"
+      "updatedAt": "2026-10-24T15:27:31.680Z"
     },
     {
       "id": "journal-21",
@@ -3195,7 +3166,7 @@
       "annualCategory": "jurnal",
       "isFeatured": false,
       "createdAt": "2024-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.479Z"
+      "updatedAt": "2026-10-24T15:27:31.680Z"
     },
     {
       "id": "journal-19",
@@ -3242,7 +3213,7 @@
       "annualCategory": "jurnal",
       "isFeatured": false,
       "createdAt": "2024-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.479Z"
+      "updatedAt": "2026-10-24T15:27:31.680Z"
     },
     {
       "id": "scopus-30",
@@ -3283,7 +3254,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2024-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.478Z"
+      "updatedAt": "2026-10-24T15:27:31.679Z"
     },
     {
       "id": "book-15",
@@ -3338,7 +3309,7 @@
       "annualCategory": "buku",
       "isFeatured": false,
       "createdAt": "2024-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.479Z"
+      "updatedAt": "2026-10-24T15:27:31.680Z"
     },
     {
       "id": "scopus-39",
@@ -3387,7 +3358,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2024-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.478Z"
+      "updatedAt": "2026-10-24T15:27:31.679Z"
     },
     {
       "id": "proceeding-16",
@@ -3426,7 +3397,7 @@
       "annualCategory": "prosiding",
       "isFeatured": true,
       "createdAt": "2024-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.479Z"
+      "updatedAt": "2026-10-24T15:27:31.680Z"
     },
     {
       "id": "journal-22",
@@ -3473,7 +3444,7 @@
       "annualCategory": "jurnal",
       "isFeatured": false,
       "createdAt": "2024-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.479Z"
+      "updatedAt": "2026-10-24T15:27:31.680Z"
     },
     {
       "id": "scopus-28",
@@ -3522,7 +3493,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2024-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.478Z"
+      "updatedAt": "2026-10-24T15:27:31.679Z"
     },
     {
       "id": "scopus-33",
@@ -3571,7 +3542,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2024-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.478Z"
+      "updatedAt": "2026-10-24T15:27:31.679Z"
     },
     {
       "id": "journal-25",
@@ -3626,7 +3597,7 @@
       "annualCategory": "jurnal",
       "isFeatured": false,
       "createdAt": "2024-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.479Z"
+      "updatedAt": "2026-10-24T15:27:31.680Z"
     },
     {
       "id": "scopus-36",
@@ -3683,7 +3654,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2024-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.478Z"
+      "updatedAt": "2026-10-24T15:27:31.679Z"
     },
     {
       "id": "journal-26",
@@ -3754,7 +3725,7 @@
       "annualCategory": "jurnal",
       "isFeatured": false,
       "createdAt": "2024-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.479Z"
+      "updatedAt": "2026-10-24T15:27:31.680Z"
     },
     {
       "id": "scopus-37",
@@ -3811,7 +3782,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2024-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.478Z"
+      "updatedAt": "2026-10-24T15:27:31.679Z"
     },
     {
       "id": "scopus-40",
@@ -3860,7 +3831,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2024-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.478Z"
+      "updatedAt": "2026-10-24T15:27:31.679Z"
     },
     {
       "id": "book-16",
@@ -3907,7 +3878,7 @@
       "annualCategory": "buku",
       "isFeatured": false,
       "createdAt": "2024-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.479Z"
+      "updatedAt": "2026-10-24T15:27:31.680Z"
     },
     {
       "id": "scopus-41",
@@ -3956,7 +3927,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2024-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.478Z"
+      "updatedAt": "2026-10-24T15:27:31.679Z"
     },
     {
       "id": "patent-19",
@@ -3987,7 +3958,7 @@
       "annualCategory": "hki",
       "isFeatured": true,
       "createdAt": "2024-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.480Z"
+      "updatedAt": "2026-10-24T15:27:31.681Z"
     },
     {
       "id": "patent-20",
@@ -4026,7 +3997,7 @@
       "annualCategory": "hki",
       "isFeatured": true,
       "createdAt": "2024-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.480Z"
+      "updatedAt": "2026-10-24T15:27:31.681Z"
     },
     {
       "id": "scopus-29",
@@ -4067,7 +4038,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2024-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.478Z"
+      "updatedAt": "2026-10-24T15:27:31.679Z"
     },
     {
       "id": "patent-18",
@@ -4122,7 +4093,7 @@
       "annualCategory": "hki",
       "isFeatured": true,
       "createdAt": "2024-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.480Z"
+      "updatedAt": "2026-10-24T15:27:31.681Z"
     },
     {
       "id": "scopus-38",
@@ -4179,7 +4150,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2024-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.478Z"
+      "updatedAt": "2026-10-24T15:27:31.679Z"
     },
     {
       "id": "scopus-31",
@@ -4236,7 +4207,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2024-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.478Z"
+      "updatedAt": "2026-10-24T15:27:31.679Z"
     },
     {
       "id": "scopus-35",
@@ -4277,7 +4248,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2024-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.478Z"
+      "updatedAt": "2026-10-24T15:27:31.679Z"
     },
     {
       "id": "scopus-34",
@@ -4326,7 +4297,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2024-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.478Z"
+      "updatedAt": "2026-10-24T15:27:31.679Z"
     },
     {
       "id": "patent-12",
@@ -4357,7 +4328,7 @@
       "annualCategory": "hki",
       "isFeatured": false,
       "createdAt": "2023-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.480Z"
+      "updatedAt": "2026-10-24T15:27:31.681Z"
     },
     {
       "id": "book-7",
@@ -4404,7 +4375,7 @@
       "annualCategory": "buku",
       "isFeatured": false,
       "createdAt": "2023-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.480Z"
+      "updatedAt": "2026-10-24T15:27:31.681Z"
     },
     {
       "id": "patent-15",
@@ -4435,7 +4406,7 @@
       "annualCategory": "hki",
       "isFeatured": false,
       "createdAt": "2023-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.480Z"
+      "updatedAt": "2026-10-24T15:27:31.681Z"
     },
     {
       "id": "scopus-26",
@@ -4516,7 +4487,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2023-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.478Z"
+      "updatedAt": "2026-10-24T15:27:31.679Z"
     },
     {
       "id": "journal-17",
@@ -4563,7 +4534,7 @@
       "annualCategory": "jurnal",
       "isFeatured": false,
       "createdAt": "2023-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.479Z"
+      "updatedAt": "2026-10-24T15:27:31.680Z"
     },
     {
       "id": "proceeding-15",
@@ -4610,7 +4581,7 @@
       "annualCategory": "prosiding",
       "isFeatured": false,
       "createdAt": "2023-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.479Z"
+      "updatedAt": "2026-10-24T15:27:31.680Z"
     },
     {
       "id": "journal-13",
@@ -4657,7 +4628,7 @@
       "annualCategory": "jurnal",
       "isFeatured": false,
       "createdAt": "2023-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.479Z"
+      "updatedAt": "2026-10-24T15:27:31.680Z"
     },
     {
       "id": "journal-14",
@@ -4712,7 +4683,7 @@
       "annualCategory": "jurnal",
       "isFeatured": false,
       "createdAt": "2023-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.479Z"
+      "updatedAt": "2026-10-24T15:27:31.680Z"
     },
     {
       "id": "journal-16",
@@ -4759,7 +4730,7 @@
       "annualCategory": "jurnal",
       "isFeatured": false,
       "createdAt": "2023-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.479Z"
+      "updatedAt": "2026-10-24T15:27:31.680Z"
     },
     {
       "id": "patent-10",
@@ -4790,7 +4761,7 @@
       "annualCategory": "hki",
       "isFeatured": false,
       "createdAt": "2023-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.480Z"
+      "updatedAt": "2026-10-24T15:27:31.681Z"
     },
     {
       "id": "book-9",
@@ -4925,7 +4896,7 @@
       "annualCategory": "buku",
       "isFeatured": false,
       "createdAt": "2023-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.480Z"
+      "updatedAt": "2026-10-24T15:27:31.681Z"
     },
     {
       "id": "book-6",
@@ -5028,7 +4999,7 @@
       "annualCategory": "buku",
       "isFeatured": false,
       "createdAt": "2023-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.480Z"
+      "updatedAt": "2026-10-24T15:27:31.681Z"
     },
     {
       "id": "book-5",
@@ -5131,7 +5102,7 @@
       "annualCategory": "buku",
       "isFeatured": false,
       "createdAt": "2023-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.480Z"
+      "updatedAt": "2026-10-24T15:27:31.681Z"
     },
     {
       "id": "patent-9",
@@ -5162,7 +5133,7 @@
       "annualCategory": "hki",
       "isFeatured": false,
       "createdAt": "2023-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.480Z"
+      "updatedAt": "2026-10-24T15:27:31.681Z"
     },
     {
       "id": "book-8",
@@ -5265,7 +5236,7 @@
       "annualCategory": "buku",
       "isFeatured": false,
       "createdAt": "2023-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.480Z"
+      "updatedAt": "2026-10-24T15:27:31.681Z"
     },
     {
       "id": "book-12",
@@ -5312,7 +5283,7 @@
       "annualCategory": "buku",
       "isFeatured": false,
       "createdAt": "2023-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.480Z"
+      "updatedAt": "2026-10-24T15:27:31.681Z"
     },
     {
       "id": "patent-16",
@@ -5343,7 +5314,7 @@
       "annualCategory": "hki",
       "isFeatured": false,
       "createdAt": "2023-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.480Z"
+      "updatedAt": "2026-10-24T15:27:31.681Z"
     },
     {
       "id": "journal-18",
@@ -5390,7 +5361,7 @@
       "annualCategory": "jurnal",
       "isFeatured": false,
       "createdAt": "2023-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.479Z"
+      "updatedAt": "2026-10-24T15:27:31.680Z"
     },
     {
       "id": "journal-15",
@@ -5453,7 +5424,7 @@
       "annualCategory": "jurnal",
       "isFeatured": false,
       "createdAt": "2023-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.479Z"
+      "updatedAt": "2026-10-24T15:27:31.680Z"
     },
     {
       "id": "book-3",
@@ -5556,7 +5527,7 @@
       "annualCategory": "buku",
       "isFeatured": false,
       "createdAt": "2023-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.480Z"
+      "updatedAt": "2026-10-24T15:27:31.680Z"
     },
     {
       "id": "book-4",
@@ -5659,7 +5630,7 @@
       "annualCategory": "buku",
       "isFeatured": false,
       "createdAt": "2023-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.480Z"
+      "updatedAt": "2026-10-24T15:27:31.681Z"
     },
     {
       "id": "scopus-27",
@@ -5708,7 +5679,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2023-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.478Z"
+      "updatedAt": "2026-10-24T15:27:31.679Z"
     },
     {
       "id": "patent-13",
@@ -5739,7 +5710,7 @@
       "annualCategory": "hki",
       "isFeatured": false,
       "createdAt": "2023-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.480Z"
+      "updatedAt": "2026-10-24T15:27:31.681Z"
     },
     {
       "id": "book-10",
@@ -5842,7 +5813,7 @@
       "annualCategory": "buku",
       "isFeatured": false,
       "createdAt": "2023-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.480Z"
+      "updatedAt": "2026-10-24T15:27:31.681Z"
     },
     {
       "id": "patent-11",
@@ -5873,7 +5844,7 @@
       "annualCategory": "hki",
       "isFeatured": false,
       "createdAt": "2023-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.480Z"
+      "updatedAt": "2026-10-24T15:27:31.681Z"
     },
     {
       "id": "book-13",
@@ -6016,7 +5987,7 @@
       "annualCategory": "buku",
       "isFeatured": false,
       "createdAt": "2023-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.480Z"
+      "updatedAt": "2026-10-24T15:27:31.681Z"
     },
     {
       "id": "patent-17",
@@ -6047,7 +6018,7 @@
       "annualCategory": "hki",
       "isFeatured": false,
       "createdAt": "2023-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.480Z"
+      "updatedAt": "2026-10-24T15:27:31.681Z"
     },
     {
       "id": "book-14",
@@ -6166,7 +6137,7 @@
       "annualCategory": "buku",
       "isFeatured": false,
       "createdAt": "2023-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.480Z"
+      "updatedAt": "2026-10-24T15:27:31.681Z"
     },
     {
       "id": "book-11",
@@ -6213,7 +6184,7 @@
       "annualCategory": "buku",
       "isFeatured": false,
       "createdAt": "2023-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.480Z"
+      "updatedAt": "2026-10-24T15:27:31.681Z"
     },
     {
       "id": "patent-14",
@@ -6244,7 +6215,7 @@
       "annualCategory": "hki",
       "isFeatured": false,
       "createdAt": "2023-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.480Z"
+      "updatedAt": "2026-10-24T15:27:31.681Z"
     },
     {
       "id": "patent-7",
@@ -6283,7 +6254,7 @@
       "annualCategory": "hki",
       "isFeatured": false,
       "createdAt": "2022-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.480Z"
+      "updatedAt": "2026-10-24T15:27:31.681Z"
     },
     {
       "id": "patent-5",
@@ -6314,7 +6285,7 @@
       "annualCategory": "hki",
       "isFeatured": false,
       "createdAt": "2022-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.480Z"
+      "updatedAt": "2026-10-24T15:27:31.681Z"
     },
     {
       "id": "patent-6",
@@ -6345,7 +6316,7 @@
       "annualCategory": "hki",
       "isFeatured": false,
       "createdAt": "2022-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.480Z"
+      "updatedAt": "2026-10-24T15:27:31.681Z"
     },
     {
       "id": "patent-4",
@@ -6376,7 +6347,7 @@
       "annualCategory": "hki",
       "isFeatured": false,
       "createdAt": "2022-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.480Z"
+      "updatedAt": "2026-10-24T15:27:31.681Z"
     },
     {
       "id": "patent-3",
@@ -6407,7 +6378,7 @@
       "annualCategory": "hki",
       "isFeatured": false,
       "createdAt": "2022-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.480Z"
+      "updatedAt": "2026-10-24T15:27:31.681Z"
     },
     {
       "id": "patent-2",
@@ -6438,7 +6409,7 @@
       "annualCategory": "hki",
       "isFeatured": false,
       "createdAt": "2022-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.480Z"
+      "updatedAt": "2026-10-24T15:27:31.681Z"
     },
     {
       "id": "scopus-25",
@@ -6487,7 +6458,7 @@
       "annualCategory": "scopus",
       "isFeatured": true,
       "createdAt": "2022-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.478Z"
+      "updatedAt": "2026-10-24T15:27:31.679Z"
     },
     {
       "id": "patent-8",
@@ -6526,7 +6497,7 @@
       "annualCategory": "hki",
       "isFeatured": false,
       "createdAt": "2022-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.480Z"
+      "updatedAt": "2026-10-24T15:27:31.681Z"
     },
     {
       "id": "journal-12",
@@ -6581,7 +6552,7 @@
       "annualCategory": "jurnal",
       "isFeatured": false,
       "createdAt": "2022-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.479Z"
+      "updatedAt": "2026-10-24T15:27:31.680Z"
     },
     {
       "id": "patent-1",
@@ -6652,7 +6623,7 @@
       "annualCategory": "paten",
       "isFeatured": false,
       "createdAt": "2022-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.480Z"
+      "updatedAt": "2026-10-24T15:27:31.681Z"
     },
     {
       "id": "scopus-23",
@@ -6685,7 +6656,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2021-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.478Z"
+      "updatedAt": "2026-10-24T15:27:31.679Z"
     },
     {
       "id": "journal-11",
@@ -6740,7 +6711,7 @@
       "annualCategory": "jurnal",
       "isFeatured": false,
       "createdAt": "2021-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.479Z"
+      "updatedAt": "2026-10-24T15:27:31.680Z"
     },
     {
       "id": "scopus-24",
@@ -6789,7 +6760,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2021-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.478Z"
+      "updatedAt": "2026-10-24T15:27:31.679Z"
     },
     {
       "id": "book-2",
@@ -6820,7 +6791,7 @@
       "annualCategory": "buku",
       "isFeatured": false,
       "createdAt": "2021-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.480Z"
+      "updatedAt": "2026-10-24T15:27:31.681Z"
     },
     {
       "id": "scopus-22",
@@ -6869,7 +6840,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2020-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.478Z"
+      "updatedAt": "2026-10-24T15:27:31.679Z"
     },
     {
       "id": "scopus-21",
@@ -6909,7 +6880,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2019-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.478Z"
+      "updatedAt": "2026-10-24T15:27:31.679Z"
     },
     {
       "id": "scopus-19",
@@ -6958,7 +6929,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2018-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.478Z"
+      "updatedAt": "2026-10-24T15:27:31.679Z"
     },
     {
       "id": "scopus-20",
@@ -7007,7 +6978,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2018-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.478Z"
+      "updatedAt": "2026-10-24T15:27:31.679Z"
     },
     {
       "id": "scopus-18",
@@ -7048,7 +7019,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2018-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.478Z"
+      "updatedAt": "2026-10-24T15:27:31.679Z"
     },
     {
       "id": "scopus-16",
@@ -7097,7 +7068,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2017-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.479Z"
+      "updatedAt": "2026-10-24T15:27:31.679Z"
     },
     {
       "id": "scopus-13",
@@ -7154,7 +7125,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2017-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.478Z"
+      "updatedAt": "2026-10-24T15:27:31.679Z"
     },
     {
       "id": "proceeding-12",
@@ -7209,7 +7180,7 @@
       "annualCategory": "prosiding",
       "isFeatured": false,
       "createdAt": "2017-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.479Z"
+      "updatedAt": "2026-10-24T15:27:31.680Z"
     },
     {
       "id": "scopus-10",
@@ -7250,7 +7221,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2017-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.478Z"
+      "updatedAt": "2026-10-24T15:27:31.679Z"
     },
     {
       "id": "journal-10",
@@ -7289,7 +7260,7 @@
       "annualCategory": "jurnal",
       "isFeatured": false,
       "createdAt": "2017-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.479Z"
+      "updatedAt": "2026-10-24T15:27:31.680Z"
     },
     {
       "id": "scopus-15",
@@ -7346,7 +7317,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2017-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.479Z"
+      "updatedAt": "2026-10-24T15:27:31.679Z"
     },
     {
       "id": "scopus-11",
@@ -7386,7 +7357,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2017-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.478Z"
+      "updatedAt": "2026-10-24T15:27:31.679Z"
     },
     {
       "id": "scopus-14",
@@ -7427,7 +7398,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2017-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.478Z"
+      "updatedAt": "2026-10-24T15:27:31.679Z"
     },
     {
       "id": "proceeding-13",
@@ -7466,7 +7437,7 @@
       "annualCategory": "prosiding",
       "isFeatured": false,
       "createdAt": "2017-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.479Z"
+      "updatedAt": "2026-10-24T15:27:31.680Z"
     },
     {
       "id": "scopus-17",
@@ -7507,7 +7478,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2017-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.479Z"
+      "updatedAt": "2026-10-24T15:27:31.679Z"
     },
     {
       "id": "proceeding-14",
@@ -7570,7 +7541,7 @@
       "annualCategory": "prosiding",
       "isFeatured": false,
       "createdAt": "2017-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.479Z"
+      "updatedAt": "2026-10-24T15:27:31.680Z"
     },
     {
       "id": "scopus-9",
@@ -7611,7 +7582,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2017-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.478Z"
+      "updatedAt": "2026-10-24T15:27:31.679Z"
     },
     {
       "id": "journal-9",
@@ -7650,7 +7621,7 @@
       "annualCategory": "jurnal",
       "isFeatured": false,
       "createdAt": "2017-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.479Z"
+      "updatedAt": "2026-10-24T15:27:31.680Z"
     },
     {
       "id": "scopus-12",
@@ -7699,7 +7670,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2017-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.478Z"
+      "updatedAt": "2026-10-24T15:27:31.679Z"
     },
     {
       "id": "scopus-4",
@@ -7740,7 +7711,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2016-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.479Z"
+      "updatedAt": "2026-10-24T15:27:31.679Z"
     },
     {
       "id": "journal-7",
@@ -7787,7 +7758,7 @@
       "annualCategory": "jurnal",
       "isFeatured": false,
       "createdAt": "2016-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.479Z"
+      "updatedAt": "2026-10-24T15:27:31.680Z"
     },
     {
       "id": "scopus-8",
@@ -7835,7 +7806,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2016-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.479Z"
+      "updatedAt": "2026-10-24T15:27:31.679Z"
     },
     {
       "id": "journal-6",
@@ -7882,7 +7853,7 @@
       "annualCategory": "jurnal",
       "isFeatured": false,
       "createdAt": "2016-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.479Z"
+      "updatedAt": "2026-10-24T15:27:31.680Z"
     },
     {
       "id": "scopus-6",
@@ -7923,7 +7894,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2016-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.479Z"
+      "updatedAt": "2026-10-24T15:27:31.679Z"
     },
     {
       "id": "scopus-5",
@@ -7956,7 +7927,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2016-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.479Z"
+      "updatedAt": "2026-10-24T15:27:31.679Z"
     },
     {
       "id": "scopus-7",
@@ -7989,7 +7960,7 @@
       "annualCategory": "scopus",
       "isFeatured": true,
       "createdAt": "2016-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.479Z"
+      "updatedAt": "2026-10-24T15:27:31.679Z"
     },
     {
       "id": "journal-5",
@@ -8052,7 +8023,7 @@
       "annualCategory": "jurnal",
       "isFeatured": false,
       "createdAt": "2016-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.479Z"
+      "updatedAt": "2026-10-24T15:27:31.680Z"
     },
     {
       "id": "proceeding-11",
@@ -8099,7 +8070,7 @@
       "annualCategory": "prosiding",
       "isFeatured": false,
       "createdAt": "2016-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.479Z"
+      "updatedAt": "2026-10-24T15:27:31.680Z"
     },
     {
       "id": "journal-8",
@@ -8146,7 +8117,7 @@
       "annualCategory": "jurnal",
       "isFeatured": false,
       "createdAt": "2016-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.479Z"
+      "updatedAt": "2026-10-24T15:27:31.680Z"
     },
     {
       "id": "proceeding-10",
@@ -8201,7 +8172,7 @@
       "annualCategory": "prosiding",
       "isFeatured": false,
       "createdAt": "2016-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.479Z"
+      "updatedAt": "2026-10-24T15:27:31.680Z"
     },
     {
       "id": "scopus-1",
@@ -8249,7 +8220,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2015-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.479Z"
+      "updatedAt": "2026-10-24T15:27:31.679Z"
     },
     {
       "id": "journal-3",
@@ -8296,7 +8267,7 @@
       "annualCategory": "jurnal",
       "isFeatured": false,
       "createdAt": "2015-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.479Z"
+      "updatedAt": "2026-10-24T15:27:31.680Z"
     },
     {
       "id": "proceeding-9",
@@ -8343,7 +8314,7 @@
       "annualCategory": "prosiding",
       "isFeatured": false,
       "createdAt": "2015-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.479Z"
+      "updatedAt": "2026-10-24T15:27:31.680Z"
     },
     {
       "id": "scopus-2",
@@ -8391,7 +8362,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2015-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.479Z"
+      "updatedAt": "2026-10-24T15:27:31.679Z"
     },
     {
       "id": "proceeding-5",
@@ -8438,7 +8409,7 @@
       "annualCategory": "prosiding",
       "isFeatured": false,
       "createdAt": "2015-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.479Z"
+      "updatedAt": "2026-10-24T15:27:31.680Z"
     },
     {
       "id": "journal-4",
@@ -8485,7 +8456,7 @@
       "annualCategory": "jurnal",
       "isFeatured": false,
       "createdAt": "2015-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.479Z"
+      "updatedAt": "2026-10-24T15:27:31.680Z"
     },
     {
       "id": "proceeding-4",
@@ -8532,7 +8503,7 @@
       "annualCategory": "prosiding",
       "isFeatured": false,
       "createdAt": "2015-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.479Z"
+      "updatedAt": "2026-10-24T15:27:31.680Z"
     },
     {
       "id": "scopus-3",
@@ -8580,7 +8551,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2015-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.479Z"
+      "updatedAt": "2026-10-24T15:27:31.679Z"
     },
     {
       "id": "proceeding-8",
@@ -8627,7 +8598,7 @@
       "annualCategory": "prosiding",
       "isFeatured": false,
       "createdAt": "2015-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.479Z"
+      "updatedAt": "2026-10-24T15:27:31.680Z"
     },
     {
       "id": "proceeding-3",
@@ -8682,7 +8653,7 @@
       "annualCategory": "prosiding",
       "isFeatured": false,
       "createdAt": "2015-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.479Z"
+      "updatedAt": "2026-10-24T15:27:31.680Z"
     },
     {
       "id": "proceeding-7",
@@ -8737,7 +8708,7 @@
       "annualCategory": "prosiding",
       "isFeatured": false,
       "createdAt": "2015-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.479Z"
+      "updatedAt": "2026-10-24T15:27:31.680Z"
     },
     {
       "id": "proceeding-6",
@@ -8792,7 +8763,7 @@
       "annualCategory": "prosiding",
       "isFeatured": false,
       "createdAt": "2015-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.479Z"
+      "updatedAt": "2026-10-24T15:27:31.680Z"
     },
     {
       "id": "proceeding-2",
@@ -8839,7 +8810,7 @@
       "annualCategory": "prosiding",
       "isFeatured": false,
       "createdAt": "2015-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.479Z"
+      "updatedAt": "2026-10-24T15:27:31.680Z"
     },
     {
       "id": "journal-1",
@@ -8878,7 +8849,7 @@
       "annualCategory": "jurnal",
       "isFeatured": false,
       "createdAt": "2014-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.479Z"
+      "updatedAt": "2026-10-24T15:27:31.680Z"
     },
     {
       "id": "proceeding-1",
@@ -8941,7 +8912,7 @@
       "annualCategory": "prosiding",
       "isFeatured": false,
       "createdAt": "2014-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.479Z"
+      "updatedAt": "2026-10-24T15:27:31.680Z"
     },
     {
       "id": "book-1",
@@ -8972,7 +8943,7 @@
       "annualCategory": "buku",
       "isFeatured": false,
       "createdAt": "2014-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.480Z"
+      "updatedAt": "2026-10-24T15:27:31.681Z"
     },
     {
       "id": "journal-2",
@@ -9019,7 +8990,7 @@
       "annualCategory": "jurnal",
       "isFeatured": false,
       "createdAt": "2014-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-22T10:49:34.479Z"
+      "updatedAt": "2026-10-24T15:27:31.680Z"
     }
   ],
   "students": [
