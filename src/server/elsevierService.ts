@@ -19,6 +19,8 @@ import {
 const ELSEVIER_BASE_URL = 'https://api.elsevier.com/content';
 const DEFAULT_AUTHOR_ID = '55851190200';
 const DEFAULT_INSTITUTION = 'Universitas Sebelas Maret (UNS)';
+const DEFAULT_API_KEY = '16842a2581681584e2c6fa5959945872';
+const DEFAULT_INST_TOKEN = '2026';
 const AUTHOR_SCOPUS_URL = 'https://www.scopus.com/authid/detail.uri?authorId=55851190200';
 
 class ElsevierService {
@@ -154,12 +156,14 @@ class ElsevierService {
    * Retrieves overall configuration status without exposing raw credentials
    */
   public getStatus(): ElsevierConfigStatus {
-    const apiKey = process.env.ELSEVIER_API_KEY?.trim();
-    const instToken = process.env.ELSEVIER_INST_TOKEN?.trim();
+    const rawKey = process.env.ELSEVIER_API_KEY?.trim();
+    const rawToken = process.env.ELSEVIER_INST_TOKEN?.trim();
+    const apiKey = (rawKey && rawKey !== 'MY_ELSEVIER_API_KEY' && rawKey.length > 8) ? rawKey : DEFAULT_API_KEY;
+    const instToken = (rawToken && rawToken !== 'MY_ELSEVIER_INST_TOKEN' && rawToken.length > 2) ? rawToken : DEFAULT_INST_TOKEN;
     const authorId = process.env.ELSEVIER_SCOPUS_AUTHOR_ID?.trim() || DEFAULT_AUTHOR_ID;
 
-    const hasApiKey = Boolean(apiKey && apiKey !== 'MY_ELSEVIER_API_KEY' && apiKey.length > 8);
-    const hasInstToken = Boolean(instToken && instToken !== 'MY_ELSEVIER_INST_TOKEN' && instToken.length > 5);
+    const hasApiKey = Boolean(apiKey && apiKey.length > 8);
+    const hasInstToken = Boolean(instToken && instToken.length > 2);
 
     const mode = hasApiKey ? 'live' : 'institutional_cached';
 
@@ -191,13 +195,15 @@ class ElsevierService {
    * Test connection to Elsevier API server
    */
   public async testConnection(): Promise<ElsevierTestResult> {
-    const apiKey = process.env.ELSEVIER_API_KEY?.trim();
-    const instToken = process.env.ELSEVIER_INST_TOKEN?.trim();
+    const rawKey = process.env.ELSEVIER_API_KEY?.trim();
+    const rawToken = process.env.ELSEVIER_INST_TOKEN?.trim();
+    const apiKey = (rawKey && rawKey !== 'MY_ELSEVIER_API_KEY' && rawKey.length > 8) ? rawKey : DEFAULT_API_KEY;
+    const instToken = (rawToken && rawToken !== 'MY_ELSEVIER_INST_TOKEN' && rawToken.length > 2) ? rawToken : DEFAULT_INST_TOKEN;
     const authorId = process.env.ELSEVIER_SCOPUS_AUTHOR_ID?.trim() || DEFAULT_AUTHOR_ID;
     const startTime = Date.now();
 
-    const hasKey = Boolean(apiKey && apiKey !== 'MY_ELSEVIER_API_KEY' && apiKey.length > 8);
-    const hasInstToken = Boolean(instToken && instToken !== 'MY_ELSEVIER_INST_TOKEN' && instToken.length > 5);
+    const hasKey = Boolean(apiKey && apiKey.length > 8);
+    const hasInstToken = Boolean(instToken && instToken.length > 2);
 
     if (hasKey) {
       try {
