@@ -37,22 +37,31 @@ export default async function handler(req: IncomingMessage, res: ServerResponse)
 
   // Normalize URL from Vercel rewrites or proxy headers
   try {
-    const rawUrl = req.url || '';
+    let rawUrl = req.url || '';
     const matchedPath = (req.headers['x-matched-path'] as string) || (req.headers['x-forwarded-uri'] as string) || '';
 
-    if (rawUrl.includes('__route__=')) {
+    if (matchedPath && matchedPath.startsWith('/api/')) {
+      rawUrl = matchedPath;
+    } else if (rawUrl.includes('__route__=')) {
       const parsed = new URL(rawUrl, 'http://localhost');
       const r = parsed.searchParams.get('__route__');
       if (r) {
         parsed.searchParams.delete('__route__');
         const rem = parsed.searchParams.toString();
-        req.url = rem ? `${r}?${rem}` : r;
+        rawUrl = rem ? `${r}?${rem}` : r;
       }
-    } else if (matchedPath && matchedPath.startsWith('/api/')) {
-      req.url = matchedPath;
-    } else if (req.url === '/api' || req.url === '/api/' || req.url === '/api/index') {
-      req.url = '/api/health';
     }
+
+    // Ensure path starts with /api for Express router matching
+    if (!rawUrl.startsWith('/api')) {
+      rawUrl = rawUrl.startsWith('/') ? `/api${rawUrl}` : `/api/${rawUrl}`;
+    }
+
+    if (rawUrl === '/api' || rawUrl === '/api/' || rawUrl === '/api/index') {
+      rawUrl = '/api/health';
+    }
+
+    req.url = rawUrl;
   } catch {}
 
   // Trigger non-blocking database sync in background

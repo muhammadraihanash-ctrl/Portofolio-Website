@@ -2,9 +2,15 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "vite",
   "outputDirectory": "dist",
+  "functions": {
+    "api/**/*.ts": {
+      "includeFiles": "data/**"
+    }
+  },
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api?__route__=/api/$1" },
-    { "source": "/api", "destination": "/api" },
-    { "source": "/((?!api/).*)", "destination": "/index.html" }
+    {
+      "source": "/((?!api(?:/.*)?).*)",
+      "destination": "/index.html"
+    }
   ]
 }

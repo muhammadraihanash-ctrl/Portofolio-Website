@@ -3033,7 +3033,8 @@ app.get('/api/sql/config', requireAdminAuth, (req, res) => {
 });
 
 // Diagnostic endpoint that explicitly checks connectivity of Aiven MySQL using .env credentials
-app.get('/api/sql/diagnostic', requireAdminAuth, async (req, res) => {
+app.get('/api/sql/diagnostic', async (req, res) => {
+  res.setHeader('Content-Type', 'application/json');
   try {
     const result = await p2mDatabaseService.diagnoseAivenConnection();
     return res.status(result.statusCode).json(result);
@@ -3049,7 +3050,8 @@ app.get('/api/sql/diagnostic', requireAdminAuth, async (req, res) => {
   }
 });
 
-app.post('/api/sql/diagnostic', requireAdminAuth, async (req, res) => {
+app.post('/api/sql/diagnostic', async (req, res) => {
+  res.setHeader('Content-Type', 'application/json');
   try {
     const result = await p2mDatabaseService.diagnoseAivenConnection(req.body);
     return res.status(result.statusCode).json(result);
