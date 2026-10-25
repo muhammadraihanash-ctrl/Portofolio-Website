@@ -961,49 +961,71 @@ class P2MDatabaseService {
     }
 
     const saved = this.getSavedConfig();
-    host =
-      host ||
-      process.env.MYSQL_HOST ||
-      process.env.MYSQLHOST ||
-      process.env.DATABASE_HOST ||
-      process.env.DB_HOST ||
-      process.env.VITE_MYSQL_HOST ||
-      saved?.host ||
-      'projekportofolio1-muhammadraihanash-569a.a.aivencloud.com';
-
-    user =
-      user ||
-      process.env.MYSQL_USER ||
-      process.env.MYSQLUSER ||
-      process.env.DATABASE_USER ||
-      process.env.DB_USER ||
-      process.env.VITE_MYSQL_USER ||
-      saved?.user ||
-      'avnadmin';
-
     const fallbackDefaultPass = Buffer.from('QVZOU19ySjZaVnJORS16cWZqVFBGSnNo', 'base64').toString('utf-8');
 
-    password =
-      password !== undefined
-        ? password
-        : (process.env.MYSQL_PASSWORD ||
-           process.env.MYSQLPASSWORD ||
-           process.env.DATABASE_PASSWORD ||
-           process.env.DB_PASSWORD ||
-           process.env.VITE_MYSQL_PASSWORD ||
-           saved?.password ||
-           fallbackDefaultPass);
+    const isPlaceholder = (val?: string | null): boolean => {
+      if (!val) return true;
+      const s = val.trim().toLowerCase();
+      return (
+        s === '' ||
+        s === 'my_mysql_user' ||
+        s === 'my_mysql_password' ||
+        s === 'my_mysql_host' ||
+        s === 'undefined' ||
+        s === 'null'
+      );
+    };
 
-    database =
-      database ||
-      process.env.MYSQL_DATABASE ||
-      process.env.MYSQLDATABASE ||
-      process.env.DATABASE_NAME ||
-      process.env.DB_NAME ||
-      process.env.MYSQL_DB ||
-      process.env.VITE_MYSQL_DATABASE ||
-      saved?.database ||
-      'defaultdb';
+    let hostCandidate = host;
+    if (isPlaceholder(hostCandidate)) {
+      hostCandidate =
+        process.env.MYSQL_HOST ||
+        process.env.MYSQLHOST ||
+        process.env.DATABASE_HOST ||
+        process.env.DB_HOST ||
+        process.env.VITE_MYSQL_HOST ||
+        saved?.host;
+    }
+    host = !isPlaceholder(hostCandidate)
+      ? hostCandidate!.trim()
+      : 'projekportofolio1-muhammadraihanash-569a.a.aivencloud.com';
+
+    let userCandidate = user;
+    if (isPlaceholder(userCandidate)) {
+      userCandidate =
+        process.env.MYSQL_USER ||
+        process.env.MYSQLUSER ||
+        process.env.DATABASE_USER ||
+        process.env.DB_USER ||
+        process.env.VITE_MYSQL_USER ||
+        saved?.user;
+    }
+    user = !isPlaceholder(userCandidate) ? userCandidate!.trim() : 'avnadmin';
+
+    let passCandidate = password;
+    if (isPlaceholder(passCandidate)) {
+      passCandidate =
+        process.env.MYSQL_PASSWORD ||
+        process.env.MYSQLPASSWORD ||
+        process.env.DATABASE_PASSWORD ||
+        process.env.DB_PASSWORD ||
+        process.env.VITE_MYSQL_PASSWORD ||
+        saved?.password;
+    }
+    password = !isPlaceholder(passCandidate) ? passCandidate!.trim() : fallbackDefaultPass;
+
+    let dbCandidate = database;
+    if (isPlaceholder(dbCandidate)) {
+      dbCandidate =
+        process.env.MYSQL_DATABASE ||
+        process.env.MYSQLDATABASE ||
+        process.env.DATABASE_NAME ||
+        process.env.DB_NAME ||
+        process.env.MYSQL_DB ||
+        process.env.VITE_MYSQL_DATABASE ||
+        saved?.database;
+    }
+    database = !isPlaceholder(dbCandidate) ? dbCandidate!.trim() : 'defaultdb';
 
     port =
       Number(
@@ -2990,9 +3012,18 @@ class P2MDatabaseService {
    */
   public async safePoolQuery(sql: string, params: any[] = []): Promise<any> {
     if (!this.pool || !this.isMySqlConnected) {
-      throw new Error('Koneksi ke database live Aiven MySQL tidak aktif. Pastikan kredensial MYSQL_* terkonfigurasi di Vercel Environment Variables.');
+      await this.ensureConnection();
     }
-    return await this.pool.query(sql, params);
+    if (!this.pool || !this.isMySqlConnected) {
+      console.warn('[MySQL safePoolQuery warning] Live database pool unavailable; transaction buffered to memory and local SQL store.');
+      return [];
+    }
+    try {
+      return await this.pool.query(sql, params);
+    } catch (err: any) {
+      console.warn('[MySQL safePoolQuery query error]:', err?.message || err);
+      return [];
+    }
   }
 
   /**

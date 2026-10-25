@@ -132,28 +132,103 @@ app.use((req, res, next) => {
   next();
 });
 
-// Normalize Vercel serverless request path
+// Normalize Vercel serverless request path ONLY for API requests
 app.use((req, res, next) => {
-  try {
-    const rawUrl = req.url || '';
-    const matchedPath = (req.headers['x-matched-path'] as string) || (req.headers['x-forwarded-uri'] as string) || '';
+  const rawUrl = req.url || '';
+  const forwardedUri = (req.headers['x-forwarded-uri'] as string) || '';
+  const isApiRequest = rawUrl.startsWith('/api') || 
+                       rawUrl.includes('__route__=') || 
+                       rawUrl.startsWith('/api/index') ||
+                       forwardedUri.startsWith('/api');
 
-    if (rawUrl.includes('__route__=')) {
-      const parsed = new URL(rawUrl, 'http://localhost');
-      const r = parsed.searchParams.get('__route__');
-      if (r) {
-        parsed.searchParams.delete('__route__');
-        const rem = parsed.searchParams.toString();
-        req.url = rem ? `${r}?${rem}` : r;
+  // Frontend requests (HTML, Vite scripts, images, CSS) must pass through directly to Vite
+  if (!isApiRequest) {
+    return next();
+  }
+
+  try {
+    let effectiveUrl = '';
+
+    // 1. Check __route__ parameter explicitly injected by vercel.json rewrites
+    let u = req.url || '';
+    if (u.includes('__route__=')) {
+      try {
+        const parsed = new URL(u, 'http://localhost');
+        const r = parsed.searchParams.get('__route__');
+        if (r) {
+          parsed.searchParams.delete('__route__');
+          const rem = parsed.searchParams.toString();
+          let cleanR = r.startsWith('/') ? r : `/${r}`;
+          if (!cleanR.startsWith('/api')) {
+            cleanR = cleanR === '/' ? '/api' : `/api${cleanR}`;
+          }
+          effectiveUrl = rem ? `${cleanR}?${rem}` : cleanR;
+        }
+      } catch {}
+    }
+
+    // 2. Authoritative client requested path from reverse proxy headers
+    if (!effectiveUrl) {
+      if (forwardedUri && forwardedUri.startsWith('/api')) {
+        effectiveUrl = forwardedUri;
       }
-    } else if (matchedPath && matchedPath.startsWith('/api/')) {
-      req.url = matchedPath;
-    } else if (req.url.startsWith('/api/index/')) {
-      req.url = req.url.replace('/api/index/', '/api/');
-    } else if (req.url === '/api/index' || req.url.startsWith('/api/index?')) {
-      req.url = '/api/health';
-    } else if (req.url === '/api' || req.url === '/api/') {
-      req.url = '/api/health';
+    }
+
+    // 3. Safe check on x-matched-path (ignore internal placeholders like [...all] or index)
+    if (!effectiveUrl) {
+      const matchedPath = (req.headers['x-matched-path'] as string) || '';
+      if (
+        matchedPath &&
+        matchedPath.startsWith('/api/') &&
+        !matchedPath.includes('[') &&
+        !matchedPath.includes('index')
+      ) {
+        effectiveUrl = matchedPath;
+      }
+    }
+
+    // 4. Inspect remaining query parameters and patterns
+    if (!effectiveUrl) {
+      if (u.includes('match=') || u.includes('all=') || u.includes('1=')) {
+        try {
+          const parsed = new URL(u, 'http://localhost');
+          const matchVal =
+            parsed.searchParams.getAll('match').join('/') ||
+            parsed.searchParams.getAll('all').join('/') ||
+            parsed.searchParams.get('1') ||
+            '';
+          if (matchVal) {
+            parsed.searchParams.delete('match');
+            parsed.searchParams.delete('all');
+            parsed.searchParams.delete('1');
+            const rem = parsed.searchParams.toString();
+            const cleanSub = matchVal.replace(/^\/+/, '');
+            effectiveUrl = `/api/${cleanSub}${rem ? '?' + rem : ''}`;
+          }
+        } catch {}
+      }
+
+      if (!effectiveUrl && (u.startsWith('/api') || u.startsWith('/api/index'))) {
+        // Strip /api/index prefix if present
+        if (u.startsWith('/api/index.ts') || u.startsWith('/api/index')) {
+          u = u.replace(/^\/api\/index(\.ts)?/, '');
+          if (!u.startsWith('/')) u = `/${u}`;
+          u = `/api${u}`;
+        }
+
+        if (!u.startsWith('/api')) {
+          u = u.startsWith('/') ? `/api${u}` : `/api/${u}`;
+        }
+        effectiveUrl = u;
+      }
+    }
+
+    if (effectiveUrl === '/api' || effectiveUrl === '/api/' || effectiveUrl === '/api/index') {
+      effectiveUrl = '/api/health';
+    }
+
+    if (effectiveUrl) {
+      req.url = effectiveUrl;
     }
   } catch {}
   next();

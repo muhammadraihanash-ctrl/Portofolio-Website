@@ -210,12 +210,12 @@ export const SqlDatabaseTab: React.FC<SqlDatabaseTabProps> = ({ showToast }) => 
   // MySQL Connection Modal & Test State
   const [isConfigModalOpen, setIsConfigModalOpen] = useState<boolean>(false);
   const [configTab, setConfigTab] = useState<'uri' | 'fields' | 'guide'>('uri');
-  const [jdbcUrl, setJdbcUrl] = useState<string>('');
+  const [jdbcUrl, setJdbcUrl] = useState<string>('mysql://avnadmin:AVNS_rJ6ZVrNE-zqfjTPFJsh@projekportofolio1-muhammadraihanash-569a.a.aivencloud.com:23220/defaultdb?ssl-mode=REQUIRED');
   const [configFields, setConfigFields] = useState({
     host: 'projekportofolio1-muhammadraihanash-569a.a.aivencloud.com',
     port: 23220,
     user: 'avnadmin',
-    password: '',
+    password: 'AVNS_rJ6ZVrNE-zqfjTPFJsh',
     database: 'defaultdb',
     ssl: 'REQUIRED'
   });
@@ -255,7 +255,8 @@ export const SqlDatabaseTab: React.FC<SqlDatabaseTabProps> = ({ showToast }) => 
           port: data.config.port || prev.port,
           user: data.config.user || prev.user,
           database: data.config.database || prev.database,
-          ssl: data.config.ssl || prev.ssl
+          ssl: data.config.ssl || prev.ssl,
+          password: prev.password || 'AVNS_rJ6ZVrNE-zqfjTPFJsh'
         }));
       }
     } catch {}
@@ -265,11 +266,18 @@ export const SqlDatabaseTab: React.FC<SqlDatabaseTabProps> = ({ showToast }) => 
     setIsTestingConfig(true);
     setTestResult(null);
     try {
-      const payload = useEnvOnly
-        ? undefined
-        : (configTab === 'uri'
-            ? { jdbcUrl: jdbcUrl.trim() }
-            : { ...configFields });
+      let payload: any = undefined;
+      if (!useEnvOnly) {
+        if (configTab === 'uri') {
+          const cleanUri = jdbcUrl.trim() || 'mysql://avnadmin:AVNS_rJ6ZVrNE-zqfjTPFJsh@projekportofolio1-muhammadraihanash-569a.a.aivencloud.com:23220/defaultdb?ssl-mode=REQUIRED';
+          payload = { jdbcUrl: cleanUri };
+        } else {
+          payload = {
+            ...configFields,
+            password: configFields.password.trim() || 'AVNS_rJ6ZVrNE-zqfjTPFJsh'
+          };
+        }
+      }
       const res = await academicService.checkAivenMySqlDiagnostics(payload);
       setTestResult({
         success: res.success,
