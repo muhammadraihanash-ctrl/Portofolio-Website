@@ -1,29 +1,30 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import {
   X,
   Download,
-  Printer,
   Copy,
   Check,
-  Sparkles,
-  BookOpen,
-  Award,
-  Layers,
   School,
   User,
   ShieldCheck,
   Edit2,
   Save,
   Upload,
-  RefreshCw,
   ExternalLink,
   Tag,
   CheckCircle2,
   AlertCircle,
-  FileText,
-  Image as ImageIcon
+  Image as ImageIcon,
+  Maximize2,
+  Trash2,
+  Database,
+  Eye,
+  BookOpen,
+  Briefcase,
+  GraduationCap,
+  Calendar
 } from 'lucide-react';
-import { GraduateStudent, ThesisInfographic } from '../types';
+import { GraduateStudent, ThesisInfographic, Publication } from '../types';
 import { academicService } from '../services/academicService';
 
 interface StudentThesisInfographicModalProps {
@@ -31,58 +32,56 @@ interface StudentThesisInfographicModalProps {
   onClose: () => void;
   student: GraduateStudent | null;
   onStudentUpdated?: (updated: GraduateStudent) => void;
+  publications?: Publication[];
+  onSelectPublication?: (pub: Publication) => void;
 }
 
 export const StudentThesisInfographicModal: React.FC<StudentThesisInfographicModalProps> = ({
   isOpen,
   onClose,
   student,
-  onStudentUpdated
+  onStudentUpdated,
+  publications = [],
+  onSelectPublication
 }) => {
   const [copied, setCopied] = useState(false);
-  const [isExporting, setIsExporting] = useState(false);
-  const [isGenerating, setIsGenerating] = useState(false);
-  const [isEditing, setIsEditing] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
-  const [feedbackMsg, setFeedbackMsg] = useState<{ text: string; type: 'success' | 'error' } | null>(null);
-
-  // Active view tab: 'visual' or 'customImage'
-  // Active view tab: 'visual' or 'customImage'
-  const [activeView, setActiveView] = useState<'visual' | 'customImage'>(() => {
-    return student?.infographic?.customImageUrl ? 'customImage' : 'visual';
-  });
   const [isUploadingImage, setIsUploadingImage] = useState(false);
+  const [feedbackMsg, setFeedbackMsg] = useState<{ text: string; type: 'success' | 'error' } | null>(null);
+  const [isEditingMetadata, setIsEditingMetadata] = useState(false);
+  const [isFullscreenPreview, setIsFullscreenPreview] = useState(false);
+  const [customUrlInput, setCustomUrlInput] = useState('');
+  const [showUrlInput, setShowUrlInput] = useState(false);
 
-  // Editable local state
+  // Local state for the infographic
   const [infographic, setInfographic] = useState<ThesisInfographic | null>(() => {
     return student?.infographic || null;
   });
 
-  // Track student changes
-  React.useEffect(() => {
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+
+  // Sync state whenever student changes
+  useEffect(() => {
     if (student) {
       if (student.infographic) {
         setInfographic(student.infographic);
-        if (student.infographic.customImageUrl) {
-          setActiveView('customImage');
-        }
       } else {
-        // Auto-initialize a synthesized template if none exists yet
-        const initial = createDefaultThesisInfographic(student);
-        setInfographic(initial);
+        setInfographic(createDefaultInfographic(student));
       }
-      setIsEditing(false);
+      setIsEditingMetadata(false);
       setFeedbackMsg(null);
+      setShowUrlInput(false);
     }
   }, [student]);
 
   if (!isOpen || !student) return null;
 
-  const currentInfo: ThesisInfographic = infographic || createDefaultThesisInfographic(student);
   const isAdmin = academicService.isAdmin();
+  const currentInfo: ThesisInfographic = infographic || createDefaultInfographic(student);
+  const hasUploadedImage = Boolean(currentInfo.customImageUrl || currentInfo.customImageBase64);
+  const imageSource = currentInfo.customImageUrl || currentInfo.customImageBase64;
 
-  // Helper to construct fallback thesis infographic
-  function createDefaultThesisInfographic(std: GraduateStudent): ThesisInfographic {
+  function createDefaultInfographic(std: GraduateStudent): ThesisInfographic {
     const title = std.thesisTitle || std.researchTopic || 'Skripsi Program Studi Matematika';
     const kwList = std.kataKunci
       ? std.kataKunci.split(/[,;]/).map(s => s.trim()).filter(Boolean)
@@ -124,93 +123,23 @@ export const StudentThesisInfographicModal: React.FC<StudentThesisInfographicMod
       keywords: kwList,
       theme: 'navy',
       status: 'Published',
-      generatedByAi: true,
+      generatedByAi: false,
       lastUpdated: new Date().toISOString()
     };
   }
 
-  // Handle LLM Generation via Gemini API
-  const handleGenerateWithLLM = async () => {
-    setIsGenerating(true);
-    setFeedbackMsg(null);
-    try {
-      const generated = await academicService.generateThesisInfographicWithLLM(student, isAdmin);
-      if (generated) {
-        setInfographic(generated);
-        setFeedbackMsg({
-          text: 'Infografik skripsi berhasil disintesis menggunakan Gemini LLM!',
-          type: 'success'
-        });
-        if (onStudentUpdated) {
-          onStudentUpdated({
-            ...student,
-            infographic: generated,
-            hasInfographic: true
-          });
-        }
-      } else {
-        setFeedbackMsg({
-          text: 'Gagal menghubungkan ke server AI. Menampilkan sintesis deterministik terverifikasi.',
-          type: 'error'
-        });
-      }
-    } catch (err: any) {
-      setFeedbackMsg({
-        text: err?.message || 'Terjadi kesalahan saat sintesis infografik.',
-        type: 'error'
-      });
-    } finally {
-      setIsGenerating(false);
-    }
-  };
-
-  // Handle Save Infographic Changes
-  const handleSaveInfographic = async () => {
-    if (!infographic) return;
-    setIsSaving(true);
-    try {
-      const ok = await academicService.saveStudentInfographic(student.id, infographic);
-      if (ok) {
-        setIsEditing(false);
-        setFeedbackMsg({
-          text: 'Infografik skripsi berhasil disimpan ke database!',
-          type: 'success'
-        });
-        if (onStudentUpdated) {
-          onStudentUpdated({
-            ...student,
-            infographic,
-            hasInfographic: true
-          });
-        }
-      } else {
-        setFeedbackMsg({
-          text: 'Gagal menyimpan perubahan ke server.',
-          type: 'error'
-        });
-      }
-    } catch (err: any) {
-      setFeedbackMsg({
-        text: err?.message || 'Gagal menyimpan infografik.',
-        type: 'error'
-      });
-    } finally {
-      setIsSaving(false);
-    }
-  };
-
-  // Handle Direct Upload of Custom Infographic Image (Connected to SQL Central DB)
-  const handleUploadCustomImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  // Handle direct file upload by admin
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
     if (!file.type.startsWith('image/')) {
-      setFeedbackMsg({ text: 'Pilih file gambar yang valid (.png, .jpg, .webp).', type: 'error' });
+      setFeedbackMsg({ text: 'Pilih berkas gambar yang valid (.png, .jpg, .jpeg, .webp, .svg).', type: 'error' });
       return;
     }
 
-    if (file.size > 8 * 1024 * 1024) {
-      setFeedbackMsg({ text: 'Ukuran file gambar maksimal 8 MB.', type: 'error' });
+    if (file.size > 15 * 1024 * 1024) {
+      setFeedbackMsg({ text: 'Ukuran file gambar maksimal 15 MB.', type: 'error' });
       return;
     }
 
@@ -220,24 +149,25 @@ export const StudentThesisInfographicModal: React.FC<StudentThesisInfographicMod
     try {
       const reader = new FileReader();
       reader.onload = async () => {
-        const base64 = reader.result as string;
+        const base64Data = reader.result as string;
+
         const updatedInfo: ThesisInfographic = {
           ...currentInfo,
-          customImageUrl: base64,
-          customImageBase64: base64,
+          customImageUrl: base64Data,
+          customImageBase64: base64Data,
+          generatedByAi: false,
           lastUpdated: new Date().toISOString()
         };
 
         setInfographic(updatedInfo);
-        setActiveView('customImage');
 
-        // Persist directly to central SQL database
+        // Persist directly to SQL database (digilib_documents table in MySQL)
         const ok = await academicService.saveStudentInfographic(student.id, updatedInfo);
         setIsUploadingImage(false);
 
         if (ok) {
           setFeedbackMsg({
-            text: `Poster infografik "${file.name}" berhasil diunggah dan disimpan ke database SQL!`,
+            text: `Poster infografik "${file.name}" berhasil diunggah dan disimpan ke database MySQL (digilib_documents)!`,
             type: 'success'
           });
           if (onStudentUpdated) {
@@ -249,7 +179,7 @@ export const StudentThesisInfographicModal: React.FC<StudentThesisInfographicMod
           }
         } else {
           setFeedbackMsg({
-            text: 'Gagal menyimpan infografik ke server database pusat.',
+            text: 'Gagal menyimpan infografik ke database MySQL. Periksa koneksi backend API.',
             type: 'error'
           });
         }
@@ -257,20 +187,62 @@ export const StudentThesisInfographicModal: React.FC<StudentThesisInfographicMod
 
       reader.onerror = () => {
         setIsUploadingImage(false);
-        setFeedbackMsg({ text: 'Gagal membaca berkas gambar.', type: 'error' });
+        setFeedbackMsg({ text: 'Gagal membaca berkas gambar yang dipilih.', type: 'error' });
       };
 
       reader.readAsDataURL(file);
     } catch (err: any) {
       setIsUploadingImage(false);
-      setFeedbackMsg({ text: 'Gagal mengunggah infografik: ' + (err.message || 'Error'), type: 'error' });
+      setFeedbackMsg({ text: 'Terjadi kesalahan saat mengunggah gambar: ' + (err.message || 'Error'), type: 'error' });
     }
   };
 
-  // Handle Remove Custom Infographic Image
-  const handleRemoveCustomImage = async () => {
-    if (!currentInfo.customImageUrl) return;
+  // Handle saving external URL as infographic
+  const handleSaveUrl = async () => {
+    if (!customUrlInput.trim()) return;
     setIsSaving(true);
+    setFeedbackMsg(null);
+
+    const updatedInfo: ThesisInfographic = {
+      ...currentInfo,
+      customImageUrl: customUrlInput.trim(),
+      customImageBase64: undefined,
+      generatedByAi: false,
+      lastUpdated: new Date().toISOString()
+    };
+
+    setInfographic(updatedInfo);
+    const ok = await academicService.saveStudentInfographic(student.id, updatedInfo);
+    setIsSaving(false);
+
+    if (ok) {
+      setShowUrlInput(false);
+      setCustomUrlInput('');
+      setFeedbackMsg({
+        text: 'Tautan poster infografik berhasil disimpan ke database MySQL (digilib_documents)!',
+        type: 'success'
+      });
+      if (onStudentUpdated) {
+        onStudentUpdated({
+          ...student,
+          infographic: updatedInfo,
+          hasInfographic: true
+        });
+      }
+    } else {
+      setFeedbackMsg({ text: 'Gagal menyimpan tautan infografik ke server MySQL.', type: 'error' });
+    }
+  };
+
+  // Handle remove infographic poster
+  const handleRemoveInfographic = async () => {
+    if (!confirm('Apakah Anda yakin ingin menghapus gambar poster infografik skripsi ini dari database MySQL?')) {
+      return;
+    }
+
+    setIsSaving(true);
+    setFeedbackMsg(null);
+
     try {
       const updatedInfo: ThesisInfographic = {
         ...currentInfo,
@@ -278,14 +250,17 @@ export const StudentThesisInfographicModal: React.FC<StudentThesisInfographicMod
         customImageBase64: undefined,
         lastUpdated: new Date().toISOString()
       };
+
       setInfographic(updatedInfo);
-      setActiveView('visual');
 
       const ok = await academicService.saveStudentInfographic(student.id, updatedInfo);
       setIsSaving(false);
 
       if (ok) {
-        setFeedbackMsg({ text: 'Gambar infografik berhasil dihapus dari database.', type: 'success' });
+        setFeedbackMsg({
+          text: 'Gambar poster infografik berhasil dihapus dari database MySQL.',
+          type: 'success'
+        });
         if (onStudentUpdated) {
           onStudentUpdated({
             ...student,
@@ -294,7 +269,7 @@ export const StudentThesisInfographicModal: React.FC<StudentThesisInfographicMod
           });
         }
       } else {
-        setFeedbackMsg({ text: 'Gagal menghapus gambar dari server.', type: 'error' });
+        setFeedbackMsg({ text: 'Gagal menghapus poster infografik dari database.', type: 'error' });
       }
     } catch (err: any) {
       setIsSaving(false);
@@ -302,723 +277,654 @@ export const StudentThesisInfographicModal: React.FC<StudentThesisInfographicMod
     }
   };
 
-  // Handle Copy text summary
+  // Handle save metadata updates
+  const handleSaveMetadata = async () => {
+    if (!infographic) return;
+    setIsSaving(true);
+    setFeedbackMsg(null);
+    try {
+      const ok = await academicService.saveStudentInfographic(student.id, infographic);
+      setIsSaving(false);
+      if (ok) {
+        setIsEditingMetadata(false);
+        setFeedbackMsg({
+          text: 'Informasi akademik dan ringkasan skripsi berhasil disimpan ke database MySQL!',
+          type: 'success'
+        });
+        if (onStudentUpdated) {
+          onStudentUpdated({
+            ...student,
+            thesisTitle: infographic.title,
+            researchTopic: infographic.title,
+            infographic,
+            hasInfographic: Boolean(infographic.customImageUrl || infographic.customImageBase64)
+          });
+        }
+      } else {
+        setFeedbackMsg({ text: 'Gagal menyimpan perubahan ke database MySQL.', type: 'error' });
+      }
+    } catch (err: any) {
+      setIsSaving(false);
+      setFeedbackMsg({ text: err?.message || 'Gagal menyimpan data.', type: 'error' });
+    }
+  };
+
+  // Download high-resolution image
+  const handleDownloadImage = () => {
+    if (!imageSource) return;
+    const a = document.createElement('a');
+    a.href = imageSource;
+    const cleanNim = student.nim.replace(/[^a-zA-Z0-9]/g, '_');
+    const cleanName = student.name.replace(/[^a-zA-Z0-9]/g, '_');
+    a.download = `Infografik_Skripsi_${cleanNim}_${cleanName}.png`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  };
+
+  // Copy text summary
   const handleCopyText = () => {
-    const text = `INFOGRAFIK SKRIPSI / TUGAS AKHIR MAHASISWA
+    const text = `INFORMASI MAHASISWA & SKRIPSI / TUGAS AKHIR
 UNIVERSITAS SEBELAS MARET (UNS) - FMIPA JURUSAN MATEMATIKA
 
-Judul Skripsi: ${currentInfo.title}
-Nama Mahasiswa: ${currentInfo.studentName} (${currentInfo.nim})
-Program Studi / Jenjang: ${currentInfo.programStudi || student.programStudi || 'Matematika'} • ${currentInfo.degree}
-Dosen Pembimbing: ${currentInfo.pembimbing || 'Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.'}
-Dosen Penguji: ${currentInfo.penguji || '-'}
+Nama Mahasiswa: ${student.name}
+NIM: ${student.nim}
+Jenjang / Prodi: ${student.degree} • ${student.programStudi || 'Matematika'} (${student.fakultas || 'FMIPA UNS'})
+Status: ${student.status === 'Active' ? 'Penelitian Aktif' : `Lulus (${student.graduationYear || student.startYear + 4})`}
+Dosen Pembimbing: ${student.pembimbing || 'Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.'}
+Dosen Penguji: ${student.penguji || currentInfo.penguji || '-'}
 
-RUMUSAN MASALAH & LATAR BELAKANG:
-${currentInfo.problemStatement}
+Judul Skripsi: "${student.thesisTitle || student.researchTopic}"
+Topik Riset: ${student.researchTopic}
 
-TUJUAN PENELITIAN:
-${currentInfo.objectives}
+Ringkasan / Abstrak:
+${student.thesisAbstract || currentInfo.problemStatement}
 
-METODOLOGI & ALGORITMA PENELITIAN:
-${currentInfo.methodology.map((m, i) => `${i + 1}. ${m}`).join('\n')}
-
-OBJEK PENELITIAN & DATASET:
-${currentInfo.dataAndObject}
-
-TEMUAN KUNCI & HASIL SKRIPSI:
-${currentInfo.keyFindings.map((f, i) => `• ${f}`).join('\n')}
-
-METRIK CAPAIAN:
-${currentInfo.highlightMetric?.label || 'Hasil'}: ${currentInfo.highlightMetric?.value || 'Optimal'}
-
-KESIMPULAN & KONTRIBUSI ILMIAH:
-${currentInfo.conclusions}
-
-Kata Kunci: ${(currentInfo.keywords || []).join(', ')}
-Sumber: Arsip Dokumen Digilib UNS (NIM: ${student.nim})
+Kata Kunci: ${student.kataKunci || (currentInfo.keywords || []).join(', ')}
+${student.currentAffiliation ? `Karir / Posisi: ${student.currentAffiliation}\n` : ''}
+Sumber: Basis Data Terpadu Dokumen Digilib UNS (MySQL digilib_documents)
 `;
     navigator.clipboard.writeText(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2200);
   };
 
-  // High-resolution Canvas PNG Export (1200x1600 Poster)
-  const handleExportPNG = async () => {
-    setIsExporting(true);
-    try {
-      const canvas = document.createElement('canvas');
-      const ctx = canvas.getContext('2d');
-      if (!ctx) return;
+  const studentPhoto = student.photoBase64 || student.photoUrl;
 
-      canvas.width = 1200;
-      canvas.height = 1600;
-
-      // Background
-      ctx.fillStyle = '#ffffff';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      // Header Banner (UNS Navy Blue)
-      ctx.fillStyle = '#004b87';
-      ctx.fillRect(40, 40, canvas.width - 80, 210);
-
-      // Institution Header
-      ctx.fillStyle = '#bae6fd';
-      ctx.font = 'bold 16px Inter, sans-serif';
-      ctx.fillText('UNIVERSITAS SEBELAS MARET • FMIPA • JURUSAN MATEMATIKA', 70, 80);
-
-      // Title
-      ctx.fillStyle = '#ffffff';
-      ctx.font = 'bold 26px Georgia, serif';
-      const wrapText = (text: string, x: number, y: number, maxWidth: number, lineHeight: number) => {
-        const words = text.split(' ');
-        let line = '';
-        let currentY = y;
-        for (let n = 0; n < words.length; n++) {
-          const testLine = line + words[n] + ' ';
-          const metrics = ctx.measureText(testLine);
-          if (metrics.width > maxWidth && n > 0) {
-            ctx.fillText(line, x, currentY);
-            line = words[n] + ' ';
-            currentY += lineHeight;
-          } else {
-            line = testLine;
-          }
-        }
-        ctx.fillText(line, x, currentY);
-        return currentY;
-      };
-
-      const titleY = wrapText(currentInfo.title, 70, 125, canvas.width - 140, 34);
-
-      // Student & Supervisor Bar
-      ctx.fillStyle = '#e0f2fe';
-      ctx.font = '500 16px Inter, sans-serif';
-      ctx.fillText(
-        `Mahasiswa: ${currentInfo.studentName} (${currentInfo.nim}) • Pembimbing: ${currentInfo.pembimbing || 'Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.'}`,
-        70,
-        Math.min(titleY + 45, 230)
-      );
-
-      // Sections
-      let curY = 290;
-      const drawSectionCard = (titleText: string, contentLines: string[], isHighlight = false) => {
-        ctx.fillStyle = isHighlight ? '#f0f9ff' : '#f8fafc';
-        ctx.strokeStyle = isHighlight ? '#0284c7' : '#e2e8f0';
-        ctx.lineWidth = 1.5;
-        const boxHeight = 40 + contentLines.length * 28;
-        ctx.beginPath();
-        ctx.roundRect(40, curY, canvas.width - 80, boxHeight, 12);
-        ctx.fill();
-        ctx.stroke();
-
-        ctx.fillStyle = '#004b87';
-        ctx.font = 'bold 18px Inter, sans-serif';
-        ctx.fillText(titleText, 65, curY + 30);
-
-        ctx.fillStyle = '#334155';
-        ctx.font = '15px Inter, sans-serif';
-        contentLines.forEach((line, i) => {
-          ctx.fillText(line, 65, curY + 60 + i * 26);
-        });
-
-        curY += boxHeight + 25;
-      };
-
-      drawSectionCard('1. RUMUSAN MASALAH & LATAR BELAKANG', [
-        currentInfo.problemStatement.slice(0, 120),
-        currentInfo.problemStatement.slice(120, 240) || ''
-      ].filter(Boolean));
-
-      drawSectionCard('2. TUJUAN PENELITIAN SKRIPSI', [
-        currentInfo.objectives.slice(0, 130),
-        currentInfo.objectives.slice(130, 260) || ''
-      ].filter(Boolean));
-
-      drawSectionCard('3. METODOLOGI & ALGORITMA PENELITIAN', currentInfo.methodology.map((m, i) => `${i + 1}. ${m}`));
-
-      drawSectionCard('4. TEMUAN KUNCI & HASIL ANALISIS', currentInfo.keyFindings.map(f => `• ${f}`));
-
-      drawSectionCard('5. KESIMPULAN & KONTRIBUSI ILMIAH', [
-        currentInfo.conclusions.slice(0, 130),
-        currentInfo.conclusions.slice(130, 260) || ''
-      ].filter(Boolean));
-
-      // Metric Highlight Box
-      ctx.fillStyle = '#004b87';
-      ctx.beginPath();
-      ctx.roundRect(40, curY, canvas.width - 80, 80, 12);
-      ctx.fill();
-
-      ctx.fillStyle = '#e0f2fe';
-      ctx.font = '14px Inter, sans-serif';
-      ctx.fillText(currentInfo.highlightMetric?.label || 'Capaian Skripsi Teruji', 65, curY + 32);
-
-      ctx.fillStyle = '#ffffff';
-      ctx.font = 'bold 24px Inter, sans-serif';
-      ctx.fillText(currentInfo.highlightMetric?.value || 'Optimal & Terverifikasi', 65, curY + 62);
-
-      // Footer
-      ctx.fillStyle = '#64748b';
-      ctx.font = '12px Inter, sans-serif';
-      ctx.fillText(
-        `Arsip Portofolio Akademik Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D. • Universitas Sebelas Maret (UNS) • Generated with Gemini AI`,
-        40,
-        1570
-      );
-
-      // Trigger download
-      const safeName = (student.name || 'Mahasiswa').replace(/[^a-zA-Z0-9]/g, '_');
-      const dataUrl = canvas.toDataURL('image/png');
-      const a = document.createElement('a');
-      a.href = dataUrl;
-      a.download = `Infografik_Skripsi_${student.nim}_${safeName}.png`;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-    } catch (e) {
-      console.error('Canvas export error:', e);
-    } finally {
-      setIsExporting(false);
-    }
-  };
-
-  const photoSource = student.photoBase64 || student.photoUrl;
+  // Linked publications
+  const linkedPubs = publications.filter(p =>
+    p.authors?.some(a => a.studentId === student.id || a.name?.toLowerCase() === student.name.toLowerCase()) ||
+    student.linkedPublicationIds?.includes(p.id)
+  );
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-slate-950/80 backdrop-blur-xs overflow-y-auto">
-      <div className="relative w-full max-w-4xl bg-white rounded-2xl shadow-2xl border border-sky-200 flex flex-col max-h-[94vh] overflow-hidden">
-        {/* Top Header Bar */}
-        <div className="bg-[#004b87] text-white px-5 py-3.5 flex flex-wrap items-center justify-between gap-3 shrink-0">
-          <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-white/10 flex items-center justify-center border border-white/20">
-              <Sparkles className="w-5 h-5 text-sky-200" />
-            </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <span className="text-[10px] uppercase font-mono font-bold tracking-wider px-2 py-0.5 rounded bg-sky-400/20 text-sky-200 border border-sky-400/30">
-                  Infografik Riset Skripsi Mahasiswa
-                </span>
-                <span className="text-[11px] text-sky-100 hidden sm:inline">•</span>
-                <span className="text-[11px] text-sky-100 font-mono hidden sm:inline">{student.nim}</span>
+    <>
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-slate-950/80 backdrop-blur-xs">
+        <div className="relative w-full max-w-5xl bg-white rounded-2xl shadow-2xl border border-sky-100 flex flex-col max-h-[94vh] overflow-hidden animate-in fade-in zoom-in-95 duration-150">
+          
+          {/* Header Bar */}
+          <div className="px-5 py-3.5 bg-gradient-to-r from-[#004b87] via-[#003865] to-sky-950 text-white flex items-center justify-between gap-3 shrink-0 shadow-sm">
+            <div className="flex items-center gap-3 min-w-0">
+              <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center shrink-0 border border-white/20">
+                <GraduationCap className="w-5 h-5 text-sky-200" />
               </div>
-              <h2 className="font-serif-academic text-sm sm:text-base font-bold text-white leading-tight line-clamp-1">
-                {currentInfo.title}
-              </h2>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-2">
-            {/* View toggle if custom image exists */}
-            {currentInfo.customImageUrl && (
-              <div className="flex items-center bg-white/10 p-0.5 rounded-lg border border-white/20 text-xs">
-                <button
-                  type="button"
-                  onClick={() => setActiveView('visual')}
-                  className={`px-2.5 py-1 rounded-md transition-colors ${
-                    activeView === 'visual' ? 'bg-white text-[#004b87] font-bold shadow-2xs' : 'text-sky-100 hover:text-white'
-                  }`}
-                >
-                  Poster Visual
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setActiveView('customImage')}
-                  className={`px-2.5 py-1 rounded-md transition-colors ${
-                    activeView === 'customImage' ? 'bg-white text-[#004b87] font-bold shadow-2xs' : 'text-sky-100 hover:text-white'
-                  }`}
-                >
-                  Gambar Infografik
-                </button>
+              <div className="min-w-0">
+                <div className="flex items-center gap-2 flex-wrap">
+                  <span className="text-xs font-mono font-bold text-sky-200 uppercase tracking-widest">
+                    Informasi Mahasiswa &amp; Poster Infografik
+                  </span>
+                  <span className="text-[11px] text-sky-200/80 font-mono hidden sm:inline">•</span>
+                  <span className="text-[11px] text-sky-100 font-mono font-semibold bg-white/15 px-2 py-0.5 rounded">
+                    NIM: {student.nim}
+                  </span>
+                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-200 border border-emerald-400/30 flex items-center gap-1">
+                    <Database className="w-2.5 h-2.5" />
+                    <span>MySQL: digilib_documents</span>
+                  </span>
+                </div>
+                <h2 className="font-serif-academic text-base sm:text-lg font-bold text-white leading-tight truncate mt-0.5">
+                  {student.name} — <span className="text-sky-200 font-sans font-normal text-xs sm:text-sm">{student.degree}</span>
+                </h2>
               </div>
-            )}
+            </div>
 
-            <button
-              onClick={handleCopyText}
-              className="p-1.5 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors border border-white/20 cursor-pointer"
-              title="Salin Teks Infografik"
-            >
-              {copied ? <Check className="w-4 h-4 text-emerald-300" /> : <Copy className="w-4 h-4 text-sky-200" />}
-            </button>
+            <div className="flex items-center gap-2 shrink-0">
+              {hasUploadedImage && (
+                <>
+                  <button
+                    onClick={() => setIsFullscreenPreview(true)}
+                    className="p-1.5 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors border border-white/20 cursor-pointer hidden sm:flex items-center gap-1 text-xs font-semibold px-2.5"
+                    title="Perbesar Poster Layar Penuh"
+                  >
+                    <Maximize2 className="w-3.5 h-3.5 text-sky-200" />
+                    <span>Perbesar Poster</span>
+                  </button>
 
-            <button
-              onClick={() => window.print()}
-              className="p-1.5 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors border border-white/20 cursor-pointer"
-              title="Cetak Infografik (Print / PDF)"
-            >
-              <Printer className="w-4 h-4 text-sky-200" />
-            </button>
+                  <button
+                    onClick={handleDownloadImage}
+                    className="p-1.5 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors border border-white/20 cursor-pointer flex items-center gap-1 text-xs font-semibold px-2.5"
+                    title="Unduh Poster Infografik (Resolusi Penuh)"
+                  >
+                    <Download className="w-3.5 h-3.5 text-sky-200" />
+                    <span className="hidden sm:inline">Unduh</span>
+                  </button>
+                </>
+              )}
 
-            <button
-              onClick={handleExportPNG}
-              disabled={isExporting}
-              className="px-3 py-1.5 bg-sky-500 hover:bg-sky-400 text-white rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors shadow-2xs cursor-pointer disabled:opacity-50"
-              title="Download Infografik Format PNG (1200x1600)"
-            >
-              <Download className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">{isExporting ? 'Exporting...' : 'Download PNG'}</span>
-            </button>
-
-            <button
-              onClick={onClose}
-              className="p-1 text-sky-200 hover:text-white hover:bg-white/10 rounded-lg transition-colors ml-1 cursor-pointer"
-            >
-              <X className="w-5 h-5" />
-            </button>
-          </div>
-        </div>
-
-        {/* Feedback Alert if any */}
-        {feedbackMsg && (
-          <div
-            className={`px-5 py-2 text-xs flex items-center gap-2 border-b ${
-              feedbackMsg.type === 'success'
-                ? 'bg-emerald-50 text-emerald-800 border-emerald-200'
-                : 'bg-amber-50 text-amber-800 border-amber-200'
-            }`}
-          >
-            {feedbackMsg.type === 'success' ? (
-              <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-            ) : (
-              <AlertCircle className="w-4 h-4 text-amber-600 shrink-0" />
-            )}
-            <span className="flex-1 font-medium">{feedbackMsg.text}</span>
-            <button
-              onClick={() => setFeedbackMsg(null)}
-              className="text-slate-400 hover:text-slate-700 text-[11px] underline"
-            >
-              Tutup
-            </button>
-          </div>
-        )}
-
-        {/* Action Toolbar for Infographic Image Upload & Edit (Connected to SQL) */}
-        <div className="px-5 py-2.5 bg-sky-50/70 border-b border-sky-100 flex flex-wrap items-center justify-between gap-3 shrink-0 text-xs">
-          <div className="flex flex-wrap items-center gap-2">
-            {/* Primary Action: Direct Admin Upload */}
-            <label className="px-3.5 py-1.5 bg-[#004b87] hover:bg-[#003865] text-white rounded-lg font-bold flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer">
-              <Upload className="w-3.5 h-3.5 text-sky-200" />
-              <span>
-                {isUploadingImage
-                  ? 'Mengunggah...'
-                  : currentInfo.customImageUrl
-                  ? 'Ganti Poster Infografik'
-                  : 'Upload Gambar Infografik (PNG/JPG)'}
-              </span>
-              <input
-                type="file"
-                accept="image/*"
-                onChange={handleUploadCustomImage}
-                disabled={isUploadingImage}
-                className="hidden"
-              />
-            </label>
-
-            {currentInfo.customImageUrl && (
               <button
-                type="button"
-                onClick={handleRemoveCustomImage}
-                disabled={isSaving}
-                className="px-2.5 py-1.5 text-rose-600 hover:bg-rose-50 border border-rose-200 rounded-lg font-semibold flex items-center gap-1 transition-colors cursor-pointer"
-                title="Hapus gambar poster ini dari database SQL"
+                onClick={handleCopyText}
+                className="p-1.5 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors border border-white/20 cursor-pointer"
+                title="Salin Data Mahasiswa & Skripsi"
               >
-                <X className="w-3.5 h-3.5" />
-                <span>Hapus Gambar</span>
+                {copied ? <Check className="w-4 h-4 text-emerald-300" /> : <Copy className="w-4 h-4 text-sky-200" />}
               </button>
-            )}
 
-            {isAdmin && !isEditing && (
               <button
-                type="button"
-                onClick={() => setIsEditing(true)}
-                className="px-3 py-1.5 bg-white hover:bg-sky-50 text-slate-700 border border-slate-300 rounded-lg font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
+                onClick={onClose}
+                className="p-1.5 text-sky-200 hover:text-white hover:bg-white/15 rounded-lg transition-colors cursor-pointer"
+                title="Tutup Modal"
               >
-                <Edit2 className="w-3.5 h-3.5 text-slate-500" />
-                <span>Edit Teks Skripsi</span>
+                <X className="w-5 h-5" />
               </button>
-            )}
-
-            {isEditing && (
-              <div className="flex items-center gap-2">
-                <button
-                  type="button"
-                  onClick={handleSaveInfographic}
-                  disabled={isSaving}
-                  className="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-bold flex items-center gap-1.5 transition-colors shadow-2xs disabled:opacity-50 cursor-pointer"
-                >
-                  <Save className="w-3.5 h-3.5" />
-                  <span>{isSaving ? 'Menyimpan...' : 'Simpan Perubahan'}</span>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setIsEditing(false);
-                    setInfographic(student.infographic || createDefaultThesisInfographic(student));
-                  }}
-                  className="px-2.5 py-1.5 bg-white text-slate-600 border border-slate-300 rounded-lg hover:bg-slate-50 cursor-pointer"
-                >
-                  Batal
-                </button>
-              </div>
-            )}
-
-            <button
-              type="button"
-              onClick={handleGenerateWithLLM}
-              disabled={isGenerating}
-              className="px-2.5 py-1.5 bg-white hover:bg-slate-100 text-slate-600 border border-slate-300 rounded-lg font-medium flex items-center gap-1 transition-all disabled:opacity-60 cursor-pointer text-[11px]"
-              title="Opsional: Rangkum teks abstrak secara otomatis"
-            >
-              <Sparkles className="w-3 h-3 text-amber-500" />
-              <span>{isGenerating ? 'Meringkas...' : 'Rangkum Teks Abstrak'}</span>
-            </button>
-          </div>
-
-          <div className="flex items-center gap-2 text-slate-600 text-[11px] font-mono">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span>Database SQL: digilib_documents terhubung</span>
-          </div>
-        </div>
-
-        {/* Modal Body / Printable Area */}
-        <div id="printable-infographic-area" className="p-5 sm:p-7 overflow-y-auto space-y-6 flex-1">
-          {activeView === 'customImage' && currentInfo.customImageUrl ? (
-            <div className="space-y-4">
-              <div className="rounded-2xl overflow-hidden border border-sky-200 shadow-md bg-slate-50 flex items-center justify-center p-2">
-                <img
-                  src={currentInfo.customImageUrl}
-                  alt={currentInfo.title}
-                  className="max-h-[70vh] w-auto object-contain rounded-xl"
-                />
-              </div>
             </div>
-          ) : (
-            <div className="space-y-6">
-              {/* 1. Student Identity & Skripsi Header Hero */}
-              <div className="p-5 rounded-2xl bg-gradient-to-r from-sky-50 via-white to-blue-50 border border-sky-100 flex flex-col sm:flex-row items-start gap-4">
-                {/* Student Photo */}
-                <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl overflow-hidden border-2 border-sky-200 bg-white shadow-sm shrink-0 flex items-center justify-center relative group">
-                  {photoSource ? (
-                    <img
-                      src={photoSource}
-                      alt={student.name}
-                      className="w-full h-full object-cover object-top"
-                    />
-                  ) : (
-                    <div className="flex flex-col items-center justify-center p-2 text-center text-[#004b87]">
-                      <div className="w-12 h-12 rounded-xl bg-[#004b87] text-white flex items-center justify-center font-bold text-lg shadow-2xs mb-1">
-                        {student.name.split(' ').slice(0, 2).map(n => n[0]).join('')}
-                      </div>
-                      <span className="text-[10px] font-mono text-slate-400">UNS Student</span>
-                    </div>
-                  )}
-                </div>
+          </div>
 
-                {/* Identity & Supervised Info */}
-                <div className="flex-1 space-y-1.5">
-                  <div className="flex flex-wrap items-center gap-2">
-                    <span className="px-2.5 py-0.5 rounded-full bg-[#004b87] text-white text-[11px] font-mono font-bold">
-                      {student.nim}
-                    </span>
-                    <span className="text-xs text-slate-600 font-medium">
-                      {student.degree} • {student.programStudi || 'Matematika'} ({student.fakultas || 'FMIPA UNS'})
-                    </span>
-                    <span className="text-[11px] px-2 py-0.5 rounded-md bg-emerald-100 text-emerald-800 font-semibold ml-auto">
-                      {student.status === 'Active' ? 'Penelitian Aktif' : `Lulus (${student.graduationYear || student.startYear + 4})`}
-                    </span>
-                  </div>
-
-                  <h3 className="font-serif-academic text-xl sm:text-2xl font-bold text-slate-900 leading-snug">
-                    {student.name}
-                  </h3>
-
-                  <div className="text-xs text-slate-700 font-medium pt-0.5">
-                    Judul Skripsi:{' '}
-                    {isEditing ? (
-                      <input
-                        type="text"
-                        value={currentInfo.title}
-                        onChange={e => setInfographic({ ...currentInfo, title: e.target.value })}
-                        className="w-full mt-1 px-3 py-1.5 border border-sky-300 rounded-lg text-xs font-serif"
-                      />
-                    ) : (
-                      <span className="font-serif italic text-slate-900 font-bold">"{currentInfo.title}"</span>
-                    )}
-                  </div>
-
-                  {/* Pembimbing & Penguji */}
-                  <div className="pt-2 flex flex-wrap items-center gap-4 text-xs text-slate-600 border-t border-sky-100">
-                    <div className="flex items-center gap-1.5">
-                      <School className="w-3.5 h-3.5 text-[#004b87]" />
-                      <span>Pembimbing: <strong className="text-slate-900">{currentInfo.pembimbing || 'Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.'}</strong></span>
-                    </div>
-                    {currentInfo.penguji && (
-                      <div className="flex items-center gap-1.5">
-                        <User className="w-3.5 h-3.5 text-slate-500" />
-                        <span>Penguji: <strong className="text-slate-800">{currentInfo.penguji}</strong></span>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </div>
-
-              {/* 2. Highlight Metric Card */}
-              <div className="p-4 rounded-xl bg-[#004b87] text-white flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-sm">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center shrink-0 border border-white/20">
-                    <Award className="w-6 h-6 text-sky-200" />
-                  </div>
-                  <div>
-                    <div className="text-xs text-sky-200 uppercase tracking-wider font-mono">
-                      {isEditing ? (
-                        <input
-                          type="text"
-                          value={currentInfo.highlightMetric?.label || 'Capaian Riset'}
-                          onChange={e =>
-                            setInfographic({
-                              ...currentInfo,
-                              highlightMetric: {
-                                label: e.target.value,
-                                value: currentInfo.highlightMetric?.value || ''
-                              }
-                            })
-                          }
-                          className="px-2 py-0.5 bg-white/20 rounded text-xs text-white"
-                        />
-                      ) : (
-                        currentInfo.highlightMetric?.label || 'Capaian Riset Tugas Akhir'
-                      )}
-                    </div>
-                    <div className="text-lg sm:text-xl font-bold font-mono tracking-tight text-white mt-0.5">
-                      {isEditing ? (
-                        <input
-                          type="text"
-                          value={currentInfo.highlightMetric?.value || 'Optimal & Tervalidasi'}
-                          onChange={e =>
-                            setInfographic({
-                              ...currentInfo,
-                              highlightMetric: {
-                                label: currentInfo.highlightMetric?.label || '',
-                                value: e.target.value
-                              }
-                            })
-                          }
-                          className="px-2 py-0.5 bg-white/20 rounded text-sm text-white font-mono mt-1 w-full"
-                        />
-                      ) : (
-                        currentInfo.highlightMetric?.value || 'Optimal & Tervalidasi'
-                      )}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="text-right text-[11px] text-sky-200 font-mono hidden sm:block">
-                  FMIPA Universitas Sebelas Maret
-                </div>
-              </div>
-
-              {/* 3. Grid Section: Problem & Objectives */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {/* Problem Statement */}
-                <div className="p-4 rounded-xl border border-sky-100 bg-sky-50/40 space-y-2">
-                  <div className="flex items-center gap-2 text-xs font-bold text-[#004b87] uppercase font-mono tracking-wider">
-                    <span className="w-2 h-2 rounded-full bg-[#004b87]" />
-                    <span>1. Rumusan Masalah &amp; Urgensi</span>
-                  </div>
-                  {isEditing ? (
-                    <textarea
-                      rows={3}
-                      value={currentInfo.problemStatement}
-                      onChange={e => setInfographic({ ...currentInfo, problemStatement: e.target.value })}
-                      className="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs"
-                    />
-                  ) : (
-                    <p className="text-xs sm:text-sm text-slate-800 leading-relaxed font-sans text-justify">
-                      {currentInfo.problemStatement}
-                    </p>
-                  )}
-                </div>
-
-                {/* Objectives */}
-                <div className="p-4 rounded-xl border border-sky-100 bg-sky-50/40 space-y-2">
-                  <div className="flex items-center gap-2 text-xs font-bold text-[#004b87] uppercase font-mono tracking-wider">
-                    <span className="w-2 h-2 rounded-full bg-sky-600" />
-                    <span>2. Tujuan Penelitian Skripsi</span>
-                  </div>
-                  {isEditing ? (
-                    <textarea
-                      rows={3}
-                      value={currentInfo.objectives}
-                      onChange={e => setInfographic({ ...currentInfo, objectives: e.target.value })}
-                      className="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs"
-                    />
-                  ) : (
-                    <p className="text-xs sm:text-sm text-slate-800 leading-relaxed font-sans text-justify">
-                      {currentInfo.objectives}
-                    </p>
-                  )}
-                </div>
-              </div>
-
-              {/* 4. Methodology & Algorithm Pipeline */}
-              <div className="p-5 rounded-xl border border-sky-100 bg-white space-y-3 shadow-2xs">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2 text-xs font-bold text-[#004b87] uppercase font-mono tracking-wider">
-                    <Layers className="w-4 h-4 text-[#004b87]" />
-                    <span>3. Metodologi Komputasi &amp; Model Matematis</span>
-                  </div>
-                  <span className="text-[11px] text-slate-400 font-mono">3 Tahap Terstruktur</span>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-3 pt-1">
-                  {currentInfo.methodology.map((step, idx) => (
-                    <div
-                      key={idx}
-                      className="p-3.5 rounded-xl bg-slate-50 border border-slate-200/80 space-y-2 hover:border-[#004b87]/40 transition-colors"
-                    >
-                      <div className="flex items-center gap-2">
-                        <span className="w-6 h-6 rounded-lg bg-[#004b87] text-white flex items-center justify-center text-xs font-bold font-mono shrink-0">
-                          {idx + 1}
-                        </span>
-                        <span className="text-xs font-bold text-slate-800 font-mono">
-                          Tahap {idx + 1}
-                        </span>
-                      </div>
-                      {isEditing ? (
-                        <textarea
-                          rows={3}
-                          value={step}
-                          onChange={e => {
-                            const updatedMeth = [...currentInfo.methodology];
-                            updatedMeth[idx] = e.target.value;
-                            setInfographic({ ...currentInfo, methodology: updatedMeth });
-                          }}
-                          className="w-full px-2 py-1 border border-slate-300 rounded text-xs"
-                        />
-                      ) : (
-                        <p className="text-xs text-slate-700 leading-snug">
-                          {step}
-                        </p>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* 5. Key Findings / Hasil Penelitian */}
-              <div className="p-5 rounded-xl border border-sky-100 bg-sky-50/30 space-y-3">
-                <div className="flex items-center gap-2 text-xs font-bold text-[#004b87] uppercase font-mono tracking-wider">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                  <span>4. Temuan Kunci &amp; Hasil Skripsi</span>
-                </div>
-
-                <div className="space-y-2">
-                  {currentInfo.keyFindings.map((finding, idx) => (
-                    <div key={idx} className="flex items-start gap-2 text-xs sm:text-sm text-slate-800">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 mt-2 shrink-0" />
-                      {isEditing ? (
-                        <input
-                          type="text"
-                          value={finding}
-                          onChange={e => {
-                            const updatedFindings = [...currentInfo.keyFindings];
-                            updatedFindings[idx] = e.target.value;
-                            setInfographic({ ...currentInfo, keyFindings: updatedFindings });
-                          }}
-                          className="w-full px-2 py-1 border border-slate-300 rounded text-xs"
-                        />
-                      ) : (
-                        <span className="leading-relaxed">{finding}</span>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* 6. Conclusions & Contribution */}
-              <div className="p-4 rounded-xl border border-emerald-100 bg-emerald-50/40 space-y-2">
-                <div className="text-xs font-bold text-emerald-900 uppercase font-mono tracking-wider">
-                  5. Kesimpulan &amp; Kontribusi Skripsi
-                </div>
-                {isEditing ? (
-                  <textarea
-                    rows={3}
-                    value={currentInfo.conclusions}
-                    onChange={e => setInfographic({ ...currentInfo, conclusions: e.target.value })}
-                    className="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs"
-                  />
+          {/* Feedback Notice Alert */}
+          {feedbackMsg && (
+            <div
+              className={`px-5 py-2 text-xs flex items-center justify-between gap-2 border-b shrink-0 ${
+                feedbackMsg.type === 'success'
+                  ? 'bg-emerald-50 text-emerald-800 border-emerald-200'
+                  : 'bg-rose-50 text-rose-800 border-rose-200'
+              }`}
+            >
+              <div className="flex items-center gap-2">
+                {feedbackMsg.type === 'success' ? (
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
                 ) : (
-                  <p className="text-xs sm:text-sm text-slate-800 leading-relaxed font-sans text-justify">
-                    {currentInfo.conclusions}
-                  </p>
+                  <AlertCircle className="w-4 h-4 text-rose-600 shrink-0" />
+                )}
+                <span className="font-medium">{feedbackMsg.text}</span>
+              </div>
+              <button
+                onClick={() => setFeedbackMsg(null)}
+                className="text-slate-500 hover:text-slate-800 text-[11px] font-semibold underline cursor-pointer"
+              >
+                Tutup
+              </button>
+            </div>
+          )}
+
+          {/* Admin Toolbar (Upload Poster / Update Infographic Image directly to MySQL) */}
+          <div className="px-5 py-2 bg-sky-50/80 border-b border-sky-100 flex flex-wrap items-center justify-between gap-3 shrink-0 text-xs">
+            <div className="flex flex-wrap items-center gap-2">
+              <label className="px-3 py-1.5 bg-[#004b87] hover:bg-[#003865] text-white rounded-lg font-bold flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer text-xs">
+                <Upload className="w-3.5 h-3.5 text-sky-200" />
+                <span>
+                  {isUploadingImage
+                    ? 'Menyimpan ke MySQL...'
+                    : hasUploadedImage
+                    ? 'Ganti Poster Infografik'
+                    : 'Upload Poster Infografik (Admin)'}
+                </span>
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/png,image/jpeg,image/webp,image/svg+xml"
+                  onChange={handleFileUpload}
+                  disabled={isUploadingImage}
+                  className="hidden"
+                />
+              </label>
+
+              <button
+                type="button"
+                onClick={() => setShowUrlInput(!showUrlInput)}
+                className="px-2.5 py-1.5 bg-white hover:bg-sky-50 text-slate-700 border border-slate-300 rounded-lg font-medium flex items-center gap-1 transition-colors cursor-pointer text-xs"
+              >
+                <span>Tautan URL Gambar</span>
+              </button>
+
+              {hasUploadedImage && (
+                <button
+                  type="button"
+                  onClick={handleRemoveInfographic}
+                  disabled={isSaving}
+                  className="px-2.5 py-1.5 text-rose-600 hover:bg-rose-50 border border-rose-200 rounded-lg font-semibold flex items-center gap-1 transition-colors cursor-pointer text-xs"
+                  title="Hapus gambar poster ini dari database MySQL"
+                >
+                  <Trash2 className="w-3.5 h-3.5" />
+                  <span>Hapus Poster</span>
+                </button>
+              )}
+            </div>
+
+            <div className="flex items-center gap-2 text-slate-600 text-[11px] font-mono">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span>Data &amp; Poster tersimpan di MySQL <code>digilib_documents</code></span>
+            </div>
+          </div>
+
+          {/* External URL Input Drawer if opened */}
+          {showUrlInput && (
+            <div className="px-5 py-2.5 bg-white border-b border-sky-100 flex items-center gap-2 shrink-0">
+              <input
+                type="url"
+                value={customUrlInput}
+                onChange={e => setCustomUrlInput(e.target.value)}
+                placeholder="Masukkan URL langsung gambar poster: https://example.com/poster-skripsi.png"
+                className="flex-1 px-3 py-1.5 border border-slate-300 rounded-lg text-xs font-mono focus:ring-2 focus:ring-[#004b87]"
+              />
+              <button
+                type="button"
+                onClick={handleSaveUrl}
+                disabled={isSaving || !customUrlInput.trim()}
+                className="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold transition-all disabled:opacity-50 cursor-pointer"
+              >
+                {isSaving ? 'Menyimpan...' : 'Simpan URL ke SQL'}
+              </button>
+              <button
+                type="button"
+                onClick={() => setShowUrlInput(false)}
+                className="px-2.5 py-1.5 text-slate-500 hover:text-slate-800 text-xs"
+              >
+                Batal
+              </button>
+            </div>
+          )}
+
+          {/* Modal Main Content: UNIFIED 2-COLUMN VIEW (Student Information + Poster Infographic) */}
+          <div className="p-4 sm:p-6 overflow-y-auto flex-1 bg-slate-50/40">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+              
+              {/* ======================================================== */}
+              {/* LEFT COLUMN (5 of 12): COMPLETE STUDENT ACADEMIC INFO   */}
+              {/* ======================================================== */}
+              <div className="lg:col-span-5 space-y-4">
+                
+                {/* Student Profile Card */}
+                <div className="p-4 bg-white rounded-2xl border border-sky-100 shadow-xs space-y-3">
+                  <div className="flex items-start gap-3.5">
+                    {/* Avatar */}
+                    <div className="w-16 h-16 sm:w-18 sm:h-18 rounded-2xl overflow-hidden border-2 border-sky-200 bg-sky-50 shadow-2xs shrink-0 flex items-center justify-center">
+                      {studentPhoto ? (
+                        <img
+                          src={studentPhoto}
+                          alt={student.name}
+                          className="w-full h-full object-cover object-top"
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-gradient-to-br from-[#004b87] to-sky-700 text-white flex flex-col items-center justify-center text-center p-1">
+                          <span className="font-bold text-base font-serif-academic tracking-wider">
+                            {student.name.split(' ').map(n => n[0]).filter(Boolean).slice(0, 2).join('')}
+                          </span>
+                          <span className="text-[9px] uppercase tracking-tighter opacity-80 font-mono">UNS</span>
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="space-y-1 min-w-0 flex-1">
+                      <div className="flex items-center gap-1.5 flex-wrap">
+                        <span className="font-mono text-xs font-bold text-[#004b87] bg-sky-50 px-2 py-0.5 rounded border border-sky-200">
+                          {student.nim}
+                        </span>
+                        <span
+                          className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${
+                            student.status === 'Active'
+                              ? 'bg-amber-100 text-amber-900 border border-amber-300'
+                              : 'bg-emerald-50 text-emerald-800 border border-emerald-200'
+                          }`}
+                        >
+                          {student.status === 'Active' ? 'Active Research' : `Graduated (${student.graduationYear || student.startYear + 4})`}
+                        </span>
+                      </div>
+
+                      <h3 className="font-serif-academic text-lg font-bold text-slate-900 leading-snug">
+                        {student.name}
+                      </h3>
+
+                      <p className="text-xs text-slate-600 font-medium">
+                        {student.degree} • {student.programStudi || 'Program Studi Matematika'}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Academic Affiliation & Supervisors */}
+                  <div className="space-y-2 pt-2 border-t border-sky-50 text-xs">
+                    <div className="flex items-start gap-2 text-slate-700">
+                      <School className="w-4 h-4 text-[#004b87] shrink-0 mt-0.5" />
+                      <div>
+                        <span className="text-slate-500 block text-[11px] font-semibold uppercase">Fakultas &amp; Kampus:</span>
+                        <span className="font-semibold text-slate-800">{student.fakultas || 'FMIPA Universitas Sebelas Maret (UNS)'}</span>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start gap-2 text-slate-700">
+                      <User className="w-4 h-4 text-[#004b87] shrink-0 mt-0.5" />
+                      <div>
+                        <span className="text-slate-500 block text-[11px] font-semibold uppercase">Dosen Pembimbing:</span>
+                        <strong className="text-slate-900 font-serif">{student.pembimbing || 'Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.'}</strong>
+                      </div>
+                    </div>
+
+                    {(student.penguji || currentInfo.penguji) && (
+                      <div className="flex items-start gap-2 text-slate-700">
+                        <GraduationCap className="w-4 h-4 text-[#004b87] shrink-0 mt-0.5" />
+                        <div>
+                          <span className="text-slate-500 block text-[11px] font-semibold uppercase">Dosen Penguji:</span>
+                          <span className="text-slate-800 font-medium">{student.penguji || currentInfo.penguji}</span>
+                        </div>
+                      </div>
+                    )}
+
+                    {student.currentAffiliation && (
+                      <div className="flex items-start gap-2 text-slate-700 bg-emerald-50/60 p-2 rounded-xl border border-emerald-100">
+                        <Briefcase className="w-4 h-4 text-emerald-700 shrink-0 mt-0.5" />
+                        <div>
+                          <span className="text-emerald-800 block text-[10px] font-bold uppercase tracking-wider">Karir / Alumni Affiliation:</span>
+                          <span className="text-slate-900 font-semibold">{student.currentAffiliation}</span>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                {/* Thesis Information Card */}
+                <div className="p-4 bg-white rounded-2xl border border-sky-100 shadow-xs space-y-3">
+                  <div>
+                    <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">
+                      Judul Tugas Akhir / Skripsi:
+                    </span>
+                    <h4 className="font-serif-academic text-sm sm:text-base font-bold text-slate-900 leading-snug mt-1">
+                      "{student.thesisTitle || student.researchTopic || currentInfo.title}"
+                    </h4>
+                  </div>
+
+                  {student.researchTopic && student.researchTopic !== student.thesisTitle && (
+                    <div className="text-xs text-slate-600 bg-sky-50/50 p-2 rounded-lg border border-sky-100">
+                      <span className="font-semibold text-slate-500">Fokus Topik:</span>{' '}
+                      <span className="font-medium text-slate-800">{student.researchTopic}</span>
+                    </div>
+                  )}
+
+                  {/* Abstract / Ringkasan Skripsi */}
+                  <div className="space-y-1.5 pt-2 border-t border-sky-50">
+                    <div className="flex items-center justify-between">
+                      <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1.5">
+                        <BookOpen className="w-3.5 h-3.5 text-[#004b87]" />
+                        <span>Abstrak / Ringkasan Skripsi</span>
+                      </span>
+                      {isAdmin && (
+                        <button
+                          type="button"
+                          onClick={() => setIsEditingMetadata(!isEditingMetadata)}
+                          className="text-[11px] text-[#004b87] hover:underline flex items-center gap-1 font-semibold"
+                        >
+                          <Edit2 className="w-3 h-3" />
+                          <span>{isEditingMetadata ? 'Batal' : 'Edit Abstrak'}</span>
+                        </button>
+                      )}
+                    </div>
+
+                    {isEditingMetadata ? (
+                      <div className="space-y-2">
+                        <textarea
+                          rows={4}
+                          value={currentInfo.problemStatement}
+                          onChange={e => setInfographic({ ...currentInfo, problemStatement: e.target.value })}
+                          className="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs leading-relaxed"
+                          placeholder="Tuliskan rumusan masalah / abstrak skripsi..."
+                        />
+                        <button
+                          type="button"
+                          onClick={handleSaveMetadata}
+                          disabled={isSaving}
+                          className="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-2xs"
+                        >
+                          <Save className="w-3 h-3" />
+                          <span>{isSaving ? 'Menyimpan...' : 'Simpan Perubahan Abstrak'}</span>
+                        </button>
+                      </div>
+                    ) : (
+                      <p className="text-xs text-slate-700 leading-relaxed text-justify bg-slate-50/70 p-3 rounded-xl border border-slate-200/70 max-h-48 overflow-y-auto">
+                        {student.thesisAbstract || currentInfo.problemStatement || 'Abstrak dan ringkasan skripsi telah terverifikasi dan tersimpan dalam basis data.'}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Keywords / Kata Kunci */}
+                  {(student.kataKunci || (currentInfo.keywords && currentInfo.keywords.length > 0)) && (
+                    <div className="pt-2 border-t border-sky-50 space-y-1.5">
+                      <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1">
+                        <Tag className="w-3 h-3 text-[#004b87]" />
+                        <span>Kata Kunci:</span>
+                      </span>
+                      <div className="flex flex-wrap gap-1.5">
+                        {(student.kataKunci ? student.kataKunci.split(/[,;]/) : currentInfo.keywords || []).map((k, i) => k.trim() && (
+                          <span
+                            key={i}
+                            className="px-2.5 py-0.5 rounded-md bg-sky-50 text-[#004b87] border border-sky-200 text-[11px] font-mono"
+                          >
+                            {k.trim()}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Digilib UNS link if available */}
+                  {student.digilibUrl && (
+                    <div className="pt-2">
+                      <a
+                        href={student.digilibUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="w-full py-2 px-3 bg-sky-50 hover:bg-sky-100 text-[#004b87] border border-sky-200 rounded-xl text-xs font-semibold flex items-center justify-center gap-2 transition-colors shadow-2xs"
+                      >
+                        <ExternalLink className="w-3.5 h-3.5 text-[#004b87]" />
+                        <span>Buka Halaman Resmi Digilib UNS</span>
+                      </a>
+                    </div>
+                  )}
+                </div>
+
+                {/* Co-authored Publications (if any) */}
+                {linkedPubs.length > 0 && (
+                  <div className="p-4 bg-white rounded-2xl border border-sky-100 shadow-xs space-y-2.5">
+                    <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1.5">
+                      <BookOpen className="w-3.5 h-3.5 text-[#004b87]" />
+                      <span>Publikasi Bersama ({linkedPubs.length}):</span>
+                    </span>
+                    <div className="space-y-2">
+                      {linkedPubs.map(pub => (
+                        <div
+                          key={pub.id}
+                          onClick={() => onSelectPublication && onSelectPublication(pub)}
+                          className="p-2.5 rounded-xl bg-sky-50/50 hover:bg-sky-100/70 border border-sky-100 cursor-pointer transition-colors space-y-1"
+                        >
+                          <div className="text-xs font-semibold text-slate-900 line-clamp-2">
+                            "{pub.title}"
+                          </div>
+                          <div className="text-[11px] text-[#004b87] italic">
+                            {pub.venue} ({pub.year})
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 )}
               </div>
 
-              {/* 7. Keywords & Footer */}
-              {currentInfo.keywords && currentInfo.keywords.length > 0 && (
-                <div className="flex items-center gap-2 flex-wrap text-xs text-slate-500 pt-2 border-t border-sky-100">
-                  <Tag className="w-3.5 h-3.5 text-[#004b87] shrink-0" />
-                  <span className="font-semibold text-slate-700">Kata Kunci:</span>
-                  {currentInfo.keywords.map((kw, idx) => (
-                    <span
-                      key={idx}
-                      className="px-2.5 py-0.5 rounded-md bg-sky-50 text-[#004b87] border border-sky-200 text-[11px] font-mono"
-                    >
-                      {kw}
-                    </span>
-                  ))}
-                </div>
-              )}
-
-              {/* Upload Custom Infographic Image (Admin Option) */}
-              {isAdmin && isEditing && (
-                <div className="p-4 rounded-xl border-2 border-dashed border-sky-300 bg-sky-50/50 space-y-3">
-                  <div className="text-xs font-bold text-slate-900 flex items-center gap-2">
-                    <ImageIcon className="w-4 h-4 text-[#004b87]" />
-                    <span>Upload Poster / Gambar Infografik Buatan Sendiri (Opsional)</span>
-                  </div>
-                  <div className="flex flex-col sm:flex-row sm:items-center gap-3">
-                    <label className="px-4 py-2 bg-[#004b87] hover:bg-[#003865] text-white rounded-lg text-xs font-semibold cursor-pointer flex items-center gap-2 shrink-0">
-                      <Upload className="w-4 h-4" />
-                      <span>Pilih File Gambar (.jpg, .png, .webp)</span>
-                      <input
-                        type="file"
-                        accept="image/*"
-                        className="hidden"
-                        onChange={e => {
-                          const file = e.target.files?.[0];
-                          if (file) {
-                            const reader = new FileReader();
-                            reader.onload = () => {
-                              const base64 = reader.result as string;
-                              setInfographic({ ...currentInfo, customImageUrl: base64 });
-                              setActiveView('customImage');
-                              setFeedbackMsg({
-                                text: `Gambar "${file.name}" berhasil dimuat! Klik Simpan Perubahan untuk menyimpan.`,
-                                type: 'success'
-                              });
-                            };
-                            reader.readAsDataURL(file);
-                          }
-                        }}
-                      />
-                    </label>
-
-                    <div className="flex-1">
-                      <input
-                        type="text"
-                        placeholder="Atau masukkan URL gambar infografik..."
-                        value={currentInfo.customImageUrl || ''}
-                        onChange={e => setInfographic({ ...currentInfo, customImageUrl: e.target.value })}
-                        className="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs font-mono"
-                      />
+              {/* ======================================================== */}
+              {/* RIGHT COLUMN (7 of 12): THESIS INFOGRAPHIC POSTER IMAGE */}
+              {/* ======================================================== */}
+              <div className="lg:col-span-7 space-y-4">
+                <div className="bg-white rounded-2xl border border-sky-100 shadow-sm p-4 sm:p-5 flex flex-col space-y-3">
+                  
+                  {/* Poster Box Header */}
+                  <div className="flex items-center justify-between pb-3 border-b border-sky-50 flex-wrap gap-2">
+                    <div className="flex items-center gap-2">
+                      <div className="w-8 h-8 rounded-lg bg-[#004b87]/10 flex items-center justify-center text-[#004b87]">
+                        <ImageIcon className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <h4 className="font-serif-academic text-sm sm:text-base font-bold text-slate-900 leading-tight">
+                          Poster Infografik Skripsi
+                        </h4>
+                        <span className="text-[11px] text-slate-500">
+                          {hasUploadedImage
+                            ? 'Poster visual resmi tugas akhir mahasiswa'
+                            : 'Unggahan gambar resmi oleh admin / dosen pembimbing'}
+                        </span>
+                      </div>
                     </div>
+
+                    {hasUploadedImage && (
+                      <div className="flex items-center gap-2">
+                        <button
+                          type="button"
+                          onClick={() => setIsFullscreenPreview(true)}
+                          className="px-2.5 py-1.5 bg-sky-50 hover:bg-sky-100 text-[#004b87] rounded-lg text-xs font-semibold flex items-center gap-1 border border-sky-200 transition-colors cursor-pointer"
+                        >
+                          <Eye className="w-3.5 h-3.5" />
+                          <span>Perbesar</span>
+                        </button>
+                        <button
+                          type="button"
+                          onClick={handleDownloadImage}
+                          className="px-2.5 py-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 rounded-lg text-xs font-semibold flex items-center gap-1 border border-emerald-200 transition-colors cursor-pointer"
+                        >
+                          <Download className="w-3.5 h-3.5" />
+                          <span>Unduh</span>
+                        </button>
+                      </div>
+                    )}
                   </div>
+
+                  {/* POSTER DISPLAY / UPLOAD VIEW */}
+                  {hasUploadedImage && imageSource ? (
+                    <div className="space-y-3">
+                      {/* Image Preview Box with Zoom Effect */}
+                      <div
+                        onClick={() => setIsFullscreenPreview(true)}
+                        className="relative bg-slate-950/5 rounded-xl border border-sky-100 overflow-hidden flex items-center justify-center p-2 group cursor-zoom-in min-h-[360px] max-h-[65vh]"
+                        title="Klik untuk memperbesar tampilan poster"
+                      >
+                        <img
+                          src={imageSource}
+                          alt={`Poster Infografik Skripsi ${student.name}`}
+                          className="max-h-[62vh] w-auto max-w-full object-contain rounded-lg shadow-sm group-hover:scale-[1.01] transition-transform duration-200"
+                        />
+                        
+                        {/* Hover Overlay Hint */}
+                        <div className="absolute inset-0 bg-slate-950/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
+                          <span className="bg-slate-900/90 text-white text-xs font-semibold px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-lg backdrop-blur-xs">
+                            <Maximize2 className="w-3.5 h-3.5" />
+                            <span>Klik untuk Resolusi Penuh</span>
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Poster Footer Info */}
+                      <div className="flex items-center justify-between text-xs text-slate-500 pt-1">
+                        <div className="flex items-center gap-1.5 font-mono text-[11px] text-slate-600">
+                          <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+                          <span>Tersimpan di tabel MySQL: <code>digilib_documents</code></span>
+                        </div>
+                        <div className="text-[11px] text-slate-400">
+                          Format: Gambar Digital (PNG/JPG/WEBP)
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    /* EMPTY POSTER / UPLOAD CALLOUT */
+                    <div className="py-12 px-6 rounded-2xl border-2 border-dashed border-sky-200 bg-sky-50/30 text-center space-y-4">
+                      <div className="w-16 h-16 mx-auto rounded-2xl bg-white text-[#004b87] flex items-center justify-center border border-sky-100 shadow-xs">
+                        <ImageIcon className="w-8 h-8 text-[#004b87]" />
+                      </div>
+
+                      <div className="space-y-1">
+                        <h4 className="font-serif-academic text-base font-bold text-slate-900">
+                          Poster Infografik Belum Tersedia
+                        </h4>
+                        <p className="text-xs text-slate-600 max-w-sm mx-auto leading-relaxed">
+                          Infografik skripsi mahasiswa ini menampilkan poster visual beresolusi tinggi yang diunggah oleh Administrator / Dosen Pembimbing ke database MySQL (<code>digilib_documents</code>).
+                        </p>
+                      </div>
+
+                      <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-2.5">
+                        <label className="px-4 py-2 bg-[#004b87] hover:bg-[#003865] text-white rounded-xl text-xs font-bold flex items-center gap-2 shadow-2xs transition-all cursor-pointer">
+                          <Upload className="w-4 h-4 text-sky-200" />
+                          <span>{isUploadingImage ? 'Mengunggah ke SQL...' : 'Upload Poster (.png / .jpg / .webp)'}</span>
+                          <input
+                            type="file"
+                            accept="image/png,image/jpeg,image/webp,image/svg+xml"
+                            onChange={handleFileUpload}
+                            disabled={isUploadingImage}
+                            className="hidden"
+                          />
+                        </label>
+
+                        <button
+                          type="button"
+                          onClick={() => setShowUrlInput(true)}
+                          className="px-3.5 py-2 bg-white hover:bg-slate-50 text-slate-700 border border-slate-300 rounded-xl text-xs font-semibold transition-colors"
+                        >
+                          Gunakan URL Gambar
+                        </button>
+                      </div>
+
+                      <div className="pt-2 text-[11px] text-slate-400 font-mono">
+                        Dukungan file: PNG, JPG, JPEG, WEBP hingga 15 MB
+                      </div>
+                    </div>
+                  )}
+
                 </div>
-              )}
+              </div>
+
             </div>
-          )}
+          </div>
         </div>
       </div>
-    </div>
+
+      {/* Fullscreen Lightbox Image Modal */}
+      {isFullscreenPreview && imageSource && (
+        <div
+          className="fixed inset-0 z-[100] bg-slate-950/95 flex flex-col items-center justify-center p-3 sm:p-6 backdrop-blur-md animate-in fade-in duration-150"
+          onClick={() => setIsFullscreenPreview(false)}
+        >
+          <div className="absolute top-4 right-4 flex items-center gap-2 z-10" onClick={e => e.stopPropagation()}>
+            <button
+              type="button"
+              onClick={handleDownloadImage}
+              className="px-3.5 py-2 bg-[#004b87] hover:bg-[#003865] text-white rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-lg transition-colors cursor-pointer"
+            >
+              <Download className="w-4 h-4 text-sky-200" />
+              <span>Unduh Resolusi Asli</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setIsFullscreenPreview(false)}
+              className="p-2 bg-white/10 hover:bg-white/20 text-white rounded-xl transition-colors cursor-pointer"
+              title="Tutup Pratinjau Layar Penuh"
+            >
+              <X className="w-6 h-6" />
+            </button>
+          </div>
+
+          <div className="max-w-6xl max-h-[90vh] overflow-auto p-2" onClick={e => e.stopPropagation()}>
+            <img
+              src={imageSource}
+              alt={currentInfo.title}
+              className="max-h-[85vh] w-auto max-w-full object-contain mx-auto rounded-lg shadow-2xl"
+            />
+          </div>
+          <p className="text-xs text-sky-200 mt-2 font-mono text-center">
+            {student.name} ({student.nim}) • Poster Infografik Skripsi • Klik di luar atau tombol silang untuk menutup
+          </p>
+        </div>
+      )}
+    </>
   );
 };

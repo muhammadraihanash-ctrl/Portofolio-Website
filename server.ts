@@ -136,6 +136,8 @@ app.use((req, res, next) => {
 app.use((req, res, next) => {
   try {
     const rawUrl = req.url || '';
+    const matchedPath = (req.headers['x-matched-path'] as string) || (req.headers['x-forwarded-uri'] as string) || '';
+
     if (rawUrl.includes('__route__=')) {
       const parsed = new URL(rawUrl, 'http://localhost');
       const r = parsed.searchParams.get('__route__');
@@ -144,9 +146,13 @@ app.use((req, res, next) => {
         const rem = parsed.searchParams.toString();
         req.url = rem ? `${r}?${rem}` : r;
       }
+    } else if (matchedPath && matchedPath.startsWith('/api/')) {
+      req.url = matchedPath;
     } else if (req.url.startsWith('/api/index/')) {
       req.url = req.url.replace('/api/index/', '/api/');
     } else if (req.url === '/api/index' || req.url.startsWith('/api/index?')) {
+      req.url = '/api/health';
+    } else if (req.url === '/api' || req.url === '/api/') {
       req.url = '/api/health';
     }
   } catch {}
@@ -533,8 +539,8 @@ function synthesizeLocalThesisInfographic(params: any): ThesisInfographic {
   };
 }
 
-// Save or update student infographic
-app.post('/api/students/:id/infographic', async (req, res) => {
+// Save or update student infographic (POST and PUT supported)
+const handleSaveStudentInfographic = async (req: express.Request, res: express.Response) => {
   try {
     const studentId = req.params.id;
     const infographic = req.body as ThesisInfographic;
@@ -542,11 +548,20 @@ app.post('/api/students/:id/infographic', async (req, res) => {
     if (!updated) {
       return res.status(404).json({ error: 'Mahasiswa tidak ditemukan.' });
     }
+    academicDb.addAuditLog({
+      adminEmail: (req as any).adminSession?.admin?.email || 'admin@staff.uns.ac.id',
+      adminNama: (req as any).adminSession?.admin?.namaLengkap || 'Administrator',
+      action: 'UPDATE_STUDENT_INFOGRAPHIC',
+      details: `Menyimpan gambar/poster infografik skripsi mahasiswa: "${updated.name || studentId}" ke database MySQL.`,
+      targetId: studentId
+    });
     res.json({ success: true, data: updated, infographic: updated.infographic });
   } catch (err: any) {
     res.status(500).json({ error: err.message || 'Gagal menyimpan infografik skripsi.' });
   }
-});
+};
+app.post('/api/students/:id/infographic', handleSaveStudentInfographic);
+app.put('/api/students/:id/infographic', handleSaveStudentInfographic);
 
 // Delete student infographic
 app.delete('/api/students/:id/infographic', requireAdminAuth, async (req, res) => {

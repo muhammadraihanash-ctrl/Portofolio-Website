@@ -1023,8 +1023,19 @@ class AcademicDatabase {
 
   public async updateStudent(id: string, updates: Partial<GraduateStudent>): Promise<GraduateStudent | null> {
     let updatedStudent: GraduateStudent | null = null;
+    let docId: number | null = null;
     if (id.startsWith('digilib-')) {
-      const docId = parseInt(id.replace('digilib-', ''), 10);
+      docId = parseInt(id.replace('digilib-', ''), 10);
+    } else if (!isNaN(Number(id))) {
+      docId = Number(id);
+    } else {
+      const ex = this.data.students.find(s => s.id === id) || this.getStudentById(id);
+      if (ex && ex.docId) {
+        docId = ex.docId;
+      }
+    }
+
+    if (docId !== null && !isNaN(docId) && docId > 0) {
       try {
         updatedStudent = await p2mDatabaseService.updateStudentRecord(docId, updates);
       } catch (err) {

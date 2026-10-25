@@ -1630,7 +1630,7 @@ class P2MDatabaseService {
         password: eff.password,
         database: eff.database,
         ssl: eff.isSslRequired ? { rejectUnauthorized: false } : undefined,
-        connectTimeout: 8000
+        connectTimeout: 4500
       });
 
       const [rows]: any = await conn.query('SELECT 1 AS ok, DATABASE() AS db, VERSION() AS ver');
@@ -1902,7 +1902,7 @@ class P2MDatabaseService {
         waitForConnections: true,
         connectionLimit: 10,
         queueLimit: 0,
-        connectTimeout: 10000
+        connectTimeout: 4000
       });
 
       // Verify pool connection

@@ -58,6 +58,7 @@ import {
   PressMediaItem,
   BlogPost,
   ResearchInfographic,
+  ThesisInfographic,
   AuthorItem,
   EducationEntry,
   WorkHistoryEntry,
@@ -77,7 +78,6 @@ import {
 } from '../services/academicService';
 import { InfographicEditorModal } from '../components/InfographicEditorModal';
 import { ResearchInfographicModal } from '../components/ResearchInfographicModal';
-import { StudentThesisPdfModal } from '../components/StudentThesisPdfModal';
 import { StudentThesisInfographicModal } from '../components/StudentThesisInfographicModal';
 import { ImportPublicationsTab } from '../components/ImportPublicationsTab';
 import { SqlDatabaseTab } from '../components/SqlDatabaseTab';
@@ -208,11 +208,10 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
   // 2. Student Modal
   const [editingStudent, setEditingStudent] = useState<GraduateStudent | null>(null);
   const [isStudentModalOpen, setIsStudentModalOpen] = useState(false);
-  const [studentPdfUrl, setStudentPdfUrl] = useState<string>('');
-  const [studentPdfFileName, setStudentPdfFileName] = useState<string>('');
   const [studentPhotoBase64, setStudentPhotoBase64] = useState<string>('');
   const [studentPhotoUrl, setStudentPhotoUrl] = useState<string>('');
-  const [adminPdfPreviewStudent, setAdminPdfPreviewStudent] = useState<GraduateStudent | null>(null);
+  const [studentInfographicImage, setStudentInfographicImage] = useState<string>('');
+  const [studentInfographicUrl, setStudentInfographicUrl] = useState<string>('');
   const [adminInfographicStudent, setAdminInfographicStudent] = useState<GraduateStudent | null>(null);
 
   // 3. Course Modal
@@ -3512,10 +3511,10 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
                 <button
                   onClick={() => {
                     setEditingStudent(null);
-                    setStudentPdfUrl('');
-                    setStudentPdfFileName('');
                     setStudentPhotoBase64('');
                     setStudentPhotoUrl('');
+                    setStudentInfographicImage('');
+                    setStudentInfographicUrl('');
                     setIsStudentModalOpen(true);
                   }}
                   className="px-4 py-2 bg-[#004b87] hover:bg-[#003865] text-white rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors shadow-2xs self-start sm:self-auto"
@@ -3585,13 +3584,13 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
                               </span>
 
                               {hasInfo ? (
-                                <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-indigo-50 text-indigo-700 border border-indigo-200 flex items-center gap-1">
-                                  <Sparkles className="w-3 h-3 text-indigo-600" />
-                                  <span>Infografik AI Ready</span>
+                                <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-sky-50 text-[#004b87] border border-sky-200 flex items-center gap-1">
+                                  <ImageIcon className="w-3 h-3 text-[#004b87]" />
+                                  <span>Poster Infografik SQL</span>
                                 </span>
                               ) : (
                                 <span className="px-2 py-0.5 rounded text-[10px] font-medium bg-slate-100 text-slate-500">
-                                  No Infographic
+                                  Belum Ada Poster
                                 </span>
                               )}
                             </div>
@@ -3607,40 +3606,40 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
                         </div>
 
                         <div className="flex items-center gap-2 shrink-0 self-end md:self-center">
-                          {/* Infografik Skripsi LLM Action Button */}
+                          {/* Infografik Skripsi Poster Action Button */}
                           <button
                             type="button"
                             onClick={() => setAdminInfographicStudent(std)}
                             className={`px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer ${
                               hasInfo
-                                ? 'bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 shadow-2xs'
-                                : 'bg-slate-100 hover:bg-indigo-50 text-slate-700 hover:text-indigo-700 border border-slate-200'
+                                ? 'bg-sky-50 hover:bg-sky-100 text-[#004b87] border border-sky-200 shadow-2xs'
+                                : 'bg-slate-100 hover:bg-sky-50 text-slate-700 hover:text-[#004b87] border border-slate-200'
                             }`}
-                            title="Kelola & Sintesis Infografik Skripsi dengan LLM (Gemini 3.8 Flash)"
+                            title="Kelola & Upload Gambar Infografik Skripsi (Terkoneksi ke MySQL digilib_documents)"
                           >
-                            <Sparkles className={`w-3.5 h-3.5 ${hasInfo ? 'text-indigo-600' : 'text-slate-500'}`} />
-                            <span className="hidden sm:inline">{hasInfo ? 'Infografik AI' : 'Buat Infografik'}</span>
+                            {hasInfo ? <ImageIcon className="w-3.5 h-3.5 text-[#004b87]" /> : <Upload className="w-3.5 h-3.5 text-slate-500" />}
+                            <span className="hidden sm:inline">{hasInfo ? 'Poster Infografik' : 'Upload Poster'}</span>
                           </button>
 
                           <button
                             type="button"
-                            onClick={() => setAdminPdfPreviewStudent(std)}
+                            onClick={() => setAdminInfographicStudent(std)}
                             className="p-1.5 text-[#004b87] hover:text-sky-900 rounded-lg hover:bg-sky-50"
-                            title="Buka & Pratinjau Soft File PDF Skripsi"
+                            title="Buka Informasi Lengkap Mahasiswa & Poster Infografik"
                           >
-                            <FileText className="w-4 h-4" />
+                            <Eye className="w-4 h-4" />
                           </button>
                           <button
                             onClick={() => {
                               setEditingStudent(std);
-                              setStudentPdfUrl(std.pdfUrl || '');
-                              setStudentPdfFileName(std.pdfFileName || '');
                               setStudentPhotoBase64(std.photoBase64 || '');
                               setStudentPhotoUrl(std.photoUrl || '');
+                              setStudentInfographicImage(std.infographic?.customImageBase64 || std.infographic?.customImageUrl || '');
+                              setStudentInfographicUrl(std.infographic?.customImageUrl?.startsWith('http') ? std.infographic.customImageUrl : '');
                               setIsStudentModalOpen(true);
                             }}
                             className="p-1.5 text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-100"
-                            title="Edit data mahasiswa & foto profil"
+                            title="Edit data mahasiswa, foto, dan infografik"
                           >
                             <Edit2 className="w-4 h-4" />
                           </button>
@@ -5472,11 +5471,35 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
               onSubmit={async e => {
                 e.preventDefault();
                 const fd = new FormData(e.currentTarget);
-                const pdfUrl = studentPdfUrl || String(fd.get('pdfUrl') || '').trim() || undefined;
-                const pdfFileName = studentPdfFileName || String(fd.get('pdfFileName') || '').trim() || undefined;
+                const digilibUrl = String(fd.get('digilibUrl') || '').trim() || undefined;
                 const thesisAbstract = String(fd.get('thesisAbstract') || '').trim() || undefined;
                 const photoUrl = studentPhotoUrl || String(fd.get('photoUrl') || '').trim() || undefined;
                 const photoBase64 = studentPhotoBase64 || undefined;
+                const effectiveInfographicImage = studentInfographicImage || studentInfographicUrl || undefined;
+                const baseInfo = editingStudent?.infographic;
+                const infographicPayload: ThesisInfographic | undefined = effectiveInfographicImage ? {
+                  studentId: editingStudent?.id || '',
+                  studentName: String(fd.get('name') || '').trim(),
+                  nim: String(fd.get('nim') || '').trim(),
+                  degree: String(fd.get('degree') || 'S1 Matematika').trim(),
+                  title: String(fd.get('thesisTitle') || fd.get('researchTopic') || 'Skripsi').trim(),
+                  problemStatement: thesisAbstract || baseInfo?.problemStatement || 'Penelitian tugas akhir mahasiswa bimbingan.',
+                  objectives: baseInfo?.objectives || 'Formulasi pemodelan matematis dan solusi komputasi terverifikasi.',
+                  methodology: baseInfo?.methodology || ['Formulasi model matematis', 'Pencarian solusi komputasi', 'Validasi empiris'],
+                  dataAndObject: baseInfo?.dataAndObject || 'Arsip data tugas akhir terverifikasi.',
+                  keyFindings: baseInfo?.keyFindings || ['Hasil optimal dan teruji'],
+                  conclusions: baseInfo?.conclusions || 'Kontribusi bagi matematika terapan dan sains data.',
+                  keywords: baseInfo?.keywords || [String(fd.get('researchTopic') || 'Optimasi')],
+                  pembimbing: baseInfo?.pembimbing || 'Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.',
+                  penguji: baseInfo?.penguji,
+                  programStudi: baseInfo?.programStudi || String(fd.get('degree') || 'Matematika'),
+                  fakultas: baseInfo?.fakultas || 'FMIPA UNS',
+                  status: 'Published',
+                  customImageUrl: effectiveInfographicImage,
+                  customImageBase64: effectiveInfographicImage,
+                  generatedByAi: false,
+                  lastUpdated: new Date().toISOString()
+                } : editingStudent?.infographic;
 
                 const payload = {
                   name: String(fd.get('name') || '').trim(),
@@ -5489,12 +5512,12 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
                   status: String(fd.get('status') || 'Active') as any,
                   currentAffiliation: String(fd.get('currentAffiliation') || '').trim(),
                   notes: String(fd.get('notes') || '').trim(),
-                  pdfUrl,
-                  pdfFileName,
+                  digilibUrl: digilibUrl || editingStudent?.digilibUrl,
                   thesisAbstract,
                   photoUrl,
                   photoBase64,
-                  hasPdf: !!pdfUrl
+                  infographic: infographicPayload,
+                  hasInfographic: Boolean(effectiveInfographicImage || editingStudent?.hasInfographic)
                 };
 
                 if (editingStudent) {
@@ -5698,155 +5721,145 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
                 />
               </div>
 
-              {/* Infografik Skripsi Mahasiswa (LLM / Gemini 3.8 Flash) Section */}
-              <div className="p-3.5 bg-indigo-50/70 rounded-xl border border-indigo-200 space-y-2.5">
+              {/* Poster Infografik Skripsi Mahasiswa (Upload Gambar & Terhubung ke MySQL) */}
+              <div className="p-3.5 bg-sky-50/70 rounded-xl border border-sky-200 space-y-3">
                 <div className="flex items-center justify-between">
-                  <label className="text-xs font-bold text-indigo-950 flex items-center gap-1.5">
-                    <Sparkles className="w-4 h-4 text-indigo-600" />
-                    <span>Infografik Skripsi Mahasiswa (LLM Gemini 3.8 Flash)</span>
+                  <label className="text-xs font-bold text-slate-900 flex items-center gap-1.5">
+                    <ImageIcon className="w-4 h-4 text-[#004b87]" />
+                    <span>Poster Infografik Skripsi (Upload Gambar)</span>
                   </label>
-                  {Boolean(editingStudent?.hasInfographic || editingStudent?.infographic) ? (
-                    <span className="text-[10px] font-bold text-indigo-700 bg-white px-2 py-0.5 rounded border border-indigo-300">
-                      Infografik Tersedia
+                  {(studentInfographicImage || studentInfographicUrl || editingStudent?.infographic?.customImageUrl) ? (
+                    <span className="text-[10px] font-bold text-[#004b87] bg-white px-2 py-0.5 rounded border border-sky-300 flex items-center gap-1">
+                      <CheckCircle2 className="w-3 h-3 text-emerald-600" />
+                      <span>Poster Terpasang</span>
                     </span>
                   ) : (
                     <span className="text-[10px] font-medium text-slate-500 bg-white px-2 py-0.5 rounded border border-slate-200">
-                      Belum Dibuat
+                      Belum Diunggah
                     </span>
                   )}
                 </div>
 
                 <p className="text-[11px] text-slate-600 leading-relaxed">
-                  Infografik merangkum rumusan masalah, metodologi terstruktur, temuan kunci, dan metrik capaian skripsi. Terhubung langsung dengan LLM Gemini 3.8 Flash atau dapat diunggah sendiri berupa poster visual.
+                  Unggah gambar poster infografik skripsi mahasiswa resmi buatan Anda/mahasiswa (.png, .jpg, .webp). Gambar langsung terhubung dan tersimpan ke basis data MySQL (tabel <code>digilib_documents</code>).
                 </p>
 
-                {editingStudent && (
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setAdminInfographicStudent(editingStudent);
-                    }}
-                    className="w-full py-2 bg-gradient-to-r from-[#004b87] to-indigo-700 hover:from-[#003865] hover:to-indigo-800 text-white rounded-lg text-xs font-semibold flex items-center justify-center gap-1.5 shadow-2xs transition-all cursor-pointer"
-                  >
-                    <Sparkles className="w-3.5 h-3.5 text-amber-300" />
-                    <span>Buka / Kelola Infografik Skripsi dengan LLM</span>
-                  </button>
-                )}
-              </div>
-
-              {/* Soft File PDF Skripsi / Artikel */}
-              <div className="p-3 bg-sky-50/70 rounded-xl border border-sky-200 space-y-2.5">
-                <div className="flex items-center justify-between">
-                  <label className="text-xs font-bold text-slate-900 flex items-center gap-1.5">
-                    <FileText className="w-4 h-4 text-[#004b87]" />
-                    <span>Soft File PDF Skripsi / Artikel Tugas Akhir</span>
-                  </label>
-                  {(studentPdfUrl || editingStudent?.pdfUrl) && (
-                    <button
-                      type="button"
-                      onClick={() => {
-                        const tempStudent: GraduateStudent = {
-                          id: editingStudent?.id || 'temp-preview',
-                          name: editingStudent?.name || 'Mahasiswa Bimbingan',
-                          nim: editingStudent?.nim || 'NIM',
-                          degree: editingStudent?.degree || 'S1 Matematika',
-                          researchTopic: editingStudent?.researchTopic || '',
-                          thesisTitle: editingStudent?.thesisTitle || 'Skripsi Mahasiswa',
-                          startYear: editingStudent?.startYear || 2023,
-                          status: 'Graduated',
-                          pdfUrl: studentPdfUrl || editingStudent?.pdfUrl,
-                          pdfFileName: studentPdfFileName || editingStudent?.pdfFileName || 'Skripsi.pdf',
-                          thesisAbstract: editingStudent?.thesisAbstract || 'Naskah skripsi terverifikasi.'
-                        };
-                        setAdminPdfPreviewStudent(tempStudent);
-                      }}
-                      className="px-2.5 py-1 bg-[#004b87] hover:bg-[#003865] text-white rounded text-xs font-semibold flex items-center gap-1 shadow-2xs"
-                    >
-                      <Eye className="w-3.5 h-3.5" />
-                      <span>Test Pratinjau PDF</span>
-                    </button>
-                  )}
-                </div>
-
-                <div className="space-y-2">
-                  <div className="flex flex-col sm:flex-row sm:items-center gap-2">
-                    <label className="px-3 py-1.5 bg-white border border-sky-300 hover:border-[#004b87] text-[#004b87] rounded-lg text-xs font-semibold cursor-pointer flex items-center gap-1.5 shrink-0 shadow-2xs">
-                      <Upload className="w-3.5 h-3.5" />
-                      <span>Pilih File PDF (.pdf)</span>
-                      <input
-                        type="file"
-                        accept=".pdf,application/pdf"
-                        className="hidden"
-                        onChange={e => {
-                          const file = e.target.files?.[0];
-                          if (file) {
-                            if (file.type !== 'application/pdf' && !file.name.toLowerCase().endsWith('.pdf')) {
-                              showToast('Pilih file berformat PDF (.pdf)', 'error');
-                              return;
-                            }
-                            const reader = new FileReader();
-                            reader.onload = () => {
-                              const base64 = reader.result as string;
-                              setStudentPdfUrl(base64);
-                              setStudentPdfFileName(file.name);
-                              showToast(`File "${file.name}" siap dihubungkan!`);
-                            };
-                            reader.readAsDataURL(file);
-                          }
-                        }}
+                {/* Preview Thumbnail if image uploaded */}
+                <div className="flex items-start gap-3 bg-white p-2.5 rounded-lg border border-sky-100">
+                  <div className="w-20 h-24 rounded-lg overflow-hidden border border-slate-200 bg-slate-50 flex items-center justify-center shrink-0">
+                    {(studentInfographicImage || studentInfographicUrl) ? (
+                      <img
+                        src={studentInfographicImage || studentInfographicUrl}
+                        alt="Preview Infografik"
+                        className="w-full h-full object-cover"
                       />
-                    </label>
+                    ) : (
+                      <div className="text-center p-1 text-slate-400">
+                        <ImageIcon className="w-6 h-6 mx-auto mb-1 text-slate-300" />
+                        <span className="text-[9px] font-mono leading-none block">No Poster</span>
+                      </div>
+                    )}
+                  </div>
 
-                    <div className="flex-1 text-[11px] text-slate-600 truncate font-mono">
-                      {studentPdfFileName || editingStudent?.pdfFileName ? (
-                        <span className="text-emerald-700 font-semibold flex items-center gap-1">
-                          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                          <span className="truncate">{studentPdfFileName || editingStudent?.pdfFileName}</span>
-                        </span>
-                      ) : (
-                        <span className="text-slate-400 italic">Belum ada file dipilih</span>
+                  <div className="flex-1 space-y-2">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <label className="px-3 py-1.5 bg-[#004b87] hover:bg-[#003865] text-white rounded-lg text-xs font-semibold cursor-pointer flex items-center gap-1.5 shrink-0 shadow-2xs transition-colors">
+                        <Upload className="w-3.5 h-3.5 text-sky-200" />
+                        <span>Pilih Gambar (.png/.jpg/.webp)</span>
+                        <input
+                          type="file"
+                          accept="image/png,image/jpeg,image/webp,image/svg+xml"
+                          className="hidden"
+                          onChange={e => {
+                            const file = e.target.files?.[0];
+                            if (file) {
+                              if (!file.type.startsWith('image/')) {
+                                showToast('Pilih berkas gambar yang valid (.png, .jpg, .webp)', 'error');
+                                return;
+                              }
+                              const reader = new FileReader();
+                              reader.onload = () => {
+                                const base64 = reader.result as string;
+                                setStudentInfographicImage(base64);
+                                showToast(`Poster infografik "${file.name}" siap disimpan.`);
+                              };
+                              reader.readAsDataURL(file);
+                            }
+                          }}
+                        />
+                      </label>
+
+                      {(studentInfographicImage || studentInfographicUrl) && (
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setStudentInfographicImage('');
+                            setStudentInfographicUrl('');
+                            showToast('Poster infografik dibersihkan.');
+                          }}
+                          className="px-2.5 py-1.5 text-rose-600 hover:bg-rose-50 rounded-lg text-xs font-medium border border-rose-200 cursor-pointer transition-colors"
+                        >
+                          Hapus Poster
+                        </button>
                       )}
                     </div>
-                  </div>
 
-                  <div>
-                    <label className="block text-[11px] text-slate-600 font-medium mb-0.5">
-                      URL Soft File PDF (misal repository UNS / URL file):
-                    </label>
                     <input
-                      name="pdfUrl"
-                      value={studentPdfUrl}
-                      onChange={e => setStudentPdfUrl(e.target.value)}
-                      placeholder="https://digilib.uns.ac.id/dokumen/skripsi.pdf"
-                      className="w-full px-2.5 py-1.5 bg-white border border-slate-300 rounded-lg text-xs font-mono"
+                      value={studentInfographicUrl}
+                      onChange={e => {
+                        setStudentInfographicUrl(e.target.value);
+                        if (!studentInfographicImage) setStudentInfographicImage(e.target.value);
+                      }}
+                      placeholder="Atau tautan URL langsung poster: https://..."
+                      className="w-full px-2.5 py-1.5 bg-slate-50 border border-slate-300 rounded-lg text-xs font-mono"
                     />
-                  </div>
 
-                  <div>
-                    <label className="block text-[11px] text-slate-600 font-medium mb-0.5">
-                      Nama File Naskah (PDF):
-                    </label>
-                    <input
-                      name="pdfFileName"
-                      value={studentPdfFileName}
-                      onChange={e => setStudentPdfFileName(e.target.value)}
-                      placeholder="Skripsi_M0519014_Bintang_Pratama.pdf"
-                      className="w-full px-2.5 py-1.5 bg-white border border-slate-300 rounded-lg text-xs font-mono"
-                    />
+                    {editingStudent && (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setAdminInfographicStudent(editingStudent);
+                        }}
+                        className="text-xs text-[#004b87] hover:underline flex items-center gap-1 font-semibold pt-0.5 cursor-pointer"
+                      >
+                        <Eye className="w-3 h-3" />
+                        <span>Buka / Kelola Pratinjau Penuh Infografik</span>
+                      </button>
+                    )}
                   </div>
+                </div>
+              </div>
 
-                  <div>
-                    <label className="block text-[11px] text-slate-600 font-medium mb-0.5">
-                      Ringkasan / Abstrak Skripsi Mahasiswa (Ditampilkan di Reader):
-                    </label>
-                    <textarea
-                      name="thesisAbstract"
-                      rows={2}
-                      defaultValue={editingStudent?.thesisAbstract || ''}
-                      placeholder="Ringkasan abstrak hasil penelitian tugas akhir..."
-                      className="w-full px-2.5 py-1.5 bg-white border border-slate-300 rounded-lg text-xs"
-                    />
-                  </div>
+              {/* Ringkasan Abstrak Skripsi & Tautan Digilib UNS */}
+              <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-200 space-y-3">
+                <label className="text-xs font-bold text-slate-900 flex items-center gap-1.5">
+                  <BookOpen className="w-4 h-4 text-[#004b87]" />
+                  <span>Abstrak &amp; Arsip Digilib UNS</span>
+                </label>
+
+                <div>
+                  <label className="block text-[11px] text-slate-600 font-medium mb-1">
+                    Ringkasan / Abstrak Skripsi Mahasiswa:
+                  </label>
+                  <textarea
+                    name="thesisAbstract"
+                    rows={3}
+                    defaultValue={editingStudent?.thesisAbstract || ''}
+                    placeholder="Tuliskan rumusan masalah, metodologi, dan ringkasan temuan tugas akhir..."
+                    className="w-full px-2.5 py-1.5 bg-white border border-slate-300 rounded-lg text-xs"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-[11px] text-slate-600 font-medium mb-1">
+                    Tautan Halaman Resmi Digilib UNS (Opsional):
+                  </label>
+                  <input
+                    name="digilibUrl"
+                    defaultValue={editingStudent?.digilibUrl || ''}
+                    placeholder="https://digilib.uns.ac.id/dokumen/detail/..."
+                    className="w-full px-2.5 py-1.5 bg-white border border-slate-300 rounded-lg text-xs font-mono"
+                  />
                 </div>
               </div>
 
@@ -7714,14 +7727,6 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
         />
       )}
 
-      {/* ======================================================= */}
-      {/* STUDENT THESIS PDF VIEWER MODAL IN ADMIN PORTAL */}
-      {/* ======================================================= */}
-      <StudentThesisPdfModal
-        isOpen={!!adminPdfPreviewStudent}
-        onClose={() => setAdminPdfPreviewStudent(null)}
-        student={adminPdfPreviewStudent}
-      />
 
       {/* ======================================================= */}
       {/* STUDENT THESIS INFOGRAPHIC MODAL IN ADMIN PORTAL */}
