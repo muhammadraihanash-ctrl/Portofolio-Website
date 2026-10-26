@@ -101,6 +101,7 @@ class AcademicService {
   public isSyncing: boolean = false;
   public syncError: string | null = null;
   private lastLocalCachedAt: string = '';
+  private activeSyncPromise: Promise<boolean> | null = null;
 
   constructor() {
     if (typeof window !== 'undefined') {
@@ -441,57 +442,64 @@ class AcademicService {
   }
 
   public async syncFromBackend(): Promise<boolean> {
-    this.isSyncing = true;
-    try {
-      // 1. Primary authoritative source: Central server database API
-      const res = await fetch('/api/database/state').catch(() => null);
-      if (res && res.ok && res.headers.get('content-type')?.includes('application/json')) {
-        const json = await res.json().catch(() => null);
-        if (json && json.success && json.data) {
-          this.applyLoadedDatabaseState(json.data);
-          this.isSyncing = false;
+    if (this.activeSyncPromise) {
+      return this.activeSyncPromise;
+    }
+
+    const executeSync = async (): Promise<boolean> => {
+      this.isSyncing = true;
+      try {
+        // 1. Primary authoritative source: Central server database API
+        const res = await fetch('/api/database/state').catch(() => null);
+        if (res && res.ok && res.headers.get('content-type')?.includes('application/json')) {
+          const json = await res.json().catch(() => null);
+          if (json && json.success && json.data) {
+            this.applyLoadedDatabaseState(json.data);
+            return true;
+          }
+        }
+
+        // 2. Static CDN database state (Ultra-fast Edge delivery for Vercel, Netlify, Cloudflare)
+        const staticRes = await fetch('/database_state.json').catch(() => null);
+        if (staticRes && staticRes.ok && staticRes.headers.get('content-type')?.includes('application/json')) {
+          const staticJson = await staticRes.json().catch(() => null);
+          if (staticJson && staticJson.profile && Array.isArray(staticJson.publications)) {
+            this.applyLoadedDatabaseState(staticJson);
+            return true;
+          }
+        }
+
+        // 3. Secondary fallback: Cloud Firestore
+        const firestoreSuccess = await this.syncFromFirestore();
+        if (firestoreSuccess) {
           return true;
         }
-      }
 
-      // 2. Static CDN database state (Ultra-fast Edge delivery for Vercel, Netlify, Cloudflare)
-      const staticRes = await fetch('/database_state.json').catch(() => null);
-      if (staticRes && staticRes.ok && staticRes.headers.get('content-type')?.includes('application/json')) {
-        const staticJson = await staticRes.json().catch(() => null);
-        if (staticJson && staticJson.profile && Array.isArray(staticJson.publications)) {
-          this.applyLoadedDatabaseState(staticJson);
-          this.isSyncing = false;
-          return true;
-        }
-      }
-
-      // 3. Secondary fallback: Cloud Firestore
-      const firestoreSuccess = await this.syncFromFirestore();
-      if (firestoreSuccess) {
-        this.isSyncing = false;
+        // 4. Resilient authentic built-in dataset fallback
+        this.isInitialized = true;
+        this.hasSyncedOnce = true;
+        this.syncError = null;
+        this.saveLocalCache();
+        this.notify();
         return true;
+      } catch (e: any) {
+        console.warn('Sync error, activating authentic baseline dataset fallback:', e);
+        this.isInitialized = true;
+        this.hasSyncedOnce = true;
+        this.syncError = null;
+        this.saveLocalCache();
+        this.notify();
+        return true;
+      } finally {
+        this.isSyncing = false;
       }
+    };
 
-      // 4. Resilient authentic built-in dataset fallback
-      // Guarantees zero downtime on static hosts without API gateways
-      this.isInitialized = true;
-      this.hasSyncedOnce = true;
-      this.syncError = null;
-      this.saveLocalCache();
-      this.notify();
-      this.isSyncing = false;
-      return true;
-    } catch (e: any) {
-      console.warn('Sync error, activating authentic baseline dataset fallback:', e);
-      this.isInitialized = true;
-      this.hasSyncedOnce = true;
-      this.syncError = null;
-      this.saveLocalCache();
-      this.notify();
-      this.isSyncing = false;
-      return true;
+    this.activeSyncPromise = executeSync();
+    try {
+      return await this.activeSyncPromise;
     } finally {
-      this.isSyncing = false;
+      this.activeSyncPromise = null;
     }
   }
 
@@ -2894,13 +2902,28 @@ class AcademicService {
     }
   }
 
-  public async testSqlConnection(config: any): Promise<{ success: boolean; message: string; latencyMs?: number; database?: string; statusCode?: number; errorCode?: string }> {
+  public async testSqlConnection(config: any): Promise<{
+    success: boolean;
+    message: string;
+    latencyMs?: number;
+    queryLatencyMs?: number;
+    handshakeLatencyMs?: number;
+    totalLatencyMs?: number;
+    isWarmPool?: boolean;
+    database?: string;
+    statusCode?: number;
+    errorCode?: string;
+  }> {
     try {
       const diag = await this.checkAivenMySqlDiagnostics(config);
       return {
         success: diag.success,
         message: diag.message,
         latencyMs: diag.details?.latencyMs,
+        queryLatencyMs: diag.details?.queryLatencyMs,
+        handshakeLatencyMs: diag.details?.handshakeLatencyMs,
+        totalLatencyMs: diag.details?.totalLatencyMs,
+        isWarmPool: diag.details?.isWarmPool,
         database: diag.details?.database,
         statusCode: diag.statusCode,
         errorCode: diag.errorCode

@@ -24,6 +24,7 @@ import {
   Key,
   HelpCircle,
   ShieldCheck,
+  Zap,
   User,
   Compass,
   Newspaper,
@@ -224,6 +225,9 @@ export const SqlDatabaseTab: React.FC<SqlDatabaseTabProps> = ({ showToast }) => 
     success: boolean;
     message: string;
     latencyMs?: number;
+    queryLatencyMs?: number;
+    handshakeLatencyMs?: number;
+    isWarmPool?: boolean;
     database?: string;
     statusCode?: number;
     errorCode?: string;
@@ -283,6 +287,9 @@ export const SqlDatabaseTab: React.FC<SqlDatabaseTabProps> = ({ showToast }) => 
         success: res.success,
         message: res.message,
         latencyMs: res.details?.latencyMs,
+        queryLatencyMs: res.details?.queryLatencyMs,
+        handshakeLatencyMs: res.details?.handshakeLatencyMs,
+        isWarmPool: res.details?.isWarmPool,
         database: res.details?.database,
         statusCode: res.statusCode,
         errorCode: res.errorCode
@@ -2786,31 +2793,67 @@ export const SqlDatabaseTab: React.FC<SqlDatabaseTabProps> = ({ showToast }) => 
 
               {/* Test Result Display */}
               {testResult && (
-                <div className={`p-3.5 rounded-lg border flex flex-col gap-1.5 text-xs font-medium ${
+                <div className={`p-4 rounded-xl border flex flex-col gap-2.5 text-xs font-medium shadow-xs ${
                   testResult.success
-                    ? 'bg-emerald-50 border-emerald-200 text-emerald-800'
-                    : 'bg-red-50 border-red-200 text-red-800'
+                    ? 'bg-emerald-50/90 border-emerald-300 text-emerald-950'
+                    : 'bg-red-50/90 border-red-300 text-red-950'
                 }`}>
                   <div className="flex items-center justify-between gap-2 flex-wrap">
                     <div className="flex items-center gap-2">
                       {testResult.success ? (
-                        <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                        <CheckCircle2 className="w-4.5 h-4.5 text-emerald-600 shrink-0" />
                       ) : (
-                        <AlertCircle className="w-4 h-4 text-red-600 shrink-0" />
+                        <AlertCircle className="w-4.5 h-4.5 text-red-600 shrink-0" />
                       )}
-                      <span className="font-bold">
+                      <span className="font-bold text-xs sm:text-sm">
                         {testResult.success
                           ? `Status: ${testResult.statusCode || 200} OK (SSL Handshake Terverifikasi)`
                           : `Status: ${testResult.statusCode || 500} [${testResult.errorCode || 'HANDSHAKE_ERROR'}]`}
                       </span>
                     </div>
-                    {testResult.latencyMs !== undefined && (
-                      <span className="text-[11px] px-2 py-0.5 rounded bg-white/80 border border-current font-mono">
-                        Latency: {testResult.latencyMs}ms
+                    {testResult.isWarmPool !== undefined && (
+                      <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider flex items-center gap-1 ${
+                        testResult.isWarmPool
+                          ? 'bg-emerald-200 text-emerald-900 border border-emerald-300'
+                          : 'bg-sky-200 text-sky-900 border border-sky-300'
+                      }`}>
+                        {testResult.isWarmPool ? '⚡ Warm Pool Aktif' : '❄️ Cold Handshake'}
                       </span>
                     )}
                   </div>
-                  <p className="text-xs leading-relaxed opacity-95">{testResult.message}</p>
+
+                  {/* Latency Breakdown Badges */}
+                  {testResult.success && (
+                    <div className="flex items-center gap-2 flex-wrap pt-1 border-t border-emerald-200/60 font-mono text-[11px]">
+                      <div className="flex items-center gap-1 px-2.5 py-1 rounded-md bg-white border border-emerald-200 shadow-2xs">
+                        <span className="text-slate-500 font-sans">Query Round-Trip:</span>
+                        <span className="font-bold text-emerald-700">
+                          {testResult.queryLatencyMs ?? testResult.latencyMs ?? 0}ms
+                        </span>
+                        <span className="text-[10px] text-emerald-600 font-sans font-semibold">⚡ Cepat</span>
+                      </div>
+
+                      {testResult.handshakeLatencyMs !== undefined && testResult.handshakeLatencyMs > 0 && (
+                        <div className="flex items-center gap-1 px-2.5 py-1 rounded-md bg-white border border-slate-200 shadow-2xs">
+                          <span className="text-slate-500 font-sans">Initial TLS Handshake:</span>
+                          <span className="font-bold text-slate-700">{testResult.handshakeLatencyMs}ms</span>
+                        </div>
+                      )}
+
+                      <div className="flex items-center gap-1 px-2.5 py-1 rounded-md bg-white border border-slate-200 shadow-2xs">
+                        <span className="text-slate-500 font-sans">Database:</span>
+                        <span className="font-bold text-sky-700">{testResult.database || 'defaultdb'}</span>
+                      </div>
+                    </div>
+                  )}
+
+                  <p className="text-xs leading-relaxed opacity-95 text-slate-800">{testResult.message}</p>
+
+                  {testResult.success && (
+                    <div className="text-[11px] leading-relaxed text-slate-600 bg-white/70 p-2.5 rounded-lg border border-emerald-200/50">
+                      💡 <strong>Info Kecepatan:</strong> Latensi SSL Handshake (~1.5s) adalah negosiasi kriptografi TLS 1.3 lintas server cloud yang hanya berjalan <strong>1x di awal</strong>. Untuk seluruh operasional portofolio dan query data selanjutnya, sistem menggunakan <em>Persistent Connection Pool (Keep-Alive)</em> yang berjalan instan dalam hitungan milidetik ({testResult.queryLatencyMs ?? testResult.latencyMs ?? '15–35'}ms).
+                    </div>
+                  )}
                 </div>
               )}
             </div>

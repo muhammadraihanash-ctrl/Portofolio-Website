@@ -4,23 +4,43 @@ import app, { syncAllSqlDataToAcademicDb } from '../server.js';
 import { p2mDatabaseService } from '../src/server/p2mDatabaseService.js';
 
 let lastGetSyncTime = 0;
+let activeBackgroundSync: Promise<void> | null = null;
 
 async function syncMySqlStateForRequest(method?: string): Promise<void> {
-  try {
-    await p2mDatabaseService.ensureConnection();
-    const isGet = (method || 'GET').toUpperCase() === 'GET';
-    const now = Date.now();
-    if (!isGet || now - lastGetSyncTime > 10000) {
-      if (p2mDatabaseService.getStatus().isConnected) {
-        await p2mDatabaseService.syncLiveFromMySql();
-        syncAllSqlDataToAcademicDb();
+  const isGet = (method || 'GET').toUpperCase() === 'GET';
+  const now = Date.now();
+
+  // On write requests (POST, PUT, DELETE, PATCH): ensure live connection synchronously
+  if (!isGet) {
+    try {
+      await p2mDatabaseService.ensureConnection();
+      if (activeBackgroundSync) {
+        await activeBackgroundSync;
       }
-      if (isGet) {
-        lastGetSyncTime = now;
-      }
+    } catch (err) {
+      console.warn('[Vercel Serverless Mutation Sync Warning]:', err);
     }
-  } catch (err) {
-    console.warn('[Vercel Serverless Sync Warning]:', err);
+    return;
+  }
+
+  // Ultra-fast path for GET requests:
+  // In-memory data store serves immediately (0-5ms response time).
+  // Revalidation runs in non-blocking background task without stalling the HTTP response.
+  if (!activeBackgroundSync && (now - lastGetSyncTime > 60000 || !p2mDatabaseService.getStatus().isConnected)) {
+    lastGetSyncTime = now;
+    activeBackgroundSync = (async () => {
+      try {
+        const ok = await p2mDatabaseService.ensureConnection();
+        if (ok && p2mDatabaseService.getStatus().isConnected) {
+          await p2mDatabaseService.syncLiveFromMySql();
+          syncAllSqlDataToAcademicDb();
+        }
+      } catch (err) {
+        console.warn('[Vercel Background Sync Notice]:', err);
+      } finally {
+        activeBackgroundSync = null;
+      }
+    })();
   }
 }
 

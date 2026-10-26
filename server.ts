@@ -1618,6 +1618,7 @@ app.get('/api/publications', (req, res) => {
     if (featuredOnly === 'true') filter.featuredOnly = true;
 
     const list = academicDb.getPublications(filter);
+    res.setHeader('Cache-Control', 'public, max-age=15, s-maxage=60, stale-while-revalidate=120');
     res.json({ success: true, count: list.length, data: list });
   } catch (err: any) {
     res.status(500).json({ error: 'Gagal mengambil data publikasi.' });
@@ -2523,7 +2524,14 @@ function sanitizeDatabaseStateForExport(state: any): any {
 
 // 9. Full Central State & Reset & Self-Heal
 app.get('/api/database/state', (req, res) => {
-  res.json({ success: true, data: sanitizeDatabaseStateForExport(academicDb.getFullState()) });
+  const fullState = academicDb.getFullState();
+  const etag = `"db-${fullState.version || 1}-${new Date(fullState.updatedAt || 0).getTime()}"`;
+  if (req.headers['if-none-match'] === etag) {
+    return res.status(304).end();
+  }
+  res.setHeader('ETag', etag);
+  res.setHeader('Cache-Control', 'public, max-age=15, s-maxage=60, stale-while-revalidate=120');
+  res.json({ success: true, data: sanitizeDatabaseStateForExport(fullState) });
 });
 
 // Self-heal endpoint: PERMANENTLY DISABLED to prevent client caches from overwriting server data
@@ -2907,6 +2915,7 @@ app.delete('/api/p2m/kegiatan/:id', requireAdminAuth, async (req, res) => {
 app.get('/api/p2m/ringkasan', async (req, res) => {
   try {
     const ringkasan = await p2mDatabaseService.getRingkasan();
+    res.setHeader('Cache-Control', 'public, max-age=15, s-maxage=60, stale-while-revalidate=120');
     res.json({
       success: true,
       data: ringkasan,
@@ -2918,7 +2927,6 @@ app.get('/api/p2m/ringkasan', async (req, res) => {
 });
 
 app.get('/api/p2m/status', async (req, res) => {
-  await p2mDatabaseService.ensureConnection();
   res.json({
     success: true,
     status: p2mDatabaseService.getStatus()
@@ -2926,7 +2934,7 @@ app.get('/api/p2m/status', async (req, res) => {
 });
 
 app.get('/api/p2m/annual-metrics', async (req, res) => {
-  await p2mDatabaseService.ensureConnection();
+  res.setHeader('Cache-Control', 'public, max-age=15, s-maxage=60, stale-while-revalidate=120');
   res.json({
     success: true,
     data: p2mDatabaseService.getAnnualP2MMetrics(),
@@ -2938,7 +2946,6 @@ app.get('/api/p2m/annual-metrics', async (req, res) => {
 // 12. FULL SQL DATABASE INTEGRATION (7 TABLES)
 // ========================================================
 app.get('/api/sql/status', async (req, res) => {
-  await p2mDatabaseService.ensureConnection();
   res.json({
     success: true,
     status: p2mDatabaseService.getStatus()
@@ -2946,6 +2953,7 @@ app.get('/api/sql/status', async (req, res) => {
 });
 
 app.get('/api/sql/tables', async (req, res) => {
+  res.setHeader('Cache-Control', 'public, max-age=10, s-maxage=30, stale-while-revalidate=60');
   try {
     const status = await p2mDatabaseService.refreshTableCounts();
     res.json({
