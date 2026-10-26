@@ -3,11 +3,20 @@
   "framework": "vite",
   "outputDirectory": "dist",
   "functions": {
+    "api/index.ts": {
+      "includeFiles": "data/**",
+      "maxDuration": 30
+    },
     "api/**/*.ts": {
-      "includeFiles": "data/**"
+      "includeFiles": "data/**",
+      "maxDuration": 30
     }
   },
   "rewrites": [
+    {
+      "source": "/api/sql/diagnostic",
+      "destination": "/api/sql/diagnostic.ts"
+    },
     {
       "source": "/api",
       "destination": "/api/index.ts?__route__=/api/health"

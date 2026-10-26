@@ -18,8 +18,8 @@ import {
   ScopusHIndexYearEntry,
   AnnualPerformanceIndexEntry,
   P2MActivity
-} from '../types';
-import databaseState from './database_state.json';
+} from '../types/index.js';
+import databaseState from './database_state.json' with { type: 'json' };
 
 const rawProfile = (databaseState as any)?.profile || {};
 

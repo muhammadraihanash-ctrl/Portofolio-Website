@@ -7,14 +7,14 @@
  * Affiliation: Universitas Sebelas Maret (UNS), Surakarta, Indonesia
  */
 
-import { academicDb } from './database';
+import { academicDb } from './database.js';
 import {
   ElsevierConfigStatus,
   ScopusAuthorMetrics,
   ScopusPublicationItem,
   ElsevierSyncResult,
   ElsevierTestResult
-} from '../types/index';
+} from '../types/index.js';
 
 const ELSEVIER_BASE_URL = 'https://api.elsevier.com/content';
 const DEFAULT_AUTHOR_ID = '55851190200';

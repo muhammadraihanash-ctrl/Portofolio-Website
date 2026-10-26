@@ -16,6 +16,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import mysql from 'mysql2/promise';
 import {
   P2MActivity,
   Publication,
@@ -32,7 +33,7 @@ import {
   BlogPost,
   ProfessorProfile,
   AdminAccount
-} from '../types/index';
+} from '../types/index.js';
 
 export interface SqlP2MActivityRow {
   id: number;
@@ -961,7 +962,6 @@ class P2MDatabaseService {
     }
 
     const saved = this.getSavedConfig();
-    const fallbackDefaultPass = Buffer.from('QVZOU19ySjZaVnJORS16cWZqVFBGSnNo', 'base64').toString('utf-8');
 
     const isPlaceholder = (val?: string | null): boolean => {
       if (!val) return true;
@@ -1012,7 +1012,7 @@ class P2MDatabaseService {
         process.env.VITE_MYSQL_PASSWORD ||
         saved?.password;
     }
-    password = !isPlaceholder(passCandidate) ? passCandidate!.trim() : fallbackDefaultPass;
+    password = !isPlaceholder(passCandidate) ? passCandidate!.trim() : '';
 
     let dbCandidate = database;
     if (isPlaceholder(dbCandidate)) {
@@ -1643,8 +1643,6 @@ class P2MDatabaseService {
 
     const start = Date.now();
     try {
-      const mysql = await import('mysql2/promise');
-
       const conn = await mysql.createConnection({
         host: eff.host,
         port: eff.port,
@@ -1907,8 +1905,6 @@ class P2MDatabaseService {
       }
 
     try {
-      const mysql = await import('mysql2/promise');
-
       if (this.pool) {
         try { await this.pool.end(); } catch {}
         this.pool = null;
@@ -1950,14 +1946,18 @@ class P2MDatabaseService {
 
       console.log(`[MySQL] Connected successfully to live database ${this.activeDatabaseName}@${host}:${port} (SSL: ${isSslRequired ? 'REQUIRED' : 'OFF'})`);
 
-      // Ensure all 7 tables exist
-      await this.ensureTablesExist();
+      // Ensure tables exist, seed, and sync in non-blocking background task
+      // This ensures initMySqlConnection and ensureConnection return in ~300ms on serverless cold starts
+      (async () => {
+        try {
+          await this.ensureTablesExist();
+          await this.seedEmptyTablesIfNecessary();
+          await this.syncLiveFromMySql();
+        } catch (syncErr: any) {
+          console.warn('[MySQL background setup warning]:', syncErr?.message || syncErr);
+        }
+      })();
 
-      // Seed if tables are empty
-      await this.seedEmptyTablesIfNecessary();
-
-      // Synchronize latest authoritative state directly from MySQL
-      await this.syncLiveFromMySql();
       return true;
     } catch (err: any) {
       this.isMySqlConnected = false;
@@ -3004,6 +3004,40 @@ class P2MDatabaseService {
       console.warn('MySQL connection attempt notice:', e?.message || e);
       return false;
     }
+  }
+
+  /**
+   * Asserts that live MySQL database is connected.
+   * If running on Vercel or REQUIRE_LIVE_DB==='1' and MySQL is not connected after ensureConnection,
+   * throws Error so that changes are NOT falsely saved to memory/file.
+   */
+  public async assertLiveDatabase(): Promise<void> {
+    const isVercel = Boolean(process.env.VERCEL || process.env.VERCEL_ENV);
+    const requireLive = process.env.REQUIRE_LIVE_DB === '1';
+    if (!isVercel && !requireLive) {
+      return;
+    }
+    await this.ensureConnection();
+    if (!this.pool || !this.isMySqlConnected) {
+      throw new Error(
+        'Database MySQL pusat belum terhubung (Aiven MySQL). Perubahan TIDAK disimpan. Pastikan MYSQL_PASSWORD sudah diisi di Vercel lalu redeploy.'
+      );
+    }
+  }
+
+  public async clearAllPublications(): Promise<void> {
+    await this.assertLiveDatabase();
+    await this.safePoolQuery('DELETE FROM scopus_publications');
+    await this.safePoolQuery('DELETE FROM journals');
+    await this.safePoolQuery('DELETE FROM proceedings');
+    await this.safePoolQuery('DELETE FROM books');
+    await this.safePoolQuery('DELETE FROM patents_hki');
+    this.scopusRows = [];
+    this.journalRows = [];
+    this.proceedingRows = [];
+    this.bookRows = [];
+    this.patentHkiRows = [];
+    this.persistToSqlFile();
   }
 
   /**
@@ -4675,6 +4709,19 @@ class P2MDatabaseService {
         : hasPassword
         ? `Gagal terhubung ke MySQL: ${this.mySqlError || 'Koneksi ditolak'}. Data aman di penyimpanan lokal (${totalOverall} baris pada seluruh 15 tabel navigasi).`
         : `MySQL Aiven belum terhubung: Kata sandi untuk '${user}' belum diatur. Seluruh 15 tabel navigasi tetap berfungsi via cache lokal tersinkron.`
+    };
+  }
+}
+
+// Wrap all record mutation methods to assert live database on Vercel
+const recordMutationPattern = /^(insert|update|delete)\w*Record$/;
+const serviceProto = P2MDatabaseService.prototype as any;
+for (const prop of Object.getOwnPropertyNames(serviceProto)) {
+  if (recordMutationPattern.test(prop) && typeof serviceProto[prop] === 'function') {
+    const originalMethod = serviceProto[prop];
+    serviceProto[prop] = async function (this: any, ...args: any[]) {
+      await this.assertLiveDatabase();
+      return await originalMethod.apply(this, args);
     };
   }
 }

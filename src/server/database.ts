@@ -23,7 +23,7 @@ import {
   ResearchGroupEntry,
   ImportBatchRecord,
   ThesisInfographic
-} from '../types/index';
+} from '../types/index.js';
 import {
   SEED_PROFILE,
   SEED_PUBLICATIONS,
@@ -36,8 +36,8 @@ import {
   SEED_BLOG,
   DEFAULT_PORTFOLIO_ADMIN,
   INITIAL_ANNUAL_PERFORMANCE
-} from '../data/academicSeedData';
-import { p2mDatabaseService } from './p2mDatabaseService';
+} from '../data/academicSeedData.js';
+import { p2mDatabaseService } from './p2mDatabaseService.js';
 
 const getFileMeta = () => {
   try {
@@ -426,15 +426,11 @@ class AcademicDatabase {
   }
 
   public async updateProfileAsync(updated: Partial<ProfessorProfile>): Promise<ProfessorProfile> {
+    await p2mDatabaseService.updateAcademicProfileRecord(updated);
     this.data.profile = {
       ...this.data.profile,
       ...updated
     };
-    try {
-      await p2mDatabaseService.updateAcademicProfileRecord(updated);
-    } catch (e) {
-      console.warn('Academic profile sync to SQL notice:', e);
-    }
     this.persist();
     this.notifyMutation('UPDATE_PROFILE');
     return this.getProfile();
@@ -542,7 +538,8 @@ class AcademicDatabase {
     return { profile: this.data.profile, updatedPubsCount: updatedCount };
   }
 
-  public updateResearchGroups(groups: ResearchGroupEntry[]): ProfessorProfile {
+  public async updateResearchGroups(groups: ResearchGroupEntry[]): Promise<ProfessorProfile> {
+    await p2mDatabaseService.updateAcademicProfileRecord({ researchGroups: groups });
     this.data.profile.researchGroups = [...groups];
     this.persist();
     this.notifyMutation('UPDATE_RESEARCH_GROUPS');
@@ -755,26 +752,39 @@ class AcademicDatabase {
     return true;
   }
 
-  public clearAllPublications(): number {
+  public async clearAllPublications(): Promise<number> {
     const prevCount = this.data.publications.length;
+    await p2mDatabaseService.clearAllPublications();
     this.data.publications = [];
+    this.data.profile.achievements = p2mDatabaseService.calculateAchievements();
+    this.data.profile.annualPerformance = p2mDatabaseService.calculateAnnualPerformance();
+    this.data.profile.hIndexHistory = p2mDatabaseService.calculateScopusHIndexHistory();
     this.persist();
     this.notifyMutation('CLEAR_PUBLICATIONS');
     return prevCount;
   }
 
-  public resetSeedPublications(): number {
-    this.data.publications = JSON.parse(JSON.stringify(SEED_PUBLICATIONS));
+  public async resetSeedPublications(): Promise<number> {
+    await p2mDatabaseService.clearAllPublications();
+    const seeds = JSON.parse(JSON.stringify(SEED_PUBLICATIONS)) as Publication[];
+    for (const pub of seeds) {
+      await p2mDatabaseService.insertRecord('scopus_publications', pub).catch(() => {});
+    }
+    this.data.publications = seeds;
+    this.data.profile.achievements = p2mDatabaseService.calculateAchievements();
+    this.data.profile.annualPerformance = p2mDatabaseService.calculateAnnualPerformance();
+    this.data.profile.hIndexHistory = p2mDatabaseService.calculateScopusHIndexHistory();
     this.persist();
     this.notifyMutation('RESET_PUBLICATIONS');
     return this.data.publications.length;
   }
 
-  public batchDeletePublications(ids: string[]): number {
-    const idSet = new Set(ids);
-    const initialCount = this.data.publications.length;
-    this.data.publications = this.data.publications.filter(p => !idSet.has(p.id));
-    const removedCount = initialCount - this.data.publications.length;
+  public async batchDeletePublications(ids: string[]): Promise<number> {
+    let removedCount = 0;
+    for (const id of ids) {
+      const ok = await this.deletePublication(id);
+      if (ok) removedCount++;
+    }
     if (removedCount > 0) {
       this.persist();
       this.notifyMutation('BATCH_DELETE_PUBLICATIONS');
@@ -782,28 +792,20 @@ class AcademicDatabase {
     return removedCount;
   }
 
-  public setPublicationArchiveStatus(id: string, isArchived: boolean): Publication | null {
+  public async setPublicationArchiveStatus(id: string, isArchived: boolean): Promise<Publication | null> {
     const pub = this.data.publications.find(p => p.id === id);
     if (!pub) return null;
-    pub.isArchived = isArchived;
-    pub.archivedAt = isArchived ? new Date().toISOString() : undefined;
-    pub.updatedAt = new Date().toISOString();
-    this.persist();
-    this.notifyMutation('ARCHIVE_PUBLICATION', id);
-    return pub;
+    return await this.updatePublication(id, {
+      isArchived,
+      archivedAt: isArchived ? new Date().toISOString() : undefined
+    });
   }
 
-  public batchSetArchiveStatus(ids: string[], isArchived: boolean): number {
-    const idSet = new Set(ids);
+  public async batchSetArchiveStatus(ids: string[], isArchived: boolean): Promise<number> {
     let count = 0;
-    const now = new Date().toISOString();
-    for (const p of this.data.publications) {
-      if (idSet.has(p.id)) {
-        p.isArchived = isArchived;
-        p.archivedAt = isArchived ? now : undefined;
-        p.updatedAt = now;
-        count++;
-      }
+    for (const id of ids) {
+      const res = await this.setPublicationArchiveStatus(id, isArchived);
+      if (res) count++;
     }
     if (count > 0) {
       this.persist();
@@ -812,25 +814,16 @@ class AcademicDatabase {
     return count;
   }
 
-  public archiveAllPublications(isArchived: boolean): number {
-    const now = new Date().toISOString();
-    let count = 0;
-    for (const p of this.data.publications) {
-      p.isArchived = isArchived;
-      p.archivedAt = isArchived ? now : undefined;
-      p.updatedAt = now;
-      count++;
-    }
-    this.persist();
-    this.notifyMutation('ARCHIVE_ALL_PUBLICATIONS');
-    return count;
+  public async archiveAllPublications(isArchived: boolean): Promise<number> {
+    const ids = this.data.publications.map(p => p.id);
+    return await this.batchSetArchiveStatus(ids, isArchived);
   }
 
   // --- BULK IMPORT & SINTA / DIGILIB INTEGRATION ---
-  public importPublications(
+  public async importPublications(
     newPubs: Publication[],
     batchRecord: ImportBatchRecord
-  ): { importedCount: number; batchId: string } {
+  ): Promise<{ importedCount: number; batchId: string }> {
     if (!Array.isArray(this.data.publications)) {
       this.data.publications = [];
     }
@@ -838,21 +831,16 @@ class AcademicDatabase {
     const importedIds: string[] = [];
 
     for (const pub of newPubs) {
-      const existingIdx = this.data.publications.findIndex(
+      const existing = this.data.publications.find(
         p => p.id === pub.id || (pub.doi && p.doi && p.doi.toLowerCase() === pub.doi.toLowerCase())
       );
 
-      if (existingIdx !== -1) {
-        // Update existing with fresh metadata
-        this.data.publications[existingIdx] = {
-          ...this.data.publications[existingIdx],
-          ...pub,
-          updatedAt: new Date().toISOString()
-        };
-        importedIds.push(this.data.publications[existingIdx].id);
+      if (existing) {
+        const updated = await this.updatePublication(existing.id, pub);
+        if (updated) importedIds.push(updated.id);
       } else {
-        this.data.publications.unshift(pub);
-        importedIds.push(pub.id);
+        const created = await this.createPublication(pub);
+        if (created) importedIds.push(created.id);
       }
     }
 
@@ -872,7 +860,7 @@ class AcademicDatabase {
     return Array.isArray(this.data.importHistory) ? [...this.data.importHistory] : [];
   }
 
-  public deleteImportBatch(batchId: string, rollbackPubs: boolean = false): boolean {
+  public async deleteImportBatch(batchId: string, rollbackPubs: boolean = false): Promise<boolean> {
     if (!Array.isArray(this.data.importHistory)) return false;
     const batchIdx = this.data.importHistory.findIndex(b => b.id === batchId);
     if (batchIdx === -1) return false;
@@ -880,8 +868,7 @@ class AcademicDatabase {
     const batch = this.data.importHistory[batchIdx];
 
     if (rollbackPubs && Array.isArray(batch.importedPublicationIds)) {
-      const idSet = new Set(batch.importedPublicationIds);
-      this.data.publications = this.data.publications.filter(p => !idSet.has(p.id));
+      await this.batchDeletePublications(batch.importedPublicationIds);
     }
 
     this.data.importHistory.splice(batchIdx, 1);
@@ -890,7 +877,7 @@ class AcademicDatabase {
     return true;
   }
 
-  public deleteNonKurdhiPublications(): { removedCount: number; remainingCount: number } {
+  public async deleteNonKurdhiPublications(): Promise<{ removedCount: number; remainingCount: number }> {
     const isKurdhiAuthor = (p: Publication) => {
       if (!Array.isArray(p.authors)) return false;
       return p.authors.some(a => {
@@ -900,8 +887,8 @@ class AcademicDatabase {
     };
 
     const initialCount = this.data.publications.length;
-    this.data.publications = this.data.publications.filter(isKurdhiAuthor);
-    const removedCount = initialCount - this.data.publications.length;
+    const toDelete = this.data.publications.filter(p => !isKurdhiAuthor(p)).map(p => p.id);
+    const removedCount = await this.batchDeletePublications(toDelete);
 
     if (removedCount > 0) {
       this.persist();
@@ -912,38 +899,44 @@ class AcademicDatabase {
   }
 
   // --- INFOGRAPHIC INTEGRATION ---
-  public saveInfographic(publicationId: string, infographicData: ResearchInfographic): boolean {
+  public async saveInfographic(publicationId: string, infographicData: ResearchInfographic): Promise<boolean> {
     const pub = this.getPublicationById(publicationId);
     if (!pub) return false;
 
-    pub.infographicData = {
-      ...infographicData,
-      publicationId,
-      lastUpdated: new Date().toISOString()
-    };
-    pub.hasInfographic = true;
-    if (infographicData.customImageUrl) pub.infographicImageUrl = infographicData.customImageUrl;
-    if (infographicData.customImageBase64) pub.infographicImageBase64 = infographicData.customImageBase64;
-    pub.updatedAt = new Date().toISOString();
+    const updated = await this.updatePublication(publicationId, {
+      infographicData: {
+        ...infographicData,
+        publicationId,
+        lastUpdated: new Date().toISOString()
+      },
+      hasInfographic: true,
+      infographicImageUrl: infographicData.customImageUrl || pub.infographicImageUrl,
+      infographicImageBase64: infographicData.customImageBase64 || pub.infographicImageBase64
+    });
 
-    this.persist();
-    this.notifyMutation('SAVE_INFOGRAPHIC', publicationId);
-    return true;
+    if (updated) {
+      this.notifyMutation('SAVE_INFOGRAPHIC', publicationId);
+      return true;
+    }
+    return false;
   }
 
-  public deleteInfographic(publicationId: string): boolean {
+  public async deleteInfographic(publicationId: string): Promise<boolean> {
     const pub = this.getPublicationById(publicationId);
     if (!pub) return false;
 
-    pub.infographicData = undefined;
-    pub.hasInfographic = false;
-    pub.infographicImageUrl = undefined;
-    pub.infographicImageBase64 = undefined;
-    pub.updatedAt = new Date().toISOString();
+    const updated = await this.updatePublication(publicationId, {
+      infographicData: undefined,
+      hasInfographic: false,
+      infographicImageUrl: undefined,
+      infographicImageBase64: undefined
+    });
 
-    this.persist();
-    this.notifyMutation('DELETE_INFOGRAPHIC', publicationId);
-    return true;
+    if (updated) {
+      this.notifyMutation('DELETE_INFOGRAPHIC', publicationId);
+      return true;
+    }
+    return false;
   }
 
   // --- GRADUATE STUDENTS (CONNECTED DIRECTLY TO MYSQL digilib_documents) ---
@@ -1039,6 +1032,9 @@ class AcademicDatabase {
       try {
         updatedStudent = await p2mDatabaseService.updateStudentRecord(docId, updates);
       } catch (err) {
+        if (process.env.VERCEL || process.env.REQUIRE_LIVE_DB === '1') {
+          throw err;
+        }
         console.warn('p2mDatabaseService updateStudentRecord fallback note:', err);
       }
     }
@@ -1090,7 +1086,11 @@ class AcademicDatabase {
       const docId = parseInt(id.replace('digilib-', ''), 10);
       try {
         await p2mDatabaseService.deleteStudentRecord(docId);
-      } catch {}
+      } catch (err) {
+        if (process.env.VERCEL || process.env.REQUIRE_LIVE_DB === '1') {
+          throw err;
+        }
+      }
     }
     this.data.students = this.data.students.filter(s => s.id !== id);
     this.persist();
@@ -1517,6 +1517,7 @@ class AcademicDatabase {
       }
 
       // Default system master accounts
+      const masterPass = process.env.ADMIN_MASTER_PASSWORD?.trim();
       if (!account) {
         const isMasterEmail = (
           cleanEmail === 'arfa@staff.uns.ac.id' ||
@@ -1526,13 +1527,13 @@ class AcademicDatabase {
           cleanEmail === 'admin@staff.uns.ac.id' ||
           cleanEmail === 'arfawi@mipa.uns.ac.id'
         );
-        if (isMasterEmail) {
+        if (isMasterEmail && masterPass) {
           account = {
             id: cleanEmail === 'arfa@staff.uns.ac.id' ? 'admin-kurdhi' : cleanEmail.includes('raihan') ? 'admin-raihan' : 'admin-owner',
             email: cleanEmail,
             namaLengkap: cleanEmail === 'arfa@staff.uns.ac.id' ? 'Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.' : cleanEmail.includes('raihan') ? 'Muhammad Raihan' : 'Administrator Akun',
             role: cleanEmail === 'arfa@staff.uns.ac.id' ? 'Dosen Pemilik Portofolio (Administrator Utama)' : 'Administrator Resmi (UNS Verified)',
-            passwordHash: hashPasswordWithSalt('kurdhi2026', 'kurdhi_master_salt'),
+            passwordHash: hashPasswordWithSalt(masterPass, 'kurdhi_master_salt'),
             salt: 'kurdhi_master_salt',
             createdAt: '2026-01-01T00:00:00.000Z'
           };
@@ -1549,7 +1550,7 @@ class AcademicDatabase {
       } catch {
         testHash = '';
       }
-      const isMasterAuth = (passwordAttempt === 'kurdhi2026' && (
+      const isMasterAuth = Boolean(masterPass && passwordAttempt === masterPass && (
         account.id === 'admin-kurdhi' ||
         cleanEmail === 'arfa@staff.uns.ac.id' ||
         cleanEmail === 'muhammadraihanash@student.uns.ac.id' ||

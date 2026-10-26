@@ -5,12 +5,12 @@ import fs from 'fs';
 import { GoogleGenAI } from '@google/genai';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { academicDb } from './src/server/database';
-import { elsevierService } from './src/server/elsevierService';
-import { centralStorage, generateAcademicCurriculumVitaePdf } from './src/server/storage';
-import { importScraperService } from './src/server/importScraperService';
-import { ImportBatchRecord, Publication, ThesisInfographic, GraduateStudent } from './src/types';
-import { p2mDatabaseService } from './src/server/p2mDatabaseService';
+import { academicDb } from './src/server/database.js';
+import { elsevierService } from './src/server/elsevierService.js';
+import { centralStorage, generateAcademicCurriculumVitaePdf } from './src/server/storage.js';
+import { importScraperService } from './src/server/importScraperService.js';
+import { ImportBatchRecord, Publication, ThesisInfographic, GraduateStudent } from './src/types/index.js';
+import { p2mDatabaseService } from './src/server/p2mDatabaseService.js';
 
 dotenv.config();
 
@@ -108,7 +108,7 @@ app.use((req, res, next) => {
       return next();
     } catch {}
   }
-  if (req.readableEnded || (req as any).complete) {
+  if (req.readableEnded) {
     if (!req.body || typeof req.body !== 'object') req.body = {};
     return next();
   }
@@ -730,7 +730,12 @@ interface AdminSessionData {
 }
 
 const SESSIONS_FILE = path.resolve(__dirname, 'data/admin_sessions.json');
-const SESSION_SECRET = process.env.SESSION_SECRET || process.env.JWT_SECRET || (process.env.MYSQL_PASSWORD ? `kurdhi_sec_${process.env.MYSQL_PASSWORD}` : 'kurdhi_academic_secret_uns_2026');
+let resolvedSessionSecret = process.env.SESSION_SECRET || process.env.JWT_SECRET;
+if (!resolvedSessionSecret) {
+  console.warn('[SECURITY WARNING] SESSION_SECRET is not defined in environment variables. Generating a secure ephemeral random secret.');
+  resolvedSessionSecret = crypto.randomBytes(32).toString('hex');
+}
+const SESSION_SECRET = resolvedSessionSecret;
 const adminSessions = new Map<string, AdminSessionData>();
 
 // Load persisted sessions on startup
@@ -796,39 +801,10 @@ function verifyCryptoToken(token: string): AdminSessionData | null {
   }
 }
 
-function verifyFirebaseIdToken(token: string): AdminSessionData | null {
-  try {
-    const parts = token.split('.');
-    if (parts.length !== 3) return null;
-    const payload = JSON.parse(Buffer.from(parts[1], 'base64url').toString('utf-8'));
-    if (!payload || !payload.email) return null;
-    const cleanEmail = String(payload.email).trim().toLowerCase();
-    const authorizedEmails = [
-      'arfa@staff.uns.ac.id',
-      'muhammadraihanash@student.uns.ac.id',
-      'muhammadraihanash@gmail.com',
-      'akunpemanis820@gmail.com'
-    ];
-    const isDbAdmin = academicDb.adminExists(cleanEmail);
-    if (!authorizedEmails.includes(cleanEmail) && !isDbAdmin && !cleanEmail.endsWith('@staff.uns.ac.id') && !cleanEmail.endsWith('@student.uns.ac.id')) {
-      return null;
-    }
-    const expMs = payload.exp ? payload.exp * 1000 : Date.now() + 7 * 24 * 3600 * 1000;
-    if (Date.now() > expMs) return null;
-    const adminObj = {
-      id: payload.user_id || payload.sub || 'admin-firebase',
-      email: cleanEmail,
-      namaLengkap: payload.name || cleanEmail,
-      role: 'Administrator Resmi (Firebase Verified)'
-    };
-    return {
-      token,
-      admin: adminObj,
-      expiresAt: expMs
-    };
-  } catch {
-    return null;
-  }
+function verifyFirebaseIdToken(_token: string): AdminSessionData | null {
+  // Direct raw Firebase ID token acceptance without cryptographic signature verification
+  // is disabled. All admin logins via Google must exchange their token at /api/admin/google-session.
+  return null;
 }
 
 function verifyFallbackToken(_token: string): AdminSessionData | null {
@@ -882,6 +858,15 @@ const passwordResetOtps = new Map<string, PasswordResetOtp>();
 // Admin Account Registration
 app.post('/api/admin/register', (req, res) => {
   try {
+    const requiredCode = process.env.ADMIN_REGISTRATION_CODE?.trim();
+    const providedCode = String(req.body?.registrationCode || '').trim();
+    if (!requiredCode || !providedCode || providedCode !== requiredCode) {
+      return res.status(403).json({
+        error: 'Pendaftaran administrator ditutup. Kode registrasi tidak valid atau belum dikonfigurasi.',
+        success: false
+      });
+    }
+
     const { namaLengkap, email, password } = req.body;
     if (!email || !password) {
       return res.status(400).json({ error: 'Email dan kata sandi wajib diisi.' });
@@ -1610,12 +1595,12 @@ app.put('/api/profile/p2m', requireAdminAuth, (req, res) => {
 });
 
 // Update Research Groups
-app.put('/api/profile/research-groups', requireAdminAuth, (req, res) => {
+app.put('/api/profile/research-groups', requireAdminAuth, async (req, res) => {
   try {
-    const updated = academicDb.updateResearchGroups(req.body);
+    const updated = await academicDb.updateResearchGroups(req.body);
     res.json({ success: true, data: updated });
   } catch (err: any) {
-    res.status(500).json({ error: 'Failed to update research groups.' });
+    res.status(500).json({ error: err.message || 'Failed to update research groups.' });
   }
 });
 
@@ -1708,13 +1693,13 @@ app.delete('/api/publications/:id', requireAdminAuth, async (req, res) => {
 });
 
 // Batch delete publications
-app.post('/api/publications/batch-delete', requireAdminAuth, (req, res) => {
+app.post('/api/publications/batch-delete', requireAdminAuth, async (req, res) => {
   try {
     const { ids } = req.body;
     if (!Array.isArray(ids) || ids.length === 0) {
       return res.status(400).json({ error: 'Daftar ID publikasi wajib disertakan.' });
     }
-    const removedCount = academicDb.batchDeletePublications(ids);
+    const removedCount = await academicDb.batchDeletePublications(ids);
     academicDb.addAuditLog({
       adminEmail: (req as any).adminSession.admin.email,
       adminNama: (req as any).adminSession.admin.namaLengkap,
@@ -1723,14 +1708,14 @@ app.post('/api/publications/batch-delete', requireAdminAuth, (req, res) => {
     });
     res.json({ success: true, count: removedCount, message: `Berhasil menghapus ${removedCount} publikasi.` });
   } catch (err: any) {
-    res.status(500).json({ error: 'Gagal menghapus publikasi massal.' });
+    res.status(500).json({ error: err.message || 'Gagal menghapus publikasi massal.' });
   }
 });
 
 // Clear ALL publications
-app.post('/api/publications/clear-all', requireAdminAuth, (req, res) => {
+app.post('/api/publications/clear-all', requireAdminAuth, async (req, res) => {
   try {
-    const count = academicDb.clearAllPublications();
+    const count = await academicDb.clearAllPublications();
     academicDb.addAuditLog({
       adminEmail: (req as any).adminSession.admin.email,
       adminNama: (req as any).adminSession.admin.namaLengkap,
@@ -1739,14 +1724,14 @@ app.post('/api/publications/clear-all', requireAdminAuth, (req, res) => {
     });
     res.json({ success: true, count, message: `Seluruh publikasi (${count} data) berhasil dihapus dari arsip.` });
   } catch (err: any) {
-    res.status(500).json({ error: 'Gagal mengosongkan arsip publikasi.' });
+    res.status(500).json({ error: err.message || 'Gagal mengosongkan arsip publikasi.' });
   }
 });
 
 // Reset publications to standard seed
-app.post('/api/publications/reset-seed', requireAdminAuth, (req, res) => {
+app.post('/api/publications/reset-seed', requireAdminAuth, async (req, res) => {
   try {
-    const count = academicDb.resetSeedPublications();
+    const count = await academicDb.resetSeedPublications();
     academicDb.addAuditLog({
       adminEmail: (req as any).adminSession.admin.email,
       adminNama: (req as any).adminSession.admin.namaLengkap,
@@ -1755,21 +1740,21 @@ app.post('/api/publications/reset-seed', requireAdminAuth, (req, res) => {
     });
     res.json({ success: true, count, message: `Berhasil memulihkan ${count} publikasi bawaan.` });
   } catch (err: any) {
-    res.status(500).json({ error: 'Gagal memulihkan publikasi bawaan.' });
+    res.status(500).json({ error: err.message || 'Gagal memulihkan publikasi bawaan.' });
   }
 });
 
 // Batch archive or unarchive publications
-app.post('/api/publications/batch-archive', requireAdminAuth, (req, res) => {
+app.post('/api/publications/batch-archive', requireAdminAuth, async (req, res) => {
   try {
     const { ids, isArchived, all } = req.body;
     const shouldArchive = Boolean(isArchived);
 
     let updatedCount = 0;
     if (all) {
-      updatedCount = academicDb.archiveAllPublications(shouldArchive);
+      updatedCount = await academicDb.archiveAllPublications(shouldArchive);
     } else if (Array.isArray(ids) && ids.length > 0) {
-      updatedCount = academicDb.batchSetArchiveStatus(ids, shouldArchive);
+      updatedCount = await academicDb.batchSetArchiveStatus(ids, shouldArchive);
     } else {
       return res.status(400).json({ error: 'Harap tentukan ID publikasi atau opsi all: true.' });
     }
@@ -1792,16 +1777,16 @@ app.post('/api/publications/batch-archive', requireAdminAuth, (req, res) => {
         : `Berhasil mengaktifkan kembali ${updatedCount} publikasi.`
     });
   } catch (err: any) {
-    res.status(500).json({ error: 'Gagal mengubah status arsip publikasi.' });
+    res.status(500).json({ error: err.message || 'Gagal mengubah status arsip publikasi.' });
   }
 });
 
 // Single publication archive toggle
-app.put('/api/publications/:id/archive', requireAdminAuth, (req, res) => {
+app.put('/api/publications/:id/archive', requireAdminAuth, async (req, res) => {
   try {
     const { isArchived } = req.body;
     const shouldArchive = Boolean(isArchived);
-    const pub = academicDb.setPublicationArchiveStatus(req.params.id, shouldArchive);
+    const pub = await academicDb.setPublicationArchiveStatus(req.params.id, shouldArchive);
     if (!pub) {
       return res.status(404).json({ error: 'Publikasi tidak ditemukan.' });
     }
@@ -1814,40 +1799,32 @@ app.put('/api/publications/:id/archive', requireAdminAuth, (req, res) => {
     });
     res.json({ success: true, publication: pub });
   } catch (err: any) {
-    res.status(500).json({ error: 'Gagal memperbarui status arsip publikasi.' });
+    res.status(500).json({ error: err.message || 'Gagal memperbarui status arsip publikasi.' });
   }
 });
 
 // Filter publications to retain only works authored or co-authored by Nughthoh Arfawi Kurdhi
-app.post('/api/publications/filter-by-author', requireAdminAuth, (req, res) => {
+app.post('/api/publications/filter-by-author', requireAdminAuth, async (req, res) => {
   try {
-    const allPubs = academicDb.getPublications();
-    const initialCount = allPubs.length;
-    const kept = allPubs.filter(p => {
-      return p.authors && p.authors.some(a => {
-        const n = (a.name || '').toLowerCase();
-        return n.includes('kurdhi') || n.includes('nughthoh') || n.includes('arfawi');
-      });
-    });
+    const result = await academicDb.deleteNonKurdhiPublications();
 
-    academicDb.setPublications(kept);
     academicDb.addAuditLog({
       adminEmail: (req as any).adminSession.admin.email,
       adminNama: (req as any).adminSession.admin.namaLengkap,
       action: 'FILTER_PUBLICATIONS',
-      details: `Menyaring publikasi: mempertahankan ${kept.length} karya milik Nughthoh Arfawi Kurdhi (menghapus ${initialCount - kept.length} karya luar).`
+      details: `Menyaring publikasi: mempertahankan ${result.remainingCount} karya milik Nughthoh Arfawi Kurdhi (menghapus ${result.removedCount} karya luar).`
     });
 
-    res.json({ success: true, count: kept.length, removed: initialCount - kept.length });
+    res.json({ success: true, count: result.remainingCount, removed: result.removedCount });
   } catch (err: any) {
-    res.status(500).json({ error: 'Gagal memfilter publikasi.' });
+    res.status(500).json({ error: err.message || 'Gagal memfilter publikasi.' });
   }
 });
 
 // Infographic Saving
-app.post('/api/publications/:id/infographic', requireAdminAuth, (req, res) => {
+app.post('/api/publications/:id/infographic', requireAdminAuth, async (req, res) => {
   try {
-    const success = academicDb.saveInfographic(req.params.id, req.body);
+    const success = await academicDb.saveInfographic(req.params.id, req.body);
     if (!success) {
       return res.status(404).json({ error: 'Publikasi tidak ditemukan.' });
     }
@@ -1860,14 +1837,14 @@ app.post('/api/publications/:id/infographic', requireAdminAuth, (req, res) => {
     });
     res.json({ success: true, message: 'Infografik berhasil disimpan ke database.' });
   } catch (err: any) {
-    res.status(500).json({ error: 'Gagal menyimpan infografik.' });
+    res.status(500).json({ error: err.message || 'Gagal menyimpan infografik.' });
   }
 });
 
 // Delete publication infographic
-app.delete('/api/publications/:id/infographic', requireAdminAuth, (req, res) => {
+app.delete('/api/publications/:id/infographic', requireAdminAuth, async (req, res) => {
   try {
-    const success = academicDb.deleteInfographic(req.params.id);
+    const success = await academicDb.deleteInfographic(req.params.id);
     if (!success) {
       return res.status(404).json({ error: 'Publikasi tidak ditemukan.' });
     }
@@ -1880,7 +1857,7 @@ app.delete('/api/publications/:id/infographic', requireAdminAuth, (req, res) => 
     });
     res.json({ success: true, message: 'Infografik berhasil dihapus dari database.' });
   } catch (err: any) {
-    res.status(500).json({ error: 'Gagal menghapus infografik.' });
+    res.status(500).json({ error: err.message || 'Gagal menghapus infografik.' });
   }
 });
 
@@ -1912,7 +1889,7 @@ app.post('/api/infographics/upload-image', requireAdminAuth, async (req, res) =>
     if (targetType === 'publication' && targetId) {
       const pub = academicDb.getPublicationById(targetId);
       if (pub) {
-        academicDb.saveInfographic(targetId, {
+        await academicDb.saveInfographic(targetId, {
           ...(pub.infographicData || {
             publicationId: targetId,
             status: 'Published',
@@ -2011,7 +1988,7 @@ app.post('/api/scraper/validate', requireAdminAuth, (req, res) => {
   }
 });
 
-app.post('/api/scraper/import', requireAdminAuth, (req, res) => {
+app.post('/api/scraper/import', requireAdminAuth, async (req, res) => {
   try {
     const { items, source, sourceUrl, notes } = req.body;
     if (!Array.isArray(items) || items.length === 0) {
@@ -2060,7 +2037,7 @@ app.post('/api/scraper/import', requireAdminAuth, (req, res) => {
       notes: notes || `Impor ${newPublications.length} publikasi dari ${source || 'SINTA / Digilib UNS'}`
     };
 
-    const importResult = academicDb.importPublications(newPublications, batchRecord);
+    const importResult = await academicDb.importPublications(newPublications, batchRecord);
 
     academicDb.addAuditLog({
       adminEmail: admin.email,
@@ -2090,10 +2067,10 @@ app.get('/api/scraper/history', requireAdminAuth, (req, res) => {
   }
 });
 
-app.delete('/api/scraper/history/:id', requireAdminAuth, (req, res) => {
+app.delete('/api/scraper/history/:id', requireAdminAuth, async (req, res) => {
   try {
     const rollback = req.query.rollback === 'true';
-    const deleted = academicDb.deleteImportBatch(req.params.id, rollback);
+    const deleted = await academicDb.deleteImportBatch(req.params.id, rollback);
     if (!deleted) return res.status(404).json({ error: 'Riwayat impor tidak ditemukan.' });
 
     academicDb.addAuditLog({
@@ -2531,9 +2508,22 @@ app.delete('/api/blog/:id', requireAdminAuth, async (req, res) => {
   }
 });
 
+function sanitizeDatabaseStateForExport(state: any): any {
+  if (!state || typeof state !== 'object') return state;
+  const clone = JSON.parse(JSON.stringify(state));
+  if (Array.isArray(clone.adminAccounts)) {
+    clone.adminAccounts = clone.adminAccounts.map((adm: any) => {
+      const { passwordHash, salt, ...safe } = adm;
+      return safe;
+    });
+  }
+  clone.auditLogs = [];
+  return clone;
+}
+
 // 9. Full Central State & Reset & Self-Heal
 app.get('/api/database/state', (req, res) => {
-  res.json({ success: true, data: academicDb.getFullState() });
+  res.json({ success: true, data: sanitizeDatabaseStateForExport(academicDb.getFullState()) });
 });
 
 // Self-heal endpoint: PERMANENTLY DISABLED to prevent client caches from overwriting server data
@@ -2550,7 +2540,7 @@ app.get('/api/database/backup', (req, res) => {
     const fileName = `academic_portfolio_kurdhi_backup_${new Date().toISOString().split('T')[0]}.json`;
     res.setHeader('Content-Type', 'application/json');
     res.setHeader('Content-Disposition', `attachment; filename="${fileName}"`);
-    return res.send(JSON.stringify(fullState, null, 2));
+    return res.send(JSON.stringify(sanitizeDatabaseStateForExport(fullState), null, 2));
   } catch (err: any) {
     return res.status(500).send('Gagal membuat berkas cadangan database.');
   }
@@ -2980,8 +2970,22 @@ app.get('/api/sql/tables', async (req, res) => {
 });
 
 app.get('/api/sql/table/:table', async (req, res) => {
+  const table = req.params.table.toLowerCase();
+  if (table === 'admin_accounts') {
+    return requireAdminAuth(req, res, async () => {
+      try {
+        const rows = await p2mDatabaseService.getTableRows(table);
+        const safeRows = rows.map((r: any) => {
+          const { password_hash, passwordHash, salt, ...safe } = r;
+          return safe;
+        });
+        return res.json({ success: true, count: safeRows.length, table, data: safeRows });
+      } catch (err: any) {
+        return res.status(500).json({ error: err.message || 'Gagal memuat tabel SQL.' });
+      }
+    });
+  }
   try {
-    const table = req.params.table.toLowerCase();
     const rows = await p2mDatabaseService.getTableRows(table);
     return res.json({ success: true, count: rows.length, table, data: rows });
   } catch (err: any) {
@@ -3108,7 +3112,7 @@ app.get('/api/sql/config', requireAdminAuth, (req, res) => {
 });
 
 // Diagnostic endpoint that explicitly checks connectivity of Aiven MySQL using .env credentials
-app.get('/api/sql/diagnostic', async (req, res) => {
+app.get('/api/sql/diagnostic', requireAdminAuth, async (req, res) => {
   res.setHeader('Content-Type', 'application/json');
   try {
     const result = await p2mDatabaseService.diagnoseAivenConnection();
@@ -3125,7 +3129,7 @@ app.get('/api/sql/diagnostic', async (req, res) => {
   }
 });
 
-app.post('/api/sql/diagnostic', async (req, res) => {
+app.post('/api/sql/diagnostic', requireAdminAuth, async (req, res) => {
   res.setHeader('Content-Type', 'application/json');
   try {
     const result = await p2mDatabaseService.diagnoseAivenConnection(req.body);
@@ -3273,9 +3277,11 @@ app.get('/api/sql/download', (req, res) => {
     if (!fs.existsSync(sqlPath)) {
       return res.status(404).json({ error: 'Berkas database_p2m_mysql.sql tidak ditemukan.' });
     }
+    let sqlContent = fs.readFileSync(sqlPath, 'utf-8');
+    sqlContent = sqlContent.replace(/INSERT\s+INTO\s+`?admin_accounts`?[\s\S]*?;/gi, '-- [admin_accounts omitted for security]');
     res.setHeader('Content-Type', 'application/sql');
     res.setHeader('Content-Disposition', 'attachment; filename="portofolio_nught_mysql_database.sql"');
-    return res.sendFile(sqlPath);
+    return res.send(sqlContent);
   } catch (err: any) {
     return res.status(500).send('Gagal mengunduh file SQL database.');
   }
@@ -3297,9 +3303,17 @@ app.use((err: any, req: express.Request, res: express.Response, next: express.Ne
   });
 });
 
+const isServerlessEnvironment = Boolean(
+  process.env.VERCEL ||
+  process.env.VERCEL_ENV ||
+  process.env.NOW_REGION ||
+  process.env.AWS_LAMBDA_FUNCTION_NAME ||
+  process.env.LAMBDA_TASK_ROOT
+);
+
 // Vite dev server vs static build - only when running standalone (not in Vercel serverless)
 async function startServer() {
-  if (process.env.VERCEL) return;
+  if (isServerlessEnvironment) return;
 
   if (process.env.NODE_ENV !== 'production') {
     try {
@@ -3344,7 +3358,7 @@ async function startServer() {
   });
 }
 
-if (!process.env.VERCEL) {
+if (!isServerlessEnvironment) {
   startServer().catch(err => {
     console.error('Server boot failure:', err);
   });

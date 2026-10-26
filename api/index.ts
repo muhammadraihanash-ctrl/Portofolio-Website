@@ -1,24 +1,26 @@
 import type { IncomingMessage, ServerResponse } from 'http';
-import app, { syncAllSqlDataToAcademicDb } from '../server';
-import { p2mDatabaseService } from '../src/server/p2mDatabaseService';
+import 'mysql2/promise';
+import app, { syncAllSqlDataToAcademicDb } from '../server.js';
+import { p2mDatabaseService } from '../src/server/p2mDatabaseService.js';
 
-let initPromise: Promise<boolean> | null = null;
+let lastGetSyncTime = 0;
 
-function ensureVercelBootstrapped(): void {
-  if (!initPromise) {
-    // Non-blocking background task: ensures serverless response starts in milliseconds
-    initPromise = (async () => {
-      try {
-        const ok = await p2mDatabaseService.initMySqlConnection();
-        if (ok) {
-          syncAllSqlDataToAcademicDb();
-        }
-        return true;
-      } catch (err) {
-        console.warn('[Vercel Serverless Boot Warning]:', err);
-        return false;
+async function syncMySqlStateForRequest(method?: string): Promise<void> {
+  try {
+    await p2mDatabaseService.ensureConnection();
+    const isGet = (method || 'GET').toUpperCase() === 'GET';
+    const now = Date.now();
+    if (!isGet || now - lastGetSyncTime > 10000) {
+      if (p2mDatabaseService.getStatus().isConnected) {
+        await p2mDatabaseService.syncLiveFromMySql();
+        syncAllSqlDataToAcademicDb();
       }
-    })();
+      if (isGet) {
+        lastGetSyncTime = now;
+      }
+    }
+  } catch (err) {
+    console.warn('[Vercel Serverless Sync Warning]:', err);
   }
 }
 
@@ -123,11 +125,8 @@ export default async function handler(req: IncomingMessage, res: ServerResponse)
     req.url = effectiveUrl;
   } catch {}
 
-  // Ensure database bootstrap runs (and for API data queries, wait on it gracefully)
-  ensureVercelBootstrapped();
-  try {
-    await p2mDatabaseService.ensureConnection();
-  } catch {}
+  // Sync MySQL state: force on write requests, throttled to 10s on GET
+  await syncMySqlStateForRequest(req.method);
 
   // Wrap Express dispatch in a Promise so Vercel Serverless does not prematurely freeze/kill execution
   return new Promise<void>((resolve) => {

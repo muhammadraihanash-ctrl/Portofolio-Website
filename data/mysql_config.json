@@ -1,0 +1,9 @@
+{
+  "host": "projekportofolio1-muhammadraihanash-569a.a.aivencloud.com",
+  "port": 23220,
+  "user": "avnadmin",
+  "password": "",
+  "database": "defaultdb",
+  "ssl": "REQUIRED",
+  "updatedAt": "2026-10-26T05:42:05.819Z"
+}
