@@ -171,6 +171,8 @@ export interface GraduateStudent {
   imprint?: string;
   infographic?: ThesisInfographic;
   hasInfographic?: boolean;
+  studentResearchId?: number;
+  sourceTable?: 'student_research' | 'digilib_documents';
 }
 
 export interface EducationEntry {

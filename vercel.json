@@ -3,27 +3,14 @@
   "framework": "vite",
   "outputDirectory": "dist",
   "functions": {
-    "api/index.ts": {
-      "includeFiles": "data/**",
-      "maxDuration": 30
-    },
     "api/**/*.ts": {
-      "includeFiles": "data/**",
-      "maxDuration": 30
+      "includeFiles": "data/**"
     }
   },
   "rewrites": [
     {
-      "source": "/api/sql/diagnostic",
-      "destination": "/api/sql/diagnostic.ts"
-    },
-    {
-      "source": "/api",
-      "destination": "/api/index.ts?__route__=/api/health"
-    },
-    {
-      "source": "/api/(.*)",
-      "destination": "/api/index.ts?__route__=/api/$1"
+      "source": "/api/:match*",
+      "destination": "/api?__route__=/api/:match*"
     },
     {
       "source": "/((?!api(?:/.*)?).*)",

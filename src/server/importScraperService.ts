@@ -18,12 +18,12 @@ import {
   Publication,
   AuthorItem,
   PublicationType
-} from '../types/index.js';
+} from '../types/index';
 import {
   DIGILIB_UNS_74_DOCUMENTS,
   SINTA_IPR_AND_PUBLICATIONS,
   AUTHENTIC_SINTA_PROFILE
-} from '../data/sintaDigilibSnapshots.js';
+} from '../data/sintaDigilibSnapshots';
 
 export class ImportScraperService {
   private browserUserAgents = [

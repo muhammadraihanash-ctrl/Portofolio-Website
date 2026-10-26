@@ -11,8 +11,8 @@
  * Total: 215 items
  */
 
-import { Publication, P2MActivity, AnnualPerformanceIndexEntry } from '../types/index.js';
-import databaseState from './database_state.json' with { type: 'json' };
+import { Publication, P2MActivity, AnnualPerformanceIndexEntry } from '../types';
+import databaseState from './database_state.json';
 
 // Authentic 60 P2M & Research activities directly from database state
 export const SAMPLE_P2M_ACTIVITIES: P2MActivity[] = ((databaseState as any)?.profile?.p2mActivities || []) as P2MActivity[];

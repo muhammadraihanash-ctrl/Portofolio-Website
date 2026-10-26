@@ -24,7 +24,6 @@ import {
   Key,
   HelpCircle,
   ShieldCheck,
-  Zap,
   User,
   Compass,
   Newspaper,
@@ -35,6 +34,7 @@ import { academicService } from '../services/academicService';
 export type SqlTableName =
   | 'academic_profile'
   | 'teaching_courses'
+  | 'student_research'
   | 'digilib_documents'
   | 'research_topics'
   | 'research_projects'
@@ -74,6 +74,14 @@ export const SQL_TABLES: TableMeta[] = [
     navSection: 'Teaching',
     icon: BookMarked,
     defaultCount: 5
+  },
+  {
+    id: 'student_research',
+    label: 'Riset Mahasiswa Aktif',
+    sublabel: '13 Mahasiswa Bimbingan Aktif (Proposal & Riset)',
+    navSection: 'Graduate Students',
+    icon: GraduationCap,
+    defaultCount: 13
   },
   {
     id: 'digilib_documents',
@@ -225,9 +233,6 @@ export const SqlDatabaseTab: React.FC<SqlDatabaseTabProps> = ({ showToast }) => 
     success: boolean;
     message: string;
     latencyMs?: number;
-    queryLatencyMs?: number;
-    handshakeLatencyMs?: number;
-    isWarmPool?: boolean;
     database?: string;
     statusCode?: number;
     errorCode?: string;
@@ -259,8 +264,7 @@ export const SqlDatabaseTab: React.FC<SqlDatabaseTabProps> = ({ showToast }) => 
           port: data.config.port || prev.port,
           user: data.config.user || prev.user,
           database: data.config.database || prev.database,
-          ssl: data.config.ssl || prev.ssl,
-          password: prev.password || ''
+          ssl: data.config.ssl || prev.ssl
         }));
       }
     } catch {}
@@ -270,26 +274,16 @@ export const SqlDatabaseTab: React.FC<SqlDatabaseTabProps> = ({ showToast }) => 
     setIsTestingConfig(true);
     setTestResult(null);
     try {
-      let payload: any = undefined;
-      if (!useEnvOnly) {
-        if (configTab === 'uri') {
-          const cleanUri = jdbcUrl.trim();
-          if (cleanUri) payload = { jdbcUrl: cleanUri };
-        } else {
-          payload = {
-            ...configFields,
-            password: configFields.password.trim()
-          };
-        }
-      }
+      const payload = useEnvOnly
+        ? undefined
+        : (configTab === 'uri'
+            ? { jdbcUrl: jdbcUrl.trim() }
+            : { ...configFields });
       const res = await academicService.checkAivenMySqlDiagnostics(payload);
       setTestResult({
         success: res.success,
         message: res.message,
         latencyMs: res.details?.latencyMs,
-        queryLatencyMs: res.details?.queryLatencyMs,
-        handshakeLatencyMs: res.details?.handshakeLatencyMs,
-        isWarmPool: res.details?.isWarmPool,
         database: res.details?.database,
         statusCode: res.statusCode,
         errorCode: res.errorCode
@@ -465,6 +459,20 @@ export const SqlDatabaseTab: React.FC<SqlDatabaseTabProps> = ({ showToast }) => 
         jenis: 'Hak Cipta',
         status: 'Terdaftar',
         kategori: 'Karya Tulis / Perangkat Lunak'
+      };
+    } else if (activeTable === 'student_research') {
+      initial = {
+        nama: "",
+        nim: "",
+        judul_proposal: "",
+        research_topic: "",
+        status: "active",
+        tahun: currentYear,
+        program_studi: "Matematika",
+        pembimbing: "Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.",
+        penguji: "",
+        photo_url: "",
+        infographic: ""
       };
     } else if (activeTable === 'digilib_documents') {
       initial = {
@@ -1083,6 +1091,13 @@ export const SqlDatabaseTab: React.FC<SqlDatabaseTabProps> = ({ showToast }) => 
                       <th className="py-3 px-4 font-bold">Status</th>
                     </>
                   )}
+                  {activeTable === 'student_research' && (
+                    <>
+                      <th className="py-3 px-4 font-bold">Mahasiswa &amp; NIM</th>
+                      <th className="py-3 px-4 font-bold">Topik / Domain Riset</th>
+                      <th className="py-3 px-4 font-bold">Pembimbing &amp; Status</th>
+                    </>
+                  )}
                   {activeTable === 'digilib_documents' && (
                     <>
                       <th className="py-3 px-4 font-bold">Mahasiswa / Penulis</th>
@@ -1309,6 +1324,24 @@ export const SqlDatabaseTab: React.FC<SqlDatabaseTabProps> = ({ showToast }) => 
                       </>
                     )}
 
+                    {activeTable === 'student_research' && (
+                      <>
+                        <td className="py-3 px-4 whitespace-nowrap">
+                          <div className="font-bold text-slate-900 text-xs">{row.nama}</div>
+                          <div className="font-mono text-[10px] text-slate-500 font-semibold">{row.nim || "NIM -"}</div>
+                        </td>
+                        <td className="py-3 px-4 max-w-xs">
+                          <span className="font-medium text-slate-800 text-[11px] block line-clamp-1">{row.research_topic || "Pemodelan Matematika"}</span>
+                          <span className="text-[10px] text-[#004b87] font-semibold bg-sky-50 px-1.5 py-0.2 rounded border border-sky-100">{row.program_studi || "Matematika"} ({row.tahun || 2024})</span>
+                        </td>
+                        <td className="py-3 px-4 max-w-xs">
+                          <div className="text-[11px] text-slate-700 truncate font-medium">{row.pembimbing || "Nughthoh Arfawi Kurdhi, Ph.D."}</div>
+                          <span className="inline-block mt-0.5 px-2 py-0.5 text-[9px] font-bold rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200">
+                            {row.status || "Active Research"}
+                          </span>
+                        </td>
+                      </>
+                    )}
                     {activeTable === 'digilib_documents' && (
                       <>
                         <td className="py-3 px-4 whitespace-nowrap">
@@ -1963,6 +1996,107 @@ export const SqlDatabaseTab: React.FC<SqlDatabaseTabProps> = ({ showToast }) => 
                 </>
               )}
 
+              {activeTable === 'student_research' && (
+                <>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-slate-700 font-semibold mb-1">Nama Mahasiswa *</label>
+                      <input
+                        type="text"
+                        required
+                        value={formData.nama || ""}
+                        onChange={e => setFormData({ ...formData, nama: e.target.value })}
+                        placeholder="Nama Mahasiswa Bimbingan Aktif..."
+                        className="w-full px-3 py-2 border border-slate-300 rounded-lg font-medium"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-slate-700 font-semibold mb-1">NIM *</label>
+                      <input
+                        type="text"
+                        required
+                        value={formData.nim || ""}
+                        onChange={e => setFormData({ ...formData, nim: e.target.value })}
+                        placeholder="M0123001"
+                        className="w-full px-3 py-2 border border-slate-300 rounded-lg font-mono"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <label className="block text-slate-700 font-semibold mb-1">Judul Proposal Riset / Skripsi *</label>
+                    <textarea
+                      rows={2}
+                      required
+                      value={formData.judul_proposal || ""}
+                      onChange={e => setFormData({ ...formData, judul_proposal: e.target.value })}
+                      placeholder="Judul lengkap proposal penelitian tugas akhir..."
+                      className="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-slate-700 font-semibold mb-1">Topik Riset / Kata Kunci</label>
+                    <input
+                      type="text"
+                      value={formData.research_topic || ""}
+                      onChange={e => setFormData({ ...formData, research_topic: e.target.value })}
+                      placeholder="Deep Learning; Combinatorial Optimization; Vehicle Routing..."
+                      className="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs font-mono"
+                    />
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div>
+                      <label className="block text-slate-700 font-semibold mb-1">Tahun Angkatan / Riset</label>
+                      <input
+                        type="number"
+                        value={formData.tahun || 2024}
+                        onChange={e => setFormData({ ...formData, tahun: Number(e.target.value) })}
+                        className="w-full px-3 py-2 border border-slate-300 rounded-lg"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-slate-700 font-semibold mb-1">Program Studi</label>
+                      <input
+                        type="text"
+                        value={formData.program_studi || "Matematika"}
+                        onChange={e => setFormData({ ...formData, program_studi: e.target.value })}
+                        className="w-full px-3 py-2 border border-slate-300 rounded-lg"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-slate-700 font-semibold mb-1">Status</label>
+                      <select
+                        value={formData.status || "active"}
+                        onChange={e => setFormData({ ...formData, status: e.target.value })}
+                        className="w-full px-3 py-2 border border-slate-300 rounded-lg"
+                      >
+                        <option value="active">Active (Riset Berjalan)</option>
+                        <option value="graduated">Graduated (Lulus)</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-slate-700 font-semibold mb-1">Dosen Pembimbing</label>
+                      <input
+                        type="text"
+                        value={formData.pembimbing || "Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D."}
+                        onChange={e => setFormData({ ...formData, pembimbing: e.target.value })}
+                        className="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-slate-700 font-semibold mb-1">Dosen Penguji</label>
+                      <input
+                        type="text"
+                        value={formData.penguji || ""}
+                        onChange={e => setFormData({ ...formData, penguji: e.target.value })}
+                        placeholder="Nama dosen penguji..."
+                        className="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs"
+                      />
+                    </div>
+                  </div>
+                </>
+              )}
               {activeTable === 'digilib_documents' && (
                 <>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -2654,7 +2788,7 @@ export const SqlDatabaseTab: React.FC<SqlDatabaseTabProps> = ({ showToast }) => 
                       rows={3}
                       value={jdbcUrl}
                       onChange={e => setJdbcUrl(e.target.value)}
-                      placeholder="mysql://avnadmin:password@projekportofolio1-muhammadraihanash-569a.a.aivencloud.com:23220/defaultdb?ssl-mode=REQUIRED"
+                      placeholder="mysql://avnadmin:AVNS_rJ6ZVrNE-zqfjTPFJsh@projekportofolio1-muhammadraihanash-569a.a.aivencloud.com:23220/defaultdb?ssl-mode=REQUIRED"
                       className="w-full px-3 py-2 border border-slate-300 rounded-lg font-mono text-[11px] focus:ring-2 focus:ring-[#004b87] focus:outline-none"
                     />
                     <p className="text-[11px] text-slate-500 mt-1">
@@ -2759,7 +2893,7 @@ export const SqlDatabaseTab: React.FC<SqlDatabaseTabProps> = ({ showToast }) => 
                           { key: 'MYSQL_HOST', val: 'projekportofolio1-muhammadraihanash-569a.a.aivencloud.com' },
                           { key: 'MYSQL_PORT', val: '23220' },
                           { key: 'MYSQL_USER', val: 'avnadmin' },
-                          { key: 'MYSQL_PASSWORD', val: 'Masukkan kata sandi database dari Aiven Console' },
+                          { key: 'MYSQL_PASSWORD', val: 'AVNS_rJ6ZVrNE-zqfjTPFJsh' },
                           { key: 'MYSQL_DATABASE', val: 'defaultdb' },
                           { key: 'MYSQL_SSL', val: 'REQUIRED' }
                         ].map(item => (
@@ -2793,67 +2927,31 @@ export const SqlDatabaseTab: React.FC<SqlDatabaseTabProps> = ({ showToast }) => 
 
               {/* Test Result Display */}
               {testResult && (
-                <div className={`p-4 rounded-xl border flex flex-col gap-2.5 text-xs font-medium shadow-xs ${
+                <div className={`p-3.5 rounded-lg border flex flex-col gap-1.5 text-xs font-medium ${
                   testResult.success
-                    ? 'bg-emerald-50/90 border-emerald-300 text-emerald-950'
-                    : 'bg-red-50/90 border-red-300 text-red-950'
+                    ? 'bg-emerald-50 border-emerald-200 text-emerald-800'
+                    : 'bg-red-50 border-red-200 text-red-800'
                 }`}>
                   <div className="flex items-center justify-between gap-2 flex-wrap">
                     <div className="flex items-center gap-2">
                       {testResult.success ? (
-                        <CheckCircle2 className="w-4.5 h-4.5 text-emerald-600 shrink-0" />
+                        <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
                       ) : (
-                        <AlertCircle className="w-4.5 h-4.5 text-red-600 shrink-0" />
+                        <AlertCircle className="w-4 h-4 text-red-600 shrink-0" />
                       )}
-                      <span className="font-bold text-xs sm:text-sm">
+                      <span className="font-bold">
                         {testResult.success
                           ? `Status: ${testResult.statusCode || 200} OK (SSL Handshake Terverifikasi)`
                           : `Status: ${testResult.statusCode || 500} [${testResult.errorCode || 'HANDSHAKE_ERROR'}]`}
                       </span>
                     </div>
-                    {testResult.isWarmPool !== undefined && (
-                      <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider flex items-center gap-1 ${
-                        testResult.isWarmPool
-                          ? 'bg-emerald-200 text-emerald-900 border border-emerald-300'
-                          : 'bg-sky-200 text-sky-900 border border-sky-300'
-                      }`}>
-                        {testResult.isWarmPool ? '⚡ Warm Pool Aktif' : '❄️ Cold Handshake'}
+                    {testResult.latencyMs !== undefined && (
+                      <span className="text-[11px] px-2 py-0.5 rounded bg-white/80 border border-current font-mono">
+                        Latency: {testResult.latencyMs}ms
                       </span>
                     )}
                   </div>
-
-                  {/* Latency Breakdown Badges */}
-                  {testResult.success && (
-                    <div className="flex items-center gap-2 flex-wrap pt-1 border-t border-emerald-200/60 font-mono text-[11px]">
-                      <div className="flex items-center gap-1 px-2.5 py-1 rounded-md bg-white border border-emerald-200 shadow-2xs">
-                        <span className="text-slate-500 font-sans">Query Round-Trip:</span>
-                        <span className="font-bold text-emerald-700">
-                          {testResult.queryLatencyMs ?? testResult.latencyMs ?? 0}ms
-                        </span>
-                        <span className="text-[10px] text-emerald-600 font-sans font-semibold">⚡ Cepat</span>
-                      </div>
-
-                      {testResult.handshakeLatencyMs !== undefined && testResult.handshakeLatencyMs > 0 && (
-                        <div className="flex items-center gap-1 px-2.5 py-1 rounded-md bg-white border border-slate-200 shadow-2xs">
-                          <span className="text-slate-500 font-sans">Initial TLS Handshake:</span>
-                          <span className="font-bold text-slate-700">{testResult.handshakeLatencyMs}ms</span>
-                        </div>
-                      )}
-
-                      <div className="flex items-center gap-1 px-2.5 py-1 rounded-md bg-white border border-slate-200 shadow-2xs">
-                        <span className="text-slate-500 font-sans">Database:</span>
-                        <span className="font-bold text-sky-700">{testResult.database || 'defaultdb'}</span>
-                      </div>
-                    </div>
-                  )}
-
-                  <p className="text-xs leading-relaxed opacity-95 text-slate-800">{testResult.message}</p>
-
-                  {testResult.success && (
-                    <div className="text-[11px] leading-relaxed text-slate-600 bg-white/70 p-2.5 rounded-lg border border-emerald-200/50">
-                      💡 <strong>Info Kecepatan:</strong> Latensi SSL Handshake (~1.5s) adalah negosiasi kriptografi TLS 1.3 lintas server cloud yang hanya berjalan <strong>1x di awal</strong>. Untuk seluruh operasional portofolio dan query data selanjutnya, sistem menggunakan <em>Persistent Connection Pool (Keep-Alive)</em> yang berjalan instan dalam hitungan milidetik ({testResult.queryLatencyMs ?? testResult.latencyMs ?? '15–35'}ms).
-                    </div>
-                  )}
+                  <p className="text-xs leading-relaxed opacity-95">{testResult.message}</p>
                 </div>
               )}
             </div>

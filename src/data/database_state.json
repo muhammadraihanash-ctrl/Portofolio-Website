@@ -1,6 +1,6 @@
 {
   "version": 3,
-  "updatedAt": "2026-10-25T10:30:29.274Z",
+  "updatedAt": "2026-10-26T16:15:06.413Z",
   "profile": {
     "name": "Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.",
     "titleWithDegrees": "Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.",
@@ -114,13 +114,13 @@
     "achievements": {
       "penelitian": 47,
       "p2m": 13,
-      "scopus": 63,
+      "scopus": 64,
       "nonScopus": 32,
       "prosiding": 16,
       "buku": 22,
       "paten": 1,
       "hki": 21,
-      "notes": "Kinerja akademik resmi terintegrasi penuh dari basis data SQL (60 P2M: 47 Penelitian, 13 Pengabdian; 63 Scopus; 32 Jurnal; 16 Prosiding; 22 Buku; 1 Paten; 21 HKI)."
+      "notes": "Kinerja akademik resmi terintegrasi penuh dari basis data SQL."
     },
     "researchGroups": [
       {
@@ -166,31 +166,31 @@
       },
       {
         "year": 2015,
-        "hIndex": 2
+        "hIndex": 1
       },
       {
         "year": 2016,
-        "hIndex": 4
+        "hIndex": 2
       },
       {
         "year": 2017,
-        "hIndex": 6
+        "hIndex": 2
       },
       {
         "year": 2018,
-        "hIndex": 6
+        "hIndex": 3
       },
       {
         "year": 2019,
-        "hIndex": 6
+        "hIndex": 4
       },
       {
         "year": 2020,
-        "hIndex": 7
+        "hIndex": 5
       },
       {
         "year": 2021,
-        "hIndex": 7
+        "hIndex": 6
       },
       {
         "year": 2022,
@@ -198,7 +198,7 @@
       },
       {
         "year": 2023,
-        "hIndex": 7
+        "hIndex": 8
       },
       {
         "year": 2024,
@@ -206,122 +206,22 @@
       },
       {
         "year": 2025,
-        "hIndex": 11
+        "hIndex": 10
       },
       {
         "year": 2026,
-        "hIndex": 12
+        "hIndex": 10
       }
     ],
     "annualPerformance": [
       {
-        "year": 2026,
-        "p2m": 13,
-        "scopus": 3,
-        "jurnal": 1,
-        "prosiding": null,
-        "buku": 2,
-        "paten": null,
-        "hki": null
-      },
-      {
-        "year": 2025,
-        "p2m": 10,
-        "scopus": 18,
-        "jurnal": 5,
-        "prosiding": null,
-        "buku": 4,
-        "paten": null,
-        "hki": 2
-      },
-      {
-        "year": 2024,
-        "p2m": 9,
-        "scopus": 15,
-        "jurnal": 8,
-        "prosiding": 1,
-        "buku": 2,
-        "paten": null,
-        "hki": 3
-      },
-      {
-        "year": 2023,
-        "p2m": 5,
-        "scopus": 2,
-        "jurnal": 6,
-        "prosiding": 1,
-        "buku": 12,
-        "paten": null,
-        "hki": 9
-      },
-      {
-        "year": 2022,
-        "p2m": 7,
-        "scopus": 1,
-        "jurnal": 1,
-        "prosiding": null,
-        "buku": null,
-        "paten": 1,
-        "hki": 7
-      },
-      {
-        "year": 2021,
-        "p2m": 5,
-        "scopus": 2,
-        "jurnal": 1,
-        "prosiding": null,
-        "buku": 1,
-        "paten": null,
-        "hki": null
-      },
-      {
-        "year": 2020,
-        "p2m": null,
-        "scopus": 1,
-        "jurnal": null,
-        "prosiding": null,
-        "buku": null,
-        "paten": null,
-        "hki": null
-      },
-      {
-        "year": 2019,
+        "year": 2014,
         "p2m": 1,
-        "scopus": 1,
-        "jurnal": null,
-        "prosiding": null,
-        "buku": null,
-        "paten": null,
-        "hki": null
-      },
-      {
-        "year": 2018,
-        "p2m": null,
-        "scopus": 3,
-        "jurnal": null,
-        "prosiding": null,
-        "buku": null,
-        "paten": null,
-        "hki": null
-      },
-      {
-        "year": 2017,
-        "p2m": null,
-        "scopus": 9,
+        "scopus": null,
         "jurnal": 2,
-        "prosiding": 3,
-        "buku": null,
+        "prosiding": 1,
         "paten": null,
-        "hki": null
-      },
-      {
-        "year": 2016,
-        "p2m": 5,
-        "scopus": 5,
-        "jurnal": 4,
-        "prosiding": 2,
-        "buku": null,
-        "paten": null,
+        "buku": 1,
         "hki": null
       },
       {
@@ -330,685 +230,723 @@
         "scopus": 3,
         "jurnal": 2,
         "prosiding": 8,
-        "buku": null,
         "paten": null,
+        "buku": null,
         "hki": null
       },
       {
-        "year": 2014,
-        "p2m": 1,
-        "scopus": null,
-        "jurnal": 2,
-        "prosiding": 1,
-        "buku": 1,
+        "year": 2016,
+        "p2m": 5,
+        "scopus": 5,
+        "jurnal": 4,
+        "prosiding": 2,
         "paten": null,
+        "buku": null,
+        "hki": null
+      },
+      {
+        "year": 2017,
+        "p2m": null,
+        "scopus": 9,
+        "jurnal": 2,
+        "prosiding": 3,
+        "paten": null,
+        "buku": null,
+        "hki": null
+      },
+      {
+        "year": 2018,
+        "p2m": null,
+        "scopus": 3,
+        "jurnal": null,
+        "prosiding": null,
+        "paten": null,
+        "buku": null,
+        "hki": null
+      },
+      {
+        "year": 2019,
+        "p2m": 1,
+        "scopus": 1,
+        "jurnal": null,
+        "prosiding": null,
+        "paten": null,
+        "buku": null,
+        "hki": null
+      },
+      {
+        "year": 2020,
+        "p2m": null,
+        "scopus": 1,
+        "jurnal": null,
+        "prosiding": null,
+        "paten": null,
+        "buku": null,
+        "hki": null
+      },
+      {
+        "year": 2021,
+        "p2m": 5,
+        "scopus": 2,
+        "jurnal": 1,
+        "prosiding": null,
+        "paten": null,
+        "buku": 1,
+        "hki": null
+      },
+      {
+        "year": 2022,
+        "p2m": 7,
+        "scopus": 1,
+        "jurnal": 1,
+        "prosiding": null,
+        "paten": 1,
+        "buku": null,
+        "hki": 7
+      },
+      {
+        "year": 2023,
+        "p2m": 5,
+        "scopus": 2,
+        "jurnal": 6,
+        "prosiding": 1,
+        "paten": null,
+        "buku": 12,
+        "hki": 9
+      },
+      {
+        "year": 2024,
+        "p2m": 9,
+        "scopus": 15,
+        "jurnal": 8,
+        "prosiding": 1,
+        "paten": null,
+        "buku": 2,
+        "hki": 3
+      },
+      {
+        "year": 2025,
+        "p2m": 10,
+        "scopus": 18,
+        "jurnal": 5,
+        "prosiding": null,
+        "paten": null,
+        "buku": 4,
+        "hki": 2
+      },
+      {
+        "year": 2026,
+        "p2m": 13,
+        "scopus": 4,
+        "jurnal": 1,
+        "prosiding": null,
+        "paten": null,
+        "buku": 2,
         "hki": null
       }
     ],
     "p2mActivities": [
       {
-        "id": "p2m-sql-48",
+        "id": "p2m-1",
         "year": 2026,
         "title": "Strategic Decision Making for Refurbishing Across New Product Generations",
         "role": "Ketua",
         "status": "Diterima",
         "jenis": "Penelitian",
         "groupRiset": "Mathematical Modelling, Data Science, and Scientific Machine Learning",
-        "skema": "PENELITIAN SMART I-NETWORK (I-NETWORK UNS)",
-        "dana": "Dana Hibah Internal UNS"
+        "skema": "PENELITIAN SMART I-NETWORK (I-NETWORK UNS)"
       },
       {
-        "id": "p2m-sql-49",
+        "id": "p2m-2",
         "year": 2026,
         "title": "Model Optimasi Electric Vehicle Routing Problem Menggunakan Pendekatan Multi-verse Dan Artificial Protozoa Optimizer",
         "role": "Ketua",
         "status": "Diterima",
         "jenis": "Penelitian",
         "groupRiset": "Mathematical Modelling, Data Science, and Scientific Machine Learning",
-        "skema": "Penelitian Fundamental Reguler (PFR) - KEMDIKTISAINTEK",
-        "dana": "BIMA Kemdiktisaintek RI"
+        "skema": "Penelitian Fundamental Reguler (PFR) - KEMDIKTISAINTEK"
       },
       {
-        "id": "p2m-sql-50",
+        "id": "p2m-3",
         "year": 2026,
         "title": "Smartmapping: Aplikasi Mapping Interaktif Berbasis Data Penjualan Untuk Optimasi Distribusi Dan Strategi Ritel Modern",
         "role": "Ketua",
         "status": "Diterima",
         "jenis": "Penelitian",
         "groupRiset": "Mathematical Modelling, Data Science, and Scientific Machine Learning",
-        "skema": "Program Hilirisasi Riset - Ajakan Industri Tahun 2025",
-        "dana": "Sumber Dana Riset Nasional"
+        "skema": "Program Hilirisasi Riset - Ajakan Industri Tahun 2025"
       },
       {
-        "id": "p2m-sql-51",
+        "id": "p2m-4",
         "year": 2026,
         "title": "Mathematical Modeling And Stability Analysis Of Eco-genetic And Epidemiological Systems",
         "role": "Ketua",
         "status": "Diterima",
         "jenis": "Penelitian",
         "groupRiset": "Mathematical Modelling, Data Science, and Scientific Machine Learning",
-        "skema": "POST-DOCTORAL RESEARCHER Program EQUITY THE Impact Rankings 2025",
-        "dana": "Sumber Dana Riset Nasional"
+        "skema": "POST-DOCTORAL RESEARCHER Program EQUITY THE Impact Rankings 2025"
       },
       {
-        "id": "p2m-sql-52",
+        "id": "p2m-5",
         "year": 2026,
         "title": "Implementasi Ekonomi Sirkular: Pengolahan Residu Jamu Menjadi Pakan Ternak untuk Peningkatan Margin Keuntungan Peternak Skala Rumah Tangga",
         "role": "Ketua",
         "status": "Diterima",
         "jenis": "Pengabdian",
         "groupRiset": "Mathematical Modelling, Data Science, and Scientific Machine Learning",
-        "skema": "PENGABDIAN KEPADA MASYARAKAT HIBAH GRUP RISET (PKM HGR-UNS)",
-        "dana": "Dana Hibah Internal UNS"
+        "skema": "PENGABDIAN KEPADA MASYARAKAT HIBAH GRUP RISET (PKM HGR-UNS)"
       },
       {
-        "id": "p2m-sql-53",
+        "id": "p2m-6",
         "year": 2026,
         "title": "MAPARTA: Smart Navigation App dan Personal Asisten Terintegrasi Cuaca di Surakarta",
         "role": "Ketua",
         "status": "Diterima",
         "jenis": "Penelitian",
         "groupRiset": "Mathematical Modelling, Data Science, and Scientific Machine Learning",
-        "skema": "INKUBASI BISNIS SEMESTA (SEBELAS MARET STARTUP ACADEMY) - PRA STARTUP",
-        "dana": "Sumber Dana Riset Nasional"
+        "skema": "INKUBASI BISNIS SEMESTA (SEBELAS MARET STARTUP ACADEMY) - PRA STARTUP"
       },
       {
-        "id": "p2m-sql-54",
+        "id": "p2m-7",
         "year": 2026,
         "title": "Optimasi Kebijakan Emisi Karbon pada Closed-Loop Supply Chain : Studi Komparatif Carbon Credit Sharing Contract",
         "role": "Ketua",
         "status": "Diterima",
         "jenis": "Penelitian",
         "groupRiset": "Mathematical Modelling, Data Science, and Scientific Machine Learning",
-        "skema": "PENELITIAN PASCASARJANA MAGISTER (PPsM-UNS) Batch 2",
-        "dana": "Dana Hibah Internal UNS"
+        "skema": "PENELITIAN PASCASARJANA MAGISTER (PPsM-UNS) Batch 2"
       },
       {
-        "id": "p2m-sql-55",
+        "id": "p2m-8",
         "year": 2026,
         "title": "Metaheuristic Algorithms and Explainable–Generative AI (XAI and GenAI) for Revenue Management, Electric Vehicle Routing Problems, and Classification Models",
         "role": "Ketua",
         "status": "Diterima",
         "jenis": "Penelitian",
         "groupRiset": "Mathematical Modelling, Data Science, and Scientific Machine Learning",
-        "skema": "PENELITIAN KOLABORASI INTERNASIONAL TOP 100 (iTOP-100 UNS) Batch 2",
-        "dana": "Dana Hibah Internal UNS"
+        "skema": "PENELITIAN KOLABORASI INTERNASIONAL TOP 100 (iTOP-100 UNS) Batch 2"
       },
       {
-        "id": "p2m-sql-56",
+        "id": "p2m-9",
         "year": 2026,
         "title": "Pengembangan Sistem Manajemen Pemasaran Hotel Berbasis Digital Untuk Efisiensi Dan Daya Saing",
         "role": "Ketua",
         "status": "Diterima",
         "jenis": "Penelitian",
         "groupRiset": "Mathematical Modelling, Data Science, and Scientific Machine Learning",
-        "skema": "Program Hilirisasi Riset Prioritas (BOPTN) - Ajakan Industri TA 2026",
-        "dana": "Sumber Dana Riset Nasional"
+        "skema": "Program Hilirisasi Riset Prioritas (BOPTN) - Ajakan Industri TA 2026"
       },
       {
-        "id": "p2m-sql-57",
+        "id": "p2m-10",
         "year": 2026,
         "title": "Pemodelan dan Optimasi Sistem Kompleks Berbasis Data untuk Mendukung SDG’s: Pendekatan Geostatistika, Epidemiologi, Sistem Dinamik, Kendali Optimal, dan Teori Permainan",
         "role": "Anggota",
         "status": "Diterima",
         "jenis": "Penelitian",
         "groupRiset": "Mathematical Modelling, Data Science, and Scientific Machine Learning",
-        "skema": "PENGUATAN KAPASITAS GRUP RISET (PKGR-UNS) A",
-        "dana": "Dana Hibah Internal UNS"
+        "skema": "PENGUATAN KAPASITAS GRUP RISET (PKGR-UNS) A"
       },
       {
-        "id": "p2m-sql-58",
+        "id": "p2m-11",
         "year": 2026,
         "title": "Perluasan Long Short-Term Memory dengan Attention Mechanism untuk pembacaan Data Teks dan Analisis Sentimen (Kasus pada Data Ulasan Produk Marketplace Indonesia)",
         "role": "Anggota",
         "status": "Diterima",
         "jenis": "Penelitian",
         "groupRiset": "Mathematical Modelling, Data Science, and Scientific Machine Learning",
-        "skema": "PENELITIAN FUNDAMENTAL B (PFB-UNS)",
-        "dana": "Dana Hibah Internal UNS"
+        "skema": "PENELITIAN FUNDAMENTAL B (PFB-UNS)"
       },
       {
-        "id": "p2m-sql-59",
+        "id": "p2m-12",
         "year": 2026,
         "title": "Masalah Vektor Eigen, Subvektor Eigen dan Nilai Eigen Bilangan Bulat Matriks atas Aljabar Min-Plus",
         "role": "Anggota",
         "status": "Diterima",
         "jenis": "Penelitian",
         "groupRiset": "Pure Mathematics and Application",
-        "skema": "PENELITIAN FUNDAMENTAL B (PFB-UNS)",
-        "dana": "Dana Hibah Internal UNS"
+        "skema": "PENELITIAN FUNDAMENTAL B (PFB-UNS)"
       },
       {
-        "id": "p2m-sql-60",
+        "id": "p2m-13",
         "year": 2026,
         "title": "AI Medical Check Up Report",
         "role": "Anggota",
         "status": "Diterima",
         "jenis": "Penelitian",
         "groupRiset": "Mathematical Modelling, Data Science, and Scientific Machine Learning",
-        "skema": "Program Hilirisasi Riset Prioritas (BOPTN) - Ajakan Industri TA 2026",
-        "dana": "Sumber Dana Riset Nasional"
+        "skema": "Program Hilirisasi Riset Prioritas (BOPTN) - Ajakan Industri TA 2026"
       },
       {
-        "id": "p2m-sql-38",
+        "id": "p2m-14",
         "year": 2025,
         "title": "Developing a Circular Economy Model for Battery and Electric Vehicles Production Considering Government Subsidies, Contract Systems, Competition, and Marketing Strategies",
         "role": "Ketua",
         "status": "Diterima",
         "jenis": "Penelitian",
         "groupRiset": "Mathematical Modelling, Data Science, and Scientific Machine Learning",
-        "skema": "PENELITIAN KOLABORASI INTERNASIONAL (KI-UNS)",
-        "dana": "Dana Hibah Internal UNS"
+        "skema": "PENELITIAN KOLABORASI INTERNASIONAL (KI-UNS)"
       },
       {
-        "id": "p2m-sql-39",
+        "id": "p2m-15",
         "year": 2025,
         "title": "Pemberdayaan UMKM Berbasis Kayu di Desa Pandeyan Kabupaten Boyolali: Induksi Teknologi dan Optimalisasi Limbah Kayu untuk Produk Kreatif dan Briket",
         "role": "Ketua",
         "status": "Diterima",
         "jenis": "Pengabdian",
         "groupRiset": "Mathematical Modelling, Data Science, and Scientific Machine Learning",
-        "skema": "PENGABDIAN KEPADA MASYARAKAT HIBAH GRUP RISET (PKM HGR-UNS)",
-        "dana": "Dana Hibah Internal UNS"
+        "skema": "PENGABDIAN KEPADA MASYARAKAT HIBAH GRUP RISET (PKM HGR-UNS)"
       },
       {
-        "id": "p2m-sql-40",
+        "id": "p2m-16",
         "year": 2025,
         "title": "Strategic Decision Making for Refurbishing Across New Product Generations",
         "role": "Ketua",
         "status": "Diterima",
         "jenis": "Penelitian",
         "groupRiset": "Mathematical Modelling, Data Science, and Scientific Machine Learning",
-        "skema": "PENELITIAN SMART I-NETWORK (I-NETWORK UNS)",
-        "dana": "Dana Hibah Internal UNS"
+        "skema": "PENELITIAN SMART I-NETWORK (I-NETWORK UNS)"
       },
       {
-        "id": "p2m-sql-41",
+        "id": "p2m-17",
         "year": 2025,
         "title": "Model Optimasi Electric Vehicle Routing Problem Menggunakan Pendekatan Multi-verse Dan Artificial Protozoa Optimizer",
         "role": "Ketua",
         "status": "Diterima",
         "jenis": "Penelitian",
         "groupRiset": "Mathematical Modelling, Data Science, and Scientific Machine Learning",
-        "skema": "Penelitian Fundamental Reguler (PFR) - KEMDIKTISAINTEK",
-        "dana": "BIMA Kemdiktisaintek RI"
+        "skema": "Penelitian Fundamental Reguler (PFR) - KEMDIKTISAINTEK"
       },
       {
-        "id": "p2m-sql-42",
+        "id": "p2m-18",
         "year": 2025,
         "title": "Mathematical Modeling And Stability Analysis Of Eco-genetic And Epidemiological Systems",
         "role": "Ketua",
         "status": "Diterima",
         "jenis": "Penelitian",
         "groupRiset": "Mathematical Modelling, Data Science, and Scientific Machine Learning",
-        "skema": "POST-DOCTORAL RESEARCHER Program EQUITY THE Impact Rankings 2025",
-        "dana": "Sumber Dana Riset Nasional"
+        "skema": "POST-DOCTORAL RESEARCHER Program EQUITY THE Impact Rankings 2025"
       },
       {
-        "id": "p2m-sql-43",
+        "id": "p2m-19",
         "year": 2025,
         "title": "Masalah Eigen Diperumum suatu Matriks atas Aljabar Min-Plus",
         "role": "Anggota",
         "status": "Diterima",
         "jenis": "Penelitian",
         "groupRiset": "Pure Mathematics and Application",
-        "skema": "PENELITIAN FUNDAMENTAL (PF-UNS)",
-        "dana": "Dana Hibah Internal UNS"
+        "skema": "PENELITIAN FUNDAMENTAL (PF-UNS)"
       },
       {
-        "id": "p2m-sql-44",
+        "id": "p2m-20",
         "year": 2025,
         "title": "Skema Permainan Strategi Komplementer dengan Urutan Leksikografi dan Algoritma Genetik Python untuk Menentukan Solusi Optimum Model Green Inventory dengan Emisi Karbon",
         "role": "Anggota",
         "status": "Diterima",
         "jenis": "Penelitian",
         "groupRiset": "Aljabar dan Analisis",
-        "skema": "PENELITIAN FUNDAMENTAL (PF-UNS)",
-        "dana": "Dana Hibah Internal UNS"
+        "skema": "PENELITIAN FUNDAMENTAL (PF-UNS)"
       },
       {
-        "id": "p2m-sql-45",
+        "id": "p2m-21",
         "year": 2025,
         "title": "Konstruksi Model Deterministik dan Nondeterministik pada Kasus Ekonomi-Industri dan Penyebaran Penyakit",
         "role": "Anggota",
         "status": "Diterima",
         "jenis": "Penelitian",
         "groupRiset": "Mathematical Modelling, Data Science, and Scientific Machine Learning",
-        "skema": "PENGUATAN KAPASITAS GRUP RISET (PKGR-UNS) B",
-        "dana": "Dana Hibah Internal UNS"
+        "skema": "PENGUATAN KAPASITAS GRUP RISET (PKGR-UNS) B"
       },
       {
-        "id": "p2m-sql-46",
+        "id": "p2m-22",
         "year": 2025,
         "title": "Pemanfaatan AI dalam Pemasaran Produk Kreatif Berbasis Limbah Kayu: SERULIKA pada Paguyuban Pengrajin di Kecamatan Ngemplak Kabupaten Boyolali",
         "role": "Anggota",
         "status": "Diterima",
         "jenis": "Pengabdian",
         "groupRiset": "Pure Mathematics and Application",
-        "skema": "PROGRAM KEMITRAAN MASYARAKAT (PKM-UNS)",
-        "dana": "Dana Hibah Internal UNS"
+        "skema": "PROGRAM KEMITRAAN MASYARAKAT (PKM-UNS)"
       },
       {
-        "id": "p2m-sql-47",
+        "id": "p2m-23",
         "year": 2025,
         "title": "Efektivitas Intervensi Gizi Spesifik dan Sensitif dalam Pengentasan Stunting pada Balita di Desa Sapen",
         "role": "Anggota",
         "status": "Diterima",
         "jenis": "Pengabdian",
         "groupRiset": "EKONOMI KERAKYATAN, EVOLUSI INSTITUSI DAN STUDI DINAMIKA PEMBANGUNAN",
-        "skema": "Pemberdayaan Kemitraan Masyarakat - KEMDIKTISAINTEK",
-        "dana": "BIMA Kemdiktisaintek RI"
+        "skema": "Pemberdayaan Kemitraan Masyarakat - KEMDIKTISAINTEK"
       },
       {
-        "id": "p2m-sql-29",
+        "id": "p2m-24",
         "year": 2024,
         "title": "Pengembangan Model Refurbishing dalam Circular Economy dengan Mempertimbangkan Eco-Design, Strategi Pemasaran, dan Perilaku Konsumen",
         "role": "Ketua",
         "status": "Diterima",
         "jenis": "Penelitian",
         "groupRiset": "Mathematical Modelling, Data Science, and Scientific Machine Learning",
-        "skema": "PENELITIAN FUNDAMENTAL (PF-UNS)",
-        "dana": "Dana Hibah Internal UNS"
+        "skema": "PENELITIAN FUNDAMENTAL (PF-UNS)"
       },
       {
-        "id": "p2m-sql-30",
+        "id": "p2m-25",
         "year": 2024,
         "title": "Developing a Circular Economy Model for Battery and Electric Vehicles Production Considering Government Subsidies, Contract Systems, Competition, and Marketing Strategies",
         "role": "Ketua",
         "status": "Diterima",
         "jenis": "Penelitian",
         "groupRiset": "Mathematical Modelling, Data Science, and Scientific Machine Learning",
-        "skema": "PENELITIAN KOLABORASI INTERNASIONAL (KI-UNS)",
-        "dana": "Dana Hibah Internal UNS"
+        "skema": "PENELITIAN KOLABORASI INTERNASIONAL (KI-UNS)"
       },
       {
-        "id": "p2m-sql-31",
+        "id": "p2m-26",
         "year": 2024,
         "title": "Inovasi Industri Kreatif Berbasis Limbah Kayu di Desa Pandeyan Ngemplak Boyolali",
         "role": "Ketua",
         "status": "Diterima",
         "jenis": "Pengabdian",
         "groupRiset": "Mathematical Modelling, Data Science, and Scientific Machine Learning",
-        "skema": "PENGABDIAN KEPADA MASYARAKAT HIBAH GRUP RISET (PKM HGR-UNS)",
-        "dana": "Dana Hibah Internal UNS"
+        "skema": "PENGABDIAN KEPADA MASYARAKAT HIBAH GRUP RISET (PKM HGR-UNS)"
       },
       {
-        "id": "p2m-sql-32",
+        "id": "p2m-27",
         "year": 2024,
         "title": "Developing a Cross-Border Circular (Green) Economy Model Considering Consumer Behavior, Carbon Emission Policy, and Marketplace Channels",
         "role": "Anggota",
         "status": "Diterima",
         "jenis": "Penelitian",
         "groupRiset": "Center for Research in Manufacturing System",
-        "skema": "PENELITIAN KOLABORASI INTERNASIONAL TOP 100 (iTOP-100)",
-        "dana": "Sumber Dana Riset Nasional"
+        "skema": "PENELITIAN KOLABORASI INTERNASIONAL TOP 100 (iTOP-100)"
       },
       {
-        "id": "p2m-sql-33",
+        "id": "p2m-28",
         "year": 2024,
         "title": "ANALISIS SENTIMEN REVIEW PRODUK MARKETPLACE INDONESIA, SIMULASI PRODUK DENGAN EASY CARGO, MODEL SUSCEPTIBLE VACCINATED LATENT INFECTED RECOVERED (SVLIR), MODEL REFURBISHING, DAN MODEL SUPPLY CHAIN",
         "role": "Anggota",
         "status": "Diterima",
         "jenis": "Penelitian",
         "groupRiset": "Mathematical Modelling, Data Science, and Scientific Machine Learning",
-        "skema": "PENELITIAN HIBAH GRUP RISET (PENELITIAN HGR-UNS) B",
-        "dana": "Dana Hibah Internal UNS"
+        "skema": "PENELITIAN HIBAH GRUP RISET (PENELITIAN HGR-UNS) B"
       },
       {
-        "id": "p2m-sql-34",
+        "id": "p2m-29",
         "year": 2024,
         "title": "Masalah Eigen Diperumum suatu Matriks atas Aljabar Min-Plus",
         "role": "Anggota",
         "status": "Diterima",
         "jenis": "Penelitian",
         "groupRiset": "Pure Mathematics and Application",
-        "skema": "PENELITIAN FUNDAMENTAL (PF-UNS)",
-        "dana": "Dana Hibah Internal UNS"
+        "skema": "PENELITIAN FUNDAMENTAL (PF-UNS)"
       },
       {
-        "id": "p2m-sql-35",
+        "id": "p2m-30",
         "year": 2024,
         "title": "Skema Permainan Strategi Komplementer dengan Urutan Leksikografi dan Algoritma Genetik Python untuk Menentukan Solusi Optimum Model Green Inventory dengan Emisi Karbon",
         "role": "Anggota",
         "status": "Diterima",
         "jenis": "Penelitian",
         "groupRiset": "Aljabar dan Analisis",
-        "skema": "PENELITIAN FUNDAMENTAL (PF-UNS)",
-        "dana": "Dana Hibah Internal UNS"
+        "skema": "PENELITIAN FUNDAMENTAL (PF-UNS)"
       },
       {
-        "id": "p2m-sql-36",
+        "id": "p2m-31",
         "year": 2024,
         "title": "Strategi Implementasi dan Optimalisasi SOP P2M LPPM UNS Dalam Mewujudkan Zona Integritas",
         "role": "Anggota",
         "status": "Diterima",
         "jenis": "Penelitian",
         "groupRiset": "Staff Universitas Sebelas Maret",
-        "skema": "PENELITIAN TATA KELOLA KEBIJAKAN (PTK-UNS)",
-        "dana": "Dana Hibah Internal UNS"
+        "skema": "PENELITIAN TATA KELOLA KEBIJAKAN (PTK-UNS)"
       },
       {
-        "id": "p2m-sql-37",
+        "id": "p2m-32",
         "year": 2024,
         "title": "Penentuan Label Optimum Pada Pelabelan Refleksif Tak Reguler Sisi Graf Hasil Operasi Corona Path",
         "role": "Anggota",
         "status": "Diterima",
         "jenis": "Penelitian",
         "groupRiset": "Combinatorial Mathematics",
-        "skema": "Penelitian Fundamental Regular",
-        "dana": "Sumber Dana Riset Nasional"
+        "skema": "Penelitian Fundamental Regular"
       },
       {
-        "id": "p2m-sql-24",
+        "id": "p2m-33",
         "year": 2023,
         "title": "Economic, Environmental, and Social Assessment of Refurbishing Strategies in a Competitive Market",
         "role": "Ketua",
         "status": "Diterima",
         "jenis": "Penelitian",
         "groupRiset": "Mathematical Modelling, Data Science, and Scientific Machine Learning",
-        "skema": "PENELITIAN KOLABORASI INTERNASIONAL (KI-UNS)",
-        "dana": "Dana Hibah Internal UNS"
+        "skema": "PENELITIAN KOLABORASI INTERNASIONAL (KI-UNS)"
       },
       {
-        "id": "p2m-sql-25",
+        "id": "p2m-34",
         "year": 2023,
         "title": "Pengembangan Model Refurbishing dalam Circular Economy dengan Mempertimbangkan Eco-Design, Strategi Pemasaran, dan Perilaku Konsumen",
         "role": "Ketua",
         "status": "Diterima",
         "jenis": "Penelitian",
         "groupRiset": "Mathematical Modelling, Data Science, and Scientific Machine Learning",
-        "skema": "PENELITIAN FUNDAMENTAL (PF-UNS)",
-        "dana": "Dana Hibah Internal UNS"
+        "skema": "PENELITIAN FUNDAMENTAL (PF-UNS)"
       },
       {
-        "id": "p2m-sql-26",
+        "id": "p2m-35",
         "year": 2023,
         "title": "TEOREMA CAYLEY HAMILTON DAN PERSAMAAN KARAKTERISTIK SUATU MATRIKS ATAS ALJABAR MIN-PLUS INTERVAL",
         "role": "Anggota",
         "status": "Diterima",
         "jenis": "Penelitian",
         "groupRiset": "Pure Mathematics and Application",
-        "skema": "PENELITIAN FUNDAMENTAL (PF-UNS)",
-        "dana": "Dana Hibah Internal UNS"
+        "skema": "PENELITIAN FUNDAMENTAL (PF-UNS)"
       },
       {
-        "id": "p2m-sql-27",
+        "id": "p2m-36",
         "year": 2023,
         "title": "KAJIAN DAN PENERAPAN: ALGORITME ADAPTIVE BOOSTING DAN ADASYN-MULTINOMIAL NAIVE BAYES, ANALISIS SENTIMENT SERTA MODEL SUSCEPTIBLE VACCINATED LATENT INFECTED RECOVERED (SVLIR), MODEL REFURBISHING, DAN MODEL SUPPLY CHAIN",
         "role": "Anggota",
         "status": "Diterima",
         "jenis": "Penelitian",
         "groupRiset": "Mathematical Modelling, Data Science, and Scientific Machine Learning",
-        "skema": "PENELITIAN HIBAH GRUP RISET (PENELITIAN HGR-UNS) A",
-        "dana": "Dana Hibah Internal UNS"
+        "skema": "PENELITIAN HIBAH GRUP RISET (PENELITIAN HGR-UNS) A"
       },
       {
-        "id": "p2m-sql-28",
+        "id": "p2m-37",
         "year": 2023,
         "title": "Literasi Pendataan Finansial pada Transaksi UMKM dengan Cashier Corner",
         "role": "Anggota",
         "status": "Diterima",
         "jenis": "Pengabdian",
         "groupRiset": "Mathematical Modelling, Data Science, and Scientific Machine Learning",
-        "skema": "PENGABDIAN KEPADA MASYARAKAT HIBAH GRUP RISET (PKM HGR-UNS)",
-        "dana": "Dana Hibah Internal UNS"
+        "skema": "PENGABDIAN KEPADA MASYARAKAT HIBAH GRUP RISET (PKM HGR-UNS)"
       },
       {
-        "id": "p2m-sql-17",
+        "id": "p2m-38",
         "year": 2022,
         "title": "Pengembangan Model Rantai Pasok Terintegrasi Production-inventory-distribution Dengan Mempertimbangkan Efisiensi Energi, Learning In Production, Dan Investasi Untuk Meningkatkan Kualitas Produk",
         "role": "Ketua",
         "status": "Diterima",
         "jenis": "Penelitian",
         "groupRiset": "Mathematical Modelling, Data Science, and Scientific Machine Learning",
-        "skema": "Penelitian Dasar Kompetitif Nasional (PDKN)",
-        "dana": "Sumber Dana Riset Nasional"
+        "skema": "Penelitian Dasar Kompetitif Nasional (PDKN)"
       },
       {
-        "id": "p2m-sql-18",
+        "id": "p2m-39",
         "year": 2022,
         "title": "Economic, Environmental, and Social Assessment of Refurbishing Strategies in a Competitive Market",
         "role": "Ketua",
         "status": "Diterima",
         "jenis": "Penelitian",
         "groupRiset": "Mathematical Modelling, Data Science, and Scientific Machine Learning",
-        "skema": "PENELITIAN KOLABORASI INTERNASIONAL (KI-UNS)",
-        "dana": "Dana Hibah Internal UNS"
+        "skema": "PENELITIAN KOLABORASI INTERNASIONAL (KI-UNS)"
       },
       {
-        "id": "p2m-sql-19",
+        "id": "p2m-40",
         "year": 2022,
         "title": "Strategi dan Desain dalam Model Rantai Pasok untuk Ekonomi Sirkular",
         "role": "Ketua",
         "status": "Diterima",
         "jenis": "Penelitian",
         "groupRiset": "Mathematical Modelling, Data Science, and Scientific Machine Learning",
-        "skema": "PENELITIAN HIBAH GRUP RISET (PENELITIAN HGR-UNS) A",
-        "dana": "Dana Hibah Internal UNS"
+        "skema": "PENELITIAN HIBAH GRUP RISET (PENELITIAN HGR-UNS) A"
       },
       {
-        "id": "p2m-sql-20",
+        "id": "p2m-41",
         "year": 2022,
         "title": "Rumah UMKM Industri Kreatif Pembuatan Paket Produk Sangkar Burung dengan Memanfaatkan Limbah Mebel dan Kain Perca di Kecamatan Ngemplak Kabupaten Boyolali",
         "role": "Ketua",
         "status": "Diterima",
         "jenis": "Pengabdian",
         "groupRiset": "Mathematical Modelling, Data Science, and Scientific Machine Learning",
-        "skema": "PROGRAM KEMITRAAN MASYARAKAT (PKM-UNS)",
-        "dana": "Dana Hibah Internal UNS"
+        "skema": "PROGRAM KEMITRAAN MASYARAKAT (PKM-UNS)"
       },
       {
-        "id": "p2m-sql-21",
+        "id": "p2m-42",
         "year": 2022,
         "title": "Instalasi Mesin Generator Ozon Dan Pemasaran Digital Dalam Meningkatkan Kualitas Dan Pemasaran Kelompok Tani Sayur Organik Di Desa Gedangan Kabupaten Boyolali",
         "role": "Anggota",
         "status": "Diterima",
         "jenis": "Pengabdian",
         "groupRiset": "Agribisnis Berkelanjutan",
-        "skema": "Program Kemitraan Masyarakat (PKM) Tahap II",
-        "dana": "Sumber Dana Riset Nasional"
+        "skema": "Program Kemitraan Masyarakat (PKM) Tahap II"
       },
       {
-        "id": "p2m-sql-22",
+        "id": "p2m-43",
         "year": 2022,
         "title": "TEOREMA CAYLEY HAMILTON DAN PERSAMAAN KARAKTERISTIK SUATU MATRIKS ATAS ALJABAR MIN-PLUS INTERVAL",
         "role": "Anggota",
         "status": "Diterima",
         "jenis": "Penelitian",
         "groupRiset": "Pure Mathematics and Application",
-        "skema": "PENELITIAN FUNDAMENTAL (PF-UNS)",
-        "dana": "Dana Hibah Internal UNS"
+        "skema": "PENELITIAN FUNDAMENTAL (PF-UNS)"
       },
       {
-        "id": "p2m-sql-23",
+        "id": "p2m-44",
         "year": 2022,
         "title": "Digital Marketing untuk Makanan Olahan Jamur di Desa Jatirejo Jumapolo Karanganyar",
         "role": "Anggota",
         "status": "Diterima",
         "jenis": "Pengabdian",
         "groupRiset": "Mathematical Modelling, Data Science, and Scientific Machine Learning",
-        "skema": "PENGABDIAN KEPADA MASYARAKAT HIBAH GRUP RISET (PKM HGR-UNS)",
-        "dana": "Dana Hibah Internal UNS"
+        "skema": "PENGABDIAN KEPADA MASYARAKAT HIBAH GRUP RISET (PKM HGR-UNS)"
       },
       {
-        "id": "p2m-sql-12",
+        "id": "p2m-45",
         "year": 2021,
         "title": "Optimalisasi Bisnis Refurbishing dengan Pendekatan Game Theory dan Discrete Choice Experiment",
         "role": "Ketua",
         "status": "Diterima",
         "jenis": "Penelitian",
         "groupRiset": "Mathematical Modelling, Data Science, and Scientific Machine Learning",
-        "skema": "PENELITIAN MANDIRI",
-        "dana": "Sumber Dana Riset Nasional"
+        "skema": "PENELITIAN MANDIRI"
       },
       {
-        "id": "p2m-sql-13",
+        "id": "p2m-46",
         "year": 2021,
         "title": "Optimalisasi media online sebagai solusi pemasaran UMKM di Kecamatan Tawangmangu Kabupaten Karanganyar di masa pandemi Covid 19",
         "role": "Anggota",
         "status": "Diterima",
         "jenis": "Pengabdian",
         "groupRiset": "Combinatorial Mathematics",
-        "skema": "PENGABDIAN KEPADA MASYARAKAT MANDIRI (PKM MANDIRI)",
-        "dana": "Sumber Dana Riset Nasional"
+        "skema": "PENGABDIAN KEPADA MASYARAKAT MANDIRI (PKM MANDIRI)"
       },
       {
-        "id": "p2m-sql-14",
+        "id": "p2m-47",
         "year": 2021,
         "title": "ANALISIS KONTRAK DALAM RANTAI PASOK SAYURAN DI PASAR MODERN RETAIL: PENDEKATAN BIAYA TRANSAKSI",
         "role": "Anggota",
         "status": "Diterima",
         "jenis": "Penelitian",
         "groupRiset": "Agribisnis Berkelanjutan",
-        "skema": "PENELITIAN MANDIRI",
-        "dana": "Sumber Dana Riset Nasional"
+        "skema": "PENELITIAN MANDIRI"
       },
       {
-        "id": "p2m-sql-15",
+        "id": "p2m-48",
         "year": 2021,
         "title": "Studying and Optimizing Electric Double Layer Capacitor based on Conductive Carbon Materials with Machine Learning Method",
         "role": "Anggota",
         "status": "Diterima",
         "jenis": "Penelitian",
         "groupRiset": "ESMART",
-        "skema": "PENELITIAN MANDIRI",
-        "dana": "Sumber Dana Riset Nasional"
+        "skema": "PENELITIAN MANDIRI"
       },
       {
-        "id": "p2m-sql-16",
+        "id": "p2m-49",
         "year": 2021,
         "title": "Pendampingan Kelompok Bank Sampah di Desa Dibal dengan Pembuatan Komposit dari Sampah",
         "role": "Anggota",
         "status": "Diterima",
         "jenis": "Pengabdian",
         "groupRiset": "ESMART",
-        "skema": "PENGABDIAN KEPADA MASYARAKAT MANDIRI (PKM MANDIRI)",
-        "dana": "Sumber Dana Riset Nasional"
+        "skema": "PENGABDIAN KEPADA MASYARAKAT MANDIRI (PKM MANDIRI)"
       },
       {
-        "id": "p2m-sql-11",
+        "id": "p2m-50",
         "year": 2019,
         "title": "Closed-Loop Supply Chain: Revenue Management in Remanufacturing under Competition, Cannibalization, and Consumer Behavior",
         "role": "Ketua",
         "status": "Diterima",
         "jenis": "Penelitian",
         "groupRiset": "Pemodelan dan Optimasi Matematika",
-        "skema": "Penelitian Disertasi Doktor(PDD-UNS)",
-        "dana": "Dana Hibah Internal UNS"
+        "skema": "Penelitian Disertasi Doktor(PDD-UNS)"
       },
       {
-        "id": "p2m-sql-6",
+        "id": "p2m-51",
         "year": 2016,
         "title": "Pengembangan Model Rantai Pasok Terintegrasi Pemasok-Pengecer dengan Kebijakan Penetapan Harga Barang, Investasi, dan Permintaan Stokastik",
         "role": "Ketua",
         "status": "Diterima",
         "jenis": "Penelitian",
         "groupRiset": "Riset Operasi dan Optimasi",
-        "skema": "Hibah Peneliti Utama Sebagai Rujukan Hibah MRG-UNS",
-        "dana": "Dana Hibah Internal UNS"
+        "skema": "Hibah Peneliti Utama Sebagai Rujukan Hibah MRG-UNS"
       },
       {
-        "id": "p2m-sql-7",
+        "id": "p2m-52",
         "year": 2016,
         "title": "Pengembangan Model Produksi-Persediaan-Distribusi Terintegrasi untuk Single-Manufacturer Multi-Retailer Problem dengan Mempertimbangkan Perbaikan Proses Produksi, Kesalahan Inspeksi, Inflasi, dan Optimasi Jalur Transportasi",
         "role": "Ketua",
         "status": "Diterima",
         "jenis": "Penelitian",
         "groupRiset": "Riset Operasi dan Optimasi",
-        "skema": "Hibah Riset Mandatory (RM-UNS)",
-        "dana": "Dana Hibah Internal UNS"
+        "skema": "Hibah Riset Mandatory (RM-UNS)"
       },
       {
-        "id": "p2m-sql-8",
+        "id": "p2m-53",
         "year": 2016,
         "title": "Peningkatan Kompetensi Guru SD Paseban (sekolah dasar binaan FMIPA UNS) dibidang Teknologi Informasi Menyongsong Era Globalilasi",
         "role": "Ketua",
         "status": "Diterima",
         "jenis": "Pengabdian",
         "groupRiset": "Riset Operasi dan Optimasi",
-        "skema": "Iptek bagi Masyarakat (IbM)",
-        "dana": "Sumber Dana Riset Nasional"
+        "skema": "Iptek bagi Masyarakat (IbM)"
       },
       {
-        "id": "p2m-sql-9",
+        "id": "p2m-54",
         "year": 2016,
         "title": "Distribusi Prior Beta sebagai Prior Konjugat Distribusi Binomial dengan Metode Bayes",
         "role": "Anggota",
         "status": "Diterima",
         "jenis": "Penelitian",
         "groupRiset": "Mathematical Modelling, Data Science, and Scientific Machine Learning",
-        "skema": "Hibah Peneliti Utama Sebagai Rujukan Hibah MRG-UNS",
-        "dana": "Dana Hibah Internal UNS"
+        "skema": "Hibah Peneliti Utama Sebagai Rujukan Hibah MRG-UNS"
       },
       {
-        "id": "p2m-sql-10",
+        "id": "p2m-55",
         "year": 2016,
         "title": "AKSESIBILITAS TRANSPORTASI, KETERSEDIAAN FASILITAS PUBLIK, SARANA WISATA, KONDISI LINGKUNGAN, DAN MITIGASI BENCANA SEBAGAI DETERMINAN INDEKS KUALITAS HIDUP KOTA DALAM RANGKA MEWUJUDKAN PETA JALAN PEMBANGUNAN PERKOTAAN NASIONAL",
         "role": "Anggota",
         "status": "Diterima",
         "jenis": "Penelitian",
         "groupRiset": "statistika terapan dan inferensi",
-        "skema": "Hibah Riset Mandatory (RM-UNS)",
-        "dana": "Dana Hibah Internal UNS"
+        "skema": "Hibah Riset Mandatory (RM-UNS)"
       },
       {
-        "id": "p2m-sql-2",
+        "id": "p2m-56",
         "year": 2015,
         "title": "ibM Sekolah Dasar Binaan Kecamatan Jumapolo Karanganyar untuk meningkatkan inovasi pembelajaran berbasis Information Communication and Technology (SDN 1 Paseban dan SDN 2 Paseban)",
         "role": "Ketua",
         "status": "Diterima",
         "jenis": "Pengabdian",
         "groupRiset": "Riset Operasi dan Optimasi",
-        "skema": "Hibah Iptek bagi Masyarakat (IbM)",
-        "dana": "Sumber Dana Riset Nasional"
+        "skema": "Hibah Iptek bagi Masyarakat (IbM)"
       },
       {
-        "id": "p2m-sql-3",
+        "id": "p2m-57",
         "year": 2015,
         "title": "MODEL INTEGRASI PEMANUFAKTUR DAN PEMBELI DENGAN PROSES PRODUKSI TIDAK SEMPURNA, INSPECTION ERRORS, INVESTASI, KENDALI WAKTU TUNGGU, MULTI KENDALA, DAN PERMINTAAN STOKASTIK",
         "role": "Ketua",
         "status": "Diterima",
         "jenis": "Penelitian",
         "groupRiset": "Riset Operasi dan Optimasi",
-        "skema": "HIBAH PENELITI UTAMA (PUT-UNS) sebagai rujukan HIBAH MAINTENANCE RESEARCH GROUP (MRG-UNS)",
-        "dana": "Dana Hibah Internal UNS"
+        "skema": "HIBAH PENELITI UTAMA (PUT-UNS) sebagai rujukan HIBAH MAINTENANCE RESEARCH GROUP (MRG-UNS)"
       },
       {
-        "id": "p2m-sql-4",
+        "id": "p2m-58",
         "year": 2015,
         "title": "Model Integrasi Random Fuzzy antara Produsen dan Distributor dengan Mempertimbangkan adaya Produk Cacat dan Kendala Tingkat Layanan",
         "role": "Ketua",
         "status": "Diterima",
         "jenis": "Penelitian",
         "groupRiset": "Riset Operasi dan Optimasi",
-        "skema": "Hibah Riset Mandatory 1 (RM-UNS)",
-        "dana": "Dana Hibah Internal UNS"
+        "skema": "Hibah Riset Mandatory 1 (RM-UNS)"
       },
       {
-        "id": "p2m-sql-5",
+        "id": "p2m-59",
         "year": 2015,
         "title": "Pengembangan Model Multi Stage Inventory System untuk Meningkatkan Daya Saing Sistem Supply Chain Industri Suku Cadang",
         "role": "Anggota",
         "status": "Diterima",
         "jenis": "Penelitian",
         "groupRiset": "Pusat Kajian dan Pengembangan Teknologi dan Kolaborasi Industri (PKPTKI)",
-        "skema": "Hibah Riset Mandatory 2 (RM-UNS)",
-        "dana": "Dana Hibah Internal UNS"
+        "skema": "Hibah Riset Mandatory 2 (RM-UNS)"
       },
       {
-        "id": "p2m-sql-1",
+        "id": "p2m-60",
         "year": 2014,
         "title": "Model Persediaan Dengan Fuzzy Probabilistic Number Dan Service Level Constraint Pada Kasus Jumlah Barang Yang Diterima Tidak Tentu",
         "role": "Ketua",
         "status": "Diterima",
         "jenis": "Penelitian",
         "groupRiset": "Riset Operasi dan Optimasi",
-        "skema": "HIBAH PENELITI UTAMA (PUT-UNS)",
-        "dana": "Dana Hibah Internal UNS"
+        "skema": "HIBAH PENELITI UTAMA (PUT-UNS)"
       }
-    ],
-    "linkedinUrl": "https://linkedin.com",
-    "researchGateUrl": "https://researchgate.net"
+    ]
   },
   "publications": [
     {
@@ -1066,7 +1004,7 @@
       "annualCategory": "scopus",
       "isFeatured": true,
       "createdAt": "2026-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.739Z"
+      "updatedAt": "2026-10-26T15:52:40.558Z"
     },
     {
       "id": "scopus-63",
@@ -1107,7 +1045,7 @@
       "annualCategory": "scopus",
       "isFeatured": true,
       "createdAt": "2026-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.739Z"
+      "updatedAt": "2026-10-26T15:52:40.558Z"
     },
     {
       "id": "book-22",
@@ -1138,7 +1076,48 @@
       "annualCategory": "buku",
       "isFeatured": true,
       "createdAt": "2026-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.741Z"
+      "updatedAt": "2026-10-26T15:52:40.560Z"
+    },
+    {
+      "id": "scopus-64",
+      "title": "Percobaan Scopus",
+      "authors": [
+        {
+          "nidn": "0025098501",
+          "name": "Muhammad Raihan Anshari",
+          "role": "Corresponding Author",
+          "affiliation": "Universitas Sebelas Maret (UNS)",
+          "isMainAuthor": false,
+          "order": 1
+        },
+        {
+          "nidn": "0617078501",
+          "name": "Nughthoh Arfawi Kurdhi",
+          "role": "Co-Author",
+          "affiliation": "Universitas Sebelas Maret (UNS)",
+          "isMainAuthor": true,
+          "order": 2
+        }
+      ],
+      "year": 2026,
+      "venue": "Yugoslav Journal of Operations Research",
+      "doi": "10.2298/YJOR240815030S",
+      "url": "https://yujor.fon.bg.ac.rs/index.php/yujor/article/view/942",
+      "abstract": "Karya ilmiah terindeks Scopus Nughthoh Arfawi Kurdhi bersama tim peneliti pada bidang Riset Operasi, Optimasi, dan Closed-Loop Supply Chain. Dipublikasikan pada Yugoslav Journal of Operations Research (2026).",
+      "keywords": [
+        "Scopus Indexed",
+        "Operations Research",
+        "Optimization",
+        "Mathematical Modelling"
+      ],
+      "category": "Scopus Indexed Publication",
+      "type": "Scopus Publications",
+      "status": "Published",
+      "connectToAnnual": true,
+      "annualCategory": "scopus",
+      "isFeatured": true,
+      "createdAt": "2026-01-01T00:00:00.000Z",
+      "updatedAt": "2026-10-26T15:52:40.558Z"
     },
     {
       "id": "journal-32",
@@ -1193,7 +1172,7 @@
       "annualCategory": "jurnal",
       "isFeatured": true,
       "createdAt": "2026-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.740Z"
+      "updatedAt": "2026-10-26T15:52:40.559Z"
     },
     {
       "id": "book-21",
@@ -1248,7 +1227,7 @@
       "annualCategory": "buku",
       "isFeatured": true,
       "createdAt": "2026-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.741Z"
+      "updatedAt": "2026-10-26T15:52:40.560Z"
     },
     {
       "id": "scopus-61",
@@ -1297,7 +1276,7 @@
       "annualCategory": "scopus",
       "isFeatured": true,
       "createdAt": "2026-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.739Z"
+      "updatedAt": "2026-10-26T15:52:40.558Z"
     },
     {
       "id": "journal-28",
@@ -1344,7 +1323,7 @@
       "annualCategory": "jurnal",
       "isFeatured": true,
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.740Z"
+      "updatedAt": "2026-10-26T15:52:40.559Z"
     },
     {
       "id": "scopus-53",
@@ -1401,7 +1380,7 @@
       "annualCategory": "scopus",
       "isFeatured": true,
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.740Z"
+      "updatedAt": "2026-10-26T15:52:40.558Z"
     },
     {
       "id": "scopus-60",
@@ -1466,7 +1445,7 @@
       "annualCategory": "scopus",
       "isFeatured": true,
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.740Z"
+      "updatedAt": "2026-10-26T15:52:40.558Z"
     },
     {
       "id": "scopus-45",
@@ -1515,7 +1494,7 @@
       "annualCategory": "scopus",
       "isFeatured": true,
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.739Z"
+      "updatedAt": "2026-10-26T15:52:40.558Z"
     },
     {
       "id": "scopus-58",
@@ -1572,7 +1551,7 @@
       "annualCategory": "scopus",
       "isFeatured": true,
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.740Z"
+      "updatedAt": "2026-10-26T15:52:40.558Z"
     },
     {
       "id": "scopus-43",
@@ -1629,7 +1608,7 @@
       "annualCategory": "scopus",
       "isFeatured": true,
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.739Z"
+      "updatedAt": "2026-10-26T15:52:40.558Z"
     },
     {
       "id": "scopus-46",
@@ -1670,7 +1649,7 @@
       "annualCategory": "scopus",
       "isFeatured": true,
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.739Z"
+      "updatedAt": "2026-10-26T15:52:40.558Z"
     },
     {
       "id": "book-17",
@@ -1709,7 +1688,7 @@
       "annualCategory": "buku",
       "isFeatured": true,
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.741Z"
+      "updatedAt": "2026-10-26T15:52:40.560Z"
     },
     {
       "id": "scopus-54",
@@ -1766,7 +1745,7 @@
       "annualCategory": "scopus",
       "isFeatured": true,
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.740Z"
+      "updatedAt": "2026-10-26T15:52:40.558Z"
     },
     {
       "id": "scopus-47",
@@ -1815,7 +1794,7 @@
       "annualCategory": "scopus",
       "isFeatured": true,
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.739Z"
+      "updatedAt": "2026-10-26T15:52:40.558Z"
     },
     {
       "id": "scopus-51",
@@ -1856,7 +1835,7 @@
       "annualCategory": "scopus",
       "isFeatured": true,
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.740Z"
+      "updatedAt": "2026-10-26T15:52:40.558Z"
     },
     {
       "id": "scopus-52",
@@ -1897,7 +1876,7 @@
       "annualCategory": "scopus",
       "isFeatured": true,
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.740Z"
+      "updatedAt": "2026-10-26T15:52:40.558Z"
     },
     {
       "id": "book-18",
@@ -1984,7 +1963,7 @@
       "annualCategory": "buku",
       "isFeatured": true,
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.741Z"
+      "updatedAt": "2026-10-26T15:52:40.560Z"
     },
     {
       "id": "patent-22",
@@ -2063,7 +2042,7 @@
       "annualCategory": "hki",
       "isFeatured": true,
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.742Z"
+      "updatedAt": "2026-10-26T15:52:40.560Z"
     },
     {
       "id": "book-20",
@@ -2158,7 +2137,7 @@
       "annualCategory": "buku",
       "isFeatured": true,
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.741Z"
+      "updatedAt": "2026-10-26T15:52:40.560Z"
     },
     {
       "id": "book-19",
@@ -2205,7 +2184,7 @@
       "annualCategory": "buku",
       "isFeatured": true,
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.741Z"
+      "updatedAt": "2026-10-26T15:52:40.560Z"
     },
     {
       "id": "scopus-57",
@@ -2246,7 +2225,7 @@
       "annualCategory": "scopus",
       "isFeatured": true,
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.740Z"
+      "updatedAt": "2026-10-26T15:52:40.558Z"
     },
     {
       "id": "journal-27",
@@ -2285,7 +2264,7 @@
       "annualCategory": "jurnal",
       "isFeatured": true,
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.740Z"
+      "updatedAt": "2026-10-26T15:52:40.559Z"
     },
     {
       "id": "scopus-55",
@@ -2326,7 +2305,7 @@
       "annualCategory": "scopus",
       "isFeatured": true,
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.740Z"
+      "updatedAt": "2026-10-26T15:52:40.558Z"
     },
     {
       "id": "patent-21",
@@ -2373,7 +2352,7 @@
       "annualCategory": "hki",
       "isFeatured": true,
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.742Z"
+      "updatedAt": "2026-10-26T15:52:40.560Z"
     },
     {
       "id": "journal-29",
@@ -2460,7 +2439,7 @@
       "annualCategory": "jurnal",
       "isFeatured": true,
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.740Z"
+      "updatedAt": "2026-10-26T15:52:40.559Z"
     },
     {
       "id": "journal-31",
@@ -2507,7 +2486,7 @@
       "annualCategory": "jurnal",
       "isFeatured": true,
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.740Z"
+      "updatedAt": "2026-10-26T15:52:40.559Z"
     },
     {
       "id": "scopus-59",
@@ -2564,7 +2543,7 @@
       "annualCategory": "scopus",
       "isFeatured": true,
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.740Z"
+      "updatedAt": "2026-10-26T15:52:40.558Z"
     },
     {
       "id": "scopus-49",
@@ -2613,7 +2592,7 @@
       "annualCategory": "scopus",
       "isFeatured": true,
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.740Z"
+      "updatedAt": "2026-10-26T15:52:40.558Z"
     },
     {
       "id": "scopus-50",
@@ -2654,7 +2633,7 @@
       "annualCategory": "scopus",
       "isFeatured": true,
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.740Z"
+      "updatedAt": "2026-10-26T15:52:40.558Z"
     },
     {
       "id": "scopus-44",
@@ -2703,7 +2682,7 @@
       "annualCategory": "scopus",
       "isFeatured": true,
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.739Z"
+      "updatedAt": "2026-10-26T15:52:40.558Z"
     },
     {
       "id": "scopus-48",
@@ -2752,7 +2731,7 @@
       "annualCategory": "scopus",
       "isFeatured": true,
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.739Z"
+      "updatedAt": "2026-10-26T15:52:40.558Z"
     },
     {
       "id": "scopus-56",
@@ -2793,7 +2772,7 @@
       "annualCategory": "scopus",
       "isFeatured": true,
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.740Z"
+      "updatedAt": "2026-10-26T15:52:40.558Z"
     },
     {
       "id": "journal-30",
@@ -2856,7 +2835,7 @@
       "annualCategory": "jurnal",
       "isFeatured": true,
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.740Z"
+      "updatedAt": "2026-10-26T15:52:40.559Z"
     },
     {
       "id": "scopus-42",
@@ -2913,7 +2892,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2024-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.740Z"
+      "updatedAt": "2026-10-26T15:52:40.559Z"
     },
     {
       "id": "journal-20",
@@ -2960,7 +2939,7 @@
       "annualCategory": "jurnal",
       "isFeatured": false,
       "createdAt": "2024-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.741Z"
+      "updatedAt": "2026-10-26T15:52:40.559Z"
     },
     {
       "id": "journal-23",
@@ -3007,7 +2986,7 @@
       "annualCategory": "jurnal",
       "isFeatured": false,
       "createdAt": "2024-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.741Z"
+      "updatedAt": "2026-10-26T15:52:40.559Z"
     },
     {
       "id": "scopus-32",
@@ -3064,7 +3043,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2024-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.740Z"
+      "updatedAt": "2026-10-26T15:52:40.558Z"
     },
     {
       "id": "journal-24",
@@ -3111,7 +3090,7 @@
       "annualCategory": "jurnal",
       "isFeatured": false,
       "createdAt": "2024-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.741Z"
+      "updatedAt": "2026-10-26T15:52:40.559Z"
     },
     {
       "id": "journal-21",
@@ -3166,7 +3145,7 @@
       "annualCategory": "jurnal",
       "isFeatured": false,
       "createdAt": "2024-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.741Z"
+      "updatedAt": "2026-10-26T15:52:40.559Z"
     },
     {
       "id": "journal-19",
@@ -3213,7 +3192,7 @@
       "annualCategory": "jurnal",
       "isFeatured": false,
       "createdAt": "2024-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.740Z"
+      "updatedAt": "2026-10-26T15:52:40.559Z"
     },
     {
       "id": "scopus-30",
@@ -3254,7 +3233,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2024-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.740Z"
+      "updatedAt": "2026-10-26T15:52:40.558Z"
     },
     {
       "id": "book-15",
@@ -3309,7 +3288,7 @@
       "annualCategory": "buku",
       "isFeatured": false,
       "createdAt": "2024-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.741Z"
+      "updatedAt": "2026-10-26T15:52:40.560Z"
     },
     {
       "id": "scopus-39",
@@ -3358,7 +3337,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2024-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.740Z"
+      "updatedAt": "2026-10-26T15:52:40.558Z"
     },
     {
       "id": "proceeding-16",
@@ -3397,7 +3376,7 @@
       "annualCategory": "prosiding",
       "isFeatured": true,
       "createdAt": "2024-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.741Z"
+      "updatedAt": "2026-10-26T15:52:40.560Z"
     },
     {
       "id": "journal-22",
@@ -3444,7 +3423,7 @@
       "annualCategory": "jurnal",
       "isFeatured": false,
       "createdAt": "2024-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.741Z"
+      "updatedAt": "2026-10-26T15:52:40.559Z"
     },
     {
       "id": "scopus-28",
@@ -3493,7 +3472,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2024-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.740Z"
+      "updatedAt": "2026-10-26T15:52:40.558Z"
     },
     {
       "id": "scopus-33",
@@ -3542,7 +3521,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2024-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.740Z"
+      "updatedAt": "2026-10-26T15:52:40.558Z"
     },
     {
       "id": "journal-25",
@@ -3597,7 +3576,7 @@
       "annualCategory": "jurnal",
       "isFeatured": false,
       "createdAt": "2024-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.741Z"
+      "updatedAt": "2026-10-26T15:52:40.559Z"
     },
     {
       "id": "scopus-36",
@@ -3654,7 +3633,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2024-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.740Z"
+      "updatedAt": "2026-10-26T15:52:40.558Z"
     },
     {
       "id": "journal-26",
@@ -3725,7 +3704,7 @@
       "annualCategory": "jurnal",
       "isFeatured": false,
       "createdAt": "2024-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.741Z"
+      "updatedAt": "2026-10-26T15:52:40.559Z"
     },
     {
       "id": "scopus-37",
@@ -3782,7 +3761,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2024-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.740Z"
+      "updatedAt": "2026-10-26T15:52:40.558Z"
     },
     {
       "id": "scopus-40",
@@ -3831,7 +3810,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2024-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.740Z"
+      "updatedAt": "2026-10-26T15:52:40.558Z"
     },
     {
       "id": "book-16",
@@ -3878,7 +3857,7 @@
       "annualCategory": "buku",
       "isFeatured": false,
       "createdAt": "2024-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.741Z"
+      "updatedAt": "2026-10-26T15:52:40.560Z"
     },
     {
       "id": "scopus-41",
@@ -3927,7 +3906,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2024-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.740Z"
+      "updatedAt": "2026-10-26T15:52:40.559Z"
     },
     {
       "id": "patent-19",
@@ -3958,7 +3937,7 @@
       "annualCategory": "hki",
       "isFeatured": true,
       "createdAt": "2024-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.742Z"
+      "updatedAt": "2026-10-26T15:52:40.561Z"
     },
     {
       "id": "patent-20",
@@ -3997,7 +3976,7 @@
       "annualCategory": "hki",
       "isFeatured": true,
       "createdAt": "2024-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.742Z"
+      "updatedAt": "2026-10-26T15:52:40.561Z"
     },
     {
       "id": "scopus-29",
@@ -4038,7 +4017,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2024-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.740Z"
+      "updatedAt": "2026-10-26T15:52:40.558Z"
     },
     {
       "id": "patent-18",
@@ -4093,7 +4072,7 @@
       "annualCategory": "hki",
       "isFeatured": true,
       "createdAt": "2024-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.742Z"
+      "updatedAt": "2026-10-26T15:52:40.560Z"
     },
     {
       "id": "scopus-38",
@@ -4150,7 +4129,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2024-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.740Z"
+      "updatedAt": "2026-10-26T15:52:40.558Z"
     },
     {
       "id": "scopus-31",
@@ -4207,7 +4186,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2024-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.740Z"
+      "updatedAt": "2026-10-26T15:52:40.558Z"
     },
     {
       "id": "scopus-35",
@@ -4248,7 +4227,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2024-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.740Z"
+      "updatedAt": "2026-10-26T15:52:40.558Z"
     },
     {
       "id": "scopus-34",
@@ -4297,7 +4276,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2024-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.740Z"
+      "updatedAt": "2026-10-26T15:52:40.558Z"
     },
     {
       "id": "patent-12",
@@ -4328,7 +4307,7 @@
       "annualCategory": "hki",
       "isFeatured": false,
       "createdAt": "2023-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.742Z"
+      "updatedAt": "2026-10-26T15:52:40.561Z"
     },
     {
       "id": "book-7",
@@ -4375,7 +4354,7 @@
       "annualCategory": "buku",
       "isFeatured": false,
       "createdAt": "2023-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.742Z"
+      "updatedAt": "2026-10-26T15:52:40.560Z"
     },
     {
       "id": "patent-15",
@@ -4406,7 +4385,7 @@
       "annualCategory": "hki",
       "isFeatured": false,
       "createdAt": "2023-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.742Z"
+      "updatedAt": "2026-10-26T15:52:40.561Z"
     },
     {
       "id": "scopus-26",
@@ -4487,7 +4466,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2023-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.740Z"
+      "updatedAt": "2026-10-26T15:52:40.559Z"
     },
     {
       "id": "journal-17",
@@ -4534,7 +4513,7 @@
       "annualCategory": "jurnal",
       "isFeatured": false,
       "createdAt": "2023-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.741Z"
+      "updatedAt": "2026-10-26T15:52:40.559Z"
     },
     {
       "id": "proceeding-15",
@@ -4581,7 +4560,7 @@
       "annualCategory": "prosiding",
       "isFeatured": false,
       "createdAt": "2023-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.741Z"
+      "updatedAt": "2026-10-26T15:52:40.560Z"
     },
     {
       "id": "journal-13",
@@ -4628,7 +4607,7 @@
       "annualCategory": "jurnal",
       "isFeatured": false,
       "createdAt": "2023-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.741Z"
+      "updatedAt": "2026-10-26T15:52:40.559Z"
     },
     {
       "id": "journal-14",
@@ -4683,7 +4662,7 @@
       "annualCategory": "jurnal",
       "isFeatured": false,
       "createdAt": "2023-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.741Z"
+      "updatedAt": "2026-10-26T15:52:40.559Z"
     },
     {
       "id": "journal-16",
@@ -4730,7 +4709,7 @@
       "annualCategory": "jurnal",
       "isFeatured": false,
       "createdAt": "2023-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.741Z"
+      "updatedAt": "2026-10-26T15:52:40.559Z"
     },
     {
       "id": "patent-10",
@@ -4761,7 +4740,7 @@
       "annualCategory": "hki",
       "isFeatured": false,
       "createdAt": "2023-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.742Z"
+      "updatedAt": "2026-10-26T15:52:40.561Z"
     },
     {
       "id": "book-9",
@@ -4896,7 +4875,7 @@
       "annualCategory": "buku",
       "isFeatured": false,
       "createdAt": "2023-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.742Z"
+      "updatedAt": "2026-10-26T15:52:40.560Z"
     },
     {
       "id": "book-6",
@@ -4999,7 +4978,7 @@
       "annualCategory": "buku",
       "isFeatured": false,
       "createdAt": "2023-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.742Z"
+      "updatedAt": "2026-10-26T15:52:40.560Z"
     },
     {
       "id": "book-5",
@@ -5102,7 +5081,7 @@
       "annualCategory": "buku",
       "isFeatured": false,
       "createdAt": "2023-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.742Z"
+      "updatedAt": "2026-10-26T15:52:40.560Z"
     },
     {
       "id": "patent-9",
@@ -5133,7 +5112,7 @@
       "annualCategory": "hki",
       "isFeatured": false,
       "createdAt": "2023-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.742Z"
+      "updatedAt": "2026-10-26T15:52:40.561Z"
     },
     {
       "id": "book-8",
@@ -5236,7 +5215,7 @@
       "annualCategory": "buku",
       "isFeatured": false,
       "createdAt": "2023-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.742Z"
+      "updatedAt": "2026-10-26T15:52:40.560Z"
     },
     {
       "id": "book-12",
@@ -5283,7 +5262,7 @@
       "annualCategory": "buku",
       "isFeatured": false,
       "createdAt": "2023-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.742Z"
+      "updatedAt": "2026-10-26T15:52:40.560Z"
     },
     {
       "id": "patent-16",
@@ -5314,7 +5293,7 @@
       "annualCategory": "hki",
       "isFeatured": false,
       "createdAt": "2023-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.742Z"
+      "updatedAt": "2026-10-26T15:52:40.561Z"
     },
     {
       "id": "journal-18",
@@ -5361,7 +5340,7 @@
       "annualCategory": "jurnal",
       "isFeatured": false,
       "createdAt": "2023-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.741Z"
+      "updatedAt": "2026-10-26T15:52:40.559Z"
     },
     {
       "id": "journal-15",
@@ -5424,7 +5403,7 @@
       "annualCategory": "jurnal",
       "isFeatured": false,
       "createdAt": "2023-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.741Z"
+      "updatedAt": "2026-10-26T15:52:40.559Z"
     },
     {
       "id": "book-3",
@@ -5527,7 +5506,7 @@
       "annualCategory": "buku",
       "isFeatured": false,
       "createdAt": "2023-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.742Z"
+      "updatedAt": "2026-10-26T15:52:40.560Z"
     },
     {
       "id": "book-4",
@@ -5630,7 +5609,7 @@
       "annualCategory": "buku",
       "isFeatured": false,
       "createdAt": "2023-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.742Z"
+      "updatedAt": "2026-10-26T15:52:40.560Z"
     },
     {
       "id": "scopus-27",
@@ -5679,7 +5658,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2023-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.740Z"
+      "updatedAt": "2026-10-26T15:52:40.559Z"
     },
     {
       "id": "patent-13",
@@ -5710,7 +5689,7 @@
       "annualCategory": "hki",
       "isFeatured": false,
       "createdAt": "2023-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.742Z"
+      "updatedAt": "2026-10-26T15:52:40.561Z"
     },
     {
       "id": "book-10",
@@ -5813,7 +5792,7 @@
       "annualCategory": "buku",
       "isFeatured": false,
       "createdAt": "2023-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.742Z"
+      "updatedAt": "2026-10-26T15:52:40.560Z"
     },
     {
       "id": "patent-11",
@@ -5844,7 +5823,7 @@
       "annualCategory": "hki",
       "isFeatured": false,
       "createdAt": "2023-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.742Z"
+      "updatedAt": "2026-10-26T15:52:40.561Z"
     },
     {
       "id": "book-13",
@@ -5987,7 +5966,7 @@
       "annualCategory": "buku",
       "isFeatured": false,
       "createdAt": "2023-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.742Z"
+      "updatedAt": "2026-10-26T15:52:40.560Z"
     },
     {
       "id": "patent-17",
@@ -6018,7 +5997,7 @@
       "annualCategory": "hki",
       "isFeatured": false,
       "createdAt": "2023-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.742Z"
+      "updatedAt": "2026-10-26T15:52:40.561Z"
     },
     {
       "id": "book-14",
@@ -6137,7 +6116,7 @@
       "annualCategory": "buku",
       "isFeatured": false,
       "createdAt": "2023-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.742Z"
+      "updatedAt": "2026-10-26T15:52:40.560Z"
     },
     {
       "id": "book-11",
@@ -6184,7 +6163,7 @@
       "annualCategory": "buku",
       "isFeatured": false,
       "createdAt": "2023-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.742Z"
+      "updatedAt": "2026-10-26T15:52:40.560Z"
     },
     {
       "id": "patent-14",
@@ -6215,7 +6194,7 @@
       "annualCategory": "hki",
       "isFeatured": false,
       "createdAt": "2023-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.742Z"
+      "updatedAt": "2026-10-26T15:52:40.561Z"
     },
     {
       "id": "patent-7",
@@ -6254,7 +6233,7 @@
       "annualCategory": "hki",
       "isFeatured": false,
       "createdAt": "2022-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.742Z"
+      "updatedAt": "2026-10-26T15:52:40.561Z"
     },
     {
       "id": "patent-5",
@@ -6285,7 +6264,7 @@
       "annualCategory": "hki",
       "isFeatured": false,
       "createdAt": "2022-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.742Z"
+      "updatedAt": "2026-10-26T15:52:40.561Z"
     },
     {
       "id": "patent-6",
@@ -6316,7 +6295,7 @@
       "annualCategory": "hki",
       "isFeatured": false,
       "createdAt": "2022-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.742Z"
+      "updatedAt": "2026-10-26T15:52:40.561Z"
     },
     {
       "id": "patent-4",
@@ -6347,7 +6326,7 @@
       "annualCategory": "hki",
       "isFeatured": false,
       "createdAt": "2022-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.742Z"
+      "updatedAt": "2026-10-26T15:52:40.561Z"
     },
     {
       "id": "patent-3",
@@ -6378,7 +6357,7 @@
       "annualCategory": "hki",
       "isFeatured": false,
       "createdAt": "2022-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.742Z"
+      "updatedAt": "2026-10-26T15:52:40.561Z"
     },
     {
       "id": "patent-2",
@@ -6409,7 +6388,7 @@
       "annualCategory": "hki",
       "isFeatured": false,
       "createdAt": "2022-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.742Z"
+      "updatedAt": "2026-10-26T15:52:40.561Z"
     },
     {
       "id": "scopus-25",
@@ -6458,7 +6437,7 @@
       "annualCategory": "scopus",
       "isFeatured": true,
       "createdAt": "2022-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.740Z"
+      "updatedAt": "2026-10-26T15:52:40.559Z"
     },
     {
       "id": "patent-8",
@@ -6497,7 +6476,7 @@
       "annualCategory": "hki",
       "isFeatured": false,
       "createdAt": "2022-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.742Z"
+      "updatedAt": "2026-10-26T15:52:40.561Z"
     },
     {
       "id": "journal-12",
@@ -6552,7 +6531,7 @@
       "annualCategory": "jurnal",
       "isFeatured": false,
       "createdAt": "2022-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.741Z"
+      "updatedAt": "2026-10-26T15:52:40.559Z"
     },
     {
       "id": "patent-1",
@@ -6623,7 +6602,7 @@
       "annualCategory": "paten",
       "isFeatured": false,
       "createdAt": "2022-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.742Z"
+      "updatedAt": "2026-10-26T15:52:40.561Z"
     },
     {
       "id": "scopus-23",
@@ -6656,7 +6635,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2021-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.740Z"
+      "updatedAt": "2026-10-26T15:52:40.559Z"
     },
     {
       "id": "journal-11",
@@ -6711,7 +6690,7 @@
       "annualCategory": "jurnal",
       "isFeatured": false,
       "createdAt": "2021-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.741Z"
+      "updatedAt": "2026-10-26T15:52:40.559Z"
     },
     {
       "id": "scopus-24",
@@ -6760,7 +6739,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2021-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.740Z"
+      "updatedAt": "2026-10-26T15:52:40.559Z"
     },
     {
       "id": "book-2",
@@ -6791,7 +6770,7 @@
       "annualCategory": "buku",
       "isFeatured": false,
       "createdAt": "2021-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.742Z"
+      "updatedAt": "2026-10-26T15:52:40.560Z"
     },
     {
       "id": "scopus-22",
@@ -6840,7 +6819,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2020-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.740Z"
+      "updatedAt": "2026-10-26T15:52:40.559Z"
     },
     {
       "id": "scopus-21",
@@ -6880,7 +6859,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2019-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.740Z"
+      "updatedAt": "2026-10-26T15:52:40.559Z"
     },
     {
       "id": "scopus-19",
@@ -6929,7 +6908,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2018-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.740Z"
+      "updatedAt": "2026-10-26T15:52:40.559Z"
     },
     {
       "id": "scopus-20",
@@ -6978,7 +6957,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2018-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.740Z"
+      "updatedAt": "2026-10-26T15:52:40.559Z"
     },
     {
       "id": "scopus-18",
@@ -7019,7 +6998,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2018-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.740Z"
+      "updatedAt": "2026-10-26T15:52:40.559Z"
     },
     {
       "id": "scopus-16",
@@ -7068,7 +7047,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2017-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.740Z"
+      "updatedAt": "2026-10-26T15:52:40.559Z"
     },
     {
       "id": "scopus-13",
@@ -7125,7 +7104,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2017-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.740Z"
+      "updatedAt": "2026-10-26T15:52:40.559Z"
     },
     {
       "id": "proceeding-12",
@@ -7180,7 +7159,7 @@
       "annualCategory": "prosiding",
       "isFeatured": false,
       "createdAt": "2017-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.741Z"
+      "updatedAt": "2026-10-26T15:52:40.560Z"
     },
     {
       "id": "scopus-10",
@@ -7221,7 +7200,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2017-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.740Z"
+      "updatedAt": "2026-10-26T15:52:40.559Z"
     },
     {
       "id": "journal-10",
@@ -7260,7 +7239,7 @@
       "annualCategory": "jurnal",
       "isFeatured": false,
       "createdAt": "2017-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.741Z"
+      "updatedAt": "2026-10-26T15:52:40.559Z"
     },
     {
       "id": "scopus-15",
@@ -7317,7 +7296,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2017-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.740Z"
+      "updatedAt": "2026-10-26T15:52:40.559Z"
     },
     {
       "id": "scopus-11",
@@ -7357,7 +7336,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2017-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.740Z"
+      "updatedAt": "2026-10-26T15:52:40.559Z"
     },
     {
       "id": "scopus-14",
@@ -7398,7 +7377,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2017-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.740Z"
+      "updatedAt": "2026-10-26T15:52:40.559Z"
     },
     {
       "id": "proceeding-13",
@@ -7437,7 +7416,7 @@
       "annualCategory": "prosiding",
       "isFeatured": false,
       "createdAt": "2017-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.741Z"
+      "updatedAt": "2026-10-26T15:52:40.560Z"
     },
     {
       "id": "scopus-17",
@@ -7478,7 +7457,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2017-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.740Z"
+      "updatedAt": "2026-10-26T15:52:40.559Z"
     },
     {
       "id": "proceeding-14",
@@ -7541,7 +7520,7 @@
       "annualCategory": "prosiding",
       "isFeatured": false,
       "createdAt": "2017-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.741Z"
+      "updatedAt": "2026-10-26T15:52:40.560Z"
     },
     {
       "id": "scopus-9",
@@ -7582,7 +7561,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2017-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.740Z"
+      "updatedAt": "2026-10-26T15:52:40.559Z"
     },
     {
       "id": "journal-9",
@@ -7621,7 +7600,7 @@
       "annualCategory": "jurnal",
       "isFeatured": false,
       "createdAt": "2017-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.741Z"
+      "updatedAt": "2026-10-26T15:52:40.559Z"
     },
     {
       "id": "scopus-12",
@@ -7670,7 +7649,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2017-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.740Z"
+      "updatedAt": "2026-10-26T15:52:40.559Z"
     },
     {
       "id": "scopus-4",
@@ -7711,7 +7690,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2016-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.740Z"
+      "updatedAt": "2026-10-26T15:52:40.559Z"
     },
     {
       "id": "journal-7",
@@ -7758,7 +7737,7 @@
       "annualCategory": "jurnal",
       "isFeatured": false,
       "createdAt": "2016-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.741Z"
+      "updatedAt": "2026-10-26T15:52:40.559Z"
     },
     {
       "id": "scopus-8",
@@ -7806,7 +7785,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2016-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.740Z"
+      "updatedAt": "2026-10-26T15:52:40.559Z"
     },
     {
       "id": "journal-6",
@@ -7853,7 +7832,7 @@
       "annualCategory": "jurnal",
       "isFeatured": false,
       "createdAt": "2016-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.741Z"
+      "updatedAt": "2026-10-26T15:52:40.559Z"
     },
     {
       "id": "scopus-6",
@@ -7894,7 +7873,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2016-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.740Z"
+      "updatedAt": "2026-10-26T15:52:40.559Z"
     },
     {
       "id": "scopus-5",
@@ -7927,7 +7906,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2016-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.740Z"
+      "updatedAt": "2026-10-26T15:52:40.559Z"
     },
     {
       "id": "scopus-7",
@@ -7960,7 +7939,7 @@
       "annualCategory": "scopus",
       "isFeatured": true,
       "createdAt": "2016-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.740Z"
+      "updatedAt": "2026-10-26T15:52:40.559Z"
     },
     {
       "id": "journal-5",
@@ -8023,7 +8002,7 @@
       "annualCategory": "jurnal",
       "isFeatured": false,
       "createdAt": "2016-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.741Z"
+      "updatedAt": "2026-10-26T15:52:40.559Z"
     },
     {
       "id": "proceeding-11",
@@ -8070,7 +8049,7 @@
       "annualCategory": "prosiding",
       "isFeatured": false,
       "createdAt": "2016-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.741Z"
+      "updatedAt": "2026-10-26T15:52:40.560Z"
     },
     {
       "id": "journal-8",
@@ -8117,7 +8096,7 @@
       "annualCategory": "jurnal",
       "isFeatured": false,
       "createdAt": "2016-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.741Z"
+      "updatedAt": "2026-10-26T15:52:40.559Z"
     },
     {
       "id": "proceeding-10",
@@ -8172,7 +8151,7 @@
       "annualCategory": "prosiding",
       "isFeatured": false,
       "createdAt": "2016-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.741Z"
+      "updatedAt": "2026-10-26T15:52:40.560Z"
     },
     {
       "id": "scopus-1",
@@ -8220,7 +8199,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2015-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.740Z"
+      "updatedAt": "2026-10-26T15:52:40.559Z"
     },
     {
       "id": "journal-3",
@@ -8267,7 +8246,7 @@
       "annualCategory": "jurnal",
       "isFeatured": false,
       "createdAt": "2015-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.741Z"
+      "updatedAt": "2026-10-26T15:52:40.559Z"
     },
     {
       "id": "proceeding-9",
@@ -8314,7 +8293,7 @@
       "annualCategory": "prosiding",
       "isFeatured": false,
       "createdAt": "2015-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.741Z"
+      "updatedAt": "2026-10-26T15:52:40.560Z"
     },
     {
       "id": "scopus-2",
@@ -8362,7 +8341,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2015-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.740Z"
+      "updatedAt": "2026-10-26T15:52:40.559Z"
     },
     {
       "id": "proceeding-5",
@@ -8409,7 +8388,7 @@
       "annualCategory": "prosiding",
       "isFeatured": false,
       "createdAt": "2015-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.741Z"
+      "updatedAt": "2026-10-26T15:52:40.560Z"
     },
     {
       "id": "journal-4",
@@ -8456,7 +8435,7 @@
       "annualCategory": "jurnal",
       "isFeatured": false,
       "createdAt": "2015-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.741Z"
+      "updatedAt": "2026-10-26T15:52:40.559Z"
     },
     {
       "id": "proceeding-4",
@@ -8503,7 +8482,7 @@
       "annualCategory": "prosiding",
       "isFeatured": false,
       "createdAt": "2015-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.741Z"
+      "updatedAt": "2026-10-26T15:52:40.560Z"
     },
     {
       "id": "scopus-3",
@@ -8551,7 +8530,7 @@
       "annualCategory": "scopus",
       "isFeatured": false,
       "createdAt": "2015-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.740Z"
+      "updatedAt": "2026-10-26T15:52:40.559Z"
     },
     {
       "id": "proceeding-8",
@@ -8598,7 +8577,7 @@
       "annualCategory": "prosiding",
       "isFeatured": false,
       "createdAt": "2015-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.741Z"
+      "updatedAt": "2026-10-26T15:52:40.560Z"
     },
     {
       "id": "proceeding-3",
@@ -8653,7 +8632,7 @@
       "annualCategory": "prosiding",
       "isFeatured": false,
       "createdAt": "2015-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.741Z"
+      "updatedAt": "2026-10-26T15:52:40.560Z"
     },
     {
       "id": "proceeding-7",
@@ -8708,7 +8687,7 @@
       "annualCategory": "prosiding",
       "isFeatured": false,
       "createdAt": "2015-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.741Z"
+      "updatedAt": "2026-10-26T15:52:40.560Z"
     },
     {
       "id": "proceeding-6",
@@ -8763,7 +8742,7 @@
       "annualCategory": "prosiding",
       "isFeatured": false,
       "createdAt": "2015-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.741Z"
+      "updatedAt": "2026-10-26T15:52:40.560Z"
     },
     {
       "id": "proceeding-2",
@@ -8810,7 +8789,7 @@
       "annualCategory": "prosiding",
       "isFeatured": false,
       "createdAt": "2015-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.741Z"
+      "updatedAt": "2026-10-26T15:52:40.560Z"
     },
     {
       "id": "journal-1",
@@ -8849,7 +8828,7 @@
       "annualCategory": "jurnal",
       "isFeatured": false,
       "createdAt": "2014-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.741Z"
+      "updatedAt": "2026-10-26T15:52:40.559Z"
     },
     {
       "id": "proceeding-1",
@@ -8912,7 +8891,7 @@
       "annualCategory": "prosiding",
       "isFeatured": false,
       "createdAt": "2014-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.741Z"
+      "updatedAt": "2026-10-26T15:52:40.560Z"
     },
     {
       "id": "book-1",
@@ -8943,7 +8922,7 @@
       "annualCategory": "buku",
       "isFeatured": false,
       "createdAt": "2014-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.742Z"
+      "updatedAt": "2026-10-26T15:52:40.560Z"
     },
     {
       "id": "journal-2",
@@ -8990,904 +8969,163 @@
       "annualCategory": "jurnal",
       "isFeatured": false,
       "createdAt": "2014-01-01T00:00:00.000Z",
-      "updatedAt": "2026-10-25T10:30:22.741Z"
+      "updatedAt": "2026-10-26T15:52:40.559Z"
     }
   ],
   "students": [
     {
-      "id": "digilib-1009761",
-      "docId": 1009761,
-      "name": "Adib Haidar Zaky",
-      "nim": "M0122002",
+      "id": "res-1",
+      "studentResearchId": 1,
+      "sourceTable": "student_research",
+      "name": "Fidelithu Vristher",
+      "nim": "M0123037",
       "degree": "Sarjana Matematika (S1)",
-      "researchTopic": "WGAN-GP, Transfer Learning, CNN, Data Tiruan, Kerusakan Permukaan Pesawat",
-      "thesisTitle": "Penerapan Model Wasserstein GANs with Gradient Penalty dan Transfer Learning dalam Model Convolutional Neural Network pada Gambar Kerusakan Permukaan Pesawat",
-      "thesisAbstract": "Kata Kunci: WGAN-GP, Transfer Learning, CNN, Data Tiruan, Kerusakan Permukaan Pesawat",
-      "startYear": 2022,
-      "graduationYear": 2026,
-      "status": "Graduated",
-      "currentAffiliation": "Surakarta-Fak. MIPA-2026",
-      "notes": "Matematika • MIPA • Surakarta-Fak. MIPA-2026",
-      "pdfFileName": "Skripsi_1009761_Adib_Haidar_Zaky.pdf",
-      "pdfFileId": "file-digilib-1009761",
-      "digilibUrl": "https://digilib.uns.ac.id/dokumen/detail/1009761",
+      "researchTopic": "Deep Learning; Computer Vision; Generative Models; Transfer Learning; Railway Surface Defect Classification",
+      "thesisTitle": "Penerapan auxiliary classifier generative adversarial network dan transfer learning pada convolutional neural network untuk klasifikasi kerusakan permukaan roda kereta",
+      "thesisAbstract": "Topik Riset: Deep Learning; Computer Vision; Generative Models; Transfer Learning; Railway Surface Defect Classification",
+      "startYear": 2023,
+      "graduationYear": 2024,
+      "status": "Active",
+      "currentAffiliation": "Matematika, FMIPA UNS",
+      "notes": "Matematika • FMIPA • Proposal & Bimbingan Aktif",
       "pembimbing": "Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.",
-      "kataKunci": "WGAN-GP, Transfer Learning, CNN, Data Tiruan, Kerusakan Permukaan Pesawat",
       "programStudi": "Matematika",
-      "fakultas": "MIPA",
-      "jenisDokumen": "Skripsi",
+      "fakultas": "FMIPA",
+      "jenisDokumen": "Proposal Skripsi",
+      "hasInfographic": false,
       "infographic": {
-        "title": "Penerapan Model Wasserstein GANs",
-        "studentName": "Adib Haidar Zaky",
-        "nim": "M0122002",
-        "degree": "Sarjana Matematika (S1)",
-        "customImageUrl": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200",
-        "generatedByAi": false,
-        "studentId": "digilib-1009761",
-        "lastUpdated": "2026-10-25T10:30:29.205Z"
-      },
-      "hasInfographic": true
-    },
-    {
-      "id": "digilib-1008916",
-      "docId": 1008916,
-      "name": "Agrippina Nicola Putra",
-      "nim": "M0122006",
-      "degree": "Sarjana Matematika (S1)",
-      "researchTopic": "Machine learning, explainable AI, Emas, Peramalan",
-      "thesisTitle": "Model Machine Learning dan Algoritme Optimized Lime Explanations (OptiLIME) Untuk Prediksi Harga Emas",
-      "thesisAbstract": "Kata Kunci: Machine learning, explainable AI, Emas, Peramalan",
-      "startYear": 2022,
-      "graduationYear": 2026,
-      "status": "Graduated",
-      "currentAffiliation": "Surakarta - Fak. MIPA - 2026",
-      "notes": "S-1 Matematika • Fak. MIPA • Surakarta - Fak. MIPA - 2026",
-      "pdfFileName": "Skripsi_1008916_Agrippina_Nicola_Putra.pdf",
-      "pdfFileId": "file-digilib-1008916",
-      "digilibUrl": "https://digilib.uns.ac.id/dokumen/detail/1008916/Model-Machine-Learning-dan-Algoritme-Optimized-Lime-Explanations-OptiLIME-Untuk-Prediksi-Harga-Emas",
-      "pembimbing": "1. Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.\r\n2. Prof. Dr. Dewi Retno Sari Saputro, S.Si., M.Kom.",
-      "penguji": "1. Dra. Purnami Widyaningsih, M.App.Sc.\r\n2. Dr. Supriyadi Wibowo, S.Si., M.Si.",
-      "kataKunci": "Machine learning, explainable AI, Emas, Peramalan",
-      "programStudi": "S-1 Matematika",
-      "fakultas": "Fak. MIPA",
-      "jenisDokumen": "Skripsi",
-      "hasInfographic": false
-    },
-    {
-      "id": "digilib-1008869",
-      "docId": 1008869,
-      "name": "Shiva Mahira Bagindo",
-      "nim": "M0122080",
-      "degree": "Sarjana Matematika (S1)",
-      "researchTopic": "Vehicle Routing Problem with Time Windows (VRPTW); Artificial Rabbits Optimization (ARO); waiting time; tardiness; metaheuristik.",
-      "thesisTitle": "Optimasi Model Vehicle Routing Problem With Time Windows (VRPTW) dengan Penalti Tardiness dan Waiting Time menggunakan Artificial Rabbit Optimization",
-      "thesisAbstract": "Kata Kunci: Vehicle Routing Problem with Time Windows (VRPTW); Artificial Rabbits Optimization (ARO); waiting time; tardiness; metaheuristik.",
-      "startYear": 2022,
-      "graduationYear": 2026,
-      "status": "Graduated",
-      "currentAffiliation": "Surakarta-Fak. MIPA-2026",
-      "notes": "Matematika • Surakarta-Fak. MIPA-2026",
-      "pdfFileName": "Skripsi_1008869_Shiva_Mahira_Bagindo.pdf",
-      "pdfFileId": "file-digilib-1008869",
-      "digilibUrl": "https://digilib.uns.ac.id/dokumen/detail/1008869/Optimasi-Model-Vehicle-Routing-Problem-With-Time-Windows-VRPTW-dengan-Penalti-Tardiness-dan-Waiting-Time-menggunakan-Artificial-Rabbit-Optimization",
-      "pembimbing": "Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.",
-      "kataKunci": "Vehicle Routing Problem with Time Windows (VRPTW); Artificial Rabbits Optimization (ARO); waiting time; tardiness; metaheuristik.",
-      "programStudi": "Matematika",
-      "fakultas": "MIPA",
-      "jenisDokumen": "Skripsi",
-      "hasInfographic": false
-    },
-    {
-      "id": "digilib-1008827",
-      "docId": 1008827,
-      "name": "Callista Zada Fernanda",
-      "nim": "M0122018",
-      "degree": "Sarjana Matematika (S1)",
-      "researchTopic": "Manajemen Persediaan; Persediaan Multi-Item; Service Level; Lead Time; Pelican Optimization Algorithm; Metahueristic.",
-      "thesisTitle": "Penyelesaian Model Persediaan Multi-Item dengan Kendala Service Level dan Lead Time menggunakan Pelican Optimization Algorithm",
-      "thesisAbstract": "Kata Kunci: Manajemen Persediaan; Persediaan Multi-Item; Service Level; Lead Time; Pelican Optimization Algorithm; Metahueristic.",
-      "startYear": 2022,
-      "graduationYear": 2026,
-      "status": "Graduated",
-      "currentAffiliation": "Surakarta-Fak. MIPA-2026",
-      "notes": "Matematika • Surakarta-Fak. MIPA-2026",
-      "pdfFileName": "Skripsi_1008827_Callista_Zada_Fernanda.pdf",
-      "pdfFileId": "file-digilib-1008827",
-      "digilibUrl": "https://digilib.uns.ac.id/dokumen/detail/1008827/Penyelesaian-Model-Persediaan-Multi-Item-dengan-Kendala-Service-Level-dan-Lead-Time-menggunakan-Pelican-Optimization-Algorithm",
-      "pembimbing": "Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.",
-      "kataKunci": "Manajemen Persediaan; Persediaan Multi-Item; Service Level; Lead Time; Pelican Optimization Algorithm; Metahueristic.",
-      "programStudi": "Matematika",
-      "fakultas": "MIPA",
-      "jenisDokumen": "Skripsi",
-      "hasInfographic": false
-    },
-    {
-      "id": "digilib-1007174",
-      "docId": 1007174,
-      "name": "Elsa Zakia Damayanti",
-      "nim": "M0119026",
-      "degree": "Sarjana Matematika (S1)",
-      "researchTopic": "closed-loop supply chain, deposit-refund system, subsidi pemerintah, stackelberg, recycling",
-      "thesisTitle": "Model Closed-Loop Supply Chain dengan Mempertimbangkan Deposit-Refund System dan Subsidi Pemerintah",
-      "thesisAbstract": "Kata Kunci: closed-loop supply chain, deposit-refund system, subsidi pemerintah, stackelberg, recycling",
-      "startYear": 2022,
-      "graduationYear": 2026,
-      "status": "Graduated",
-      "currentAffiliation": "Surakarta-Fak. MIPA-2026",
-      "notes": "Matematika • Surakarta-Fak. MIPA-2026",
-      "pdfFileName": "Skripsi_1007174_Elsa_Zakia_Damayanti.pdf",
-      "pdfFileId": "file-digilib-1007174",
-      "digilibUrl": "https://digilib.uns.ac.id/dokumen/detail/1007174/Model-Closed-Loop-Supply-Chain-dengan-Mempertimbangkan-Deposit-Refund-System-dan-Subsidi-Pemerintah",
-      "pembimbing": "Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.",
-      "kataKunci": "closed-loop supply chain, deposit-refund system, subsidi pemerintah, stackelberg, recycling",
-      "programStudi": "Matematika",
-      "fakultas": "MIPA",
-      "jenisDokumen": "Skripsi",
-      "hasInfographic": false
-    },
-    {
-      "id": "digilib-1004479",
-      "docId": 1004479,
-      "name": "Nikmatull Tsalasa Putri",
-      "nim": "M0122073",
-      "degree": "Sarjana Matematika (S1)",
-      "researchTopic": "battery energy storage system (BESS), crayfish optimization algorithm (COA), state of charge (SoC), sistem distribusi, optimasi, metaheuristik",
-      "thesisTitle": "Optimasi Model Battery Energy Storage System Terintegrasi Photovoltaic dan Electric Vehicle dengan Kendala State of Charge Menggunakan Crayfish Optimization Algorithm",
-      "thesisAbstract": "Kata Kunci: battery energy storage system (BESS), crayfish optimization algorithm (COA), state of charge (SoC), sistem distribusi, optimasi, metaheuristik",
-      "startYear": 2022,
-      "graduationYear": 2026,
-      "status": "Graduated",
-      "currentAffiliation": "Surakarta-Fak. MIPA-2026",
-      "notes": "Matematika • Surakarta-Fak. MIPA-2026",
-      "pdfFileName": "Skripsi_1004479_Nikmatull_Tsalasa_Putri.pdf",
-      "pdfFileId": "file-digilib-1004479",
-      "digilibUrl": "https://digilib.uns.ac.id/dokumen/detail/1004479/Optimasi-Model-Battery-Energy-Storage-System-Terintegrasi-Photovoltaic-dan-Electric-Vehicle-dengan-Kendala-State-of-Charge-Menggunakan-Crayfish-Optimization-Algorithm",
-      "pembimbing": "Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.",
-      "kataKunci": "battery energy storage system (BESS), crayfish optimization algorithm (COA), state of charge (SoC), sistem distribusi, optimasi, metaheuristik",
-      "programStudi": "Matematika",
-      "fakultas": "MIPA",
-      "jenisDokumen": "Skripsi",
-      "hasInfographic": false
-    },
-    {
-      "id": "digilib-1004418",
-      "docId": 1004418,
-      "name": "Adinda Putri Azzahra",
-      "nim": "M0122004",
-      "degree": "Sarjana Matematika (S1)",
-      "researchTopic": "Vehicle Routing Problem, Green, Capacitated, Time Windows, Golden Jackal Optimization, Penyelesaian optimal",
-      "thesisTitle": "Optimasi Model Green-Capacitated Vehicle Routing Problem with Time Windows Menggunakan Algoritme Golden Jackal Optimization",
-      "thesisAbstract": "Kata Kunci: Vehicle Routing Problem, Green, Capacitated, Time Windows, Golden Jackal Optimization, Penyelesaian optimal",
-      "startYear": 2022,
-      "graduationYear": 2026,
-      "status": "Graduated",
-      "currentAffiliation": "Surakarta-Fak. MIPA-2026",
-      "notes": "Matematika • Surakarta-Fak. MIPA-2026",
-      "pdfFileName": "Skripsi_1004418_Adinda_Putri_Azzahra.pdf",
-      "pdfFileId": "file-digilib-1004418",
-      "digilibUrl": "https://digilib.uns.ac.id/dokumen/detail/1004418/Optimasi-Model-Green-Capacitated-Vehicle-Routing-Problem-with-Time-Windows-Menggunakan-Algoritme-Golden-Jackal-Optimization",
-      "pembimbing": "Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.",
-      "kataKunci": "Vehicle Routing Problem, Green, Capacitated, Time Windows, Golden Jackal Optimization, Penyelesaian optimal",
-      "programStudi": "Matematika",
-      "fakultas": "MIPA",
-      "jenisDokumen": "Skripsi",
-      "hasInfographic": false
-    },
-    {
-      "id": "digilib-1004105",
-      "docId": 1004105,
-      "name": "Denisa Dwi Nanjalina",
-      "nim": "M0122026",
-      "degree": "Sarjana Matematika (S1)",
-      "researchTopic": "sistem persediaan multi-item, kapasitas gudang, anggaran pembelian, Honey Badger Algorithm, penyelesaian optimal.",
-      "thesisTitle": "Optimasi Model Sistem Persediaan Multi-Item dengan Kendala Kapasitas Gudang dan Anggaran Pembelian Menggunakan Honey Badger Algorithm",
-      "thesisAbstract": "Kata Kunci: sistem persediaan multi-item, kapasitas gudang, anggaran pembelian, Honey Badger Algorithm, penyelesaian optimal.",
-      "startYear": 2022,
-      "graduationYear": 2026,
-      "status": "Graduated",
-      "currentAffiliation": "Surakarta-Fak. MIPA-2026",
-      "notes": "Matematika • Surakarta-Fak. MIPA-2026",
-      "pdfFileName": "Skripsi_1004105_Denisa_Dwi_Nanjalina.pdf",
-      "pdfFileId": "file-digilib-1004105",
-      "digilibUrl": "https://digilib.uns.ac.id/dokumen/detail/1004105/Optimasi-Model-Sistem-Persediaan-Multi-Item-dengan-Kendala-Kapasitas-Gudang-dan-Anggaran-Pembelian-Menggunakan-Honey-Badger-Algorithm",
-      "pembimbing": "Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.",
-      "kataKunci": "sistem persediaan multi-item, kapasitas gudang, anggaran pembelian, Honey Badger Algorithm, penyelesaian optimal.",
-      "programStudi": "Matematika",
-      "fakultas": "MIPA",
-      "jenisDokumen": "Skripsi",
-      "hasInfographic": false
-    },
-    {
-      "id": "digilib-131030",
-      "docId": 131030,
-      "name": "Sectio Krisna Wijaya",
-      "nim": "M0121065",
-      "degree": "Sarjana Matematika (S1)",
-      "researchTopic": "Machine Learning, LSTM, GRU, GRU-LSTM, LIME, Explainable AI, EV, Tesla, XAI",
-      "thesisTitle": "Penerapan Local Interpretable Model-Agnostic Explanations (LIME) Terhadap Prediksi Model Machine Learning pada Harga Saham TSLA",
-      "thesisAbstract": "Kata Kunci: Machine Learning, LSTM, GRU, GRU-LSTM, LIME, Explainable AI, EV, Tesla, XAI",
-      "startYear": 2021,
-      "graduationYear": 2025,
-      "status": "Graduated",
-      "currentAffiliation": "Surakarta-Fak. MIPA-2025",
-      "notes": "Matematika • Surakarta-Fak. MIPA-2025",
-      "pdfFileName": "Skripsi_131030_Sectio_Krisna_Wijaya.pdf",
-      "pdfFileId": "file-digilib-131030",
-      "digilibUrl": "https://digilib.uns.ac.id/dokumen/detail/131030/Penerapan-Local-Interpretable-Model-Agnostic-Explanations-LIME-Terhadap-Prediksi-Model-Machine-Learning-pada-Harga-Saham-TSLA",
-      "pembimbing": "Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.",
-      "kataKunci": "Machine Learning, LSTM, GRU, GRU-LSTM, LIME, Explainable AI, EV, Tesla, XAI",
-      "programStudi": "Matematika",
-      "fakultas": "MIPA",
-      "jenisDokumen": "Skripsi",
-      "hasInfographic": false
-    },
-    {
-      "id": "digilib-130878",
-      "docId": 130878,
-      "name": "Nabila Nur Afifah",
-      "nim": "M0121053",
-      "degree": "Sarjana Matematika (S1)",
-      "researchTopic": "electric vehicle; time windows; algoritme antlion; metaheuristik",
-      "thesisTitle": "Optimasi Model Electric Vehicle Routing Problem with Time Windows (EVRPTW) degan Algoritme Antlion Optimizer",
-      "thesisAbstract": "Kata Kunci: electric vehicle; time windows; algoritme antlion; metaheuristik",
-      "startYear": 2021,
-      "graduationYear": 2025,
-      "status": "Graduated",
-      "currentAffiliation": "SURAKARTA-Fak. MIPA-2025",
-      "notes": "Matematika • SURAKARTA-Fak. MIPA-2025",
-      "pdfFileName": "Skripsi_130878_Nabila_Nur_Afifah.pdf",
-      "pdfFileId": "file-digilib-130878",
-      "digilibUrl": "https://digilib.uns.ac.id/dokumen/detail/130878/Optimasi-Model-Electric-Vehicle-Routing-Problem-with-Time-Windows-EVRPTW-degan-Algoritme-Antlion-Optimizer",
-      "pembimbing": "Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.",
-      "kataKunci": "electric vehicle; time windows; algoritme antlion; metaheuristik",
-      "programStudi": "Matematika",
-      "fakultas": "MIPA",
-      "jenisDokumen": "Skripsi",
-      "hasInfographic": false
-    },
-    {
-      "id": "digilib-130873",
-      "docId": 130873,
-      "name": "Hamda Yauma Istiqlala",
-      "nim": "M0121037",
-      "degree": "Sarjana Matematika (S1)",
-      "researchTopic": "Ekspor-Impor; prediksi; SHAP; machine learning",
-      "thesisTitle": "Analisis Kontribusi Faktor-Faktor dalam Prediksi Nilai dan Volume Ekspor-Impor pada Pintu Pelabuhan Tanjung Perak dengan Machine Learning dan Shapley Value",
-      "thesisAbstract": "Kata Kunci: Ekspor-Impor; prediksi; SHAP; machine learning",
-      "startYear": 2021,
-      "graduationYear": 2025,
-      "status": "Graduated",
-      "currentAffiliation": "SURAKARTA-Fak. MIPA-2025",
-      "notes": "Matematika • SURAKARTA-Fak. MIPA-2025",
-      "pdfFileName": "Skripsi_130873_Hamda_Yauma_Istiqlala.pdf",
-      "pdfFileId": "file-digilib-130873",
-      "digilibUrl": "https://digilib.uns.ac.id/dokumen/detail/130873/Analisis-Kontribusi-Faktor-Faktor-dalam-Prediksi-Nilai-dan-Volume-Ekspor-Impor-pada-Pintu-Pelabuhan-Tanjung-Perak-dengan-Machine-Learning-dan-Shapley-Value",
-      "pembimbing": "Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.",
-      "kataKunci": "Ekspor-Impor; prediksi; SHAP; machine learning",
-      "programStudi": "Matematika",
-      "fakultas": "MIPA",
-      "jenisDokumen": "Skripsi",
-      "hasInfographic": false
-    },
-    {
-      "id": "digilib-126012",
-      "docId": 126012,
-      "name": "Dedi Arianto",
-      "nim": "M0121025",
-      "degree": "Sarjana Matematika (S1)",
-      "researchTopic": "DCGAN, Augmentasi Data, Deteksi Cacat, CNN, Otomatisasi Industri.",
-      "thesisTitle": "Penerapan Deep Convolutional Generative Adversarial Networks (DCGAN) dan Transfer Learning dalam Model Convolutional Neural Network (CNN) untuk Inspeksi Kerusakan pada Piston Kendaraan",
-      "thesisAbstract": "Kata Kunci: DCGAN, Augmentasi Data, Deteksi Cacat, CNN, Otomatisasi Industri.",
-      "startYear": 2021,
-      "graduationYear": 2025,
-      "status": "Graduated",
-      "currentAffiliation": "Surakarta-Fak. MIPA-2025",
-      "notes": "Matematika • Surakarta-Fak. MIPA-2025",
-      "pdfFileName": "Skripsi_126012_Dedi_Arianto.pdf",
-      "pdfFileId": "file-digilib-126012",
-      "digilibUrl": "https://digilib.uns.ac.id/dokumen/detail/126012/Penerapan-Deep-Convolutional-Generative-Adversarial-Networks-DCGAN-dan-Transfer-Learning-dalam-Model-Convolutional-Neural-Network-CNN-untuk-Inspeksi-Kerusakan-pada-Piston-Kendaraan",
-      "pembimbing": "Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.",
-      "kataKunci": "DCGAN, Augmentasi Data, Deteksi Cacat, CNN, Otomatisasi Industri.",
-      "programStudi": "Matematika",
-      "fakultas": "MIPA",
-      "jenisDokumen": "Skripsi",
-      "hasInfographic": false
-    },
-    {
-      "id": "digilib-118319",
-      "docId": 118319,
-      "name": "Danendra Amrih",
-      "nim": "M0120019",
-      "degree": "Sarjana Matematika (S1)",
-      "researchTopic": "Supply Chain, Stackelberg, Fuel Cell Electric Vehicle, Insentif Pemerintah, Kontrak",
-      "thesisTitle": "Model Supply Chain Pada Fuel Cell Electric Vehicle Dengan Mempertimbangkan Insentif Pemerintah Dan Kontrak",
-      "thesisAbstract": "Kata Kunci: Supply Chain, Stackelberg, Fuel Cell Electric Vehicle, Insentif Pemerintah, Kontrak",
-      "startYear": 2020,
-      "graduationYear": 2024,
-      "status": "Graduated",
-      "currentAffiliation": "Surakarta-Fak. MIPA-2024",
-      "notes": "Matematika • Surakarta-Fak. MIPA-2024",
-      "pdfFileName": "Skripsi_118319_Danendra_Amrih.pdf",
-      "pdfFileId": "file-digilib-118319",
-      "digilibUrl": "https://digilib.uns.ac.id/dokumen/detail/118319/Model-Supply-Chain-Pada-Fuel-Cell-Electric-Vehicle-Dengan-Mempertimbangkan-Insentif-Pemerintah-Dan-Kontrak",
-      "pembimbing": "Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.",
-      "kataKunci": "Supply Chain, Stackelberg, Fuel Cell Electric Vehicle, Insentif Pemerintah, Kontrak",
-      "programStudi": "Matematika",
-      "fakultas": "MIPA",
-      "jenisDokumen": "Skripsi",
-      "hasInfographic": false
-    },
-    {
-      "id": "digilib-118250",
-      "docId": 118250,
-      "name": "Clarinda Cheril Wikana",
-      "nim": "M0120017",
-      "degree": "Sarjana Matematika (S1)",
-      "researchTopic": "supply chain, kendaraan listrik, subsidi pemerintah, pengecer",
-      "thesisTitle": "Model Supply Chain pada Produksi Kendaraan Listrik dengan Mempertimbangkan Pemasaran Produk dan Subsidi Pemerintah",
-      "thesisAbstract": "Kata Kunci: supply chain, kendaraan listrik, subsidi pemerintah, pengecer",
-      "startYear": 2020,
-      "graduationYear": 2024,
-      "status": "Graduated",
-      "currentAffiliation": "Surakarta-Fak. MIPA-2024",
-      "notes": "Matematika • Surakarta-Fak. MIPA-2024",
-      "pdfFileName": "Skripsi_118250_Clarinda_Cheril_Wikana.pdf",
-      "pdfFileId": "file-digilib-118250",
-      "digilibUrl": "https://digilib.uns.ac.id/dokumen/detail/118250/Model-Supply-Chain-pada-Produksi-Kendaraan-Listrik-dengan-Mempertimbangkan-Pemasaran-Produk-dan-Subsidi-Pemerintah",
-      "pembimbing": "Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.",
-      "kataKunci": "supply chain, kendaraan listrik, subsidi pemerintah, pengecer",
-      "programStudi": "Matematika",
-      "fakultas": "MIPA",
-      "jenisDokumen": "Skripsi",
-      "hasInfographic": false
-    },
-    {
-      "id": "digilib-114083",
-      "docId": 114083,
-      "name": "Tegar Ahmad Arsy",
-      "nim": "M0120071",
-      "degree": "Sarjana Matematika (S1)",
-      "researchTopic": "Bitcoin; prediksi; SHAP; machine learning",
-      "thesisTitle": "Analisis Kontribusi Faktor-Faktor Dalam Prediksi Harga Cryptocurrency Dengan Machine Learning Dan Shapley Value",
-      "thesisAbstract": "Kata Kunci: Bitcoin; prediksi; SHAP; machine learning",
-      "startYear": 2020,
-      "graduationYear": 2024,
-      "status": "Graduated",
-      "currentAffiliation": "Surakarta-Fak. MIPA-2024",
-      "notes": "Matematika • Surakarta-Fak. MIPA-2024",
-      "pdfFileName": "Skripsi_114083_Tegar_Ahmad_Arsy.pdf",
-      "pdfFileId": "file-digilib-114083",
-      "digilibUrl": "https://digilib.uns.ac.id/dokumen/detail/114083/Analisis-Kontribusi-Faktor-Faktor-Dalam-Prediksi-Harga-Cryptocurrency-Dengan-Machine-Learning-Dan-Shapley-Value",
-      "pembimbing": "Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.",
-      "kataKunci": "Bitcoin; prediksi; SHAP; machine learning",
-      "programStudi": "Matematika",
-      "fakultas": "MIPA",
-      "jenisDokumen": "Skripsi",
-      "hasInfographic": false
-    },
-    {
-      "id": "digilib-109257",
-      "docId": 109257,
-      "name": "Sarah Nurul Faridah",
-      "nim": "M0119080",
-      "degree": "Sarjana Matematika (S1)",
-      "researchTopic": "model refurbishing; masalah optimasi; keuntungan optimal; emisi karbon",
-      "thesisTitle": "Model Refurbishing dengan Mempertimbangkan Strategi Pemasaran dan Kendala Kapasitas Emisi Karbon",
-      "thesisAbstract": "Kata Kunci: model refurbishing; masalah optimasi; keuntungan optimal; emisi karbon",
-      "startYear": 2019,
-      "graduationYear": 2023,
-      "status": "Graduated",
-      "currentAffiliation": "Surakarta-Fak. MIPA-2023",
-      "notes": "Matematika • Surakarta-Fak. MIPA-2023",
-      "pdfFileName": "Skripsi_109257_Sarah_Nurul_Faridah.pdf",
-      "pdfFileId": "file-digilib-109257",
-      "digilibUrl": "https://digilib.uns.ac.id/dokumen/detail/109257/Model-Refurbishing-dengan-Mempertimbangkan-Strategi-Pemasaran-dan-Kendala-Kapasitas-Emisi-Karbon",
-      "pembimbing": "Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.",
-      "kataKunci": "model refurbishing; masalah optimasi; keuntungan optimal; emisi karbon",
-      "programStudi": "Matematika",
-      "fakultas": "MIPA",
-      "jenisDokumen": "Skripsi",
-      "hasInfographic": false
-    },
-    {
-      "id": "digilib-108374",
-      "docId": 108374,
-      "name": "Elisa Nur Yuliantika Ardani",
-      "nim": "M0119025",
-      "degree": "Sarjana Matematika (S1)",
-      "researchTopic": "Cost-sharing; Derajat Inovasi; Refurbishing; dan Subsidi Pemerintah",
-      "thesisTitle": "Pengembangan Model Refurbishing dengan Mempertimbangkan Derajat Inovasi, Cost-sharing, dan Subsidi Pemerintah",
-      "thesisAbstract": "Kata Kunci: Cost-sharing; Derajat Inovasi; Refurbishing; dan Subsidi Pemerintah",
-      "startYear": 2019,
-      "graduationYear": 2023,
-      "status": "Graduated",
-      "currentAffiliation": "Surakarta-Fak. MIPA-2023",
-      "notes": "Matematika • Surakarta-Fak. MIPA-2023",
-      "pdfFileName": "Skripsi_108374_Elisa_Nur_Yuliantika_Ardani.pdf",
-      "pdfFileId": "file-digilib-108374",
-      "digilibUrl": "https://digilib.uns.ac.id/dokumen/detail/108374/Pengembangan-Model-Refurbishing-dengan-Mempertimbangkan-Derajat-Inovasi-Cost-sharing-dan-Subsidi-Pemerintah",
-      "pembimbing": "Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.",
-      "kataKunci": "Cost-sharing; Derajat Inovasi; Refurbishing; dan Subsidi Pemerintah",
-      "programStudi": "Matematika",
-      "fakultas": "MIPA",
-      "jenisDokumen": "Skripsi",
-      "hasInfographic": false
-    },
-    {
-      "id": "digilib-108191",
-      "docId": 108191,
-      "name": "Tiara Permata Sari",
-      "nim": "M0119087",
-      "degree": "Sarjana Matematika (S1)",
-      "researchTopic": "refurbishing; ecodesign; responsibility transfer; model refurbishing; dan keuntungan",
-      "thesisTitle": "Model Refurbishing dengan Mempertimbangkan Ecodesign dan Responsibility Transfer",
-      "thesisAbstract": "Kata Kunci: refurbishing; ecodesign; responsibility transfer; model refurbishing; dan keuntungan",
-      "startYear": 2019,
-      "graduationYear": 2023,
-      "status": "Graduated",
-      "currentAffiliation": "Surakarta-Fak. MIPA-2023",
-      "notes": "Matematika • Surakarta-Fak. MIPA-2023",
-      "pdfFileName": "Skripsi_108191_Tiara_Permata_Sari.pdf",
-      "pdfFileId": "file-digilib-108191",
-      "digilibUrl": "https://digilib.uns.ac.id/dokumen/detail/108191/Model-Refurbishing-dengan-Mempertimbangkan-Ecodesign-dan-Responsibility-Transfer",
-      "pembimbing": "Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.",
-      "kataKunci": "refurbishing; ecodesign; responsibility transfer; model refurbishing; dan keuntungan",
-      "programStudi": "Matematika",
-      "fakultas": "MIPA",
-      "jenisDokumen": "Skripsi",
-      "hasInfographic": false
-    },
-    {
-      "id": "digilib-106617",
-      "docId": 106617,
-      "name": "Ade Adam Nisa Sabrina",
-      "nim": "M0119002",
-      "degree": "Sarjana Matematika (S1)",
-      "researchTopic": "Refurbishing; Outsourcing; Rantai Pasok Global; dan Pajak and Tarif",
-      "thesisTitle": "Analisis Tarif Bea Masuk dan Selisih Pajak Penjualan terhadap Kebijakan In-House dan Outsourcing pada Model Refurbishing Cross-Border",
-      "thesisAbstract": "Kata Kunci: Refurbishing; Outsourcing; Rantai Pasok Global; dan Pajak and Tarif",
-      "startYear": 2019,
-      "graduationYear": 2023,
-      "status": "Graduated",
-      "currentAffiliation": "Surakarta-Fak. MIPA-2023",
-      "notes": "Matematika • Surakarta-Fak. MIPA-2023",
-      "pdfFileName": "Skripsi_106617_Ade_Adam_Nisa_Sabrina.pdf",
-      "pdfFileId": "file-digilib-106617",
-      "digilibUrl": "https://digilib.uns.ac.id/dokumen/detail/106617/Analisis-Tarif-Bea-Masuk-dan-Selisih-Pajak-Penjualan-terhadap-Kebijakan-In-House-dan-Outsourcing-pada-Model-Refurbishing-Cross-Border",
-      "pembimbing": "Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.",
-      "kataKunci": "Refurbishing; Outsourcing; Rantai Pasok Global; dan Pajak and Tarif",
-      "programStudi": "Matematika",
-      "fakultas": "MIPA",
-      "jenisDokumen": "Skripsi",
-      "hasInfographic": false
-    },
-    {
-      "id": "digilib-105076",
-      "docId": 105076,
-      "name": "Sukma Wahyu Cahyani",
-      "nim": "M0119083",
-      "degree": "Sarjana Matematika (S1)",
-      "researchTopic": "Model Closed-Loop Supply Chain; Saluran Pemasaran; dan Online Marketplace",
-      "thesisTitle": "Pengambangan Model Closed-Loop Supply Chain dengan Memperhatikan Saluran Pemasaran pada Online Marketplace",
-      "thesisAbstract": "Kata Kunci: Model Closed-Loop Supply Chain; Saluran Pemasaran; dan Online Marketplace",
-      "startYear": 2019,
-      "graduationYear": 2023,
-      "status": "Graduated",
-      "currentAffiliation": "Surakarta-Fak. MIPA-2023",
-      "notes": "Matematika • Surakarta-Fak. MIPA-2023",
-      "pdfFileName": "Skripsi_105076_Sukma_Wahyu_Cahyani.pdf",
-      "pdfFileId": "file-digilib-105076",
-      "digilibUrl": "https://digilib.uns.ac.id/dokumen/detail/105076/Pengambangan-Model-Closed-Loop-Supply-Chain-dengan-Memperhatikan-Saluran-Pemasaran-pada-Online-Marketplace",
-      "pembimbing": "Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.",
-      "kataKunci": "Model Closed-Loop Supply Chain; Saluran Pemasaran; dan Online Marketplace",
-      "programStudi": "Matematika",
-      "fakultas": "MIPA",
-      "jenisDokumen": "Skripsi",
-      "hasInfographic": false
-    },
-    {
-      "id": "digilib-104955",
-      "docId": 104955,
-      "name": "Jasmine Laksmi Maharani",
-      "nim": "M0119047",
-      "degree": "Sarjana Matematika (S1)",
-      "researchTopic": "Refurbishing; Lisensi Biaya; dan Saluran Distribusi",
-      "thesisTitle": "Kebijakan Lisensi dan Saluran Distribusi pada Model Refurbishing",
-      "thesisAbstract": "Kata Kunci: Refurbishing; Lisensi Biaya; dan Saluran Distribusi",
-      "startYear": 2019,
-      "graduationYear": 2023,
-      "status": "Graduated",
-      "currentAffiliation": "Surakarta-Fak. MIPA-2023",
-      "notes": "Matematika • Surakarta-Fak. MIPA-2023",
-      "pdfFileName": "Skripsi_104955_Jasmine_Laksmi_Maharani.pdf",
-      "pdfFileId": "file-digilib-104955",
-      "digilibUrl": "https://digilib.uns.ac.id/dokumen/detail/104955/Kebijakan-Lisensi-dan-Saluran-Distribusi-pada-Model-Refurbishing",
-      "pembimbing": "Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.",
-      "kataKunci": "Refurbishing; Lisensi Biaya; dan Saluran Distribusi",
-      "programStudi": "Matematika",
-      "fakultas": "MIPA",
-      "jenisDokumen": "Skripsi",
-      "hasInfographic": false
-    },
-    {
-      "id": "digilib-100546",
-      "docId": 100546,
-      "name": "Kezia Abigail Vania",
-      "nim": "M0119048",
-      "degree": "Sarjana Matematika (S1)",
-      "researchTopic": "Refurbishing, In-House, Outsourcing",
-      "thesisTitle": "Model Refurbishing In-House dan Refurbishing Outsourcing dengan Memperhatikan Derajat Interchangeability dalam Produk Desain",
-      "thesisAbstract": "Kata Kunci: Refurbishing, In-House, Outsourcing",
-      "startYear": 2019,
-      "graduationYear": 2023,
-      "status": "Graduated",
-      "currentAffiliation": "Surakarta-Fak. MIPA-2023",
-      "notes": "Matematika • Surakarta-Fak. MIPA-2023",
-      "pdfFileName": "Skripsi_100546_Kezia_Abigail_Vania.pdf",
-      "pdfFileId": "file-digilib-100546",
-      "digilibUrl": "https://digilib.uns.ac.id/dokumen/detail/100546/Model-Refurbishing-In-House-dan-Refurbishing-Outsourcing-dengan-Memperhatikan-Derajat-Interchangeability-dalam-Produk-Desain",
-      "pembimbing": "Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.",
-      "kataKunci": "Refurbishing, In-House, Outsourcing",
-      "programStudi": "Matematika",
-      "fakultas": "MIPA",
-      "jenisDokumen": "Skripsi",
-      "hasInfographic": false
-    },
-    {
-      "id": "digilib-88107",
-      "docId": 88107,
-      "name": "Agus Wahyudi",
-      "nim": "M0117004",
-      "degree": "Sarjana Matematika (S1)",
-      "researchTopic": "Optimasi & Pemodelan Matematika",
-      "thesisTitle": "Rasio Keuangan pada Lima Bank di Indonesia dengan Artificial Neural Networks",
-      "startYear": 2018,
-      "graduationYear": 2022,
-      "status": "Graduated",
-      "currentAffiliation": "Surakarta-Fak. MIPA-2022",
-      "notes": "Matematika • Surakarta-Fak. MIPA-2022",
-      "pdfFileName": "Skripsi_88107_Agus_Wahyudi.pdf",
-      "pdfFileId": "file-digilib-88107",
-      "digilibUrl": "https://digilib.uns.ac.id/dokumen/detail/88107/Rasio-Keuangan-pada-Lima-Bank-di-Indonesia-dengan-Artificial-Neural-Networks",
-      "pembimbing": "Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.",
-      "programStudi": "Matematika",
-      "fakultas": "MIPA",
-      "jenisDokumen": "Skripsi",
-      "hasInfographic": false
-    },
-    {
-      "id": "digilib-54038",
-      "docId": 54038,
-      "name": "Anadiora Eka Putri",
-      "nim": "M0111006",
-      "degree": "Sarjana Matematika (S1)",
-      "researchTopic": "MODEL PERSEDIAAN",
-      "thesisTitle": "Model persediaan terintegrasi produsen dan distributor dengan investasi untuk mengurangi biaya persiapan, peningkatan kualitas proses produksi, dan potongan harga untuk backorder",
-      "thesisAbstract": "Kata Kunci: MODEL PERSEDIAAN",
-      "startYear": 2012,
-      "graduationYear": 2016,
-      "status": "Graduated",
-      "currentAffiliation": "Surakarta-F. MIPA-2016",
-      "notes": "Matematika • Surakarta-F. MIPA-2016",
-      "pdfFileName": "Skripsi_54038_Anadiora_Eka_Putri.pdf",
-      "pdfFileId": "file-digilib-54038",
-      "digilibUrl": "https://digilib.uns.ac.id/dokumen/detail/54038/Model-persediaan-terintegrasi-produsen-dan-distributor-dengan-investasi-untuk-mengurangi-biaya-persiapan-peningkatan-kualitas-proses-produksi-dan-potongan-harga-untuk-backorder",
-      "pembimbing": "Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.",
-      "kataKunci": "MODEL PERSEDIAAN",
-      "programStudi": "Matematika",
-      "fakultas": "MIPA",
-      "jenisDokumen": "Skripsi",
-      "hasInfographic": false
-    },
-    {
-      "id": "digilib-51458",
-      "docId": 51458,
-      "name": "Edi Agus Sugiantoro",
-      "nim": "M0111027",
-      "degree": "Sarjana Matematika (S1)",
-      "researchTopic": "LOGARITMA",
-      "thesisTitle": "Model Persediaan Terintegrasi Produsen dan Pengecer dengan Kendala Kapasitas Gudang dan Tingkat Layanan",
-      "thesisAbstract": "Kata Kunci: LOGARITMA",
-      "startYear": 2012,
-      "graduationYear": 2016,
-      "status": "Graduated",
-      "currentAffiliation": "Surakarta-FMIPA-2016",
-      "notes": "Matematika • Surakarta-FMIPA-2016",
-      "pdfFileName": "Skripsi_51458_Edi_Agus_Sugiantoro.pdf",
-      "pdfFileId": "file-digilib-51458",
-      "digilibUrl": "https://digilib.uns.ac.id/dokumen/detail/51458/Model-Persediaan-Terintegrasi-Produsen-dan-Pengecer-dengan-Kendala-Kapasitas-Gudang-dan-Tingkat-Layanan",
-      "pembimbing": "Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.",
-      "kataKunci": "LOGARITMA",
-      "programStudi": "Matematika",
-      "fakultas": "MIPA",
-      "jenisDokumen": "Skripsi",
-      "hasInfographic": false
-    },
-    {
-      "id": "digilib-51451",
-      "docId": 51451,
-      "name": "Sholikhatun Nisa",
-      "nim": "M0110072",
-      "degree": "Sarjana Matematika (S1)",
-      "researchTopic": "CRASING COST",
-      "thesisTitle": "Model Persediaan Terintegrasi Pemasok-Pengecer dengan Crashing Cost Fungsi Eksponensial Serta Investasi untuk Mengurangi Biaya Pemesanan dan Tingkat Lost Sales",
-      "thesisAbstract": "Kata Kunci: CRASING COST",
-      "startYear": 2012,
-      "graduationYear": 2016,
-      "status": "Graduated",
-      "currentAffiliation": "Surakarta-FMIPA-2016",
-      "notes": "Matematika • Surakarta-FMIPA-2016",
-      "pdfFileName": "Skripsi_51451_Sholikhatun_Nisa.pdf",
-      "pdfFileId": "file-digilib-51451",
-      "digilibUrl": "https://digilib.uns.ac.id/dokumen/detail/51451/Model-Persediaan-Terintegrasi-Pemasok-Pengecer-dengan-Crashing-Cost-Fungsi-Eksponensial-Serta-Investasi-untuk-Mengurangi-Biaya-Pemesanan-dan-Tingkat-Lost-Sales",
-      "pembimbing": "Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.",
-      "kataKunci": "CRASING COST",
-      "programStudi": "Matematika",
-      "fakultas": "MIPA",
-      "jenisDokumen": "Skripsi",
-      "hasInfographic": false
-    },
-    {
-      "id": "digilib-51403",
-      "docId": 51403,
-      "name": "Rizki Aprilia Nurhayati",
-      "nim": "M0111071",
-      "degree": "Sarjana Matematika (S1)",
-      "researchTopic": "PERSEDIAAN TERINTEGRASI",
-      "thesisTitle": "Model Persediaan Terintegrasi Produsen dan Pengecer dengan Adanya Barang Cacat, Kesalahan Inspeksi, Kendali Waktu Tunggu, dan Kendala Kapasitas Anggaran",
-      "thesisAbstract": "Kata Kunci: PERSEDIAAN TERINTEGRASI",
-      "startYear": 2011,
-      "graduationYear": 2015,
-      "status": "Graduated",
-      "currentAffiliation": "Surakarta-FMIPA-2015",
-      "notes": "Matematika • Surakarta-FMIPA-2015",
-      "pdfFileName": "Skripsi_51403_Rizki_Aprilia_Nurhayati.pdf",
-      "pdfFileId": "file-digilib-51403",
-      "digilibUrl": "https://digilib.uns.ac.id/dokumen/detail/51403/Model-Persediaan-Terintegrasi-Produsen-dan-Pengecer-dengan-Adanya-Barang-Cacat-Kesalahan-Inspeksi-Kendali-Waktu-Tunggu-dan-Kendala-Kapasitas-Anggaran",
-      "pembimbing": "Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.",
-      "kataKunci": "PERSEDIAAN TERINTEGRASI",
-      "programStudi": "Matematika",
-      "fakultas": "MIPA",
-      "jenisDokumen": "Skripsi",
-      "hasInfographic": false
-    },
-    {
-      "id": "digilib-47034",
-      "docId": 47034,
-      "name": "Mar'atin Marchamah",
-      "nim": "M0111053",
-      "degree": "Sarjana Matematika (S1)",
-      "researchTopic": "PERSEDIAAN TERINTEGRASI",
-      "thesisTitle": "Model Persediaan Terintegrasi Produsen-Distributor dengan Mempertimbangkan Barang Cacat, Kesalahan Inspeksi, dan Permintaan yang Berdistribusi Uniform",
-      "thesisAbstract": "Kata Kunci: PERSEDIAAN TERINTEGRASI",
-      "startYear": 2011,
-      "graduationYear": 2015,
-      "status": "Graduated",
-      "currentAffiliation": "Surakarta-FMIPA-2015",
-      "notes": "Matematika • Surakarta-FMIPA-2015",
-      "pdfFileName": "Skripsi_47034_Mar'atin_Marchamah.pdf",
-      "pdfFileId": "file-digilib-47034",
-      "digilibUrl": "https://digilib.uns.ac.id/dokumen/detail/47034/Model-Persediaan-Terintegrasi-Produsen-Distributor-dengan-Mempertimbangkan-Barang-Cacat-Kesalahan-Inspeksi-dan-Permintaan-yang-Berdistribusi-Uniform",
-      "pembimbing": "Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.",
-      "kataKunci": "PERSEDIAAN TERINTEGRASI",
-      "programStudi": "Matematika",
-      "fakultas": "MIPA",
-      "jenisDokumen": "Skripsi",
-      "hasInfographic": false
-    },
-    {
-      "id": "digilib-45645",
-      "docId": 45645,
-      "name": "Livvia Paradisea Santoso",
-      "nim": "M0110050",
-      "degree": "Sarjana Matematika (S1)",
-      "researchTopic": "MODEL PERSEDIAAN TERINTEGRASI",
-      "thesisTitle": "Model Persediaan Terintegrasi Pemasok-Pengecer Dengan Barang Cacat, Crashing Cost Dan Investasi Fungsi Berpangkat, Dan Kendala Tingkat Layanan",
-      "thesisAbstract": "Kata Kunci: MODEL PERSEDIAAN TERINTEGRASI",
-      "startYear": 2011,
-      "graduationYear": 2015,
-      "status": "Graduated",
-      "currentAffiliation": "Surakarta-F.MIPA-2015",
-      "notes": "Matematika • Surakarta-F.MIPA-2015",
-      "pdfFileName": "Skripsi_45645_Livvia_Paradisea_Santoso.pdf",
-      "pdfFileId": "file-digilib-45645",
-      "digilibUrl": "https://digilib.uns.ac.id/dokumen/detail/45645/Model-Persediaan-Terintegrasi-Pemasok-Pengecer-Dengan-Barang-Cacat-Crashing-Cost-Dan-Investasi-Fungsi-Berpangkat-Dan-Kendala-Tingkat-Layanan",
-      "pembimbing": "Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.",
-      "kataKunci": "MODEL PERSEDIAAN TERINTEGRASI",
-      "programStudi": "Matematika",
-      "fakultas": "MIPA",
-      "jenisDokumen": "Skripsi",
-      "hasInfographic": false
-    },
-    {
-      "id": "digilib-44144",
-      "docId": 44144,
-      "name": "Siti Aminah",
-      "nim": "M0110073",
-      "degree": "Sarjana Matematika (S1)",
-      "researchTopic": "RANDOM FUZZY",
-      "thesisTitle": "Model Persediaan Random Fuzzy untuk Manufaktur-Pengecer dengan Barang Cacat pada Kasus Continuous Review",
-      "thesisAbstract": "Kata Kunci: RANDOM FUZZY",
-      "startYear": 2010,
-      "graduationYear": 2014,
-      "status": "Graduated",
-      "currentAffiliation": "Surakarta-FMIPA-2014",
-      "notes": "Matematika • Surakarta-FMIPA-2014",
-      "pdfFileName": "Skripsi_44144_Siti_Aminah.pdf",
-      "pdfFileId": "file-digilib-44144",
-      "digilibUrl": "https://digilib.uns.ac.id/dokumen/detail/44144/Model-Persediaan-Random-Fuzzy-untuk-Manufaktur-Pengecer-dengan-Barang-Cacat-pada-Kasus-Continuous-Review",
-      "pembimbing": "Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.",
-      "kataKunci": "RANDOM FUZZY",
-      "programStudi": "Matematika",
-      "fakultas": "MIPA",
-      "jenisDokumen": "Skripsi",
-      "hasInfographic": false
-    },
-    {
-      "id": "digilib-38458",
-      "docId": 38458,
-      "name": "Ira Rusliana",
-      "nim": "M0109039",
-      "degree": "Sarjana Matematika (S1)",
-      "researchTopic": "MODEL PERSEDIAAN",
-      "thesisTitle": "Model Persediaan Periodic Review Dengan Pengendalian Waktu Tunggu, Backorder Price Discount Dan Investasi Modal",
-      "thesisAbstract": "Kata Kunci: MODEL PERSEDIAAN",
-      "startYear": 2010,
-      "graduationYear": 2014,
-      "status": "Graduated",
-      "currentAffiliation": "Surakarta-F. MIPA-2014",
-      "notes": "Matematika • Surakarta-F. MIPA-2014",
-      "pdfFileName": "Skripsi_38458_Ira_Rusliana.pdf",
-      "pdfFileId": "file-digilib-38458",
-      "digilibUrl": "https://digilib.uns.ac.id/dokumen/detail/38458/Model-Persediaan-Periodic-Review-Dengan-Pengendalian-Waktu-Tunggu-Backorder-Price-Discount-Dan-Investasi-Modal",
-      "pembimbing": "Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.",
-      "kataKunci": "MODEL PERSEDIAAN",
-      "programStudi": "Matematika",
-      "fakultas": "MIPA",
-      "jenisDokumen": "Skripsi",
-      "hasInfographic": false
-    },
-    {
-      "id": "digilib-38223",
-      "docId": 38223,
-      "name": "Desy Putma Handayani",
-      "nim": "M0109018",
-      "degree": "Sarjana Matematika (S1)",
-      "researchTopic": "PERIODIC REVIEW",
-      "thesisTitle": "Model Persediaan Periodic Review Vendor-Buyer Dengan Defective Item Serta Interaksi Antara Biaya Pemesanan Dan Waktu Tunggu",
-      "thesisAbstract": "Kata Kunci: PERIODIC REVIEW",
-      "startYear": 2010,
-      "graduationYear": 2014,
-      "status": "Graduated",
-      "currentAffiliation": "Surakarta-F.MIPA-2014",
-      "notes": "Matematika • Surakarta-F.MIPA-2014",
-      "pdfFileName": "Skripsi_38223_Desy_Putma_Handayani.pdf",
-      "pdfFileId": "file-digilib-38223",
-      "digilibUrl": "https://digilib.uns.ac.id/dokumen/detail/38223/Model-Persediaan-Periodic-Review-Vendor-Buyer-Dengan-Defective-Item-Serta-Interaksi-Antara-Biaya-Pemesanan-Dan-Waktu-Tunggu",
-      "pembimbing": "Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.",
-      "kataKunci": "PERIODIC REVIEW",
-      "programStudi": "Matematika",
-      "fakultas": "MIPA",
-      "jenisDokumen": "Skripsi",
-      "hasInfographic": false
+        "studentId": "res-1",
+        "studentName": "Fidelithu Vristher",
+        "nim": "M0123037",
+        "title": "Penerapan ACGAN dan CNN",
+        "problemStatement": "Problem statement test",
+        "objectives": "Objectives test",
+        "methodology": [
+          "Metode 1",
+          "Metode 2"
+        ],
+        "dataAndObject": "Data test",
+        "keyFindings": [
+          "Hasil 1"
+        ],
+        "conclusions": "Kesimpulan test",
+        "customImageUrl": "https://example.com/poster.png",
+        "lastUpdated": "2026-10-26T16:14:52.376Z"
+      }
     }
   ],
   "teaching": [
     {
-      "id": "tch-3",
-      "code": "DTA204",
-      "name": "Sains Data & Optimasi",
-      "level": "Undergraduate (S1)",
-      "program": "S1 Sains Data",
-      "academicYear": "2024/2025",
-      "semester": "Ganjil",
-      "description": "Integrasi metode pemelajaran mesin terapan (machine learning) dengan teknik optimasi matematis dan pengambilan keputusan.",
-      "learningOutcomes": [
-        "Menguasai algoritma optimasi berbasis gradien|Mampu menerapkan feature selection dan dimensional reduction|Mampu membangun pipeline prediksi berbasis data empiris"
-      ],
-      "materialsUrl": "https://spada.uns.ac.id",
-      "isActive": true
-    },
-    {
-      "id": "tch-5",
-      "code": "MAT205",
-      "name": "Aljabar Linear Elementer",
-      "level": "Undergraduate (S1)",
-      "program": "S1 Matematika",
-      "academicYear": "2024/2025",
-      "semester": "Ganjil",
-      "description": "Konsep dasar ruang vektor, transformasi linear, nilai eigen, dan dekomposisi matriks untuk komputasi sains.",
-      "learningOutcomes": [
-        "Memahami konsep ruang vektor Euclides dan umum|Mampu menghitung nilai dan vektor eigen matriks|Menerapkan diagonalisasi matriks pada sistem dinamik"
-      ],
-      "materialsUrl": "https://spada.uns.ac.id",
-      "isActive": true
-    },
-    {
       "id": "tch-1",
-      "code": "MAT312",
-      "name": "Pemodelan Matematika",
+      "code": "MAT-201",
+      "name": "Riset Operasi I (Operations Research I: Linear Programming)",
       "level": "Undergraduate (S1)",
-      "program": "S1 Matematika",
-      "academicYear": "2024/2025",
+      "program": "Program Studi S-1 Matematika",
+      "academicYear": "2025/2026",
       "semester": "Ganjil",
-      "description": "Mata kuliah wajib keahlian yang mempelajari formulasi matematis untuk fenomena fisis, biologis, dan sistem operasional industri.",
+      "description": "Pemodelan program linear (Linear Programming), metode Simpleks, analisis dualitas, masalah transportasi, dan masalah penugasan.",
       "learningOutcomes": [
-        "Mampu merumuskan masalah nyata ke dalam model diferensial dan diskret|Mampu melakukan analisis sensitivitas dan stabilitas solusi model|Mampu memvalidasi hasil simulasi komputasi dengan data empiris"
+        "Memahami formulasi matematis untuk problem optimasi keputusan industri",
+        "Menguasai algoritma simpleks dan implementasi komputasi dengan solver Python/PuLP",
+        "Mampu menginterpretasikan tabel sensitivitas dan nilai dual untuk pengambilan kebijakan"
       ],
       "materialsUrl": "https://spada.uns.ac.id",
       "isActive": true
     },
     {
       "id": "tch-2",
-      "code": "MAT421",
-      "name": "Riset Operasi Lanjut",
+      "code": "MAT-302",
+      "name": "Riset Operasi II (Operations Research II: Non-Linear & Heuristics)",
       "level": "Undergraduate (S1)",
-      "program": "S1 Matematika",
-      "academicYear": "2024/2025",
+      "program": "Program Studi S-1 Matematika",
+      "academicYear": "2025/2026",
       "semester": "Genap",
-      "description": "Pendalaman algoritma optimasi kombinatorial, Vehicle Routing Problem (VRP), dynamic programming, dan teori antrian.",
+      "description": "Program bilangan bulat (Integer Programming), Dynamic Programming, teori antrean, pemodelan jaringan, dan algoritma metaheuristik modern.",
       "learningOutcomes": [
-        "Mampu memformulasikan Mixed Integer Linear Programming (MILP)|Mampu menerapkan algoritma metaheuristik (Genetic Algorithm, Simulated Annealing)|Mampu menyelesaikan persoalan rute logistik skala besar"
+        "Memodelkan permasalahan kombinatorial berkategori NP-hard",
+        "Mengimplementasikan metaheuristik modern (Genetic Algorithm, Simulated Annealing)",
+        "Menyelesaikan studi kasus nyata logistik dan Electric Vehicle Routing"
       ],
       "materialsUrl": "https://spada.uns.ac.id",
       "isActive": true
     },
     {
-      "id": "tch-4",
-      "code": "MAT501",
-      "name": "Pemodelan Optimasi Lanjut",
-      "level": "Graduate (S2)",
-      "program": "S2 Matematika",
+      "id": "tch-3",
+      "code": "MAT-215",
+      "name": "Pemodelan Matematika (Mathematical Modelling)",
+      "level": "Undergraduate (S1)",
+      "program": "Program Studi S-1 Matematika",
       "academicYear": "2024/2025",
       "semester": "Ganjil",
-      "description": "Studi pascasarjana tentang closed-loop supply chain, formulasi non-linear, discrete choice experiments, dan game theory.",
+      "description": "Prinsip pemodelan matematika kontinu dan diskret, analisis dimensi, model dinamika populasi, dan formulasi optimasi terapan.",
       "learningOutcomes": [
-        "Mampu merancang model matematika interaksi multi-echelon supply chain|Menguasai metode penaksiran probabilitas pilihan diskret|Mampu mempublikasikan artikel riset optimasi pada jurnal bereputasi"
+        "Menerjemahkan fenomena fisis dan biologis ke dalam persamaan matematika",
+        "Menganalisis kestabilan titik kesetimbangan",
+        "Melakukan simulasi komputasi numerik"
       ],
-      "materialsUrl": "https://spada.uns.ac.id",
       "isActive": true
     }
   ],
   "researchTopics": [
     {
       "id": "top-1",
-      "title": "Closed-Loop Supply Chain & Circular Economy",
-      "description": "Pengembangan model optimasi rantai pasok tertutup yang mengintegrasikan logistik maju (forward logistics) dan logistik balik (reverse logistics) guna mendukung keberlanjutan lingkungan dan ekonomi sirkular.",
+      "title": "Operations Research & Optimization",
+      "description": "Formulasi matematis dan perancangan algoritma metaheuristik untuk permasalahan keputusan berskala besar, logistik perkotaan, dan efisiensi armada.",
       "keyConcepts": [
-        "Remanufacturing & Refurbishing|Carbon Cap-and-Trade Policy|Game Theoretic Coordination|Consumer Green Behavior"
+        "Operations Research",
+        "Mixed-Integer Programming",
+        "Metaheuristics",
+        "Supply Chain"
       ]
     },
     {
       "id": "top-2",
-      "title": "Electric Vehicle Routing Problem (EVRP) with Energy & Time Window Constraints",
-      "description": "Perancangan formulasi Mixed-Integer Linear Programming (MILP) dan algoritma metaheuristik hibrida untuk penentuan rute optimal armada kendaraan listrik dengan kendala pengisian baterai dan jendela waktu pengiriman.",
+      "title": "Electric Vehicle Routing Problem (EVRP)",
+      "description": "Pemodelan komputasi rute armada kendaraan listrik dengan batasan waktu pengisian daya baterai, degradasi energi, dan stasiun pengisian antara.",
       "keyConcepts": [
-        "Fleet Routing Optimization|Dynamic Battery Consumption|Fast Charging Station Allocation|Hybrid Genetic & Neighborhood Search"
+        "EVRP",
+        "Battery Degradation",
+        "Intermediate Charging",
+        "Green Logistics"
       ]
     },
     {
       "id": "top-3",
-      "title": "Explainable Artificial Intelligence (XAI) in Operational Decision-Making",
-      "description": "Penerapan kerangka kerja kecerdasan buatan terjelaskan (SHAP, LIME, Counterfactual Explanations) pada model prediksi dan sistem pendukung keputusan operasional kesehatan dan perbankan.",
+      "title": "Explainable Artificial Intelligence (XAI)",
+      "description": "Penelitian metode interpretabilitas model machine learning menggunakan Generative Adversarial Networks (GANs), SHAP, dan LIME untuk pendukung keputusan transparan.",
       "keyConcepts": [
-        "Shapley Additive Explanations|Model Transparency & Accountability|Fairness in Algorithmic Decisions|Operational Risk Modeling"
+        "XAI",
+        "GANs",
+        "SHAP Values",
+        "LIME",
+        "Scientific Machine Learning"
+      ]
+    },
+    {
+      "id": "top-4",
+      "title": "Mathematical Modelling & Discrete Choice Experiments",
+      "description": "Pemodelan matematika terapan untuk aplikasi epidemiologi, virologi, imunologi, dan eksperimen pilihan diskret pada teknik industri.",
+      "keyConcepts": [
+        "Mathematical Modelling",
+        "Epidemiology",
+        "Virology",
+        "Discrete Choice Experiments"
       ]
     }
   ],
   "researchProjects": [
     {
       "id": "prj-1",
-      "title": "Optimasi Rute Armada Kendaraan Listrik (EVRP) dengan Stasiun Pengisian Cepat dan Kendala Baterai Dinamis",
+      "title": "Pemodelan Optimasi Rute Kendaraan Listrik (EVRP) dengan Pertimbangan Stasiun Pengisian Daya dan Waktu Layanan",
       "topicId": "top-2",
       "period": "2023 – 2025",
       "fundingSource": "Kemdiktisaintek RI",
-      "grantName": "Penelitian Terapan Unggulan Perguruan Tinggi (PTUPT)",
-      "role": "Ketua Peneliti",
+      "grantName": "Penelitian Terapan Unggulan Perguruan Tinggi",
+      "role": "Ketua Peneliti (Principal Investigator)",
       "collaborators": [
-        "Dosen Jurusan Matematika FMIPA UNS|Mahasiswa S1/S2 Matematika"
+        "Tim Dosen FMIPA UNS"
       ],
-      "description": "Mengembangkan model komputasi matematis untuk menyelesaikan permasalahan rute distribusi logistik perkotaan menggunakan kendaraan listrik dengan mempertimbangkan degradasi baterai dan waktu tunggu pengisian daya.",
+      "description": "Mengembangkan model matematis dan algoritma komputasi untuk menekan emisi karbon dan mengoptimalkan rute logistik berbasis baterai.",
       "status": "Ongoing"
     },
     {
@@ -9899,9 +9137,9 @@
       "grantName": "Hibah Riset Kolaborasi UNS",
       "role": "Ketua Peneliti",
       "collaborators": [
-        "Dosen Department of Mathematics FMIPA UNS"
+        "Dosen Department of Mathematics"
       ],
-      "description": "Mengintegrasikan teknik XAI (SHAP, LIME, GANs) untuk memastikan transparansi dan akuntabilitas model cerdas buatan pada sistem pendukung keputusan klinis dan penilaian risiko kredit.",
+      "description": "Mengintegrasikan teknik XAI (SHAP, LIME, GANs) untuk memastikan transparansi dan akuntabilitas model cerdas buatan.",
       "status": "Completed"
     }
   ],
@@ -9913,7 +9151,6 @@
       "publisher": "Wiley / Elsevier",
       "indexing": "Scopus Q1 / ABS 4*",
       "period": "2022 – Sekarang",
-      "url": "https://onlinelibrary.wiley.com/journal/18731317",
       "description": "Peer-reviewer naskah bidang operations management, discrete choice, dan optimasi industri."
     },
     {
@@ -9923,20 +9160,10 @@
       "publisher": "Elsevier",
       "indexing": "Scopus Q1",
       "period": "2021 – Sekarang",
-      "url": "https://www.sciencedirect.com/journal/computers-and-operations-research",
       "description": "Peer-reviewer artikel algoritma metaheuristik dan Vehicle Routing Problems."
     }
   ],
   "pressMedia": [
-    {
-      "id": "med-2",
-      "title": "Kuliah Pakar: Tantangan Optimasi EVRP dan Penggunaan Explainable AI dalam Pengambilan Keputusan",
-      "mediaOutlet": "Kanal Berita Akademik FMIPA UNS",
-      "publishDate": "2024-04-18",
-      "category": "Public Lecture / Keynote",
-      "url": "https://uns.ac.id",
-      "summary": "Pemaparan mendalam mengenai pentingnya transparansi model AI (XAI) dan efisiensi rute kendaraan listrik bagi masa depan transportasi ramah lingkungan."
-    },
     {
       "id": "med-1",
       "title": "Nughthoh Arfawi Kurdhi Raih Publikasi pada Jurnal Bereputasi Internasional Journal of Operations Management (ABS 4*)",
@@ -9945,6 +9172,14 @@
       "category": "News Coverage",
       "url": "https://mipa.uns.ac.id",
       "summary": "Dosen Matematika FMIPA UNS, Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D. mempublikasikan hasil riset operasional pada salah satu jurnal terbaik dunia kategori ABS 4*."
+    },
+    {
+      "id": "med-2",
+      "title": "Kuliah Pakar: Tantangan Optimasi EVRP dan Penggunaan Explainable AI dalam Pengambilan Keputusan",
+      "mediaOutlet": "Kanal Berita Akademik FMIPA UNS",
+      "publishDate": "2024-04-18",
+      "category": "Public Lecture / Keynote",
+      "summary": "Pemaparan mendalam mengenai pentingnya transparansi model AI (XAI) dan efisiensi rute kendaraan listrik bagi masa depan transportasi ramah lingkungan."
     }
   ],
   "blogPosts": [
@@ -9973,169 +9208,19 @@
       "email": "arfa@staff.uns.ac.id",
       "namaLengkap": "Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.",
       "role": "Dosen Pemilik Portofolio (Administrator Utama)",
-      "passwordHash": "c71c3af94abd6505200e2163002d7ad92eb1db3bf0c2cd4aa87c329395aaf5fd",
-      "salt": "kurdhi_master_salt",
-      "createdAt": "2026-10-19T13:54:56.633Z"
-    },
-    {
-      "id": "admin-pemanis-gmail",
-      "email": "akunpemanis820@gmail.com",
-      "namaLengkap": "Akun Pemanis (Administrator)",
-      "role": "Administrator Resmi (Google Verified)",
-      "passwordHash": "dbde5961fbb1d6a606bd4fec0fe0e55c8b0a3b3416c12e5b0d4cf661f4388c31",
-      "salt": "raihan_master_salt",
-      "createdAt": "2026-10-22 10:44:47"
-    },
-    {
-      "id": "admin-raihan",
-      "email": "muhammadraihanash@student.uns.ac.id",
-      "namaLengkap": "Muhammad Raihan",
-      "role": "Administrator Resmi (UNS Verified)",
-      "passwordHash": "dbde5961fbb1d6a606bd4fec0fe0e55c8b0a3b3416c12e5b0d4cf661f4388c31",
-      "salt": "raihan_master_salt",
-      "createdAt": "2026-10-19T13:54:56.633Z"
-    },
-    {
-      "id": "admin-raihan-gmail",
-      "email": "muhammadraihanash@gmail.com",
-      "namaLengkap": "Muhammad Raihan (Google Admin)",
-      "role": "Administrator Resmi (Google Verified)",
-      "passwordHash": "dbde5961fbb1d6a606bd4fec0fe0e55c8b0a3b3416c12e5b0d4cf661f4388c31",
-      "salt": "raihan_master_salt",
-      "createdAt": "2026-10-22 10:44:47"
+      "passwordHash": "7142737e363474acdd41c64ae582d3b73dcbaef309629ffad194b3f471b30454",
+      "salt": "unsacademicportfoliosalt",
+      "createdAt": "2024-01-01T00:00:00.000Z"
     }
   ],
   "auditLogs": [
     {
-      "adminEmail": "admin@staff.uns.ac.id",
-      "adminNama": "Administrator",
-      "action": "UPDATE_STUDENT_INFOGRAPHIC",
-      "details": "Menyimpan gambar/poster infografik skripsi mahasiswa: \"Adib Haidar Zaky\" ke database MySQL.",
-      "targetId": "digilib-1009761",
-      "id": "log-1792924229274",
-      "timestamp": "2026-10-25T10:30:29.274Z"
-    },
-    {
-      "adminEmail": "muhammadraihanash@gmail.com",
-      "adminNama": "Muhammad Raihan",
-      "action": "CREATE_PUBLICATION",
-      "details": "Menambahkan publikasi baru ke database pusat: \"Analisis Optimasi Rantai Pasok Berkelanjutan\"",
-      "targetId": "journal-35",
-      "targetTitle": "Analisis Optimasi Rantai Pasok Berkelanjutan",
-      "id": "log-1792666187575",
-      "timestamp": "2026-10-22T10:49:47.575Z"
-    },
-    {
-      "adminEmail": "muhammadraihanash@gmail.com",
-      "adminNama": "Muhammad Raihan",
-      "action": "ADMIN_GOOGLE_LOGIN",
-      "details": "Berhasil login melalui autentikasi Google Firebase.",
-      "id": "log-1792666187500",
-      "timestamp": "2026-10-22T10:49:47.500Z"
-    },
-    {
-      "adminEmail": "muhammadraihanash@gmail.com",
-      "adminNama": "Muhammad Raihan",
-      "action": "ADMIN_GOOGLE_LOGIN",
-      "details": "Berhasil login melalui autentikasi Google Firebase.",
-      "id": "log-1792666173608",
-      "timestamp": "2026-10-22T10:49:33.608Z"
-    },
-    {
-      "adminEmail": "muhammadraihanash@gmail.com",
-      "adminNama": "Muhammad Raihan",
-      "action": "ADMIN_GOOGLE_LOGIN",
-      "details": "Berhasil login melalui autentikasi Google Firebase.",
-      "id": "log-1792666161529",
-      "timestamp": "2026-10-22T10:49:21.529Z"
-    },
-    {
-      "adminEmail": "arfa@staff.uns.ac.id",
-      "adminNama": "Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.",
-      "action": "ADMIN_LOGIN",
-      "details": "Berhasil login ke Dashboard Pengelolaan Akademik.",
-      "id": "log-1792595468233",
-      "timestamp": "2026-10-21T15:11:08.233Z"
-    },
-    {
-      "adminEmail": "muhammadraihanash@gmail.com",
-      "adminNama": "Muhammad Raihan",
-      "action": "ADMIN_LOGIN",
-      "details": "Berhasil login ke Dashboard Pengelolaan Akademik.",
-      "id": "log-1792595461278",
-      "timestamp": "2026-10-21T15:11:01.278Z"
-    },
-    {
-      "adminEmail": "arfa@staff.uns.ac.id",
-      "adminNama": "Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.",
-      "action": "ADMIN_LOGIN",
-      "details": "Berhasil login ke Dashboard Pengelolaan Akademik.",
-      "id": "log-1792595433415",
-      "timestamp": "2026-10-21T15:10:33.415Z"
-    },
-    {
-      "adminEmail": "arfa@staff.uns.ac.id",
-      "adminNama": "Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.",
-      "action": "ADMIN_LOGIN",
-      "details": "Berhasil login ke Dashboard Pengelolaan Akademik.",
-      "id": "log-1792594436691",
-      "timestamp": "2026-10-21T14:53:56.691Z"
-    },
-    {
-      "adminEmail": "arfa@staff.uns.ac.id",
-      "adminNama": "Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.",
-      "action": "ADMIN_LOGIN",
-      "details": "Berhasil login ke Dashboard Pengelolaan Akademik.",
-      "id": "log-1792430952291",
-      "timestamp": "2026-10-19T17:29:12.291Z"
-    },
-    {
-      "adminEmail": "arfa@staff.uns.ac.id",
-      "adminNama": "Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.",
-      "action": "ADMIN_LOGIN",
-      "details": "Berhasil login ke Dashboard Pengelolaan Akademik.",
-      "id": "log-1792429832483",
-      "timestamp": "2026-10-19T17:10:32.483Z"
-    },
-    {
-      "adminEmail": "arfa@staff.uns.ac.id",
-      "adminNama": "Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.",
-      "action": "ADMIN_LOGIN",
-      "details": "Berhasil login ke Dashboard Pengelolaan Akademik.",
-      "id": "log-1792429810099",
-      "timestamp": "2026-10-19T17:10:10.099Z"
-    },
-    {
-      "adminEmail": "akunpemanis820@gmail.com",
-      "adminNama": "Administrator Akun",
-      "action": "ADMIN_LOGIN",
-      "details": "Berhasil login ke Dashboard Pengelolaan Akademik.",
-      "id": "log-1792423783440",
-      "timestamp": "2026-10-19T15:29:43.440Z"
-    },
-    {
-      "adminEmail": "akunpemanis820@gmail.com",
-      "adminNama": "Administrator Akun",
-      "action": "ADMIN_LOGIN",
-      "details": "Berhasil login ke Dashboard Pengelolaan Akademik.",
-      "id": "log-1792423772296",
-      "timestamp": "2026-10-19T15:29:32.296Z"
-    },
-    {
-      "adminEmail": "arfa@staff.uns.ac.id",
-      "adminNama": "Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.",
-      "action": "ADMIN_LOGIN",
-      "details": "Berhasil login ke Dashboard Pengelolaan Akademik.",
-      "id": "log-1792420808392",
-      "timestamp": "2026-10-19T14:40:08.392Z"
-    },
-    {
-      "id": "log-1792235085164-boot",
+      "id": "log-1793031142312-boot",
       "adminEmail": "arfa@staff.uns.ac.id",
       "adminNama": "Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.",
       "action": "PORTFOLIO_INIT",
       "details": "Basis data akademik & arsip karya ilmiah aktif dan terverifikasi.",
-      "timestamp": "2026-10-17T11:04:45.164Z"
+      "timestamp": "2026-10-26T16:12:22.312Z"
     }
   ],
   "importHistory": []

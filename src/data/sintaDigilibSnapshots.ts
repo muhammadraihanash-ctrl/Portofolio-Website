@@ -8,7 +8,7 @@
  * 2. SINTA Kemdiktisaintek (ID: 6765487: IPR/Hak Cipta, Garuda, Scopus, Google Scholar)
  */
 
-import { ScrapedPublicationItem } from '../types/index.js';
+import { ScrapedPublicationItem } from '../types/index';
 
 export const AUTHENTIC_SINTA_PROFILE = {
   authorId: '6765487',
