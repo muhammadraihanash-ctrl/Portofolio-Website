@@ -23,7 +23,7 @@ import {
   ResearchGroupEntry,
   ImportBatchRecord,
   ThesisInfographic
-} from '../types/index';
+} from '../types/index.js';
 import {
   SEED_PROFILE,
   SEED_PUBLICATIONS,
@@ -36,8 +36,8 @@ import {
   SEED_BLOG,
   DEFAULT_PORTFOLIO_ADMIN,
   INITIAL_ANNUAL_PERFORMANCE
-} from '../data/academicSeedData';
-import { p2mDatabaseService } from './p2mDatabaseService';
+} from '../data/academicSeedData.js';
+import { p2mDatabaseService } from './p2mDatabaseService.js';
 
 const getFileMeta = () => {
   try {
@@ -426,15 +426,11 @@ class AcademicDatabase {
   }
 
   public async updateProfileAsync(updated: Partial<ProfessorProfile>): Promise<ProfessorProfile> {
+    await p2mDatabaseService.updateAcademicProfileRecord(updated);
     this.data.profile = {
       ...this.data.profile,
       ...updated
     };
-    try {
-      await p2mDatabaseService.updateAcademicProfileRecord(updated);
-    } catch (e) {
-      console.warn('Academic profile sync to SQL notice:', e);
-    }
     this.persist();
     this.notifyMutation('UPDATE_PROFILE');
     return this.getProfile();
@@ -542,7 +538,8 @@ class AcademicDatabase {
     return { profile: this.data.profile, updatedPubsCount: updatedCount };
   }
 
-  public updateResearchGroups(groups: ResearchGroupEntry[]): ProfessorProfile {
+  public async updateResearchGroups(groups: ResearchGroupEntry[]): Promise<ProfessorProfile> {
+    await p2mDatabaseService.updateAcademicProfileRecord({ researchGroups: groups });
     this.data.profile.researchGroups = [...groups];
     this.persist();
     this.notifyMutation('UPDATE_RESEARCH_GROUPS');
@@ -755,7 +752,8 @@ class AcademicDatabase {
     return true;
   }
 
-  public clearAllPublications(): number {
+  public async clearAllPublications(): Promise<number> {
+    await p2mDatabaseService.clearAllPublicationsRecords();
     const prevCount = this.data.publications.length;
     this.data.publications = [];
     this.persist();
@@ -763,14 +761,37 @@ class AcademicDatabase {
     return prevCount;
   }
 
-  public resetSeedPublications(): number {
+  public async resetSeedPublications(): Promise<number> {
+    await p2mDatabaseService.resetSeedPublicationsRecords();
     this.data.publications = JSON.parse(JSON.stringify(SEED_PUBLICATIONS));
     this.persist();
     this.notifyMutation('RESET_PUBLICATIONS');
     return this.data.publications.length;
   }
 
-  public batchDeletePublications(ids: string[]): number {
+  public async batchDeletePublications(ids: string[]): Promise<number> {
+    await p2mDatabaseService.assertLiveDatabase();
+    const tableMap: Record<string, string> = {
+      scopus: 'scopus_publications',
+      journal: 'journals',
+      proceeding: 'proceedings',
+      book: 'books',
+      patent: 'patents_hki'
+    };
+    for (const id of ids) {
+      const sqlMatch = id.match(/^(scopus|journal|proceeding|book|patent)-(\d+)$/);
+      if (sqlMatch) {
+        const table = tableMap[sqlMatch[1]];
+        const sqlId = parseInt(sqlMatch[2], 10);
+        if (table) {
+          try {
+            await p2mDatabaseService.deletePublicationRecord(table, sqlId);
+          } catch (e) {
+            console.warn(`Failed to delete record ${id} from MySQL:`, e);
+          }
+        }
+      }
+    }
     const idSet = new Set(ids);
     const initialCount = this.data.publications.length;
     this.data.publications = this.data.publications.filter(p => !idSet.has(p.id));
@@ -782,7 +803,8 @@ class AcademicDatabase {
     return removedCount;
   }
 
-  public setPublicationArchiveStatus(id: string, isArchived: boolean): Publication | null {
+  public async setPublicationArchiveStatus(id: string, isArchived: boolean): Promise<Publication | null> {
+    await p2mDatabaseService.assertLiveDatabase();
     const pub = this.data.publications.find(p => p.id === id);
     if (!pub) return null;
     pub.isArchived = isArchived;
@@ -793,7 +815,8 @@ class AcademicDatabase {
     return pub;
   }
 
-  public batchSetArchiveStatus(ids: string[], isArchived: boolean): number {
+  public async batchSetArchiveStatus(ids: string[], isArchived: boolean): Promise<number> {
+    await p2mDatabaseService.assertLiveDatabase();
     const idSet = new Set(ids);
     let count = 0;
     const now = new Date().toISOString();
@@ -812,7 +835,8 @@ class AcademicDatabase {
     return count;
   }
 
-  public archiveAllPublications(isArchived: boolean): number {
+  public async archiveAllPublications(isArchived: boolean): Promise<number> {
+    await p2mDatabaseService.assertLiveDatabase();
     const now = new Date().toISOString();
     let count = 0;
     for (const p of this.data.publications) {
@@ -827,10 +851,11 @@ class AcademicDatabase {
   }
 
   // --- BULK IMPORT & SINTA / DIGILIB INTEGRATION ---
-  public importPublications(
+  public async importPublications(
     newPubs: Publication[],
     batchRecord: ImportBatchRecord
-  ): { importedCount: number; batchId: string } {
+  ): Promise<{ importedCount: number; batchId: string }> {
+    await p2mDatabaseService.assertLiveDatabase();
     if (!Array.isArray(this.data.publications)) {
       this.data.publications = [];
     }
@@ -838,6 +863,33 @@ class AcademicDatabase {
     const importedIds: string[] = [];
 
     for (const pub of newPubs) {
+      let targetTable = 'scopus_publications';
+      if (pub.type === 'Journals (Jurnal)' || pub.type === 'Journal Article' || pub.annualCategory === 'jurnal') {
+        targetTable = 'journals';
+      } else if (pub.type === 'Proceedings (Prosiding)' || pub.type === 'Conference Paper' || pub.annualCategory === 'prosiding') {
+        targetTable = 'proceedings';
+      } else if (pub.type === 'Books (Buku)' || pub.type === 'Book Chapter' || pub.annualCategory === 'buku') {
+        targetTable = 'books';
+      } else if (pub.type === 'Patents & Copyrights (Paten & HKI)' || pub.annualCategory === 'paten' || pub.annualCategory === 'hki') {
+        targetTable = 'patents_hki';
+      }
+
+      try {
+        await p2mDatabaseService.insertPublicationRecord(targetTable, {
+          year: Number(pub.year) || new Date().getFullYear(),
+          title: pub.title,
+          venue: pub.venue,
+          publisher: pub.venue,
+          link: pub.url,
+          doi: pub.doi,
+          authors: pub.authors,
+          jenis: pub.annualCategory === 'paten' ? 'Paten' : 'Hak Cipta',
+          nomor: pub.venue
+        });
+      } catch (err) {
+        console.warn('Failed to insert imported publication into MySQL:', err);
+      }
+
       const existingIdx = this.data.publications.findIndex(
         p => p.id === pub.id || (pub.doi && p.doi && p.doi.toLowerCase() === pub.doi.toLowerCase())
       );
@@ -872,7 +924,8 @@ class AcademicDatabase {
     return Array.isArray(this.data.importHistory) ? [...this.data.importHistory] : [];
   }
 
-  public deleteImportBatch(batchId: string, rollbackPubs: boolean = false): boolean {
+  public async deleteImportBatch(batchId: string, rollbackPubs: boolean = false): Promise<boolean> {
+    await p2mDatabaseService.assertLiveDatabase();
     if (!Array.isArray(this.data.importHistory)) return false;
     const batchIdx = this.data.importHistory.findIndex(b => b.id === batchId);
     if (batchIdx === -1) return false;
@@ -880,8 +933,7 @@ class AcademicDatabase {
     const batch = this.data.importHistory[batchIdx];
 
     if (rollbackPubs && Array.isArray(batch.importedPublicationIds)) {
-      const idSet = new Set(batch.importedPublicationIds);
-      this.data.publications = this.data.publications.filter(p => !idSet.has(p.id));
+      await this.batchDeletePublications(batch.importedPublicationIds);
     }
 
     this.data.importHistory.splice(batchIdx, 1);
@@ -890,7 +942,8 @@ class AcademicDatabase {
     return true;
   }
 
-  public deleteNonKurdhiPublications(): { removedCount: number; remainingCount: number } {
+  public async deleteNonKurdhiPublications(): Promise<{ removedCount: number; remainingCount: number }> {
+    await p2mDatabaseService.assertLiveDatabase();
     const isKurdhiAuthor = (p: Publication) => {
       if (!Array.isArray(p.authors)) return false;
       return p.authors.some(a => {
@@ -899,20 +952,17 @@ class AcademicDatabase {
       });
     };
 
-    const initialCount = this.data.publications.length;
-    this.data.publications = this.data.publications.filter(isKurdhiAuthor);
-    const removedCount = initialCount - this.data.publications.length;
-
-    if (removedCount > 0) {
-      this.persist();
-      this.notifyMutation('FILTER_NON_KURDHI_PUBLICATIONS');
+    const toDeleteIds = this.data.publications.filter(p => !isKurdhiAuthor(p)).map(p => p.id);
+    if (toDeleteIds.length > 0) {
+      await this.batchDeletePublications(toDeleteIds);
     }
 
-    return { removedCount, remainingCount: this.data.publications.length };
+    return { removedCount: toDeleteIds.length, remainingCount: this.data.publications.length };
   }
 
   // --- INFOGRAPHIC INTEGRATION ---
-  public saveInfographic(publicationId: string, infographicData: ResearchInfographic): boolean {
+  public async saveInfographic(publicationId: string, infographicData: ResearchInfographic): Promise<boolean> {
+    await p2mDatabaseService.assertLiveDatabase();
     const pub = this.getPublicationById(publicationId);
     if (!pub) return false;
 
@@ -931,7 +981,8 @@ class AcademicDatabase {
     return true;
   }
 
-  public deleteInfographic(publicationId: string): boolean {
+  public async deleteInfographic(publicationId: string): Promise<boolean> {
+    await p2mDatabaseService.assertLiveDatabase();
     const pub = this.getPublicationById(publicationId);
     if (!pub) return false;
 
@@ -1041,11 +1092,7 @@ class AcademicDatabase {
       }
     }
 
-    try {
-      updatedStudent = await p2mDatabaseService.updateStudentRecord(targetIdentifier, updates);
-    } catch (err) {
-      console.warn('p2mDatabaseService updateStudentRecord note:', err);
-    }
+    updatedStudent = await p2mDatabaseService.updateStudentRecord(targetIdentifier, updates);
 
     const idx = this.data.students.findIndex(s => s.id === id);
     const existing = idx !== -1 ? this.data.students[idx] : this.getStudentById(id);
@@ -1090,11 +1137,12 @@ class AcademicDatabase {
   }
 
   public async deleteStudent(id: string): Promise<boolean> {
+    await p2mDatabaseService.assertLiveDatabase();
     if (id.startsWith('digilib-')) {
       const docId = parseInt(id.replace('digilib-', ''), 10);
-      try {
-        await p2mDatabaseService.deleteStudentRecord(docId);
-      } catch {}
+      await p2mDatabaseService.deleteStudentRecord(docId);
+    } else {
+      await p2mDatabaseService.deleteStudentRecord(id);
     }
     this.data.students = this.data.students.filter(s => s.id !== id);
     this.persist();
@@ -1520,6 +1568,8 @@ class AcademicDatabase {
         }
       }
 
+      const masterPasswordEnv = process.env.ADMIN_MASTER_PASSWORD ? String(process.env.ADMIN_MASTER_PASSWORD).trim() : '';
+
       // Default system master accounts
       if (!account) {
         const isMasterEmail = (
@@ -1530,13 +1580,13 @@ class AcademicDatabase {
           cleanEmail === 'admin@staff.uns.ac.id' ||
           cleanEmail === 'arfawi@mipa.uns.ac.id'
         );
-        if (isMasterEmail) {
+        if (isMasterEmail && masterPasswordEnv) {
           account = {
             id: cleanEmail === 'arfa@staff.uns.ac.id' ? 'admin-kurdhi' : cleanEmail.includes('raihan') ? 'admin-raihan' : 'admin-owner',
             email: cleanEmail,
             namaLengkap: cleanEmail === 'arfa@staff.uns.ac.id' ? 'Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.' : cleanEmail.includes('raihan') ? 'Muhammad Raihan' : 'Administrator Akun',
             role: cleanEmail === 'arfa@staff.uns.ac.id' ? 'Dosen Pemilik Portofolio (Administrator Utama)' : 'Administrator Resmi (UNS Verified)',
-            passwordHash: hashPasswordWithSalt('kurdhi2026', 'kurdhi_master_salt'),
+            passwordHash: hashPasswordWithSalt(masterPasswordEnv, 'kurdhi_master_salt'),
             salt: 'kurdhi_master_salt',
             createdAt: '2026-01-01T00:00:00.000Z'
           };
@@ -1553,7 +1603,7 @@ class AcademicDatabase {
       } catch {
         testHash = '';
       }
-      const isMasterAuth = (passwordAttempt === 'kurdhi2026' && (
+      const isMasterAuth = Boolean(masterPasswordEnv && passwordAttempt === masterPasswordEnv && (
         account.id === 'admin-kurdhi' ||
         cleanEmail === 'arfa@staff.uns.ac.id' ||
         cleanEmail === 'muhammadraihanash@student.uns.ac.id' ||

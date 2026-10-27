@@ -2788,7 +2788,7 @@ export const SqlDatabaseTab: React.FC<SqlDatabaseTabProps> = ({ showToast }) => 
                       rows={3}
                       value={jdbcUrl}
                       onChange={e => setJdbcUrl(e.target.value)}
-                      placeholder="mysql://avnadmin:AVNS_rJ6ZVrNE-zqfjTPFJsh@projekportofolio1-muhammadraihanash-569a.a.aivencloud.com:23220/defaultdb?ssl-mode=REQUIRED"
+                      placeholder="mysql://avnadmin:YOUR_PASSWORD@projekportofolio1-muhammadraihanash-569a.a.aivencloud.com:23220/defaultdb?ssl-mode=REQUIRED"
                       className="w-full px-3 py-2 border border-slate-300 rounded-lg font-mono text-[11px] focus:ring-2 focus:ring-[#004b87] focus:outline-none"
                     />
                     <p className="text-[11px] text-slate-500 mt-1">
@@ -2893,7 +2893,7 @@ export const SqlDatabaseTab: React.FC<SqlDatabaseTabProps> = ({ showToast }) => 
                           { key: 'MYSQL_HOST', val: 'projekportofolio1-muhammadraihanash-569a.a.aivencloud.com' },
                           { key: 'MYSQL_PORT', val: '23220' },
                           { key: 'MYSQL_USER', val: 'avnadmin' },
-                          { key: 'MYSQL_PASSWORD', val: 'AVNS_rJ6ZVrNE-zqfjTPFJsh' },
+                          { key: 'MYSQL_PASSWORD', val: 'Isi dengan password database Aiven Anda' },
                           { key: 'MYSQL_DATABASE', val: 'defaultdb' },
                           { key: 'MYSQL_SSL', val: 'REQUIRED' }
                         ].map(item => (

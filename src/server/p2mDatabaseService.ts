@@ -32,7 +32,7 @@ import {
   BlogPost,
   ProfessorProfile,
   AdminAccount
-} from '../types/index';
+} from '../types/index.js';
 
 export interface SqlP2MActivityRow {
   id: number;
@@ -1026,8 +1026,6 @@ class P2MDatabaseService {
       saved?.user ||
       'avnadmin';
 
-    const fallbackDefaultPass = Buffer.from('QVZOU19ySjZaVnJORS16cWZqVFBGSnNo', 'base64').toString('utf-8');
-
     password =
       password !== undefined
         ? password
@@ -1037,7 +1035,7 @@ class P2MDatabaseService {
            process.env.DB_PASSWORD ||
            process.env.VITE_MYSQL_PASSWORD ||
            saved?.password ||
-           fallbackDefaultPass);
+           '');
 
     database =
       database ||
@@ -2701,6 +2699,52 @@ class P2MDatabaseService {
     }
   }
 
+  public async assertLiveDatabase(): Promise<void> {
+    await this.ensureConnection();
+    const isVercelOrRequired = Boolean(process.env.VERCEL || process.env.REQUIRE_LIVE_DB === '1');
+    if (isVercelOrRequired && !this.isMySqlConnected) {
+      const cfg = this.getEffectiveConnectionConfig();
+      throw new Error(`Database MySQL pusat belum terhubung (${cfg.user}@${cfg.host}:${cfg.port}/${cfg.database}). Perubahan TIDAK disimpan. Pastikan MYSQL_PASSWORD sudah diisi di Vercel lalu redeploy.`);
+    }
+  }
+
+  public async clearAllPublicationsRecords(): Promise<void> {
+    await this.assertLiveDatabase();
+    const tables = ['scopus_publications', 'journals', 'proceedings', 'books', 'patents_hki'];
+    for (const t of tables) {
+      await this.safePoolQuery(`DELETE FROM ${t}`);
+    }
+    this.scopusRows = [];
+    this.journalRows = [];
+    this.proceedingRows = [];
+    this.bookRows = [];
+    this.patentHkiRows = [];
+    this.persistToSqlFile();
+  }
+
+  public async resetSeedPublicationsRecords(): Promise<void> {
+    await this.assertLiveDatabase();
+    await this.clearAllPublicationsRecords();
+    this.loadFromSqlFile();
+    if (this.pool && this.isMySqlConnected) {
+      for (const r of this.scopusRows) {
+        await this.safePoolQuery('INSERT INTO scopus_publications (year, title, journal, publisher, link, doi, authors) VALUES (?, ?, ?, ?, ?, ?, ?)', [r.year, r.title, r.journal, r.publisher, r.link, r.doi, r.authors]);
+      }
+      for (const r of this.journalRows) {
+        await this.safePoolQuery('INSERT INTO journals (year, title, journal, publisher, link, authors) VALUES (?, ?, ?, ?, ?, ?)', [r.year, r.title, r.journal, r.publisher, r.link, r.authors]);
+      }
+      for (const r of this.proceedingRows) {
+        await this.safePoolQuery('INSERT INTO proceedings (year, title, publisher, link, seminar_name, seminar_theme, authors) VALUES (?, ?, ?, ?, ?, ?, ?)', [r.year, r.title, r.publisher, r.link, r.seminar_name, r.seminar_theme, r.authors]);
+      }
+      for (const r of this.bookRows) {
+        await this.safePoolQuery('INSERT INTO books (year, title, publisher, isbn, authors) VALUES (?, ?, ?, ?, ?)', [r.year, r.title, r.publisher, r.isbn, r.authors]);
+      }
+      for (const r of this.patentHkiRows) {
+        await this.safePoolQuery('INSERT INTO patents_hki (year, title, jenis, nomor, inventors, anggota_tim) VALUES (?, ?, ?, ?, ?, ?)', [r.year, r.title, r.jenis, r.nomor, r.inventors, r.anggota_tim]);
+      }
+    }
+  }
+
   public toP2MActivities(): P2MActivity[] {
     return this.p2mRows.map(row => ({
       id: "p2m-" + row.id,
@@ -4280,6 +4324,20 @@ class P2MDatabaseService {
   }
 }
 
+// Wrap all mutation methods matching /^(insert|update|delete)\w*Record$/ to call assertLiveDatabase() first
+for (const key of Object.getOwnPropertyNames(P2MDatabaseService.prototype)) {
+  if (/^(insert|update|delete)\w*Record$/.test(key)) {
+    const originalMethod = (P2MDatabaseService.prototype as any)[key];
+    if (typeof originalMethod === 'function') {
+      (P2MDatabaseService.prototype as any)[key] = async function (this: P2MDatabaseService, ...args: any[]) {
+        await this.assertLiveDatabase();
+        return originalMethod.apply(this, args);
+      };
+    }
+  }
+}
+
 export const p2mDatabaseService = new P2MDatabaseService();
 export const sqlDatabaseService = p2mDatabaseService;
+
 

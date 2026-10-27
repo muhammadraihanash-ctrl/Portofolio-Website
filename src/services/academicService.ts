@@ -105,14 +105,27 @@ class AcademicService {
   constructor() {
     if (typeof window !== 'undefined') {
       try {
-        this.adminToken = safeStorage.getItem('kurdhi_academic_adm_token');
-        const savedAdmin = safeStorage.getItem('kurdhi_academic_adm_user');
-        if (savedAdmin) {
-          try {
-            this.currentAdmin = JSON.parse(savedAdmin);
-          } catch {
-            this.currentAdmin = null;
+        const storedToken = safeStorage.getItem('kurdhi_academic_adm_token');
+        if (
+          storedToken &&
+          storedToken.startsWith('adm_') &&
+          !storedToken.startsWith('adm_token_local_') &&
+          !storedToken.endsWith('.fallback')
+        ) {
+          this.adminToken = storedToken;
+          const savedAdmin = safeStorage.getItem('kurdhi_academic_adm_user');
+          if (savedAdmin) {
+            try {
+              this.currentAdmin = JSON.parse(savedAdmin);
+            } catch {
+              this.currentAdmin = null;
+            }
           }
+        } else {
+          this.adminToken = null;
+          this.currentAdmin = null;
+          safeStorage.removeItem('kurdhi_academic_adm_token');
+          safeStorage.removeItem('kurdhi_academic_adm_user');
         }
         // Load previously confirmed central database state from persistent cache if available
         this.loadLocalCache();
@@ -2004,61 +2017,17 @@ class AcademicService {
         this.adminToken = json.token;
         this.currentAdmin = json.admin;
         if (typeof window !== 'undefined') {
-          localStorage.setItem('kurdhi_academic_adm_token', json.token);
-          localStorage.setItem('kurdhi_academic_adm_user', JSON.stringify(json.admin));
+          safeStorage.setItem('kurdhi_academic_adm_token', json.token);
+          safeStorage.setItem('kurdhi_academic_adm_user', JSON.stringify(json.admin));
         }
         await this.syncFromBackend();
         this.notify();
         return { success: true, admin: json.admin, message: json.message };
       }
 
-      if (parsed.data && parsed.data.error) {
-        return { success: false, error: parsed.data.error };
-      }
-
-      // If backend server on Vercel returns 500 / read-only filesystem, register locally
-      if (!res.ok) {
-        const fallbackAdmin = {
-          id: `admin-${Date.now()}`,
-          email: cleanEmail,
-          namaLengkap: namaLengkap || 'Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.',
-          role: 'Dosen Pemilik Portofolio (Administrator Utama)'
-        };
-        this.adminToken = `adm_token_local_${Date.now()}`;
-        this.currentAdmin = fallbackAdmin;
-        if (typeof window !== 'undefined') {
-          localStorage.setItem('kurdhi_academic_adm_token', this.adminToken);
-          localStorage.setItem('kurdhi_academic_adm_user', JSON.stringify(fallbackAdmin));
-        }
-        this.notify();
-        return {
-          success: true,
-          admin: fallbackAdmin,
-          message: 'Akun admin berhasil didaftarkan dan disimpan di penyimpanan lokal Anda!'
-        };
-      }
-
-      return { success: false, error: 'Pendaftaran akun gagal.' };
-    } catch {
-      // Offline / network fallback
-      const fallbackAdmin = {
-        id: `admin-${Date.now()}`,
-        email: cleanEmail,
-        namaLengkap: namaLengkap || 'Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.',
-        role: 'Dosen Pemilik Portofolio (Administrator Utama)'
-      };
-      this.adminToken = `adm_token_local_${Date.now()}`;
-      this.currentAdmin = fallbackAdmin;
-      if (typeof window !== 'undefined') {
-        localStorage.setItem('kurdhi_academic_adm_token', this.adminToken);
-        localStorage.setItem('kurdhi_academic_adm_user', JSON.stringify(fallbackAdmin));
-      }
-      this.notify();
-      return {
-        success: true,
-        admin: fallbackAdmin,
-        message: 'Akun admin berhasil didaftarkan dan disimpan di perangkat Anda!'
-      };
+      return { success: false, error: parsed.data?.error || 'Pendaftaran akun gagal.' };
+    } catch (err: any) {
+      return { success: false, error: err?.message || 'Gagal menghubungi server untuk pendaftaran akun.' };
     }
   }
 
@@ -2078,23 +2047,9 @@ class AcademicService {
       if (parsed.ok && parsed.data?.success) {
         return { success: true, message: parsed.data.message, debugOtpCode: parsed.data.debugOtpCode };
       }
-      if (parsed.data?.error) {
-        return { success: false, error: parsed.data.error };
-      }
-      // Emergency recovery code fallback
-      const emergencyOtp = String(Math.floor(100000 + Math.random() * 900000));
-      return {
-        success: true,
-        message: `Kode pemulihan cadangan telah dibuat: ${emergencyOtp}`,
-        debugOtpCode: emergencyOtp
-      };
-    } catch {
-      const emergencyOtp = String(Math.floor(100000 + Math.random() * 900000));
-      return {
-        success: true,
-        message: `Kode pemulihan cadangan telah dibuat: ${emergencyOtp}`,
-        debugOtpCode: emergencyOtp
-      };
+      return { success: false, error: parsed.data?.error || 'Gagal mengirim kode pemulihan kata sandi.' };
+    } catch (err: any) {
+      return { success: false, error: err?.message || 'Gagal menghubungi server untuk pemulihan kata sandi.' };
     }
   }
 
@@ -2113,12 +2068,9 @@ class AcademicService {
       if (parsed.ok && parsed.data?.success) {
         return { success: true, message: parsed.data.message };
       }
-      if (parsed.data?.error) {
-        return { success: false, error: parsed.data.error };
-      }
-      return { success: true, message: 'Kata sandi berhasil diperbarui.' };
-    } catch {
-      return { success: true, message: 'Kata sandi berhasil diperbarui.' };
+      return { success: false, error: parsed.data?.error || 'Gagal mengatur ulang kata sandi.' };
+    } catch (err: any) {
+      return { success: false, error: err?.message || 'Gagal menghubungi server untuk mengatur ulang kata sandi.' };
     }
   }
 
@@ -2140,101 +2092,23 @@ class AcademicService {
         this.adminToken = json.token;
         this.currentAdmin = json.admin;
         if (typeof window !== 'undefined') {
-          localStorage.setItem('kurdhi_academic_adm_token', json.token);
-          localStorage.setItem('kurdhi_academic_adm_user', JSON.stringify(json.admin));
+          safeStorage.setItem('kurdhi_academic_adm_token', json.token);
+          safeStorage.setItem('kurdhi_academic_adm_user', JSON.stringify(json.admin));
         }
         await this.syncFromBackend();
         this.notify();
         return { success: true, admin: json.admin };
       }
 
-      // If server returned error or 500, check master credentials or registered admin fallback
-      const isMaster = [
-        'arfa@staff.uns.ac.id',
-        'muhammadraihanash@student.uns.ac.id',
-        'muhammadraihanash@gmail.com',
-        'akunpemanis820@gmail.com'
-      ].includes(cleanEmail) || cleanEmail.endsWith('@staff.uns.ac.id');
-
-      if (isMaster && (password === 'kurdhi2026' || password === 'admin123' || password === 'uns2026')) {
-        const fallbackAdmin = {
-          id: cleanEmail === 'arfa@staff.uns.ac.id' ? 'admin-kurdhi' : `admin-${cleanEmail.split('@')[0]}`,
-          email: cleanEmail,
-          namaLengkap: cleanEmail === 'arfa@staff.uns.ac.id' ? 'Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.' : (cleanEmail.includes('raihan') ? 'Muhammad Raihan' : 'Administrator Resmi (UNS)'),
-          role: cleanEmail === 'arfa@staff.uns.ac.id' ? 'Dosen Pemilik Portofolio (Administrator Utama)' : 'Administrator Resmi (UNS Verified)'
-        };
-        const expiresAt = Date.now() + 30 * 24 * 3600 * 1000;
-        this.adminToken = `adm_${btoa(JSON.stringify({ admin: fallbackAdmin, expiresAt, rand: Math.random() }))}.fallback`;
-        this.currentAdmin = fallbackAdmin;
-        if (typeof window !== 'undefined') {
-          localStorage.setItem('kurdhi_academic_adm_token', this.adminToken);
-          localStorage.setItem('kurdhi_academic_adm_user', JSON.stringify(fallbackAdmin));
-        }
-        this.notify();
-        return { success: true, admin: fallbackAdmin };
-      }
-
-      // Check local registered admins
-      if (typeof window !== 'undefined') {
-        try {
-          const raw = localStorage.getItem('kurdhi_registered_admins');
-          if (raw) {
-            const admins = JSON.parse(raw);
-            const found = admins.find((a: any) => a.email && a.email.toLowerCase() === cleanEmail);
-            if (found && (password === 'kurdhi2026' || !found.password || found.password === password)) {
-              this.adminToken = `adm_token_local_${Date.now()}`;
-              this.currentAdmin = found;
-              localStorage.setItem('kurdhi_academic_adm_token', this.adminToken);
-              localStorage.setItem('kurdhi_academic_adm_user', JSON.stringify(found));
-              this.notify();
-              return { success: true, admin: found };
-            }
-          }
-        } catch {}
-      }
-
-      // Specific validation failure
-      if (parsed.data && parsed.data.error && res.status !== 500) {
-        return { success: false, error: parsed.data.error };
-      }
-
-      if (res.status >= 500) {
-        return {
-          success: false,
-          error: (isMaster)
-            ? 'Kata sandi tidak sesuai dengan master password (kurdhi2026).'
-            : 'Email atau kata sandi tidak sesuai. Silakan hubungi administrator sistem.'
-        };
-      }
-
-      return { success: false, error: 'Email atau kata sandi tidak sesuai.' };
-    } catch {
-      // In case of complete network outage or fetch error
-      const isMaster = [
-        'arfa@staff.uns.ac.id',
-        'muhammadraihanash@student.uns.ac.id',
-        'muhammadraihanash@gmail.com',
-        'akunpemanis820@gmail.com'
-      ].includes(cleanEmail) || cleanEmail.endsWith('@staff.uns.ac.id');
-
-      if (isMaster && (password === 'kurdhi2026' || password === 'admin123' || password === 'uns2026')) {
-        const fallbackAdmin = {
-          id: cleanEmail === 'arfa@staff.uns.ac.id' ? 'admin-kurdhi' : `admin-${cleanEmail.split('@')[0]}`,
-          email: cleanEmail,
-          namaLengkap: cleanEmail === 'arfa@staff.uns.ac.id' ? 'Nughthoh Arfawi Kurdhi, S.Si., M.Sc., Ph.D.' : (cleanEmail.includes('raihan') ? 'Muhammad Raihan' : 'Administrator Resmi (UNS)'),
-          role: cleanEmail === 'arfa@staff.uns.ac.id' ? 'Dosen Pemilik Portofolio (Administrator Utama)' : 'Administrator Resmi (UNS Verified)'
-        };
-        const expiresAt = Date.now() + 30 * 24 * 3600 * 1000;
-        this.adminToken = `adm_${btoa(JSON.stringify({ admin: fallbackAdmin, expiresAt, rand: Math.random() }))}.fallback`;
-        this.currentAdmin = fallbackAdmin;
-        if (typeof window !== 'undefined') {
-          localStorage.setItem('kurdhi_academic_adm_token', this.adminToken);
-          localStorage.setItem('kurdhi_academic_adm_user', JSON.stringify(fallbackAdmin));
-        }
-        this.notify();
-        return { success: true, admin: fallbackAdmin };
-      }
-      return { success: false, error: 'Gagal menghubungi server autentikasi atau kata sandi tidak sesuai.' };
+      return {
+        success: false,
+        error: parsed.data?.error || 'Email atau kata sandi tidak sesuai.'
+      };
+    } catch (err: any) {
+      return {
+        success: false,
+        error: err?.message || 'Gagal menghubungi server autentikasi. Silakan periksa koneksi Anda.'
+      };
     }
   }
 
@@ -2323,7 +2197,7 @@ class AcademicService {
         role: 'Administrator Resmi (Firebase Verified)'
       };
 
-      let sessionToken = token;
+      let sessionToken: string;
       try {
         const sRes = await fetch('/api/admin/google-session', {
           method: 'POST',
@@ -2341,23 +2215,26 @@ class AcademicService {
           if (sParsed.data.admin?.role) {
             adminObj.role = sParsed.data.admin.role;
           }
-        } else if (!sParsed.ok && sParsed.data?.error) {
-          return { success: false, error: sParsed.data.error };
+        } else {
+          await signOut(auth).catch(() => {});
+          return { success: false, error: sParsed.data?.error || 'Gagal memvalidasi sesi Google dengan server backend.' };
         }
-      } catch (sessErr) {
-        console.warn('Backend session registration fallback:', sessErr);
+      } catch (sessErr: any) {
+        await signOut(auth).catch(() => {});
+        return { success: false, error: sessErr?.message || 'Gagal menghubungi server untuk verifikasi sesi Google.' };
       }
 
       this.adminToken = sessionToken;
       this.currentAdmin = adminObj;
       if (typeof window !== 'undefined') {
-        localStorage.setItem('kurdhi_academic_adm_token', sessionToken);
-        localStorage.setItem('kurdhi_academic_adm_user', JSON.stringify(adminObj));
+        safeStorage.setItem('kurdhi_academic_adm_token', sessionToken);
+        safeStorage.setItem('kurdhi_academic_adm_user', JSON.stringify(adminObj));
       }
       await this.syncFromBackend();
       this.notify();
       return { success: true, admin: adminObj };
     } catch (err: any) {
+      await signOut(auth).catch(() => {});
       return { success: false, error: err.message || 'Gagal login via Google Authentication.' };
     }
   }

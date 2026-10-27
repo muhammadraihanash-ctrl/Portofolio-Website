@@ -1,24 +1,22 @@
 import type { IncomingMessage, ServerResponse } from 'http';
-import app, { syncAllSqlDataToAcademicDb } from '../server';
-import { p2mDatabaseService } from '../src/server/p2mDatabaseService';
+import app, { syncAllSqlDataToAcademicDb } from '../server.js';
+import { p2mDatabaseService } from '../src/server/p2mDatabaseService.js';
 
-let initPromise: Promise<boolean> | null = null;
+let lastGetSyncTimestamp = 0;
 
-function ensureVercelBootstrapped(): void {
-  if (!initPromise) {
-    // Non-blocking background task: ensures serverless response starts in milliseconds
-    initPromise = (async () => {
-      try {
-        const ok = await p2mDatabaseService.initMySqlConnection();
-        if (ok) {
-          syncAllSqlDataToAcademicDb();
-        }
-        return true;
-      } catch (err) {
-        console.warn('[Vercel Serverless Boot Warning]:', err);
-        return false;
+async function refreshFromMySql(isNonGet: boolean): Promise<void> {
+  try {
+    await p2mDatabaseService.ensureConnection();
+    const now = Date.now();
+    if (isNonGet || now - lastGetSyncTimestamp > 10000) {
+      lastGetSyncTimestamp = now;
+      const synced = await p2mDatabaseService.syncLiveFromMySql();
+      if (synced) {
+        syncAllSqlDataToAcademicDb();
       }
-    })();
+    }
+  } catch (err) {
+    console.warn('[Vercel Serverless Sync Warning]:', err);
   }
 }
 
@@ -68,8 +66,9 @@ export default async function handler(req: IncomingMessage, res: ServerResponse)
     req.url = rawUrl;
   } catch {}
 
-  // Trigger non-blocking database sync in background
-  ensureVercelBootstrapped();
+  // Refresh data from live MySQL
+  const isNonGet = req.method !== 'GET' && req.method !== 'HEAD' && req.method !== 'OPTIONS';
+  await refreshFromMySql(isNonGet);
 
   // Wrap Express dispatch in a Promise so Vercel Serverless does not prematurely freeze/kill execution
   return new Promise<void>((resolve) => {
